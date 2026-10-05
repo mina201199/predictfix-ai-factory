@@ -307,3 +307,94 @@ def test_llm_unknown_is_not_replaced_with_unrelated_excerpt(client,monkeypatch):
     monkeypatch.setattr(chat,'analyze',missing_answer)
     r=client.post('/api/chat',json={'text':'換刀後能直接量產嗎？'}).json()
     assert r['route']=='unknown' and r['answer']=='我不知道，沒有足夠的文件依據。'
+
+
+def test_manual_version_import_filter_and_withdraw(client):
+    content='# 測試手冊\n\n## 供應檢查\n\n'+('測試設備泵浦供應異常時，記錄流量、液位及測點，不直接決定更換泵。\n\n'*12)
+    body={'title':'授權測試手冊','version':'1.0','machine_model':'TEST-PUMP',
+          'component':'泵浦','content':content,'source_label':'原創測試資料','rights_confirmed':True,'is_synthetic':False}
+    login(client,'amy')
+    assert client.post('/api/knowledge/manuals',json=body).status_code==403
+    login(client)
+    assert client.post('/api/knowledge/manuals',json={**body,'rights_confirmed':False}).status_code==422
+    imported=client.post('/api/knowledge/manuals',json=body)
+    assert imported.status_code==201,imported.text
+    mid=imported.json()['id']
+    assert client.post('/api/knowledge/manuals',json=body).status_code==409
+    assert client.post('/api/knowledge/manuals',json={**body,'version':'2.0'}).status_code==201
+    matches=client.get('/api/knowledge/search',params={'q':'泵浦供應流量液位','machine_model':'TEST-PUMP'}).json()
+    assert matches and all(m['machine_models']==['TEST-PUMP'] for m in matches)
+    assert any(m['id']==mid for m in matches)
+    assert client.post('/api/knowledge/manuals/'+mid+'/withdraw').status_code==200
+    assert not any(m['id']==mid for m in client.get('/api/knowledge/search',params={'q':'泵浦供應流量液位','machine_model':'TEST-PUMP'}).json())
+    assert client.get('/api/knowledge/manuals/'+mid).json()['active'] is False
+
+
+def test_case_review_publish_revision_and_retraction(client):
+    ticket=client.post('/api/tickets',json={'machine':'CNC-03','issue':'檢索驗證刀庫定位中斷','engineer':'Amy Chen'}).json()
+    tid=ticket['id']
+    assert client.post('/api/tickets/'+tid+'/case-draft').status_code==409
+    login(client,'amy')
+    assert client.post('/api/tickets/'+tid+'/complete',json={'note':'核對刀位資料，確認新刀具資料不一致；依核准程序修正並保存首件驗收'}).status_code==200
+    login(client)
+    assert client.post('/api/tickets/'+tid+'/review',json={'decision':'approve','note':'確認量測與驗收紀錄'}).status_code==200
+    draft=client.post('/api/tickets/'+tid+'/case-draft').json()
+    cid=draft['id']
+    assert client.post('/api/tickets/'+tid+'/case-draft').json()['id']==cid
+    assert client.post('/api/cases/'+cid+'/publish',json={'revision':draft['revision'],'note':'確認發布'}).status_code==422
+    assert not any(c['id']==cid for c in client.get('/api/knowledge/search',params={'q':'刀庫定位中斷'}).json())
+    fields={**draft['fields'],'machine_model':'TEST-ATC','component':'刀庫',
+            'conditions':'換新刀具後特定刀位發生','findings':'刀具資料不一致',
+            'cause_status':'confirmed','root_cause':'核對確認刀具資料不一致','verification':'已保存適用程序的首件驗收與狀態確認'}
+    edit=client.put('/api/cases/'+cid,json={'revision':draft['revision'],'fields':fields}).json()
+    assert edit['revision']==2 and edit['source_sha256']==draft['source_sha256']
+    assert client.put('/api/cases/'+cid,json={'revision':1,'fields':fields}).status_code==409
+    login(client,'amy')
+    assert client.post('/api/cases/'+cid+'/publish',json={'revision':2,'note':'確認發布'}).status_code==403
+    login(client)
+    assert client.post('/api/cases/'+cid+'/publish',json={'revision':2,'note':'主管已核對來源與內容'}).status_code==200
+    result=client.post('/api/assist',json={'question':'刀庫定位中斷刀具資料不一致','machine_model':'TEST-ATC','use_llm':False}).json()
+    assert any(c['id']==cid and c['ticket_id']==tid for c in result['citations'])
+    assert result['llm_used'] is False and result['answer_method']=='retrieval_only'
+    assert client.put('/api/cases/'+cid,json={'revision':2,'fields':fields}).status_code==409
+    assert client.post('/api/cases/'+cid+'/withdraw',json={'revision':2,'note':'重新確認適用資料'}).status_code==200
+    assert not any(c['id']==cid for c in client.get('/api/knowledge/search',params={'q':'刀庫定位中斷','machine_model':'TEST-ATC'}).json())
+
+
+def test_assist_applicability_and_invalid_generated_quotes(client,monkeypatch):
+    from backend import maintenance_ai
+    async def invented(*args):
+        return {'selected':['S999:P1','S1:P999']}, {'llm_used':True,'model':'mock'}
+    monkeypatch.setattr(maintenance_ai,'generate_json',invented)
+    r=client.post('/api/assist',json={'question':'換刀刀庫位置確認未完成','machine_model':'PF-VMC850-DEMO'}).json()
+    assert r['citations'] and not r['steps']
+    assert r['citation_checks']['rejected']==2 and r['answer_method']=='retrieval_only'
+    assert client.post('/api/assist',json={'question':'換刀卡住','machine_model':'NOT-A-MODEL'}).json()['answer_method']=='insufficient_evidence'
+    assert client.post('/api/assist',json={'question':'換刀卡住','machine_model':'PF-VMC850-DEMO','allow_synthetic':False}).json()['citations']==[]
+    assert client.get('/knowledge.html').status_code==200
+
+
+def test_assist_selected_ids_map_to_source_and_case_ai_does_not_autosave(client,monkeypatch):
+    from backend import maintenance_ai
+    async def select_source(*args):
+        return {'selected':['S1:P1']},{'llm_used':True,'model':'mock'}
+    monkeypatch.setattr(maintenance_ai,'generate_json',select_source)
+    result=client.post('/api/assist',json={'question':'刀庫位置確認未完成','machine_model':'PF-VMC850-DEMO'}).json()
+    assert result['answer_method']=='llm_selected_verified_excerpts'
+    step=result['steps'][0]
+    assert any(c['id']==step['source_id'] and step['quote'] in c['text'] for c in result['citations'])
+    ticket=client.post('/api/tickets',json={'machine':'CNC-03','issue':'AI 原文分類測試','engineer':'Amy Chen'}).json()
+    login(client,'amy')
+    note='發現刀位資料不一致。核對後依核准程序修正。保存首件驗收結果。'
+    client.post('/api/tickets/'+ticket['id']+'/complete',json={'note':note})
+    login(client)
+    client.post('/api/tickets/'+ticket['id']+'/review',json={'decision':'approve','note':'確認原文與來源'})
+    case=client.post('/api/tickets/'+ticket['id']+'/case-draft').json()
+    async def classify_source(*args):
+        return {'findings':'發現刀位資料不一致。','actions':'偷偷更換所有零件。','verification':'保存首件驗收結果。'}, {'llm_used':True,'model':'mock'}
+    monkeypatch.setattr(maintenance_ai,'generate_json',classify_source)
+    suggestion=client.post('/api/cases/'+case['id']+'/ai-suggestion').json()
+    assert suggestion['saved'] is False and 'actions' not in suggestion['suggestions']
+    assert suggestion['suggestions']['findings'] in note
+    unchanged=client.get('/api/cases/'+case['id']).json()
+    assert unchanged['fields']==case['fields'] and unchanged['revision']==case['revision']

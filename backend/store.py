@@ -81,3 +81,17 @@ class Evidence(Base):
     sha256: Mapped[str] = mapped_column(String(64))
     content: Mapped[bytes] = mapped_column(LargeBinary)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True),default=lambda:datetime.now(timezone.utc))
+
+class KnowledgeDocument(Base):
+    __tablename__ = 'knowledge_documents'
+    id: Mapped[str] = mapped_column(String(60), primary_key=True)
+    payload: Mapped[str] = mapped_column(Text)
+    active: Mapped[int] = mapped_column(Integer, default=1)
+
+class RepairCase(Base):
+    __tablename__ = 'repair_cases'
+    id: Mapped[str] = mapped_column(String(60), primary_key=True)
+    ticket_id: Mapped[str] = mapped_column(String(60), unique=True)
+    status: Mapped[str] = mapped_column(String(20), default='draft')
+    revision: Mapped[int] = mapped_column(Integer, default=1)
+    payload: Mapped[str] = mapped_column(Text)

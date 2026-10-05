@@ -1,0 +1,65 @@
+{
+  "scope": "3-question local integration smoke; not answer-quality evaluation",
+  "llm_available": true,
+  "checks": [
+    {
+      "question": "換刀卡住只在某個刀位出現，應先記錄什麼？",
+      "llm_used": true,
+      "model": "Qwen3-0.6B-Q8_0",
+      "answer_method": "llm_selected_verified_excerpts",
+      "source_ids": [
+        "PF-MAN-ATC-002",
+        "CASE-4b2d1417263b4cfd84c4fe7392bb80ee"
+      ],
+      "selected_count": 2,
+      "quotes_exist": true,
+      "citation_checks": {
+        "accepted": 2,
+        "rejected": 0,
+        "method": "selected_id_to_immutable_source_paragraph"
+      },
+      "elapsed_ms": 6213.94,
+      "reason": null
+    },
+    {
+      "question": "冷卻液流量下降但液位正常，有哪些排查方向？",
+      "llm_used": true,
+      "model": "Qwen3-0.6B-Q8_0",
+      "answer_method": "llm_selected_verified_excerpts",
+      "source_ids": [
+        "PF-MAN-COOLANT-003",
+        "CASE-38b9a0c5f72345b4bf602cd7af0a7023",
+        "PF-MAN-COOLANT-003",
+        "PF-MAN-COOLANT-003"
+      ],
+      "selected_count": 3,
+      "quotes_exist": true,
+      "citation_checks": {
+        "accepted": 3,
+        "rejected": 0,
+        "method": "selected_id_to_immutable_source_paragraph"
+      },
+      "elapsed_ms": 20472.87,
+      "reason": null
+    },
+    {
+      "question": "熱機後尺寸漂移，量測條件要如何記錄？",
+      "llm_used": true,
+      "model": "Qwen3-0.6B-Q8_0",
+      "answer_method": "llm_selected_verified_excerpts",
+      "source_ids": [
+        "CASE-ffe838fbd5484c369bb88f5cb9651d55",
+        "PF-MAN-FEED-004"
+      ],
+      "selected_count": 1,
+      "quotes_exist": true,
+      "citation_checks": {
+        "accepted": 1,
+        "rejected": 0,
+        "method": "selected_id_to_immutable_source_paragraph"
+      },
+      "elapsed_ms": 12092.94,
+      "reason": null
+    }
+  ]
+}

@@ -96,3 +96,5 @@ renderDetail=function(){lifecycleDetail();if(!machines[selected])return;$('.asse
 $('.knowledge').classList.add('hidden');
 
 const roleStyle=document.createElement('style');roleStyle.textContent='body[data-role=engineer] #add-machine,body[data-role=engineer] .remove-machine,body[data-role=engineer] #edit-asset,body[data-role=engineer] [data-restore]{display:none!important}';document.head.append(roleStyle);
+
+const knowledgeCentreLink=document.createElement("a");knowledgeCentreLink.className="nav";knowledgeCentreLink.href="/knowledge.html";knowledgeCentreLink.textContent="▧　維修 AI 中心";knowledgeCentreLink.style.textDecoration="none";navigation.append(knowledgeCentreLink);

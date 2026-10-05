@@ -1,0 +1,25 @@
+{
+  "scope":"development synthetic fixture; not held-out or externally reviewed",
+  "cases":[
+    {"id":"SP-01","question":"主軸換刀後振動升高，刀把與加工條件要記錄什麼？","expected":"PF-MAN-SPINDLE-001"},
+    {"id":"SP-02","question":"空轉和切削都有異音，主軸潤滑供應怎麼查核？","expected":"PF-MAN-SPINDLE-001"},
+    {"id":"SP-03","question":"主軸軸承合成讀值 4.8 mm/s 可以當故障門檻嗎？","expected":"PF-MAN-SPINDLE-001"},
+    {"id":"SP-04","question":"DEMO-SP-01 潤滑供應狀態待確認","expected":"PF-MAN-SPINDLE-001"},
+    {"id":"ATC-01","question":"刀庫位置確認未完成 DEMO-ATC-01","expected":"PF-MAN-ATC-002"},
+    {"id":"ATC-02","question":"換刀只在特定刀位卡住，新增刀具資料要查什麼？","expected":"PF-MAN-ATC-002"},
+    {"id":"ATC-03","question":"重開機後換刀好了，可以直接認定控制器根因嗎？","expected":"PF-MAN-ATC-002"},
+    {"id":"ATC-04","question":"刀庫完成後刀號不符，要核對刀位表及首件嗎？","expected":"PF-MAN-ATC-002"},
+    {"id":"CL-01","question":"單一冷卻使用端噴流變小，支路還是換泵？","expected":"PF-MAN-COOLANT-003"},
+    {"id":"CL-02","question":"冷卻液補液後泡沫異常，介質批號與調配紀錄","expected":"PF-MAN-COOLANT-003"},
+    {"id":"CL-03","question":"冷卻泵過濾段 DEMO-CL-FLT-01","expected":"PF-MAN-COOLANT-003"},
+    {"id":"CL-04","question":"冷卻供應流量 17 L/min 是通用合格值嗎？","expected":"PF-MAN-COOLANT-003"},
+    {"id":"FD-01","question":"定位量測工具校驗行程區段正反方向","expected":"PF-MAN-FEED-004"},
+    {"id":"FD-02","question":"熱機後尺寸漂移，原始讀值與基準不同能比較嗎？","expected":"PF-MAN-FEED-004"},
+    {"id":"FD-03","question":"進給螺桿定位差異 DEMO-FD-01","expected":"PF-MAN-FEED-004"},
+    {"id":"FD-04","question":"AI 可以推薦伺服增益與背隙補償參數嗎？","expected":"PF-MAN-FEED-004"},
+    {"id":"UNKNOWN-01","question":"香蕉蛋糕烤箱食譜","expected":null},
+    {"id":"UNKNOWN-02","question":"明天的颱風天氣預報","expected":null},
+    {"id":"MODEL-01","question":"換刀刀庫卡住","machine_model":"UNKNOWN-MACHINE","expected":null},
+    {"id":"MODEL-02","question":"冷卻供應流量","allow_synthetic":false,"expected":null}
+  ]
+}

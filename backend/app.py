@@ -18,7 +18,7 @@ from . import store
 from .ml import features, WINDOW, FEATURE_NAMES, LABELS
 from .copilot import analyze
 from .knowledge import DOCUMENTS, retrieve
-from . import operations, chat, auth, evidence
+from . import operations, chat, auth, evidence, maintenance_ai
 
 ROOT=Path(__file__).resolve().parents[1]
 ART=ROOT/'artifacts'
@@ -67,7 +67,8 @@ async def health():
     except (httpx.HTTPError, ValueError, KeyError):
         pass
     return {'status':'ok', 'database':store.engine.dialect.name, 'sensor_model_ready':model is not None,
-            'llm':llm, 'documents':'authored_demo', 'retrieval':'tfidf', 'component_health':'simulated'}
+            'llm':llm, 'documents':'synthetic_and_imported_manuals_with_reviewed_cases',
+            'retrieval':'legacy_tfidf_and_new_tfidf_bm25_fusion', 'component_health':'simulated'}
 
 @app.get('/api/model/report')
 def model_report():
@@ -220,9 +221,11 @@ def audit_list():
 evidence.register(app)
 operations.register(app)
 chat.register(app)
+maintenance_ai.register(app)
 
 STATIC={'':'index.html','index.html':'index.html','factory.css':'factory.css','factory.js':'factory.js',
-        'live.css':'live.css','live.js':'live.js','management.js':'management.js','management.css':'management.css','auth.js':'auth.js','evidence.js':'evidence.js','demo-measurements.csv':'demo-measurements.csv'}
+        'live.css':'live.css','live.js':'live.js','management.js':'management.js','management.css':'management.css','auth.js':'auth.js','evidence.js':'evidence.js','demo-measurements.csv':'demo-measurements.csv',
+        'knowledge.html':'knowledge.html','knowledge.js':'knowledge.js','knowledge.css':'knowledge.css'}
 @app.get('/')
 def index():
     return FileResponse(ROOT/'index.html',headers={'Cache-Control':'no-store'})

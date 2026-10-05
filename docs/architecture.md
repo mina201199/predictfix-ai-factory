@@ -1,5 +1,7 @@
 # 系統架構與邊界
 
+> 本頁保留早期設計記錄，部分狀態已過時。最新實作、架構圖與限制請見 [目前系統架構](system-architecture.md)。
+
 ## 實際運作
 
 瀏覽器只透過同來源 FastAPI API 呼叫功能。工單與稽核以 SQLAlchemy 寫入 SQLite，容器設定可切換 PostgreSQL。`/api/predict` 對公開實驗視窗抽取特徵、執行已訓練模型，再保存可追溯結果。
