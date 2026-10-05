@@ -1,0 +1,155 @@
+{
+  "model": "zh-maintenance-intent-v1",
+  "training": "TF-IDF character 1-3 grams + LogisticRegression, CPU",
+  "train_count": 80,
+  "test_count": 24,
+  "source": "手寫情境與改寫，非真實使用者、非獨立外部評估",
+  "accuracy": 0.8333333333333334,
+  "macro_f1": 0.8342261904761905,
+  "cases": [
+    {
+      "text": "誰沒有維修工單？",
+      "intent": "idle_people",
+      "prediction": "history",
+      "correct": false
+    },
+    {
+      "text": "現在哪些技師手上沒工作？",
+      "intent": "idle_people",
+      "prediction": "idle_people",
+      "correct": true
+    },
+    {
+      "text": "可以派給哪位沒任務的工程師？",
+      "intent": "idle_people",
+      "prediction": "idle_people",
+      "correct": true
+    },
+    {
+      "text": "哪個人身上工單最多？",
+      "intent": "workload",
+      "prediction": "workload",
+      "correct": true
+    },
+    {
+      "text": "幫我看工程師的工作負荷",
+      "intent": "workload",
+      "prediction": "workload",
+      "correct": true
+    },
+    {
+      "text": "哪位師傅最忙？",
+      "intent": "workload",
+      "prediction": "workload",
+      "correct": true
+    },
+    {
+      "text": "有什麼單子需要主管審核？",
+      "intent": "review",
+      "prediction": "review",
+      "correct": true
+    },
+    {
+      "text": "主管還有哪些維修結果未審？",
+      "intent": "review",
+      "prediction": "review",
+      "correct": true
+    },
+    {
+      "text": "已提交但待批准的有哪些？",
+      "intent": "review",
+      "prediction": "review",
+      "correct": true
+    },
+    {
+      "text": "還有哪幾張單沒指定人？",
+      "intent": "unassigned",
+      "prediction": "unassigned",
+      "correct": true
+    },
+    {
+      "text": "哪些案件還沒派給工程師？",
+      "intent": "unassigned",
+      "prediction": "unassigned",
+      "correct": true
+    },
+    {
+      "text": "誰都還沒接的工單有哪些？",
+      "intent": "unassigned",
+      "prediction": "open_tickets",
+      "correct": false
+    },
+    {
+      "text": "Amy Chen 還有什麼工單沒結案？",
+      "intent": "open_tickets",
+      "prediction": "open_tickets",
+      "correct": true
+    },
+    {
+      "text": "目前還在修的有哪些？",
+      "intent": "open_tickets",
+      "prediction": "open_tickets",
+      "correct": true
+    },
+    {
+      "text": "CNC14 尚未結束的任務",
+      "intent": "open_tickets",
+      "prediction": "open_tickets",
+      "correct": true
+    },
+    {
+      "text": "哪幾台機器應該優先檢查？",
+      "intent": "machine_attention",
+      "prediction": "machine_attention",
+      "correct": true
+    },
+    {
+      "text": "目前有哪些設備需要檢修？",
+      "intent": "machine_attention",
+      "prediction": "machine_attention",
+      "correct": true
+    },
+    {
+      "text": "CNC05 現在健康嗎？",
+      "intent": "machine_attention",
+      "prediction": "history",
+      "correct": false
+    },
+    {
+      "text": "我要看 CNC14 以前報修的內容",
+      "intent": "history",
+      "prediction": "history",
+      "correct": true
+    },
+    {
+      "text": "CNC03 曾經維修哪些問題？",
+      "intent": "history",
+      "prediction": "history",
+      "correct": true
+    },
+    {
+      "text": "查一下機器過往的維修紀錄",
+      "intent": "history",
+      "prediction": "history",
+      "correct": true
+    },
+    {
+      "text": "如何確認換刀之後可以生產？",
+      "intent": "documents",
+      "prediction": "documents",
+      "correct": true
+    },
+    {
+      "text": "我交班需要準備哪些資料？",
+      "intent": "documents",
+      "prediction": "machine_attention",
+      "correct": false
+    },
+    {
+      "text": "冷卻循環有問題應該怎麼查？",
+      "intent": "documents",
+      "prediction": "documents",
+      "correct": true
+    }
+  ]
+}

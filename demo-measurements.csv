@@ -1,0 +1,4 @@
+﻿metric,before,after,conditions
+temperature,92,56,同轉速暖機10分鐘
+vibration,7.4,2.1,同負載量測
+current,12.5,9.8,試切後量測

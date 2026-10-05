@@ -1,0 +1,27 @@
+.venv/
+.runtime/
+__pycache__/
+.pytest_cache/
+.env
+data/*.db
+data/cwru/
+*.pyc
+
+data/initial-accounts.json
+
+# Local operational data and credentials never belong in the repository.
+data/*.db-*
+data/*.sqlite*
+data/*.json
+data/uploads/
+.env.*
+!.env.example
+*.pem
+*.key
+*.pfx
+*.p12
+.github-upload/
+# Local UI proof captures and upload metadata may contain operational details.
+artifacts/*.png
+artifacts/demo-photos/upload-record.json
+artifacts/**/*proof.png

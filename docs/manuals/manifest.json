@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "source_type": "synthetic_demo_manual",
+  "is_synthetic": true,
+  "manuals": [
+    {"id":"PF-MAN-SPINDLE-001","file":"PF-MAN-SPINDLE-001.md","title":"PF-VMC850-DEMO 主軸與潤滑維修手冊","version":"1.0","category":"示範維修手冊","brand":"青岳精機 DEMO","machine_models":["PF-VMC850-DEMO"],"controller":"PF-Control-D","component":"主軸／軸承／潤滑"},
+    {"id":"PF-MAN-ATC-002","file":"PF-MAN-ATC-002.md","title":"PF-VMC850-DEMO 自動換刀機構維修手冊","version":"1.0","category":"示範維修手冊","brand":"青岳精機 DEMO","machine_models":["PF-VMC850-DEMO"],"controller":"PF-Control-D","component":"換刀機構／刀庫／位置訊號"},
+    {"id":"PF-MAN-COOLANT-003","file":"PF-MAN-COOLANT-003.md","title":"PF-VMC850-DEMO 冷卻循環系統維修手冊","version":"1.0","category":"示範維修手冊","brand":"青岳精機 DEMO","machine_models":["PF-VMC850-DEMO"],"controller":"PF-Control-D","component":"冷卻泵／過濾／管路"},
+    {"id":"PF-MAN-FEED-004","file":"PF-MAN-FEED-004.md","title":"PF-VMC850-DEMO 進給與定位維修手冊","version":"1.0","category":"示範維修手冊","brand":"青岳精機 DEMO","machine_models":["PF-VMC850-DEMO"],"controller":"PF-Control-D","component":"進給軸／螺桿／伺服／定位"}
+  ]
+}

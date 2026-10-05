@@ -1,0 +1,13 @@
+{
+  "tool": "built-in image_gen",
+  "prompts": [
+    {
+      "file": "cnc-03-after-repair-ai-demo.png",
+      "prompt": "Use case: photorealistic-natural. Asset: clearly synthetic demo maintenance evidence for a CNC smart factory app. Produce one landscape realistic documentary photograph of a generic unbranded vertical CNC machining center in a clean Taiwanese metalworking factory after spindle bearing maintenance, machine identification plate CNC-03. Main door open, spindle housing and metal worktable visible, neatly fitted spindle assembly, orderly tools on a nearby cart, subtle authentic machining wear, believable industrial LED lighting, no people, no invented certification. This is a staged mock photo, not real maintenance proof. Include a clearly readable permanent horizontal lower-edge label with exact text 'AI GENERATED / DEMO - NOT REAL MAINTENANCE EVIDENCE'. Small maintenance tag exact text 'CNC-03 / AFTER REPAIR / DEMO'. Prioritize convincing machinery geometry and photographic materials. Single photograph, no collage, no illustration, no logos."
+    },
+    {
+      "file": "cnc-03-retest-meters-ai-demo.png",
+      "prompt": "Use case: photorealistic-natural. Asset: synthetic demo CNC maintenance retest photograph. One landscape close-up realistic factory technician's evidence photograph of three generic unbranded industrial diagnostic instruments on a stable trolley next to a CNC machine marked CNC-03. Instruments have separate physical displays: a temperature meter with thermocouple probe leads prominently reading exactly '56.0 °C', a vibration analyzer reading exactly '2.1 mm/s RMS', and a current meter reading exactly '9.8 A'. Plausible cables, sensor probe leads routed toward machine in background; electrically sensible tools, no unsafe testing scene, no people. Green printed tag reading 'CNC-03 / DEMO RETEST / PASS IN DEMO SCENARIO'. Crisp readable numeric display labels 'TEMPERATURE', 'VIBRATION', 'CURRENT', shallow but sufficient depth of field so all three screens are readable, neutral industrial lighting, documentary photo style, no collage and no rendered dashboard. Prominent bottom label exact text 'AI GENERATED / DEMO - NOT REAL MEASUREMENTS'. These are invented example readings, not real measured values or certified acceptance criteria. No logos, no fabricated signatures or certifications."
+    }
+  ]
+}

@@ -1,0 +1,158 @@
+{
+  "scope": "3-case integration smoke test, not a held-out benchmark",
+  "cases": [
+    {
+      "input": "CNC03 主軸震動，溫度92度，E102，昨天換過刀。",
+      "expected_machine": "CNC-03",
+      "llm_machine_correct": true,
+      "response": {
+        "extracted": {
+          "machine_id": "CNC-03",
+          "symptoms": [
+            "主軸",
+            "振動"
+          ],
+          "temperature_c": 92.0,
+          "error_code": "E102"
+        },
+        "citations": [
+          {
+            "id": "SOP-DEMO-102",
+            "title": "示例 E102 主軸過熱檢查",
+            "section": "§2 檢查順序",
+            "text": "E102 是本專案示例錯誤碼，不是通用 CNC 錯誤碼。主軸過熱或振動異常時，依現場規範由合格人員確認停機隔離。檢查冷卻液液位、濾網、循環流量，記錄軸承振動與潤滑狀態；復機由工程師確認。",
+            "score": 0.2723,
+            "source_type": "authored_demo_document"
+          },
+          {
+            "id": "MAN-DEMO-BEARING",
+            "title": "示例主軸軸承檢查",
+            "section": "§4 振動與潤滑",
+            "text": "主軸軸承內圈、外圈與滾珠故障可能產生不同振動特徵。記錄轉速、負載、振動、溫度与潤滑。檢查異音、對心及固定件。軸承實驗分類結果不能直接換算零件健康度或剩餘壽命。",
+            "score": 0.0628,
+            "source_type": "authored_demo_document"
+          }
+        ],
+        "llm_used": true,
+        "retrieval_method": "TF-IDF character n-grams (not embedding)",
+        "provider": "llamacpp",
+        "model": "Qwen3-0.6B-Q8_0",
+        "needs_confirmation": false,
+        "answer": "CNC-03 主軸震動，溫度92度，E102，昨天換過刀。",
+        "generated_fields": {
+          "machine_id": "CNC-03",
+          "symptoms": [
+            "CNC03 主軸震動"
+          ],
+          "temperature_c": 92,
+          "error_code": null,
+          "answer": "CNC-03 主軸震動，溫度92度，E102，昨天換過刀。"
+        },
+        "eval_count": 84,
+        "llm_duration_ns": null,
+        "elapsed_ms": 4062.39,
+        "request_id": "0517d054-1d0b-4423-a0cc-fe3851efb6e4"
+      }
+    },
+    {
+      "input": "CNC01 的冷卻泵應該檢查什麼？",
+      "expected_machine": "CNC-01",
+      "llm_machine_correct": true,
+      "response": {
+        "extracted": {
+          "machine_id": "CNC-01",
+          "symptoms": [
+            "冷卻"
+          ],
+          "temperature_c": null,
+          "error_code": null
+        },
+        "citations": [
+          {
+            "id": "CHECK-DEMO-COOLANT",
+            "title": "示例冷卻系統檢查表",
+            "section": "§1 循環系統",
+            "text": "冷卻泵、冷卻液、濾網與散熱風扇：檢查液位、清潔度、循環流量、管路洩漏與積塵。過熱未必由軸承造成，需實際量測确认。",
+            "score": 0.1397,
+            "source_type": "authored_demo_document"
+          },
+          {
+            "id": "SOP-DEMO-102",
+            "title": "示例 E102 主軸過熱檢查",
+            "section": "§2 檢查順序",
+            "text": "E102 是本專案示例錯誤碼，不是通用 CNC 錯誤碼。主軸過熱或振動異常時，依現場規範由合格人員確認停機隔離。檢查冷卻液液位、濾網、循環流量，記錄軸承振動與潤滑狀態；復機由工程師確認。",
+            "score": 0.0969,
+            "source_type": "authored_demo_document"
+          }
+        ],
+        "llm_used": true,
+        "retrieval_method": "TF-IDF character n-grams (not embedding)",
+        "provider": "llamacpp",
+        "model": "Qwen3-0.6B-Q8_0",
+        "needs_confirmation": false,
+        "answer": "CNC01 的冷卻泵應檢查冷卻液液位、濾網、循環流量及軸承振動與潤滑狀態。",
+        "generated_fields": {
+          "machine_id": "CNC-01",
+          "symptoms": [
+            "冷卻液液位異常"
+          ],
+          "temperature_c": null,
+          "error_code": null,
+          "answer": "CNC01 的冷卻泵應檢查冷卻液液位、濾網、循環流量及軸承振動與潤滑狀態。"
+        },
+        "eval_count": 87,
+        "llm_duration_ns": null,
+        "elapsed_ms": 4399.25,
+        "request_id": "2989af62-9d1e-4724-a511-b7f4d7609d73"
+      }
+    },
+    {
+      "input": "有人說機台異常，但沒有告訴我機台編號。",
+      "expected_machine": null,
+      "llm_machine_correct": true,
+      "response": {
+        "extracted": {
+          "machine_id": null,
+          "symptoms": [],
+          "temperature_c": null,
+          "error_code": null
+        },
+        "citations": [
+          {
+            "id": "MAN-DEMO-TOOL",
+            "title": "示例刀具磨耗紀錄",
+            "section": "§3 更換紀錄",
+            "text": "切削刀具、車削刀片：記錄刀具編號、加工材質、切削時間、切削參數與刃口磨耗。使用比例與健康度不同；剩餘壽命需完整退化資料驗證。",
+            "score": 0.0475,
+            "source_type": "authored_demo_document"
+          },
+          {
+            "id": "SOP-DEMO-102",
+            "title": "示例 E102 主軸過熱檢查",
+            "section": "§2 檢查順序",
+            "text": "E102 是本專案示例錯誤碼，不是通用 CNC 錯誤碼。主軸過熱或振動異常時，依現場規範由合格人員確認停機隔離。檢查冷卻液液位、濾網、循環流量，記錄軸承振動與潤滑狀態；復機由工程師確認。",
+            "score": 0.0379,
+            "source_type": "authored_demo_document"
+          }
+        ],
+        "llm_used": true,
+        "retrieval_method": "TF-IDF character n-grams (not embedding)",
+        "provider": "llamacpp",
+        "model": "Qwen3-0.6B-Q8_0",
+        "needs_confirmation": true,
+        "answer": "無證據，無法確認機台編號。",
+        "generated_fields": {
+          "machine_id": null,
+          "symptoms": [],
+          "temperature_c": null,
+          "error_code": null,
+          "answer": "無證據，無法確認機台編號。"
+        },
+        "eval_count": 51,
+        "llm_duration_ns": null,
+        "elapsed_ms": 2436.05,
+        "request_id": "95c6624b-7da2-4f14-9bec-d568f6a254f9"
+      }
+    }
+  ]
+}

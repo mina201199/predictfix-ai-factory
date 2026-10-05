@@ -1,0 +1,422 @@
+{
+  "train": [
+    {
+      "text": "哪些同仁目前沒有工作單",
+      "intent": "idle_people"
+    },
+    {
+      "text": "哪些人沒任務",
+      "intent": "idle_people"
+    },
+    {
+      "text": "目前誰空閒",
+      "intent": "idle_people"
+    },
+    {
+      "text": "有哪些工程師沒有工作單",
+      "intent": "idle_people"
+    },
+    {
+      "text": "找沒有未結案任務的人",
+      "intent": "idle_people"
+    },
+    {
+      "text": "誰現在沒案子",
+      "intent": "idle_people"
+    },
+    {
+      "text": "哪些技師尚未接任務",
+      "intent": "idle_people"
+    },
+    {
+      "text": "有誰還沒被派工",
+      "intent": "idle_people"
+    },
+    {
+      "text": "列出零工單人員",
+      "intent": "idle_people"
+    },
+    {
+      "text": "可以找哪些空閒工程師",
+      "intent": "idle_people"
+    },
+    {
+      "text": "誰的任務負荷最多",
+      "intent": "workload"
+    },
+    {
+      "text": "誰最忙",
+      "intent": "workload"
+    },
+    {
+      "text": "工程師工作量比較",
+      "intent": "workload"
+    },
+    {
+      "text": "各人員有多少未完成任務",
+      "intent": "workload"
+    },
+    {
+      "text": "哪位技師負荷最高",
+      "intent": "workload"
+    },
+    {
+      "text": "列出人員任務數",
+      "intent": "workload"
+    },
+    {
+      "text": "誰手上案件最多",
+      "intent": "workload"
+    },
+    {
+      "text": "目前各工程師忙碌情況",
+      "intent": "workload"
+    },
+    {
+      "text": "所有技師的工單量",
+      "intent": "workload"
+    },
+    {
+      "text": "比較目前維修負荷",
+      "intent": "workload"
+    },
+    {
+      "text": "有哪些待主管審核工單",
+      "intent": "review"
+    },
+    {
+      "text": "哪些維修等主管確認",
+      "intent": "review"
+    },
+    {
+      "text": "待審核的案件",
+      "intent": "review"
+    },
+    {
+      "text": "主管還沒批准哪些工單",
+      "intent": "review"
+    },
+    {
+      "text": "工程師已提交的維修結果",
+      "intent": "review"
+    },
+    {
+      "text": "列出等待審核任務",
+      "intent": "review"
+    },
+    {
+      "text": "還有幾筆待審核",
+      "intent": "review"
+    },
+    {
+      "text": "主管要檢查哪些結案申請",
+      "intent": "review"
+    },
+    {
+      "text": "尚未通過審核的工單",
+      "intent": "review"
+    },
+    {
+      "text": "顯示待主管審核清單",
+      "intent": "review"
+    },
+    {
+      "text": "有哪些未派工工單",
+      "intent": "unassigned"
+    },
+    {
+      "text": "哪些工單還沒人處理",
+      "intent": "unassigned"
+    },
+    {
+      "text": "待指派的案件",
+      "intent": "unassigned"
+    },
+    {
+      "text": "列出還沒有工程師的任務",
+      "intent": "unassigned"
+    },
+    {
+      "text": "哪些維修還沒分配",
+      "intent": "unassigned"
+    },
+    {
+      "text": "找未派工案件",
+      "intent": "unassigned"
+    },
+    {
+      "text": "哪些工單負責人是待指派",
+      "intent": "unassigned"
+    },
+    {
+      "text": "尚未安排人員的工單",
+      "intent": "unassigned"
+    },
+    {
+      "text": "有哪些待分派維修",
+      "intent": "unassigned"
+    },
+    {
+      "text": "還沒指定技師的工作單",
+      "intent": "unassigned"
+    },
+    {
+      "text": "目前未結案工單有哪些",
+      "intent": "open_tickets"
+    },
+    {
+      "text": "還沒完成的工單",
+      "intent": "open_tickets"
+    },
+    {
+      "text": "列出待處理維修",
+      "intent": "open_tickets"
+    },
+    {
+      "text": "有哪些維修中案件",
+      "intent": "open_tickets"
+    },
+    {
+      "text": "哪些任務還沒結束",
+      "intent": "open_tickets"
+    },
+    {
+      "text": "Amy Chen 的未完成任務",
+      "intent": "open_tickets"
+    },
+    {
+      "text": "David Wu 有哪些工作單",
+      "intent": "open_tickets"
+    },
+    {
+      "text": "顯示未結案維修清單",
+      "intent": "open_tickets"
+    },
+    {
+      "text": "CNC14 未完成工單",
+      "intent": "open_tickets"
+    },
+    {
+      "text": "待追蹤的維修任務",
+      "intent": "open_tickets"
+    },
+    {
+      "text": "現在有哪些機台要檢查",
+      "intent": "machine_attention"
+    },
+    {
+      "text": "哪些設備有警示",
+      "intent": "machine_attention"
+    },
+    {
+      "text": "找高風險機台",
+      "intent": "machine_attention"
+    },
+    {
+      "text": "需要保養的機器",
+      "intent": "machine_attention"
+    },
+    {
+      "text": "哪些機台要檢修",
+      "intent": "machine_attention"
+    },
+    {
+      "text": "風險最高的設備",
+      "intent": "machine_attention"
+    },
+    {
+      "text": "哪台機器不健康",
+      "intent": "machine_attention"
+    },
+    {
+      "text": "CNC03 健康度如何",
+      "intent": "machine_attention"
+    },
+    {
+      "text": "有哪些零件異常的機台",
+      "intent": "machine_attention"
+    },
+    {
+      "text": "有哪些設備需要維修",
+      "intent": "machine_attention"
+    },
+    {
+      "text": "CNC14 維修過幾次",
+      "intent": "history"
+    },
+    {
+      "text": "CNC03 的歷史工單",
+      "intent": "history"
+    },
+    {
+      "text": "某台機器的維修紀錄",
+      "intent": "history"
+    },
+    {
+      "text": "哪些機台有報修紀錄",
+      "intent": "history"
+    },
+    {
+      "text": "查看歷年維修工單",
+      "intent": "history"
+    },
+    {
+      "text": "列出設備報修歷史",
+      "intent": "history"
+    },
+    {
+      "text": "CNC05 所有維修紀錄",
+      "intent": "history"
+    },
+    {
+      "text": "機台已結案紀錄",
+      "intent": "history"
+    },
+    {
+      "text": "CNC14 過去修過什麼",
+      "intent": "history"
+    },
+    {
+      "text": "查詢以前的維修案件",
+      "intent": "history"
+    },
+    {
+      "text": "刀具什麼時候換",
+      "intent": "documents"
+    },
+    {
+      "text": "換刀後怎麼验收",
+      "intent": "documents"
+    },
+    {
+      "text": "冷卻液流量下降怎麼辦",
+      "intent": "documents"
+    },
+    {
+      "text": "主軸異音如何查",
+      "intent": "documents"
+    },
+    {
+      "text": "交班應該寫什麼",
+      "intent": "documents"
+    },
+    {
+      "text": "維修結案要填什麼",
+      "intent": "documents"
+    },
+    {
+      "text": "檢查潤滑的流程",
+      "intent": "documents"
+    },
+    {
+      "text": "尺寸不準要查哪裡",
+      "intent": "documents"
+    },
+    {
+      "text": "漏液怎麼通報",
+      "intent": "documents"
+    },
+    {
+      "text": "派工要考慮哪些條件",
+      "intent": "documents"
+    }
+  ],
+  "test": [
+    {
+      "text": "誰沒有維修工單？",
+      "intent": "idle_people"
+    },
+    {
+      "text": "現在哪些技師手上沒工作？",
+      "intent": "idle_people"
+    },
+    {
+      "text": "可以派給哪位沒任務的工程師？",
+      "intent": "idle_people"
+    },
+    {
+      "text": "哪個人身上工單最多？",
+      "intent": "workload"
+    },
+    {
+      "text": "幫我看工程師的工作負荷",
+      "intent": "workload"
+    },
+    {
+      "text": "哪位師傅最忙？",
+      "intent": "workload"
+    },
+    {
+      "text": "有什麼單子需要主管審核？",
+      "intent": "review"
+    },
+    {
+      "text": "主管還有哪些維修結果未審？",
+      "intent": "review"
+    },
+    {
+      "text": "已提交但待批准的有哪些？",
+      "intent": "review"
+    },
+    {
+      "text": "還有哪幾張單沒指定人？",
+      "intent": "unassigned"
+    },
+    {
+      "text": "哪些案件還沒派給工程師？",
+      "intent": "unassigned"
+    },
+    {
+      "text": "誰都還沒接的工單有哪些？",
+      "intent": "unassigned"
+    },
+    {
+      "text": "Amy Chen 還有什麼工單沒結案？",
+      "intent": "open_tickets"
+    },
+    {
+      "text": "目前還在修的有哪些？",
+      "intent": "open_tickets"
+    },
+    {
+      "text": "CNC14 尚未結束的任務",
+      "intent": "open_tickets"
+    },
+    {
+      "text": "哪幾台機器應該優先檢查？",
+      "intent": "machine_attention"
+    },
+    {
+      "text": "目前有哪些設備需要檢修？",
+      "intent": "machine_attention"
+    },
+    {
+      "text": "CNC05 現在健康嗎？",
+      "intent": "machine_attention"
+    },
+    {
+      "text": "我要看 CNC14 以前報修的內容",
+      "intent": "history"
+    },
+    {
+      "text": "CNC03 曾經維修哪些問題？",
+      "intent": "history"
+    },
+    {
+      "text": "查一下機器過往的維修紀錄",
+      "intent": "history"
+    },
+    {
+      "text": "如何確認換刀之後可以生產？",
+      "intent": "documents"
+    },
+    {
+      "text": "我交班需要準備哪些資料？",
+      "intent": "documents"
+    },
+    {
+      "text": "冷卻循環有問題應該怎麼查？",
+      "intent": "documents"
+    }
+  ]
+}

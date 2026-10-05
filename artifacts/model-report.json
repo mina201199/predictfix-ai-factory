@@ -1,0 +1,328 @@
+{
+  "model_version": "cwru-tree-v1",
+  "task": "known_seeded_fault_classification",
+  "created_at": "2026-10-05T09:45:16.020827+00:00",
+  "source": "https://engineering.case.edu/bearingdatacenter/12k-drive-end-bearing-fault-data",
+  "classes": [
+    "ball",
+    "inner_race",
+    "outer_race"
+  ],
+  "labels": {
+    "inner_race": "內圈故障",
+    "ball": "滾珠故障",
+    "outer_race": "外圈故障"
+  },
+  "sample_rate_hz": 12000,
+  "window_size": 2048,
+  "features": [
+    "rms",
+    "std",
+    "peak",
+    "peak_to_peak",
+    "crest_factor",
+    "kurtosis",
+    "skew",
+    "spectral_centroid",
+    "band_0",
+    "band_1",
+    "band_2",
+    "band_3",
+    "band_4",
+    "band_5"
+  ],
+  "split": {
+    "train_load_hp": [
+      0,
+      1
+    ],
+    "validation_load_hp": [
+      2
+    ],
+    "test_load_hp": [
+      3
+    ],
+    "train_windows": 336,
+    "validation_windows": 168,
+    "test_windows": 168
+  },
+  "validation": {
+    "accuracy": 0.9464285714285714,
+    "macro_f1": 0.9454179900541378,
+    "confusion_matrix": [
+      [
+        56,
+        0,
+        0
+      ],
+      [
+        7,
+        47,
+        2
+      ],
+      [
+        0,
+        0,
+        56
+      ]
+    ],
+    "per_class": {
+      "ball": {
+        "precision": 0.8888888888888888,
+        "recall": 1.0,
+        "f1-score": 0.9411764705882353,
+        "support": 56.0
+      },
+      "inner_race": {
+        "precision": 1.0,
+        "recall": 0.8392857142857143,
+        "f1-score": 0.912621359223301,
+        "support": 56.0
+      },
+      "outer_race": {
+        "precision": 0.9655172413793104,
+        "recall": 1.0,
+        "f1-score": 0.9824561403508771,
+        "support": 56.0
+      },
+      "accuracy": 0.9464285714285714,
+      "macro avg": {
+        "precision": 0.9514687100893998,
+        "recall": 0.9464285714285715,
+        "f1-score": 0.9454179900541378,
+        "support": 168.0
+      },
+      "weighted avg": {
+        "precision": 0.9514687100893998,
+        "recall": 0.9464285714285714,
+        "f1-score": 0.9454179900541377,
+        "support": 168.0
+      }
+    }
+  },
+  "test": {
+    "accuracy": 0.6666666666666666,
+    "macro_f1": 0.5555555555555555,
+    "confusion_matrix": [
+      [
+        56,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        56
+      ],
+      [
+        0,
+        0,
+        56
+      ]
+    ],
+    "per_class": {
+      "ball": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 56.0
+      },
+      "inner_race": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 56.0
+      },
+      "outer_race": {
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1-score": 0.6666666666666666,
+        "support": 56.0
+      },
+      "accuracy": 0.6666666666666666,
+      "macro avg": {
+        "precision": 0.5,
+        "recall": 0.6666666666666666,
+        "f1-score": 0.5555555555555555,
+        "support": 168.0
+      },
+      "weighted avg": {
+        "precision": 0.5,
+        "recall": 0.6666666666666666,
+        "f1-score": 0.5555555555555556,
+        "support": 168.0
+      }
+    }
+  },
+  "baseline_test": {
+    "accuracy": 0.3333333333333333,
+    "macro_f1": 0.16666666666666666,
+    "confusion_matrix": [
+      [
+        56,
+        0,
+        0
+      ],
+      [
+        56,
+        0,
+        0
+      ],
+      [
+        56,
+        0,
+        0
+      ]
+    ],
+    "per_class": {
+      "ball": {
+        "precision": 0.3333333333333333,
+        "recall": 1.0,
+        "f1-score": 0.5,
+        "support": 56.0
+      },
+      "inner_race": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 56.0
+      },
+      "outer_race": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 56.0
+      },
+      "accuracy": 0.3333333333333333,
+      "macro avg": {
+        "precision": 0.1111111111111111,
+        "recall": 0.3333333333333333,
+        "f1-score": 0.16666666666666666,
+        "support": 168.0
+      },
+      "weighted avg": {
+        "precision": 0.11111111111111109,
+        "recall": 0.3333333333333333,
+        "f1-score": 0.16666666666666666,
+        "support": 168.0
+      }
+    }
+  },
+  "files": [
+    {
+      "name": "IR007_0",
+      "file": "105.mat",
+      "url": "https://engineering.case.edu/sites/default/files/105.mat",
+      "load_hp": 0,
+      "label": "inner_race",
+      "windows": 56,
+      "sha256": "f80b0ea04fd06b372a0eaec7c056543ea37e4bb4727a5b173d2a5bacd2aa9cab"
+    },
+    {
+      "name": "IR007_1",
+      "file": "106.mat",
+      "url": "https://engineering.case.edu/sites/default/files/106.mat",
+      "load_hp": 1,
+      "label": "inner_race",
+      "windows": 56,
+      "sha256": "e5cec7cdd138e6cd1deb9ed8634e5aaa9bc1bd7094ddc075bff606580eb6e883"
+    },
+    {
+      "name": "IR007_2",
+      "file": "107.mat",
+      "url": "https://engineering.case.edu/sites/default/files/107.mat",
+      "load_hp": 2,
+      "label": "inner_race",
+      "windows": 56,
+      "sha256": "111ba8996a115684661a13c913bd74d8029a59294492f88aec7b03e175fdd388"
+    },
+    {
+      "name": "IR007_3",
+      "file": "108.mat",
+      "url": "https://engineering.case.edu/sites/default/files/108.mat",
+      "load_hp": 3,
+      "label": "inner_race",
+      "windows": 56,
+      "sha256": "d415f0e65128bfa0b118c2051c988fb0dc6ce3e4c8aa45fdc5ad1d0967462e7d"
+    },
+    {
+      "name": "B007_0",
+      "file": "118.mat",
+      "url": "https://engineering.case.edu/sites/default/files/118.mat",
+      "load_hp": 0,
+      "label": "ball",
+      "windows": 56,
+      "sha256": "b00628f8dd8d1d930af77fa465d1e5cdb385fe259489053f91f3680bda7f640e"
+    },
+    {
+      "name": "B007_1",
+      "file": "119.mat",
+      "url": "https://engineering.case.edu/sites/default/files/119.mat",
+      "load_hp": 1,
+      "label": "ball",
+      "windows": 56,
+      "sha256": "bc72d9df7668219e004a0f711232b23ec0aed393eb9bd8f9f5483426f6b51330"
+    },
+    {
+      "name": "B007_2",
+      "file": "120.mat",
+      "url": "https://engineering.case.edu/sites/default/files/120.mat",
+      "load_hp": 2,
+      "label": "ball",
+      "windows": 56,
+      "sha256": "e0b7a584c49af52335ff0904a97d4afcf02d045625c582de63a7c85ce10b489c"
+    },
+    {
+      "name": "B007_3",
+      "file": "121.mat",
+      "url": "https://engineering.case.edu/sites/default/files/121.mat",
+      "load_hp": 3,
+      "label": "ball",
+      "windows": 56,
+      "sha256": "52f686e984ba8e9b04a047a57416271cdb322cee57ee105dce58926a24b966cb"
+    },
+    {
+      "name": "OR007@6_0",
+      "file": "130.mat",
+      "url": "https://engineering.case.edu/sites/default/files/130.mat",
+      "load_hp": 0,
+      "label": "outer_race",
+      "windows": 56,
+      "sha256": "35a095307d0971477049b343a1b5981dde465a58fb7f233ad89b035068c1717d"
+    },
+    {
+      "name": "OR007@6_1",
+      "file": "131.mat",
+      "url": "https://engineering.case.edu/sites/default/files/131.mat",
+      "load_hp": 1,
+      "label": "outer_race",
+      "windows": 56,
+      "sha256": "7883f7b83beadc54b2f301767f9145ce07055707182fb0278fdf0a6bb53ce3cb"
+    },
+    {
+      "name": "OR007@6_2",
+      "file": "132.mat",
+      "url": "https://engineering.case.edu/sites/default/files/132.mat",
+      "load_hp": 2,
+      "label": "outer_race",
+      "windows": 56,
+      "sha256": "17a69ed5d2270b42532e678e35bbe2fa04a2cc413cf2bf9e88c7692de8662d18"
+    },
+    {
+      "name": "OR007@6_3",
+      "file": "133.mat",
+      "url": "https://engineering.case.edu/sites/default/files/133.mat",
+      "load_hp": 3,
+      "label": "outer_race",
+      "windows": 56,
+      "sha256": "53f076cb0d905cf46bffaee7736abce8224ffed777deed03c0c863d762a90c71"
+    }
+  ],
+  "limitations": [
+    "No healthy class; all examples have seeded faults.",
+    "No health percentage, severity, RUL, or 7-day failure probability.",
+    "Load holdout is not an unseen bearing or unseen factory test.",
+    "Windows within a file are correlated; independent test files = 3.",
+    "Real CNC spindle use requires new data and validation."
+  ]
+}
