@@ -1,16 +1,24 @@
 # PredictFix AI 維修系統架構
 
-版本：2026-10-06。範圍為可本機運作的維修知識 MVP；未接真實 CNC、PLC 或企業人事系統。
+版本：2026-10-06。正式資料環境與展示環境分開；已支援真實資料建檔及維修流程，未接 CNC、PLC 或企業人事系統。部署與驗收限制見 [部署手冊](production-setup.md)。
 
 ```mermaid
 flowchart TD
-    USER[工程師／主管] --> UI[設備工單工作台]
+    USER[工程師／主管] --> UI[正式設備工單工作台]
     USER --> CENTRE[維修 AI 中心]
     UI --> AUTH[帳號／工作階段／CSRF／角色]
     CENTRE --> AUTH
     AUTH --> API[FastAPI]
     API --> OPS[設備／派工／工單／主管審核]
-    OPS --> DB[(SQLite)]
+    API --> ACCOUNT[帳號／技能／資格／工作階段撤銷]
+    ACCOUNT --> ROSTER[日期班次／確認到班／請假]
+    ROSTER --> DISPATCH[出勤與資格篩選／剩餘工時排序]
+    ESTIMATE[案件剩餘估時] --> DISPATCH
+    DISPATCH --> HUMAN[主管確認派工]
+    HUMAN --> OPS
+    OPS --> TIME[工程師實際工時／主管更新估時]
+    OPS --> DB[(SQLite 本機／PostgreSQL 部署設定)]
+    DB --> BACKUP[一致備份／雜湊／完整性檢查／新庫還原]
     DB --> PROOF[量測／照片／提交與審核快照]
     PROOF --> DRAFT[案例草稿與版本]
     DRAFT --> EXTRACT[本機 AI 原文分類建議]
@@ -19,7 +27,7 @@ flowchart TD
     PUBLISH --> CASES[(已發布案例)]
     FILE[TXT／Markdown 手冊] --> IMPORT[來源／權利確認／機型／版本]
     IMPORT --> MANUALS[(匯入文件)]
-    BUILTIN[4 份完整虛構手冊] --> CHUNK[章節與段落分段]
+    BUILTIN[4 份虛構手冊：僅展示環境] --> CHUNK[章節與段落分段]
     MANUALS --> CHUNK
     CASES --> CHUNK
     API --> FILTER[機型與示例來源篩選]
@@ -36,7 +44,11 @@ flowchart TD
 
 ## 介面與責任
 
-- `/`：設備、工單、人员、維修分析與舊有對話查詢。原對話的 SQL 模板查詢保留。
+2026-10-08 單一工廠設備模板更新：設備建檔可選模板，自訂零件、量測欄位與排查／驗收項目；設備保存模板版本快照，更新模板不覆寫既有設備。流程頁以模板預填項目，仍由主管確認機型與依據後核准。詳見 [設備模板操作](equipment-templates.md)。本輪未增加其他工廠展示或 OpenAI API。
+
+- `/`：正式模式為設備、工單、出勤派工、人員管理與操作紀錄；展示模式保留舊有設備模擬介面。展示聊天與感測器回放在正式模式關閉。
+- `/api/admin/users`：帳號管理；`/api/duties`：排班與出勤；`/api/dispatch`：當班與剩餘工時推薦；`/api/tickets/{id}/estimate` 與 `/work-logs` 分開保存估時及實際工時。
+- `/healthz`：不含敏感資料的服務／資料庫 readiness；`/api/health` 需要登入，提供模型與環境狀態。
 - `/knowledge.html`：新的排查助手、手冊管理、案例草稿、發布與來源核對；共用既有登入。
 - `/api/assist`：讀取可用來源、依機型篩選、檢索、本機 AI 選取原文、引用檢查及降級。
 - `/api/knowledge/manuals`：內建與匯入文件；主管可新增版本或撤回匯入文件。未支援 PDF/OCR。
@@ -57,3 +69,5 @@ flowchart TD
 整合測試涵蓋文件版本、權限、機型篩選、撤回、案例發布、舊版本拒絕及虛構引用拒絕。`scripts/evaluate_retrieval.py` 比較三種檢索，資料集是開發用合成題，不是外部保留評估。
 
 目前沒有 PDF/OCR、向量檢索、多模態診斷、PLC、實際排班、RUL、企業 SSO 或跨公司資料隔離。SQLite 本機單一工廠原型；Docker／PostgreSQL 全流程仍需另行驗證。案例的發布是人工判斷，不構成原廠或法律認證。
+
+安全驗證見 [專項測試與限制](security-testing.md)。工程師僅讀取已發布案例欄位及有效手冊；主管可讀草稿、撤回版本、來源快照與修改歷程。驗證錯誤不回傳原始輸入；模型段落選取在後端檢查欄位、型別與數量。引用有效仍不等於內容可信或診斷正確。

@@ -1,0 +1,38 @@
+{
+  "deployed_at": "2026-10-07T07:23:29.674690+00:00",
+  "release_id": "20261007T072329Z",
+  "url": "http://127.0.0.1:8084",
+  "hosting": "Localhost native Python; not Docker, not publicly reachable",
+  "database": "Isolated persistent SQLite under ignored .runtime/local-deploy/data",
+  "release_manifest_sha256": "0c4ea6af67e2a364cc610226c0cbff5ab975518f1a2ddd2912db7371d576460d",
+  "file_count": 43,
+  "launcher_pid": 19728,
+  "status": "deployed",
+  "llm": "Disabled in isolated deployment; candidate-source fallback. Existing demo model unchanged.",
+  "docker_status": "Engine unavailable: dockerDesktopLinuxEngine named pipe missing",
+  "postgresql_verified": false,
+  "https_verified": false,
+  "health": {
+    "status": "ok",
+    "mode": "production",
+    "schema": 1
+  },
+  "checks": {
+    "workflow_assets": "passed",
+    "api_docs": "passed",
+    "anonymous_tickets_blocked": "passed",
+    "demo_quick_login_disabled": "passed",
+    "real_login": "passed",
+    "supervisor_authorization": "passed",
+    "empty_operational_data": "passed",
+    "restart_and_account_persistence": "passed",
+    "sqlite_backup": "passed",
+    "restore_to_new_database": "passed",
+    "restored_sessions_revoked": "passed"
+  },
+  "restore_session_evidence": {
+    "active_sessions_in_backup": 1,
+    "sessions_after_restore": 0,
+    "accounts_preserved": true
+  }
+}

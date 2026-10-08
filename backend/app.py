@@ -11,6 +11,8 @@ import numpy as np
 import httpx
 from fastapi import FastAPI, HTTPException, Header, Request
 from fastapi.responses import FileResponse
+from fastapi.exceptions import RequestValidationError
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field, ConfigDict, field_validator
 from sqlalchemy import select
 from sqlalchemy.exc import IntegrityError
@@ -18,7 +20,7 @@ from . import store
 from .ml import features, WINDOW, FEATURE_NAMES, LABELS
 from .copilot import analyze
 from .knowledge import DOCUMENTS, retrieve
-from . import operations, chat, auth, evidence, maintenance_ai
+from . import operations, chat, auth, evidence, maintenance_ai, config, workforce, repair_flow, equipment_templates
 
 ROOT=Path(__file__).resolve().parents[1]
 ART=ROOT/'artifacts'
@@ -31,10 +33,18 @@ ENGINEERS=['待指派','Amy Chen','Alex Lin','Bob Wang']
 @asynccontextmanager
 async def lifespan(app):
     global model,report,replay
+    config.validate()
     store.init()
+    with store.Session() as db:
+        latest=db.scalar(select(store.SchemaVersion.version).order_by(store.SchemaVersion.version.desc()))
+        if latest and latest>1:raise RuntimeError('Database schema is newer than this application')
+        if not latest:db.add(store.SchemaVersion(version=1));db.commit()
+        if not config.demo():
+            if db.scalar(select(store.Audit).where(store.Audit.kind.in_(['asset_demo_seed_v1','demo_login']))):
+                raise RuntimeError('Demo database cannot be used in production; use a separate empty database')
     operations.seed()
     auth.seed(operations.PEOPLE)
-    if (ART/'bearing-model.joblib').exists():
+    if config.demo() and (ART/'bearing-model.joblib').exists():
         model=joblib.load(ART/'bearing-model.joblib')
         report=json.loads((ART/'model-report.json').read_text(encoding='utf-8'))
         replay=json.loads((ART/'replay.json').read_text(encoding='utf-8'))
@@ -42,7 +52,32 @@ async def lifespan(app):
 
 app=FastAPI(title='PredictFix AI',version='0.2.0',lifespan=lifespan)
 
+@app.exception_handler(RequestValidationError)
+async def safe_validation_error(request:Request, exc:RequestValidationError):
+    # FastAPI's default errors echo input, including passwords or entire malformed bodies.
+    # Keep field locations and error types, but never serialize input, context or body.
+    errors=[{'loc':e['loc'], 'type':e['type'], 'msg':'輸入格式或內容不符合要求'}
+            for e in exc.errors()]
+    return JSONResponse(status_code=422,content={'detail':errors})
+
 auth.register(app)
+
+@app.middleware('http')
+async def operational_boundary(request:Request,call_next):
+    from fastapi.responses import JSONResponse
+    if not config.demo() and request.url.path in ['/api/replay','/api/predict','/api/model/report','/api/chat','/api/copilot','/api/documents','/demo-measurements.csv','/index.html','/factory.js','/live.js','/management.js']:
+        return JSONResponse({'detail':'展示功能未在正式環境啟用；維修 AI 請使用 /api/assist'},status_code=404)
+    response=await call_next(request)
+    response.headers['X-Content-Type-Options']='nosniff'
+    response.headers['Referrer-Policy']='same-origin'
+    response.headers['X-Frame-Options']='DENY'
+    return response
+
+@app.get('/healthz')
+def readiness():
+    from sqlalchemy import text
+    with store.Session() as db:db.execute(text('SELECT 1'))
+    return {'status':'ok','mode':'demo' if config.demo() else 'production','schema':1}
 
 def audit(kind, payload, request_id=None):
     request_id=request_id or str(uuid.uuid4())
@@ -53,6 +88,13 @@ def audit(kind, payload, request_id=None):
 
 @app.get('/api/health')
 async def health():
+    from . import openai_runtime
+    if openai_runtime.configured():
+        return {'status':'ok','database':store.engine.dialect.name,'sensor_model_ready':model is not None,
+                'llm':{'configured':True,'model':openai_runtime.settings()['model'],'provider':'openai',
+                       'available':False,'availability':'not_probed_by_health'},
+                'retrieval':'keyword_and_optional_openai_embeddings','app_mode':'demo' if config.demo() else 'production',
+                'component_health':'simulated' if config.demo() else 'not_connected','openai_budget':openai_runtime.budget_status()}
     provider=os.getenv('LLM_PROVIDER','ollama')
     model_name=os.getenv('LOCAL_LLM_MODEL') if provider=='llamacpp' else os.getenv('OLLAMA_MODEL')
     llm={'configured':bool(model_name), 'model':model_name, 'provider':provider, 'available':False}
@@ -68,7 +110,15 @@ async def health():
         pass
     return {'status':'ok', 'database':store.engine.dialect.name, 'sensor_model_ready':model is not None,
             'llm':llm, 'documents':'synthetic_and_imported_manuals_with_reviewed_cases',
-            'retrieval':'legacy_tfidf_and_new_tfidf_bm25_fusion', 'component_health':'simulated'}
+            'retrieval':'tfidf_bm25_fusion', 'component_health':'simulated' if config.demo() else 'not_connected',
+            'app_mode':'demo' if config.demo() else 'production'}
+
+@app.get('/api/openai/budget')
+def openai_budget(request:Request):
+    auth.supervisor(request)
+    from . import openai_runtime
+    return {'configured':openai_runtime.configured(),'model':openai_runtime.settings()['model'],
+            **openai_runtime.budget_status()}
 
 @app.get('/api/model/report')
 def model_report():
@@ -130,14 +180,16 @@ def list_tickets():
 def create_ticket(body:TicketInput,request:Request,idempotency_key:str|None=Header(default=None,max_length=100)):
     if request.state.user['role']!='supervisor' and body.engineer not in ['待指派',request.state.user['name']]:raise HTTPException(403,'只有主管可以指派其他人員')
     operations.active_machine(body.machine)
-    if body.engineer not in ['待指派']+[p['name'] for p in operations.PEOPLE]:raise HTTPException(422,'維修人員不存在')
+    if body.engineer not in ['待指派']+[p['name'] for p in operations.people()]:raise HTTPException(422,'維修人員不存在')
     with store.Session() as session:
+        if not config.demo():workforce.lock_dispatch(session,body.engineer)
         if idempotency_key:
             existing=session.scalar(select(store.Ticket).where(store.Ticket.request_key==idempotency_key))
             if existing:
                 if any(getattr(existing,k)!=getattr(body,k) for k in ['machine','issue','engineer']):
                     raise HTTPException(409,'相同請求編號的工單內容不同')
                 return store.ticket_dict(existing)
+        if not config.demo():workforce.check_assignment(body.engineer)
         ticket=store.Ticket(id='WO-'+uuid.uuid4().hex[:12].upper(),request_key=idempotency_key,status='待指派' if body.engineer=='待指派' else '已指派',**body.model_dump())
         session.add(ticket)
         try:
@@ -164,15 +216,15 @@ class CompleteInput(BaseModel):
 @app.post('/api/tickets/{ticket_id}/complete')
 def complete_ticket(ticket_id:str,body:CompleteInput,request:Request):
     with store.Session() as session:
-        ticket=session.get(store.Ticket,ticket_id)
-        if ticket is None:
-            raise HTTPException(404,'工單不存在')
+        ticket=repair_flow.locked(session,store.Ticket,ticket_id)
         auth.assigned(request,ticket)
         if ticket.status=='已完成':
             return store.ticket_dict(ticket)
         if ticket.status=='待主管審核':raise HTTPException(409,'已提交主管審核')
         if ticket.engineer=='待指派':raise HTTPException(409,'工單尚未指派')
+        procedure=repair_flow.checklist_submission(session,ticket)
         proof=evidence.submission(session,ticket,body,request.state.user)
+        if procedure:proof['procedure']=procedure
         ticket.status='待主管審核'
         ticket.completion_note=body.note
         meta=session.get(store.Workflow,ticket_id)
@@ -186,6 +238,7 @@ def complete_ticket(ticket_id:str,body:CompleteInput,request:Request):
 @app.get('/api/engineers')
 def recommend_engineers(machine:str='CNC-03',part:str='主軸軸承'):
     operations.active_machine(machine)
+    if not config.demo():return workforce.recommendations(part)
     output=[]
     for p in operations.people():
         match=any(w in part for w in p['skills'])
@@ -213,22 +266,28 @@ def documents(q:str=''):
     return retrieve(q) if q else DOCUMENTS
 
 @app.get('/api/audit')
-def audit_list():
+def audit_list(request:Request):
+    auth.supervisor(request)
     with store.Session() as session:
         return [{'id':t.id,'kind':t.kind,'request_id':t.request_id,'created_at':t.created_at.isoformat(),
                  'payload':json.loads(t.payload)} for t in session.scalars(select(store.Audit).order_by(store.Audit.id.desc()).limit(30)).all()]
 
 evidence.register(app)
+workforce.register(app)
 operations.register(app)
 chat.register(app)
 maintenance_ai.register(app)
+repair_flow.register(app)
+equipment_templates.register(app)
 
 STATIC={'':'index.html','index.html':'index.html','factory.css':'factory.css','factory.js':'factory.js',
-        'live.css':'live.css','live.js':'live.js','management.js':'management.js','management.css':'management.css','auth.js':'auth.js','evidence.js':'evidence.js','demo-measurements.csv':'demo-measurements.csv',
-        'knowledge.html':'knowledge.html','knowledge.js':'knowledge.js','knowledge.css':'knowledge.css'}
+        'neon.css':'neon.css','live.css':'live.css','live.js':'live.js','management.js':'management.js','management.css':'management.css','auth.js':'auth.js','evidence.js':'evidence.js','demo-measurements.csv':'demo-measurements.csv',
+        'knowledge.html':'knowledge.html','knowledge.js':'knowledge.js','knowledge.css':'knowledge.css',
+        'console.html':'console.html','console.js':'console.js','console.css':'console.css','templates.js':'templates.js',
+        'workflow.html':'workflow.html','workflow.js':'workflow.js','workflow.css':'workflow.css'}
 @app.get('/')
 def index():
-    return FileResponse(ROOT/'index.html',headers={'Cache-Control':'no-store'})
+    return FileResponse(ROOT/('index.html' if config.demo() else 'console.html'),headers={'Cache-Control':'no-store'})
 
 @app.get('/{filename}')
 def static(filename:str):

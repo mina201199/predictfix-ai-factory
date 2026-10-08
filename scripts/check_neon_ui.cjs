@@ -1,0 +1,44 @@
+const {chromium}=require(process.env.PLAYWRIGHT_MODULE || 'playwright');
+const fs=require('node:fs');
+(async()=>{
+ const browser=await chromium.launch({headless:true,channel:'msedge'});
+ const page=await browser.newPage({viewport:{width:1536,height:1024},deviceScaleFactor:1});
+ const errors=[];page.on('pageerror',e=>errors.push(e.message));
+ await page.goto('http://127.0.0.1:8094',{waitUntil:'networkidle'});
+ await page.locator('[data-demo-login="supervisor"]').click();
+ await page.locator('#login-screen').waitFor({state:'detached'});
+ await page.locator('[data-view=equipment]').click();
+ await page.locator('[data-overview-machine]').first().waitFor();
+ await page.screenshot({path:'artifacts/neon-equipment-desktop.png',fullPage:false});
+ const card=page.locator('[data-overview-machine]').first();
+ if(await card.locator('.part-cube').count()!==4)throw Error('Expected four assemblies');
+ await card.locator('.model-shell-toggle').click();
+ if(await card.locator('.model-stage').evaluate(el=>el.classList.contains('cutaway')))throw Error('Solid shell toggle failed');
+ await card.locator('.model-shell-toggle').click();
+ await card.locator('.equipment-more>summary').click();
+ await card.locator('[data-overview-select="1"]').click();
+ if(await card.locator('[data-overview-part="1"]').getAttribute('aria-pressed')!=='true')throw Error('Part selection failed');
+ await card.locator('input[type=range]').fill('65');
+ if(!(await card.locator('.model-world').getAttribute('style')).includes('65deg'))throw Error('Rotation failed');
+ await card.locator('.overview-reset').click();
+ await card.locator('.overview-work').click();
+ await page.locator('.viewer').waitFor();
+ await page.locator('.component-layout').screenshot({path:'artifacts/neon-machine-cutaway.png'});
+ await page.locator('.part-button[data-part="2"]').click();
+ if(await page.locator('.interactive-model [data-part="2"]').getAttribute('aria-pressed')!=='true')throw Error('Detail hotspot failed');
+ await page.locator('#model-rotation').fill('-90');
+ if(!(await page.locator('.viewer .model-world').getAttribute('style')).includes('-90deg'))throw Error('Detail rotation failed');
+ await page.locator('[data-view=equipment]').click();
+ await page.setViewportSize({width:390,height:844});
+ await page.screenshot({path:'artifacts/neon-equipment-mobile.png',fullPage:false});
+ const overflow=await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth);
+ if(overflow)throw Error('Mobile horizontal overflow');
+ if(errors.length)throw Error(errors.join('\n'));
+ for(const route of ['console.html','knowledge.html','workflow.html']){
+   await page.goto('http://127.0.0.1:8094/'+route,{waitUntil:'networkidle'});
+   const theme=await page.locator('body').evaluate(el=>getComputedStyle(el).color);
+   if(theme!=='rgb(239, 247, 255)')throw Error('Shared theme missing: '+route);
+ }
+ fs.writeFileSync('artifacts/neon-ui-check.json',JSON.stringify({passed:true,checks:['four structural assemblies','solid/cutaway toggle','overview selection','overview rotation and reset','detail selection','detail rotation','mobile width','shared theme on console/AI/workflow','no browser errors']},null,2));
+ console.log('Neon UI checks passed');await browser.close();
+})().catch(e=>{console.error(e);process.exit(1)});

@@ -1,0 +1,51 @@
+name: Tests and container
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - name: Install pinned dependencies
+        run: pip install -r requirements.txt
+      - name: Check runtime
+        run: python scripts/check_runtime.py
+      - name: Run all tests with no skips
+        run: |
+          mkdir -p .runtime
+          python -m pytest -q --junitxml=.runtime/tests.xml
+          python scripts/check_test_report.py .runtime/tests.xml
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-results
+          path: .runtime/tests.xml
+  container:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build application image
+        run: docker build -t predictfix-ci .
+      - name: Verify production-mode container
+        run: |
+          docker run -d --name predictfix-ci -p 127.0.0.1:18083:8080 -e APP_MODE=production -e DEMO_MODE=0 -e BOOTSTRAP_PASSWORD=CI-Isolated-Bootstrap-123456 predictfix-ci
+          python3 scripts/check_container.py --url http://127.0.0.1:18083
+      - name: Container diagnostics
+        if: failure()
+        run: docker logs predictfix-ci
+      - name: Stop test container
+        if: always()
+        run: docker rm -f predictfix-ci || true

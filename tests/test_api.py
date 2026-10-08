@@ -9,6 +9,7 @@ sys.path.insert(0,str(ROOT))
 @pytest.fixture(scope='module')
 def client(tmp_path_factory):
     database=tmp_path_factory.mktemp('db')/'test.db'
+    os.environ['APP_MODE']='demo'
     os.environ['BOOTSTRAP_PASSWORD']='TestOnly-Factory-12345'
     os.environ['DATABASE_URL']='sqlite:///'+str(database)
     os.environ.pop('OLLAMA_MODEL',None)
@@ -170,7 +171,7 @@ def test_idle_people_and_lifecycle(client):
     assert r['query_kind']=='idle_people'
     assert all(row['open_tasks']==0 for row in r['rows'])
     assert not any(row['engineer']=='Amy Chen' for row in r['rows'])
-    assert r['intent_model']=='zh-maintenance-intent-v1'
+    assert r['intent_model'] in {'zh-maintenance-intent-v1','zh-maintenance-router-v2'}
     payload={'installed_on':'2020-01-01','responsible':'Amy Chen','part_dates':{'0':'2023-01-01'},'inspection_date':'2026-10-01','inspector':'Alex Lin','inspection_note':'冷卻與潤滑巡檢完成','next_inspection':'2026-11-01'}
     assert client.patch('/api/machines/CNC-03/asset',json=payload).status_code==200
     m=next(m for m in client.get('/api/machines').json() if m['id']=='CNC-03')
@@ -305,8 +306,91 @@ def test_llm_unknown_is_not_replaced_with_unrelated_excerpt(client,monkeypatch):
     async def missing_answer(*args,**kwargs):
         return {'answer':'我不知道，沒有足夠的文件依據。','llm_used':True,'citations':[{'title':'無關摘錄','text':'不應覆蓋拒答'}]}
     monkeypatch.setattr(chat,'analyze',missing_answer)
-    r=client.post('/api/chat',json={'text':'換刀後能直接量產嗎？'}).json()
+    monkeypatch.setattr(chat,'retrieve',lambda q:[{'score':1}])
+    r=client.post('/api/chat',json={'text':'換刀前應核對哪些文件？'}).json()
     assert r['route']=='unknown' and r['answer']=='我不知道，沒有足夠的文件依據。'
+
+
+def test_chat_health_filters_and_refusal(client,monkeypatch):
+    for wording,op,threshold in [('低於30%','<',30),('不超過50%','<=',50),('高於70%','>',70),('至少70%','>=',70),('低於３０％','<',30)]:
+        r=client.post('/api/chat',json={'text':'有哪些機器健康'+wording}).json()
+        assert r['query_kind']=='machines',r
+        assert r['parameters']['health_threshold']==threshold
+        compare={'<':lambda h:h<threshold,'<=':lambda h:h<=threshold,'>':lambda h:h>threshold,'>=':lambda h:h>=threshold}[op]
+        assert all(row['health'] is not None and compare(row['health']) for row in r['rows'])
+    for q in ['有哪些機器健康介於30到50%','健康低於101%的機器','有哪些設備健康低於30%但沒有工單','那台是哪個零件壞了','CNC-03比上週變差了嗎','CNC-03還能撐多久','CNC-03現在可以復機嗎','CNC-03振動偏高是什麼原因','今天有哪些工單','哪些工單超過預計完成時間']:
+        r=client.post('/api/chat',json={'text':q}).json()
+        assert r['route'] in ['unknown','clarification'],(q,r)
+        assert r['sql'] is None and r['rows']==[] and not r['machine_ids']
+    from backend import chat
+    async def fabricated(*args,**kwargs):
+        return {'answer':'主軸溫度應維持在 999 度，已確認更換軸承就能解決所有異音，不需再檢查其他原因。','llm_used':True,'citations':[{'id':'DOC-01','text':'發現異音時應記錄量測與檢查結果。'}]}
+    monkeypatch.setattr(chat,'analyze',fabricated)
+    r=client.post('/api/chat',json={'text':'主軸異音為什麼發生'}).json()
+    assert r['route']=='unknown' and '999' not in r['answer']
+
+
+def test_chat_document_verification_rejects_citation_only_and_allows_exact_source():
+    from backend.chat import verified_document_answer
+    source='遇到主軸異音時，應先記錄設備編號、運轉條件與量測結果，再交由負責工程師核對適用機型的手冊。'
+    assert verified_document_answer({'answer':source,'citations':[{'text':source}]})
+    assert not verified_document_answer({'answer':'DOC-01','citations':[{'id':'DOC-01','text':source}]})
+    assert not verified_document_answer({'answer':source,'citations':[{'text':source}],'needs_confirmation':True})
+
+
+def test_chat_health_threshold_boundary(client):
+    import json
+    from backend import store
+    with store.Session() as session:
+        session.add(store.Machine(id='CNC-997',active=1,payload=json.dumps({'name':'門檻測試','util':0,'parts':[['測試零件',30]]})))
+        session.commit()
+    try:
+        strict=client.post('/api/chat',json={'text':'有哪些機器健康低於30%'}).json()
+        inclusive=client.post('/api/chat',json={'text':'有哪些機器健康不超過30%'}).json()
+        assert 'CNC-997' not in [r['id'] for r in strict['rows']]
+        assert 'CNC-997' in [r['id'] for r in inclusive['rows']]
+    finally:
+        with store.Session() as session:
+            session.delete(session.get(store.Machine,'CNC-997'));session.commit()
+
+
+def test_chat_user_examples_and_starter_procedures(client):
+    r=client.post('/api/chat',json={'text':'哪些機台要注意'}).json()
+    assert r['query_kind']=='machines' and r['rows']
+    assert all(row['health'] is not None and row['health']<70 for row in r['rows'])
+    r=client.post('/api/chat',json={'text':'Ivy有幾台機器要修'}).json()
+    assert r['query_kind']=='person_tasks' and r['parameters']['engineer']=='Ivy Liu'
+    assert r['machine_count']==len({row['machine'] for row in r['rows']})
+    assert '展示任務' in r['answer'] and '不計入正式工單' in r['answer']
+    r=client.post('/api/chat',json={'text':'削車床怎麼修'}).json()
+    assert r['route']=='clarification' and '症狀' in r['answer'] and '車削車床' in r['answer']
+    for question,doc in [('換刀後如何驗收？','GUIDE-DEMO-03'),('主軸有異音要先檢查什麼？','GUIDE-DEMO-01'),('交班要留下哪些紀錄？','GUIDE-DEMO-05'),('CNC-03主軸異音要先檢查什麼','GUIDE-DEMO-01')]:
+        r=client.post('/api/chat',json={'text':question}).json()
+        assert r['route']=='documents' and r['answer_method']=='verified_authored_procedure',(question,r)
+        assert r['citations'][0]['id']==doc and r['citations'][0]['text'] in r['answer']
+    answer=client.post('/api/chat',json={'text':'換刀後如何驗收？'}).json()['answer']
+    assert all(word in answer for word in ['首件','試切','補正','尺寸','表面品質'])
+
+
+def test_chat_person_tasks_counts_distinct_machines(client):
+    from backend import store
+    with store.Session() as session:
+        before=[t.id for t in session.query(store.Ticket).filter(store.Ticket.engineer=='Ivy Liu',store.Ticket.status!='已完成')]
+    made=[]
+    try:
+        for issue in ['電控警報檢查A','電控警報檢查B']:
+            response=client.post('/api/tickets',json={'machine':'CNC-14','issue':issue,'engineer':'Ivy Liu'})
+            assert response.status_code==201,response.text
+            made.append(response.json()['id'])
+        r=client.post('/api/chat',json={'text':'ivy有幾台機器要修'}).json()
+        assert r['ticket_count']==len(before)+2
+        assert r['machine_count']==len({row['machine'] for row in r['rows']})
+    finally:
+        with store.Session() as session:
+            for tid in made:
+                ticket=session.get(store.Ticket,tid)
+                if ticket:ticket.status='已完成'
+            session.commit()
 
 
 def test_manual_version_import_filter_and_withdraw(client):

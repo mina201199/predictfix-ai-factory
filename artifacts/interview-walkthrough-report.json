@@ -1,0 +1,13 @@
+{
+  "synthetic": true,
+  "ticket_id": "WO-d5f2d36c1d0b4092af2be7991ed3caaa",
+  "machine_id": "DEMO-INTERVIEW",
+  "engineer": "INTERVIEW DEMO 工程師",
+  "qualification": "DEMO換刀資格",
+  "ready_for_dispatch": true,
+  "procedure_present": true,
+  "completed": true,
+  "failed_verification_blocked": true,
+  "case_id": "CASE-4e1d9acf3c2c4ca987a397d67fbd7259",
+  "published_case_retrievable": true
+}

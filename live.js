@@ -39,10 +39,10 @@ renderEngineers=async function(){
 };
 $('#analyze').onclick=async()=>{
   const text=$('#prompt').value.trim();if(!text){toast('請輸入問題');return}
-  const button=$('#analyze'),answer=$('#ai-answer');button.disabled=true;button.textContent='分析中…';answer.classList.remove('hidden');answer.textContent='正在檢索文件並呼叫本機模型…';
+  const button=$('#analyze'),answer=$('#ai-answer');button.disabled=true;button.textContent='分析中…';answer.classList.remove('hidden');answer.textContent='正在檢索文件並選取原文…';
   try{
     const result=await api('/copilot',{method:'POST',body:JSON.stringify({text})});
-    answer.innerHTML=`<div class="llm-proof">${result.llm_used?'✓ 本機 LLM 已執行':'規則處理 · 本次沒有有效 LLM 結果'}<br>模型：${escapeHTML(result.model||'未使用')} · ${result.elapsed_ms} ms<br>請求：${escapeHTML(result.request_id)}</div><div style="white-space:pre-line">${escapeHTML(result.answer)}</div><details style="margin-top:10px"><summary>查看結構化資料與處理方式</summary><pre class="proof">${escapeHTML(JSON.stringify({rules:result.extracted,llm:result.generated_fields||null,retrieval:result.retrieval_method,needs_confirmation:result.needs_confirmation},null,2))}</pre></details><div class="source-block">檢索依據 · 虛構示範文件，非原廠規格${result.citations.map(d=>`<details><summary>${escapeHTML(d.id+' · '+d.section+(d.version?' · v'+d.version:'')+(d.line_start?' · 行 '+d.line_start+'–'+d.line_end:'')+(d.is_synthetic?' · 虛構示範':''))}</summary><p>${escapeHTML(d.text)}</p></details>`).join('')||'<p>沒有匹配文件。</p>'}</div>`;
+    answer.innerHTML=`<div class="llm-proof">${result.llm_used?(result.provider==='openai'?'✓ OpenAI 已執行':'✓ 本機 LLM 已執行'):'規則處理 · 本次沒有有效 LLM 結果'}<br>模型：${escapeHTML(result.model||'未使用')} · ${result.elapsed_ms} ms<br>請求：${escapeHTML(result.request_id)}</div><div style="white-space:pre-line">${escapeHTML(result.answer)}</div><details style="margin-top:10px"><summary>查看結構化資料與處理方式</summary><pre class="proof">${escapeHTML(JSON.stringify({rules:result.extracted,llm:result.generated_fields||null,retrieval:result.retrieval_method,needs_confirmation:result.needs_confirmation},null,2))}</pre></details><div class="source-block">檢索依據 · 虛構示範文件，非原廠規格${result.citations.map(d=>`<details><summary>${escapeHTML(d.id+' · '+d.section+(d.version?' · v'+d.version:'')+(d.line_start?' · 行 '+d.line_start+'–'+d.line_end:'')+(d.is_synthetic?' · 虛構示範':''))}</summary><p>${escapeHTML(d.text)}</p></details>`).join('')||'<p>沒有匹配文件。</p>'}</div>`;
     if(result.extracted.machine_id){const index=machines.findIndex(m=>m.id===result.extracted.machine_id);if(index>=0){selected=index;activePart=0;currentTab='parts';renderFleet();renderDetail()}}
   }catch(error){answer.textContent='分析失敗：'+error.message}finally{button.disabled=false;button.textContent='分析 ↗'}
 };
@@ -63,7 +63,7 @@ $('.side-bottom').childNodes[1].textContent=' 後端連線與模型回放';
 $('footer').lastElementChild.textContent='零件健康度／工廠指標為模擬；軸承分類為實際模型推論';
 $('.knowledge h2').textContent='展示維修文件 · 非原廠手冊';
 $('.copilot .badge').textContent='LOCAL LLM';
-$('.input-bottom span').textContent='文字輸入 · 本機模型與文件檢索';
+$('.input-bottom span').textContent='文字輸入 · AI 與文件檢索';
 $('#prompt').placeholder='例如：CNC01 的冷卻泵應該檢查什麼？';
 openDoc=async function(id){
   try{
@@ -78,7 +78,7 @@ openDoc=async function(id){
 $('#recent-tickets').closest('section').querySelector('h2').innerHTML='維修工單 <small>DATABASE</small>';
 const changeView=switchView;
 switchView=function(view){changeView(view);if(view==='tickets')renderTickets();if(view==='knowledge'){
-  $('#other-view').innerHTML='<div class="view-panel"><h2>本機維修知識 · 展示文件</h2><p style="margin-top:12px">文件為專案撰寫示例。檢索使用 TF-IDF；LLM 回答由本機模型生成。</p><input class="search" aria-label="搜尋維修文件" placeholder="搜尋軸承、冷卻、刀具…"><div id="live-docs"></div></div>';
+  $('#other-view').innerHTML='<div class="view-panel"><h2>本機維修知識 · 展示文件</h2><p style="margin-top:12px">文件為專案撰寫示例。回答保留文件來源，由 AI 選取可核對的原文。</p><input class="search" aria-label="搜尋維修文件" placeholder="搜尋軸承、冷卻、刀具…"><div id="live-docs"></div></div>';
   let querySequence=0;
   async function load(){const seq=++querySequence;try{const docs=await api('/documents?q='+encodeURIComponent($('.search').value));if(seq!==querySequence||!$('#live-docs'))return;$('#live-docs').innerHTML=docs.map(d=>`<details class="recommend" style="display:block;margin-bottom:10px"><summary>${escapeHTML(d.id+' · '+d.title)}</summary><p>${escapeHTML(d.text)}</p></details>`).join('')||'<p>沒有匹配文件。</p>'}catch(error){if($('#live-docs'))$('#live-docs').textContent=error.message}}
   $('.search').oninput=load;load();
@@ -86,7 +86,7 @@ switchView=function(view){changeView(view);if(view==='tickets')renderTickets();i
 async function initialize(){
   try{
     const health=await api('/health');serviceReady=true;
-    $('#service-status').textContent=`後端：${health.database} · 感測模型：${health.sensor_model_ready?'已載入':'尚未準備'} · 本機 LLM：${health.llm.available?health.llm.model:'尚未就緒'} · 零件健康：模擬`;
+    $('#service-status').textContent=`後端：${health.database} · 感測模型：${health.sensor_model_ready?'已載入':'尚未準備'} · AI：${health.llm.provider==='openai'?'OpenAI 已設定':(health.llm.available?health.llm.model:'尚未就緒')} · 零件健康：模擬`;
     await refreshTickets();
     const [samples,report]=await Promise.all([api('/replay'),api('/model/report')]);
     $('#replay-sample').innerHTML=samples.map(s=>`<option value="${escapeHTML(s.sample_id)}">${escapeHTML({inner_race:'內圈',ball:'滾珠',outer_race:'外圈'}[s.expected])} · 檔案 ${escapeHTML(s.file)} · 視窗 ${s.window_index}</option>`).join('');
@@ -97,7 +97,7 @@ async function initialize(){
 function partRisk(p){return p[1]<45?'critical':p[1]<70?'watch':'stable'}
 function riskLabel(p){return {critical:'警示',watch:'注意',stable:'正常'}[partRisk(p)]}
 function renderEquipmentOverview(){
-  $('#other-view').innerHTML=`<div class="card-head"><h2>設備總覽 <small>PART CONDITION MAP</small></h2><span class="badge">${machines.length} 台 DEMO</span></div><div class="overview-intro"><p>直接拖曳或使用滑桿旋轉機器；選擇零件可在卡片內查看狀態與檢查線索。</p><div class="risk-legend"><span class="critical">● 警示：健康 &lt; 45%</span><span class="watch">● 注意：45–69%</span><span class="stable">● 正常：≥ 70%</span></div><p>門檻、設備與零件數值皆為模擬，不是 AI 故障機率。零件位置為概念示意。</p></div><div class="equipment-grid">${machines.map((m,i)=>`<article class="equipment-tile risk-tile" data-overview-machine="${i}"><div class="tile-heading"><h3>${m.id}</h3><span class="badge ${minHealth(m)<70?'orange':''}">${m.status}</span></div><p>${m.name}</p><div class="overview-model">${machineModel(m,true).replaceAll('data-part=','data-overview-part=')}</div><div class="viewer-control"><label for="overview-rotation-${i}">旋轉視角</label><input id="overview-rotation-${i}" type="range" min="-180" max="180" value="-32" aria-label="${m.id} 旋轉視角"><button class="link overview-reset">重設</button></div><div class="tile-meta"><span>設備使用率<b>${m.util}%</b><small>本班運轉時間／排程時間</small></span><span>累積運轉<b>${m.hours.toLocaleString()} h</b><small>展示累積值</small></span></div><div class="overview-parts">${m.parts.map((p,j)=>`<button class="overview-part ${partRisk(p)}" data-overview-select="${j}"><span>${j+1} · ${p[0]}</span><b>${riskLabel(p)} · 健康 ${p[1]}%</b></button>`).join('')}</div><div class="overview-part-info" aria-live="polite"></div><div class="tile-bottom"><span>直接在此檢視與旋轉</span><button class="btn primary overview-work">處理此零件 →</button></div></article>`).join('')}</div>`;
+  $('#other-view').innerHTML=`<div class="card-head"><h2>設備總覽 <small>PART CONDITION MAP</small></h2><span class="badge">${machines.length} 台 DEMO</span></div><div class="overview-intro"><p>直接拖曳或使用滑桿旋轉機器；選擇零件可在卡片內查看狀態與檢查線索。</p><div class="risk-legend"><span class="critical">● 警示：健康 &lt; 45%</span><span class="watch">● 注意：45–69%</span><span class="stable">● 正常：≥ 70%</span></div><p>門檻、設備與零件數值皆為模擬，不是 AI 故障機率。零件位置為概念示意。</p></div><div class="equipment-grid">${machines.map((m,i)=>`<article class="equipment-tile risk-tile" data-overview-machine="${i}"><div class="tile-heading"><h3>${m.id}</h3><span class="badge ${minHealth(m)<70?'orange':''}">${m.status}</span></div><p>${m.name}</p><div class="overview-model">${machineModel(m,true).replaceAll('data-part=','data-overview-part=')}</div><div class="viewer-control"><label for="overview-rotation-${i}">旋轉視角</label><input id="overview-rotation-${i}" type="range" min="-180" max="180" value="-32" aria-label="${m.id} 旋轉視角"><button class="link overview-reset">重設</button></div><div class="tile-meta"><span>設備使用率<b>${m.util}%</b><small>本班運轉時間／排程時間</small></span><span>累積運轉<b>${(m.hours?.toLocaleString()??'未建檔')} h</b><small>展示累積值</small></span></div><div class="overview-parts">${m.parts.map((p,j)=>`<button class="overview-part ${partRisk(p)}" data-overview-select="${j}"><span>${j+1} · ${p[0]}</span><b>${riskLabel(p)} · 健康 ${p[1]}%</b></button>`).join('')}</div><div class="overview-part-info" aria-live="polite"></div><div class="tile-bottom"><span>直接在此檢視與旋轉</span><button class="btn primary overview-work">處理此零件 →</button></div></article>`).join('')}</div>`;
   document.querySelectorAll('[data-overview-machine]').forEach(card=>{
     const i=+card.dataset.overviewMachine,m=machines[i],stage=card.querySelector('.model-stage'),world=card.querySelector('.model-world'),slider=card.querySelector('input');
     let chosen=m.parts.findIndex(p=>p[1]===minHealth(m)),angle=-32,drag=null;

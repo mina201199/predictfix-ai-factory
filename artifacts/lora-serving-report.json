@@ -1,0 +1,31 @@
+{
+  "verified_at": "2026-10-07T07:40:01.201987+00:00",
+  "status": "deployed",
+  "url": "http://127.0.0.1:8085",
+  "scope": "Isolated localhost CPU experiment; not production LLM replacement",
+  "health": {
+    "status": "ok",
+    "mode": "isolated_lora_experiment",
+    "run_id": "cpu-smoke-v1",
+    "base_model": "Qwen/Qwen3-0.6B",
+    "adapter_sha256": "6daf6321ad1438a4892d9b3a79fa7b223d52ee2ec8f537c355c5697417b47dcd",
+    "production_model_replaced": false
+  },
+  "saved_adapter_reload": "passed",
+  "recorded_output_match": "passed",
+  "invalid_input_rejected": "passed",
+  "sample_id": "leak-0",
+  "expected": [
+    "S1:P1"
+  ],
+  "response": {
+    "valid": true,
+    "selected": [
+      "S1:P1"
+    ],
+    "raw_output": "{\"selected\":[\"S1:P1\"]}",
+    "latency_seconds": 8.5018,
+    "run_id": "cpu-smoke-v1",
+    "scope": "Synthetic experiment; human review required"
+  }
+}

@@ -1,0 +1,1042 @@
+{
+  "test_count": 57,
+  "promotable": true,
+  "model_sha256": "08e62dddae23a8d5ddffe898adbeccdd4dfb7e4a7e123e89573b8df5c315ce35",
+  "evaluation_scope": "Response route and procedure source selection, not expert validation of maintenance procedures.",
+  "baseline": {
+    "accuracy": 0.5614035087719298,
+    "cases": [
+      {
+        "text": "找出機台健康有警訊的",
+        "intent": "machine_attention",
+        "route": "database",
+        "query_kind": "machines",
+        "source_id": null,
+        "router_method": null,
+        "correct": true
+      },
+      {
+        "text": "哪些機器需要留意一下",
+        "intent": "machine_attention",
+        "route": "unknown",
+        "query_kind": null,
+        "source_id": null,
+        "router_method": null,
+        "correct": false
+      },
+      {
+        "text": "幫我列出設備巡檢清單",
+        "intent": "machine_attention",
+        "route": "unknown",
+        "query_kind": null,
+        "source_id": null,
+        "router_method": null,
+        "correct": false
+      },
+      {
+        "text": "Ivy手上待修設備有多少台",
+        "intent": "person_tasks",
+        "route": "database",
+        "query_kind": "person_tasks",
+        "source_id": null,
+        "router_method": null,
+        "correct": true
+      },
+      {
+        "text": "Alex負責的工單列給我",
+        "intent": "person_tasks",
+        "route": "database",
+        "query_kind": "person_tasks",
+        "source_id": null,
+        "router_method": null,
+        "correct": true
+      },
+      {
+        "text": "David還有哪些維修沒做完",
+        "intent": "person_tasks",
+        "route": "database",
+        "query_kind": "person_tasks",
+        "source_id": null,
+        "router_method": null,
+        "correct": true
+      },
+      {
+        "text": "主軸聲音不對該先蒐集什麼",
+        "intent": "GUIDE-DEMO-01",
+        "route": "unknown",
+        "query_kind": null,
+        "source_id": null,
+        "router_method": null,
+        "correct": false
+      },
+      {
+        "text": "軸承震動的查核順序是啥",
+        "intent": "GUIDE-DEMO-01",
+        "route": "unknown",
+        "query_kind": null,
+        "source_id": null,
+        "router_method": null,
+        "correct": false
+      },
+      {
+        "text": "主軸振動異常我要準備哪些紀錄",
+        "intent": "GUIDE-DEMO-01",
+        "route": "documents",
+        "query_kind": null,
+        "source_id": "GUIDE-DEMO-01",
+        "router_method": "explicit_procedure_match",
+        "correct": true
+      },
+      {
+        "text": "冷卻流量不足我要記下哪些數據",
+        "intent": "GUIDE-DEMO-02",
+        "route": "unknown",
+        "query_kind": null,
+        "source_id": null,
+        "router_method": null,
+        "correct": false
+      },
+      {
+        "text": "循環泵怪怪的該先核對什麼",
+        "intent": "GUIDE-DEMO-02",
+        "route": "unknown",
+        "query_kind": null,
+        "source_id": null,
+        "router_method": null,
+        "correct": false
+      },
+      {
+        "text": "冷卻系統巡檢有哪些注意事項",
+        "intent": "GUIDE-DEMO-02",
+        "route": "unknown",
+        "query_kind": null,
+        "source_id": null,
+        "router_method": null,
+        "correct": false
+      },
+      {
+        "text": "刀換完了該做哪些驗證",
+        "intent": "GUIDE-DEMO-03",
+        "route": "unknown",
+        "query_kind": null,
+        "source_id": null,
+        "router_method": null,
+        "correct": false
+      },
+      {
+        "text": "新刀試切結果要留下什麼",
+        "intent": "GUIDE-DEMO-03",
+        "route": "unknown",
+        "query_kind": null,
+        "source_id": null,
+        "router_method": null,
+        "correct": false
+      },
+      {
+        "text": "首件加工完要核對什麼資訊",
+        "intent": "GUIDE-DEMO-03",
+        "route": "documents",
+        "query_kind": null,
+        "source_id": "GUIDE-DEMO-03",
+        "router_method": "explicit_procedure_match",
+        "correct": true
+      },
+      {
+        "text": "螺桿量測前要準備哪些資料",
+        "intent": "GUIDE-DEMO-04",
+        "route": "unknown",
+        "query_kind": null,
+        "source_id": null,
+        "router_method": null,
+        "correct": false
+      },
+      {
+        "text": "定位結果不一致該查核什麼",
+        "intent": "GUIDE-DEMO-04",
+        "route": "documents",
+        "query_kind": null,
+        "source_id": "GUIDE-DEMO-04",
+        "router_method": "explicit_procedure_match",
+        "correct": true
+      },
+      {
+        "text": "进给定位異常怎樣確認",
+        "intent": "GUIDE-DEMO-04",
+        "route": "documents",
+        "query_kind": null,
+        "source_id": "GUIDE-DEMO-04",
+        "router_method": "explicit_procedure_match",
+        "correct": true
+      },
+      {
+        "text": "交班給下個師傅要說哪些事情",
+        "intent": "GUIDE-DEMO-05",
+        "route": "unknown",
+        "query_kind": null,
+        "source_id": null,
+        "router_method": null,
+        "correct": false
+      },
+      {
+        "text": "交接單有哪些必填的資訊",
+        "intent": "GUIDE-DEMO-05",
+        "route": "unknown",
+        "query_kind": null,
+        "source_id": null,
+        "router_method": null,
+        "correct": false
+      },
+      {
+        "text": "維修任務移交該留什麼",
+        "intent": "GUIDE-DEMO-05",
+        "route": "database",
+        "query_kind": "tickets",
+        "source_id": null,
+        "router_method": null,
+        "correct": false
+      },
+      {
+        "text": "要把維修單結束還缺哪些紀錄",
+        "intent": "GUIDE-DEMO-06",
+        "route": "database",
+        "query_kind": "tickets",
+        "source_id": null,
+        "router_method": null,
+        "correct": false
+      },
+      {
+        "text": "修好後的報告有哪些欄位",
+        "intent": "GUIDE-DEMO-06",
+        "route": "unknown",
+        "query_kind": null,
+        "source_id": null,
+        "router_method": null,
+        "correct": false
+      },
+      {
+        "text": "工單收尾怎樣留下查核依據",
+        "intent": "GUIDE-DEMO-06",
+        "route": "database",
+        "query_kind": "tickets",
+        "source_id": null,
+        "router_method": null,
+        "correct": false
+      },
+      {
+        "text": "看到漏油要蒐集什麼證據",
+        "intent": "GUIDE-DEMO-08",
+        "route": "unknown",
+        "query_kind": null,
+        "source_id": null,
+        "router_method": null,
+        "correct": false
+      },
+      {
+        "text": "油液滲漏該怎樣回報",
+        "intent": "GUIDE-DEMO-08",
+        "route": "unknown",
+        "query_kind": null,
+        "source_id": null,
+        "router_method": null,
+        "correct": false
+      },
+      {
+        "text": "漏液處理前後的紀錄要留什麼",
+        "intent": "GUIDE-DEMO-08",
+        "route": "documents",
+        "query_kind": null,
+        "source_id": "GUIDE-DEMO-08",
+        "router_method": "explicit_procedure_match",
+        "correct": true
+      },
+      {
+        "text": "你猜設備幾天後會壞",
+        "intent": "unknown",
+        "route": "unknown",
+        "query_kind": null,
+        "source_id": null,
+        "router_method": null,
+        "correct": true
+      },
+      {
+        "text": "這機型安全轉速多少",
+        "intent": "unknown",
+        "route": "unknown",
+        "query_kind": null,
+        "source_id": null,
+        "router_method": null,
+        "correct": true
+      },
+      {
+        "text": "Ivy家住哪裡",
+        "intent": "unknown",
+        "route": "unknown",
+        "query_kind": null,
+        "source_id": null,
+        "router_method": null,
+        "correct": true
+      },
+      {
+        "text": "今晚吃什麼好",
+        "intent": "unknown",
+        "route": "unknown",
+        "query_kind": null,
+        "source_id": null,
+        "router_method": null,
+        "correct": true
+      },
+      {
+        "text": "幫我處理一下啦",
+        "intent": "unknown",
+        "route": "unknown",
+        "query_kind": null,
+        "source_id": null,
+        "router_method": null,
+        "correct": true
+      },
+      {
+        "text": "告訴我拆主軸的精確扭力",
+        "intent": "unknown",
+        "route": "unknown",
+        "query_kind": null,
+        "source_id": null,
+        "router_method": null,
+        "correct": true
+      },
+      {
+        "text": "誰沒有維修工單？",
+        "intent": "idle_people",
+        "route": "database",
+        "query_kind": "idle_people",
+        "source_id": null,
+        "router_method": null,
+        "correct": true
+      },
+      {
+        "text": "現在哪些技師手上沒工作？",
+        "intent": "idle_people",
+        "route": "database",
+        "query_kind": "idle_people",
+        "source_id": null,
+        "router_method": null,
+        "correct": true
+      },
+      {
+        "text": "可以派給哪位沒任務的工程師？",
+        "intent": "idle_people",
+        "route": "database",
+        "query_kind": "idle_people",
+        "source_id": null,
+        "router_method": null,
+        "correct": true
+      },
+      {
+        "text": "哪個人身上工單最多？",
+        "intent": "workload",
+        "route": "database",
+        "query_kind": "tickets",
+        "source_id": null,
+        "router_method": null,
+        "correct": false
+      },
+      {
+        "text": "幫我看工程師的工作負荷",
+        "intent": "workload",
+        "route": "database",
+        "query_kind": "workload",
+        "source_id": null,
+        "router_method": null,
+        "correct": true
+      },
+      {
+        "text": "哪位師傅最忙？",
+        "intent": "workload",
+        "route": "database",
+        "query_kind": "workload",
+        "source_id": null,
+        "router_method": null,
+        "correct": true
+      },
+      {
+        "text": "有什麼單子需要主管審核？",
+        "intent": "review",
+        "route": "database",
+        "query_kind": "tickets",
+        "source_id": null,
+        "router_method": null,
+        "correct": true
+      },
+      {
+        "text": "主管還有哪些維修結果未審？",
+        "intent": "review",
+        "route": "unknown",
+        "query_kind": null,
+        "source_id": null,
+        "router_method": null,
+        "correct": false
+      },
+      {
+        "text": "已提交但待批准的有哪些？",
+        "intent": "review",
+        "route": "clarification",
+        "query_kind": null,
+        "source_id": null,
+        "router_method": null,
+        "correct": false
+      },
+      {
+        "text": "還有哪幾張單沒指定人？",
+        "intent": "unassigned",
+        "route": "database",
+        "query_kind": "tickets",
+        "source_id": null,
+        "router_method": null,
+        "correct": true
+      },
+      {
+        "text": "哪些案件還沒派給工程師？",
+        "intent": "unassigned",
+        "route": "database",
+        "query_kind": "tickets",
+        "source_id": null,
+        "router_method": null,
+        "correct": true
+      },
+      {
+        "text": "誰都還沒接的工單有哪些？",
+        "intent": "unassigned",
+        "route": "database",
+        "query_kind": "tickets",
+        "source_id": null,
+        "router_method": null,
+        "correct": true
+      },
+      {
+        "text": "Amy Chen 還有什麼工單沒結案？",
+        "intent": "open_tickets",
+        "route": "database",
+        "query_kind": "person_tasks",
+        "source_id": null,
+        "router_method": null,
+        "correct": false
+      },
+      {
+        "text": "目前還在修的有哪些？",
+        "intent": "open_tickets",
+        "route": "unknown",
+        "query_kind": null,
+        "source_id": null,
+        "router_method": null,
+        "correct": false
+      },
+      {
+        "text": "CNC14 尚未結束的任務",
+        "intent": "open_tickets",
+        "route": "database",
+        "query_kind": "tickets",
+        "source_id": null,
+        "router_method": null,
+        "correct": true
+      },
+      {
+        "text": "哪幾台機器應該優先檢查？",
+        "intent": "machine_attention",
+        "route": "database",
+        "query_kind": "machines",
+        "source_id": null,
+        "router_method": null,
+        "correct": true
+      },
+      {
+        "text": "目前有哪些設備需要檢修？",
+        "intent": "machine_attention",
+        "route": "database",
+        "query_kind": "machines",
+        "source_id": null,
+        "router_method": null,
+        "correct": true
+      },
+      {
+        "text": "CNC05 現在健康嗎？",
+        "intent": "machine_attention",
+        "route": "database",
+        "query_kind": "machines",
+        "source_id": null,
+        "router_method": null,
+        "correct": true
+      },
+      {
+        "text": "我要看 CNC14 以前報修的內容",
+        "intent": "history",
+        "route": "database",
+        "query_kind": "tickets",
+        "source_id": null,
+        "router_method": null,
+        "correct": true
+      },
+      {
+        "text": "CNC03 曾經維修哪些問題？",
+        "intent": "history",
+        "route": "database",
+        "query_kind": "machines",
+        "source_id": null,
+        "router_method": null,
+        "correct": false
+      },
+      {
+        "text": "查一下機器過往的維修紀錄",
+        "intent": "history",
+        "route": "database",
+        "query_kind": "tickets",
+        "source_id": null,
+        "router_method": null,
+        "correct": true
+      },
+      {
+        "text": "如何確認換刀之後可以生產？",
+        "intent": "documents",
+        "route": "documents",
+        "query_kind": null,
+        "source_id": "GUIDE-DEMO-03",
+        "router_method": "explicit_procedure_match",
+        "correct": true
+      },
+      {
+        "text": "我交班需要準備哪些資料？",
+        "intent": "documents",
+        "route": "unknown",
+        "query_kind": null,
+        "source_id": null,
+        "router_method": null,
+        "correct": false
+      },
+      {
+        "text": "冷卻循環有問題應該怎麼查？",
+        "intent": "documents",
+        "route": "documents",
+        "query_kind": null,
+        "source_id": "GUIDE-DEMO-02",
+        "router_method": "explicit_procedure_match",
+        "correct": true
+      }
+    ]
+  },
+  "candidate": {
+    "accuracy": 0.6842105263157895,
+    "cases": [
+      {
+        "text": "找出機台健康有警訊的",
+        "intent": "machine_attention",
+        "route": "database",
+        "query_kind": "machines",
+        "source_id": null,
+        "router_method": null,
+        "correct": true
+      },
+      {
+        "text": "哪些機器需要留意一下",
+        "intent": "machine_attention",
+        "route": "unknown",
+        "query_kind": null,
+        "source_id": null,
+        "router_method": null,
+        "correct": false
+      },
+      {
+        "text": "幫我列出設備巡檢清單",
+        "intent": "machine_attention",
+        "route": "unknown",
+        "query_kind": null,
+        "source_id": null,
+        "router_method": null,
+        "correct": false
+      },
+      {
+        "text": "Ivy手上待修設備有多少台",
+        "intent": "person_tasks",
+        "route": "database",
+        "query_kind": "person_tasks",
+        "source_id": null,
+        "router_method": null,
+        "correct": true
+      },
+      {
+        "text": "Alex負責的工單列給我",
+        "intent": "person_tasks",
+        "route": "database",
+        "query_kind": "person_tasks",
+        "source_id": null,
+        "router_method": null,
+        "correct": true
+      },
+      {
+        "text": "David還有哪些維修沒做完",
+        "intent": "person_tasks",
+        "route": "database",
+        "query_kind": "person_tasks",
+        "source_id": null,
+        "router_method": null,
+        "correct": true
+      },
+      {
+        "text": "主軸聲音不對該先蒐集什麼",
+        "intent": "GUIDE-DEMO-01",
+        "route": "documents",
+        "query_kind": null,
+        "source_id": "GUIDE-DEMO-01",
+        "router_method": "trained_classifier_with_topic_guard",
+        "correct": true
+      },
+      {
+        "text": "軸承震動的查核順序是啥",
+        "intent": "GUIDE-DEMO-01",
+        "route": "unknown",
+        "query_kind": null,
+        "source_id": null,
+        "router_method": null,
+        "correct": false
+      },
+      {
+        "text": "主軸振動異常我要準備哪些紀錄",
+        "intent": "GUIDE-DEMO-01",
+        "route": "documents",
+        "query_kind": null,
+        "source_id": "GUIDE-DEMO-01",
+        "router_method": "explicit_procedure_match",
+        "correct": true
+      },
+      {
+        "text": "冷卻流量不足我要記下哪些數據",
+        "intent": "GUIDE-DEMO-02",
+        "route": "documents",
+        "query_kind": null,
+        "source_id": "GUIDE-DEMO-02",
+        "router_method": "trained_classifier_with_topic_guard",
+        "correct": true
+      },
+      {
+        "text": "循環泵怪怪的該先核對什麼",
+        "intent": "GUIDE-DEMO-02",
+        "route": "unknown",
+        "query_kind": null,
+        "source_id": null,
+        "router_method": null,
+        "correct": false
+      },
+      {
+        "text": "冷卻系統巡檢有哪些注意事項",
+        "intent": "GUIDE-DEMO-02",
+        "route": "documents",
+        "query_kind": null,
+        "source_id": "GUIDE-DEMO-02",
+        "router_method": "trained_classifier_with_topic_guard",
+        "correct": true
+      },
+      {
+        "text": "刀換完了該做哪些驗證",
+        "intent": "GUIDE-DEMO-03",
+        "route": "unknown",
+        "query_kind": null,
+        "source_id": null,
+        "router_method": null,
+        "correct": false
+      },
+      {
+        "text": "新刀試切結果要留下什麼",
+        "intent": "GUIDE-DEMO-03",
+        "route": "unknown",
+        "query_kind": null,
+        "source_id": null,
+        "router_method": null,
+        "correct": false
+      },
+      {
+        "text": "首件加工完要核對什麼資訊",
+        "intent": "GUIDE-DEMO-03",
+        "route": "documents",
+        "query_kind": null,
+        "source_id": "GUIDE-DEMO-03",
+        "router_method": "explicit_procedure_match",
+        "correct": true
+      },
+      {
+        "text": "螺桿量測前要準備哪些資料",
+        "intent": "GUIDE-DEMO-04",
+        "route": "unknown",
+        "query_kind": null,
+        "source_id": null,
+        "router_method": null,
+        "correct": false
+      },
+      {
+        "text": "定位結果不一致該查核什麼",
+        "intent": "GUIDE-DEMO-04",
+        "route": "documents",
+        "query_kind": null,
+        "source_id": "GUIDE-DEMO-04",
+        "router_method": "explicit_procedure_match",
+        "correct": true
+      },
+      {
+        "text": "进给定位異常怎樣確認",
+        "intent": "GUIDE-DEMO-04",
+        "route": "documents",
+        "query_kind": null,
+        "source_id": "GUIDE-DEMO-04",
+        "router_method": "explicit_procedure_match",
+        "correct": true
+      },
+      {
+        "text": "交班給下個師傅要說哪些事情",
+        "intent": "GUIDE-DEMO-05",
+        "route": "unknown",
+        "query_kind": null,
+        "source_id": null,
+        "router_method": null,
+        "correct": false
+      },
+      {
+        "text": "交接單有哪些必填的資訊",
+        "intent": "GUIDE-DEMO-05",
+        "route": "documents",
+        "query_kind": null,
+        "source_id": "GUIDE-DEMO-05",
+        "router_method": "trained_classifier_with_topic_guard",
+        "correct": true
+      },
+      {
+        "text": "維修任務移交該留什麼",
+        "intent": "GUIDE-DEMO-05",
+        "route": "database",
+        "query_kind": "tickets",
+        "source_id": null,
+        "router_method": null,
+        "correct": false
+      },
+      {
+        "text": "要把維修單結束還缺哪些紀錄",
+        "intent": "GUIDE-DEMO-06",
+        "route": "unknown",
+        "query_kind": null,
+        "source_id": null,
+        "router_method": null,
+        "correct": false
+      },
+      {
+        "text": "修好後的報告有哪些欄位",
+        "intent": "GUIDE-DEMO-06",
+        "route": "unknown",
+        "query_kind": null,
+        "source_id": null,
+        "router_method": null,
+        "correct": false
+      },
+      {
+        "text": "工單收尾怎樣留下查核依據",
+        "intent": "GUIDE-DEMO-06",
+        "route": "database",
+        "query_kind": "tickets",
+        "source_id": null,
+        "router_method": null,
+        "correct": false
+      },
+      {
+        "text": "看到漏油要蒐集什麼證據",
+        "intent": "GUIDE-DEMO-08",
+        "route": "documents",
+        "query_kind": null,
+        "source_id": "GUIDE-DEMO-08",
+        "router_method": "trained_classifier_with_topic_guard",
+        "correct": true
+      },
+      {
+        "text": "油液滲漏該怎樣回報",
+        "intent": "GUIDE-DEMO-08",
+        "route": "documents",
+        "query_kind": null,
+        "source_id": "GUIDE-DEMO-08",
+        "router_method": "trained_classifier_with_topic_guard",
+        "correct": true
+      },
+      {
+        "text": "漏液處理前後的紀錄要留什麼",
+        "intent": "GUIDE-DEMO-08",
+        "route": "documents",
+        "query_kind": null,
+        "source_id": "GUIDE-DEMO-08",
+        "router_method": "explicit_procedure_match",
+        "correct": true
+      },
+      {
+        "text": "你猜設備幾天後會壞",
+        "intent": "unknown",
+        "route": "unknown",
+        "query_kind": null,
+        "source_id": null,
+        "router_method": null,
+        "correct": true
+      },
+      {
+        "text": "這機型安全轉速多少",
+        "intent": "unknown",
+        "route": "unknown",
+        "query_kind": null,
+        "source_id": null,
+        "router_method": null,
+        "correct": true
+      },
+      {
+        "text": "Ivy家住哪裡",
+        "intent": "unknown",
+        "route": "unknown",
+        "query_kind": null,
+        "source_id": null,
+        "router_method": null,
+        "correct": true
+      },
+      {
+        "text": "今晚吃什麼好",
+        "intent": "unknown",
+        "route": "unknown",
+        "query_kind": null,
+        "source_id": null,
+        "router_method": null,
+        "correct": true
+      },
+      {
+        "text": "幫我處理一下啦",
+        "intent": "unknown",
+        "route": "unknown",
+        "query_kind": null,
+        "source_id": null,
+        "router_method": null,
+        "correct": true
+      },
+      {
+        "text": "告訴我拆主軸的精確扭力",
+        "intent": "unknown",
+        "route": "unknown",
+        "query_kind": null,
+        "source_id": null,
+        "router_method": null,
+        "correct": true
+      },
+      {
+        "text": "誰沒有維修工單？",
+        "intent": "idle_people",
+        "route": "database",
+        "query_kind": "idle_people",
+        "source_id": null,
+        "router_method": null,
+        "correct": true
+      },
+      {
+        "text": "現在哪些技師手上沒工作？",
+        "intent": "idle_people",
+        "route": "database",
+        "query_kind": "idle_people",
+        "source_id": null,
+        "router_method": null,
+        "correct": true
+      },
+      {
+        "text": "可以派給哪位沒任務的工程師？",
+        "intent": "idle_people",
+        "route": "database",
+        "query_kind": "idle_people",
+        "source_id": null,
+        "router_method": null,
+        "correct": true
+      },
+      {
+        "text": "哪個人身上工單最多？",
+        "intent": "workload",
+        "route": "database",
+        "query_kind": "tickets",
+        "source_id": null,
+        "router_method": null,
+        "correct": false
+      },
+      {
+        "text": "幫我看工程師的工作負荷",
+        "intent": "workload",
+        "route": "database",
+        "query_kind": "workload",
+        "source_id": null,
+        "router_method": null,
+        "correct": true
+      },
+      {
+        "text": "哪位師傅最忙？",
+        "intent": "workload",
+        "route": "database",
+        "query_kind": "workload",
+        "source_id": null,
+        "router_method": null,
+        "correct": true
+      },
+      {
+        "text": "有什麼單子需要主管審核？",
+        "intent": "review",
+        "route": "database",
+        "query_kind": "tickets",
+        "source_id": null,
+        "router_method": null,
+        "correct": true
+      },
+      {
+        "text": "主管還有哪些維修結果未審？",
+        "intent": "review",
+        "route": "unknown",
+        "query_kind": null,
+        "source_id": null,
+        "router_method": null,
+        "correct": false
+      },
+      {
+        "text": "已提交但待批准的有哪些？",
+        "intent": "review",
+        "route": "clarification",
+        "query_kind": null,
+        "source_id": null,
+        "router_method": null,
+        "correct": false
+      },
+      {
+        "text": "還有哪幾張單沒指定人？",
+        "intent": "unassigned",
+        "route": "database",
+        "query_kind": "tickets",
+        "source_id": null,
+        "router_method": null,
+        "correct": true
+      },
+      {
+        "text": "哪些案件還沒派給工程師？",
+        "intent": "unassigned",
+        "route": "database",
+        "query_kind": "tickets",
+        "source_id": null,
+        "router_method": null,
+        "correct": true
+      },
+      {
+        "text": "誰都還沒接的工單有哪些？",
+        "intent": "unassigned",
+        "route": "database",
+        "query_kind": "tickets",
+        "source_id": null,
+        "router_method": null,
+        "correct": true
+      },
+      {
+        "text": "Amy Chen 還有什麼工單沒結案？",
+        "intent": "open_tickets",
+        "route": "database",
+        "query_kind": "person_tasks",
+        "source_id": null,
+        "router_method": null,
+        "correct": false
+      },
+      {
+        "text": "目前還在修的有哪些？",
+        "intent": "open_tickets",
+        "route": "unknown",
+        "query_kind": null,
+        "source_id": null,
+        "router_method": null,
+        "correct": false
+      },
+      {
+        "text": "CNC14 尚未結束的任務",
+        "intent": "open_tickets",
+        "route": "database",
+        "query_kind": "tickets",
+        "source_id": null,
+        "router_method": null,
+        "correct": true
+      },
+      {
+        "text": "哪幾台機器應該優先檢查？",
+        "intent": "machine_attention",
+        "route": "database",
+        "query_kind": "machines",
+        "source_id": null,
+        "router_method": null,
+        "correct": true
+      },
+      {
+        "text": "目前有哪些設備需要檢修？",
+        "intent": "machine_attention",
+        "route": "database",
+        "query_kind": "machines",
+        "source_id": null,
+        "router_method": null,
+        "correct": true
+      },
+      {
+        "text": "CNC05 現在健康嗎？",
+        "intent": "machine_attention",
+        "route": "database",
+        "query_kind": "machines",
+        "source_id": null,
+        "router_method": null,
+        "correct": true
+      },
+      {
+        "text": "我要看 CNC14 以前報修的內容",
+        "intent": "history",
+        "route": "database",
+        "query_kind": "tickets",
+        "source_id": null,
+        "router_method": null,
+        "correct": true
+      },
+      {
+        "text": "CNC03 曾經維修哪些問題？",
+        "intent": "history",
+        "route": "database",
+        "query_kind": "machines",
+        "source_id": null,
+        "router_method": null,
+        "correct": false
+      },
+      {
+        "text": "查一下機器過往的維修紀錄",
+        "intent": "history",
+        "route": "database",
+        "query_kind": "tickets",
+        "source_id": null,
+        "router_method": null,
+        "correct": true
+      },
+      {
+        "text": "如何確認換刀之後可以生產？",
+        "intent": "documents",
+        "route": "documents",
+        "query_kind": null,
+        "source_id": "GUIDE-DEMO-03",
+        "router_method": "explicit_procedure_match",
+        "correct": true
+      },
+      {
+        "text": "我交班需要準備哪些資料？",
+        "intent": "documents",
+        "route": "documents",
+        "query_kind": null,
+        "source_id": "GUIDE-DEMO-05",
+        "router_method": "trained_classifier_with_topic_guard",
+        "correct": true
+      },
+      {
+        "text": "冷卻循環有問題應該怎麼查？",
+        "intent": "documents",
+        "route": "documents",
+        "query_kind": null,
+        "source_id": "GUIDE-DEMO-02",
+        "router_method": "explicit_procedure_match",
+        "correct": true
+      }
+    ]
+  }
+}

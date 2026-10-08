@@ -18,7 +18,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 from sqlalchemy import select
 from sqlalchemy.exc import IntegrityError
 
-from . import auth, knowledge, store
+from . import auth, knowledge, store, config
 
 
 def now():
@@ -88,7 +88,7 @@ def split_document(doc):
 
 def catalog(include_inactive=False):
     documents = [{**d, 'active': True, 'builtin': True,
-                  'content': d['text']} for d in knowledge.manual_documents]
+                  'content': d['text']} for d in knowledge.manual_documents] if config.demo() else []
     with store.Session() as db:
         for row in db.scalars(select(store.KnowledgeDocument)).all():
             if include_inactive or row.active:
@@ -99,6 +99,19 @@ def catalog(include_inactive=False):
 def case_dict(row):
     return {'id': row.id, 'ticket_id': row.ticket_id, 'status': row.status,
             'revision': row.revision, **json.loads(row.payload)}
+
+
+def readable_case(row, request):
+    if request.state.user['role']=='supervisor':
+        return case_dict(row)
+    if row.status!='published':
+        raise HTTPException(404,'案例不存在')
+    data=json.loads(row.payload)
+    # Publication shares the reviewed fields, never raw work-order snapshots or edit history.
+    return {'id':row.id, 'ticket_id':row.ticket_id, 'status':row.status,
+            'revision':row.revision, 'fields':data['fields'],
+            'source_sha256':data['source_sha256'], 'published_by':data.get('published_by'),
+            'published_at':data.get('published_at')}
 
 
 def published_chunks():
@@ -124,7 +137,7 @@ def published_chunks():
 
 
 def corpus():
-    chunks = [dict(c) for c in knowledge.CHUNKS]
+    chunks = [dict(c) for c in knowledge.CHUNKS] if config.demo() else []
     for chunk in chunks:
         if chunk.get('source_type')=='synthetic_demo_manual':
             chunk['source_url']='/api/knowledge/manuals/'+chunk['id']
@@ -132,7 +145,9 @@ def corpus():
         if not doc['builtin']:
             chunks.extend(split_document(doc))
     chunks.extend(published_chunks())
-    return chunks
+    for chunk in chunks:
+        chunk.setdefault('chunk_id',chunk['id']+':'+hashlib.sha256(chunk['text'].encode()).hexdigest()[:16])
+    return chunks if config.demo() else [c for c in chunks if not c.get('is_synthetic',True)]
 
 
 def tokens(text):
@@ -176,7 +191,12 @@ def search(query, chunks=None, machine_model='', method='hybrid', limit=5, allow
             for rank, i in enumerate(ranked)]
 
 
-async def generate_json(prompt, schema):
+async def generate_json(prompt, schema, synthetic=False):
+    from . import openai_runtime
+    if openai_runtime.configured():
+        if not openai_runtime.document_allowed(synthetic):
+            return None,{'llm_used':False,'provider':'openai','reason':'documents_not_authorized'}
+        return await openai_runtime.generate_json(prompt,schema)
     provider = os.getenv('LLM_PROVIDER', 'ollama')
     model = os.getenv('LOCAL_LLM_MODEL') if provider == 'llamacpp' else os.getenv('OLLAMA_MODEL')
     if not model:
@@ -248,10 +268,36 @@ async def assist(body):
     started = time.perf_counter()
     citations = search(body.question+' '+body.component, machine_model=body.machine_model,
                        allow_synthetic=body.allow_synthetic, limit=4)
+    from . import openai_runtime
+    semantic_used=False
+    if body.use_llm and openai_runtime.configured() and openai_runtime.document_allowed(True):
+        candidates=[c for c in corpus() if (body.allow_synthetic or not c.get('is_synthetic',True))
+                    and openai_runtime.source_allowed(c)
+                    and (not body.machine_model or body.machine_model in c.get('machine_models',[]))]
+        if candidates:
+            # Bound each source excerpt and preserve live model/withdrawal filters.
+            vectors,reason=await openai_runtime.embeddings([body.question+' '+body.component]+[
+                c.get('title','')+' '+c['text'][:1800] for c in candidates[:48]])
+            if vectors:
+                query=np.array(vectors[0]);similarities=[]
+                for c,v in zip(candidates[:48],vectors[1:]):
+                    vector=np.array(v);denom=np.linalg.norm(query)*np.linalg.norm(vector)
+                    score=float(query@vector/denom) if denom else 0
+                    if score>=.35:similarities.append(({**c,'semantic_score':round(score,4)},score))
+                semantic=sorted(similarities,key=lambda item:item[1],reverse=True)
+                fused={};records={}
+                for ranking in [citations,[c for c,_ in semantic[:8]]]:
+                    for rank,c in enumerate(ranking):
+                        key=c['chunk_id'];records.setdefault(key,c);fused[key]=fused.get(key,0)+1/(60+rank+1)
+                citations=[{**records[key],'score':round(fused[key],6),'rank':rank+1,
+                            'applicability':'matched_model' if body.machine_model else 'model_not_confirmed'}
+                           for rank,key in enumerate(sorted(fused,key=fused.get,reverse=True)[:4])]
+                semantic_used=True
     result = {'question':body.question,'citations':citations,'steps':[],
               'retrieval_method':'TF-IDF + BM25 reciprocal-rank fusion',
               'llm_used':False,'model':None,'needs_confirmation':not bool(body.machine_model),
               'follow_up':[],'limits':'引用檢查只驗證來源與原文存在，不代表專業診斷正確。由人員確認。'}
+    if semantic_used:result['retrieval_method']='keyword + OpenAI embedding reciprocal-rank fusion'
     if not citations:
         result.update(answer='資料不足：沒有找到符合機型與來源限制的文件或已發布案例。',
                       answer_method='insufficient_evidence', follow_up=['請提供機型、零件、完整警報及適用手冊。'])
@@ -276,10 +322,17 @@ async def assist(body):
                   '沒有相關段落則 selected 為空陣列。'
                   '輸入：'+json.dumps({'question':body.question,'paragraphs':[
                       {'id':e['id'],'text':e['quote']} for e in excerpts]},ensure_ascii=False))
-        output, execution = await generate_json(prompt,schema) if body.use_llm else (None, {'llm_used':False,'reason':'disabled'})
+        if body.use_llm and openai_runtime.configured():
+            safe=all(openai_runtime.source_allowed(c) for c in citations)
+            output,execution=await generate_json(prompt,schema,synthetic=safe) if safe else (None,{'llm_used':False,'reason':'documents_not_authorized'})
+        else:
+            output, execution = await generate_json(prompt,schema) if body.use_llm else (None, {'llm_used':False,'reason':'disabled'})
         result.update(execution)
         valid, rejected = [], 0
-        if isinstance(output,dict) and isinstance(output.get('selected'),list):
+        valid_shape=(isinstance(output,dict) and set(output)=={'selected'}
+                     and isinstance(output.get('selected'),list) and len(output['selected'])<=4
+                     and all(isinstance(item,str) for item in output['selected']))
+        if valid_shape:
             for selected in output['selected'][:4]:
                 excerpt=next((e for e in excerpts if e['id']==selected),None)
                 if excerpt and not any(v['excerpt_id']==selected for v in valid):
@@ -299,12 +352,13 @@ async def assist(body):
 
 def register(app):
     @app.get('/api/knowledge/manuals')
-    def manuals():
-        return catalog(include_inactive=True)
+    def manuals(request:Request):
+        return catalog(include_inactive=request.state.user['role']=='supervisor')
 
     @app.post('/api/knowledge/manuals',status_code=201)
     def import_manual(body:ManualInput,request:Request):
         auth.supervisor(request)
+        if not config.demo() and body.is_synthetic:raise HTTPException(422,'合成資料請匯入獨立展示環境')
         if not body.rights_confirmed: raise HTTPException(422,'請確認有權使用文件')
         with store.Session() as db:
             for doc in catalog(include_inactive=True):
@@ -326,8 +380,8 @@ def register(app):
             return data
 
     @app.get('/api/knowledge/manuals/{mid}')
-    def manual(mid:str):
-        doc=next((d for d in catalog(include_inactive=True) if d['id']==mid),None)
+    def manual(mid:str,request:Request):
+        doc=next((d for d in catalog(include_inactive=request.state.user['role']=='supervisor') if d['id']==mid),None)
         if not doc: raise HTTPException(404,'文件不存在')
         return doc
 
@@ -342,16 +396,19 @@ def register(app):
         return {'id':mid,'active':False}
 
     @app.get('/api/cases')
-    def cases():
+    def cases(request:Request):
         with store.Session() as db:
-            return [case_dict(r) for r in db.scalars(select(store.RepairCase)).all()]
+            query=select(store.RepairCase)
+            if request.state.user['role']!='supervisor':
+                query=query.where(store.RepairCase.status=='published')
+            return [readable_case(r,request) for r in db.scalars(query).all()]
 
     @app.get('/api/cases/{cid}')
-    def get_case(cid:str):
+    def get_case(cid:str,request:Request):
         with store.Session() as db:
             row=db.get(store.RepairCase,cid)
             if not row: raise HTTPException(404,'案例不存在')
-            return case_dict(row)
+            return readable_case(row,request)
 
     @app.post('/api/tickets/{tid}/case-draft',status_code=201)
     def draft(tid:str,request:Request):
@@ -367,7 +424,15 @@ def register(app):
             fields={'title':ticket.issue[:160],'machine_model':'待確認','component':'待確認',
                     'symptoms':ticket.issue,'conditions':'待補充','findings':'待補充',
                     'cause_status':'unknown','root_cause':'尚未確認','actions':ticket.completion_note or '待補充',
-                    'verification':'待補充','is_synthetic':True}
+                    'verification':'待補充','is_synthetic':config.demo()}
+            context=snapshot['workflow'].get('report_context',{})
+            procedure=snapshot['workflow'].get('procedure',{})
+            fields['machine_model']=procedure.get('machine_model') or context.get('machine_model') or '待確認'
+            fields['component']=context.get('component') or '待確認'
+            fields['conditions']=context.get('conditions') or '待補充'
+            for kind,key in [('inspect','findings'),('verify','verification')]:
+                notes=[s['label']+'：'+s['result']['note'] for s in procedure.get('steps',[]) if s['kind']==kind and s.get('result')]
+                if notes:fields[key]='\n'.join(notes)[:2000]
             data={'fields':fields,'source_snapshot':snapshot,'source_sha256':digest(snapshot),
                   'draft_method':'source_extraction_no_llm','created_at':now(),'created_by':request.state.user['username'],
                   'history':[]}
@@ -378,6 +443,7 @@ def register(app):
     @app.put('/api/cases/{cid}')
     def edit(cid:str,body:CaseEdit,request:Request):
         auth.supervisor(request)
+        if not config.demo() and body.fields.is_synthetic:raise HTTPException(422,'正式環境不接受合成案例')
         with store.Session() as db:
             row=db.get(store.RepairCase,cid)
             if not row: raise HTTPException(404,'案例不存在')

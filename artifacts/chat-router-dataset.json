@@ -1,0 +1,988 @@
+{
+  "train": [
+    {
+      "text": "哪些機台要注意",
+      "intent": "machine_attention"
+    },
+    {
+      "text": "機器狀況不好的列出來",
+      "intent": "machine_attention"
+    },
+    {
+      "text": "設備巡檢優先名單",
+      "intent": "machine_attention"
+    },
+    {
+      "text": "產線有哪些設備需要關注",
+      "intent": "machine_attention"
+    },
+    {
+      "text": "有哪幾台不太健康",
+      "intent": "machine_attention"
+    },
+    {
+      "text": "列出健康偏低的機台",
+      "intent": "machine_attention"
+    },
+    {
+      "text": "幫我找要留意的設備",
+      "intent": "machine_attention"
+    },
+    {
+      "text": "哪些機器的狀況有警告",
+      "intent": "machine_attention"
+    },
+    {
+      "text": "Ivy有幾台機器要修",
+      "intent": "person_tasks"
+    },
+    {
+      "text": "Amy負責哪些維修設備",
+      "intent": "person_tasks"
+    },
+    {
+      "text": "Alex手上幾筆工單",
+      "intent": "person_tasks"
+    },
+    {
+      "text": "David還有多少未結案任務",
+      "intent": "person_tasks"
+    },
+    {
+      "text": "Grace在修哪些機台",
+      "intent": "person_tasks"
+    },
+    {
+      "text": "Eric目前有幾台待修",
+      "intent": "person_tasks"
+    },
+    {
+      "text": "Nina的維修任務清單",
+      "intent": "person_tasks"
+    },
+    {
+      "text": "Bob被指派了哪些案件",
+      "intent": "person_tasks"
+    },
+    {
+      "text": "主軸有異音要先檢查什麼",
+      "intent": "GUIDE-DEMO-01"
+    },
+    {
+      "text": "主軸振動怎麼排查",
+      "intent": "GUIDE-DEMO-01"
+    },
+    {
+      "text": "軸承異音需要記錄哪些資訊",
+      "intent": "GUIDE-DEMO-01"
+    },
+    {
+      "text": "主軸震動變大要做哪些檢查",
+      "intent": "GUIDE-DEMO-01"
+    },
+    {
+      "text": "主軸振動事件處理流程",
+      "intent": "GUIDE-DEMO-01"
+    },
+    {
+      "text": "主軸異音通報應寫什麼",
+      "intent": "GUIDE-DEMO-01"
+    },
+    {
+      "text": "軸承振動異常的檢查順序",
+      "intent": "GUIDE-DEMO-01"
+    },
+    {
+      "text": "主軸怪聲要怎樣查核",
+      "intent": "GUIDE-DEMO-01"
+    },
+    {
+      "text": "冷卻液流量變小怎麼辦",
+      "intent": "GUIDE-DEMO-02"
+    },
+    {
+      "text": "冷卻循環異常檢查流程",
+      "intent": "GUIDE-DEMO-02"
+    },
+    {
+      "text": "冷卻泵問題要記錄什麼",
+      "intent": "GUIDE-DEMO-02"
+    },
+    {
+      "text": "冷卻液不足應先檢查哪些項目",
+      "intent": "GUIDE-DEMO-02"
+    },
+    {
+      "text": "冷卻系統要怎樣查核",
+      "intent": "GUIDE-DEMO-02"
+    },
+    {
+      "text": "冷卻流量下降怎麼處置",
+      "intent": "GUIDE-DEMO-02"
+    },
+    {
+      "text": "循環泵巡檢需要哪些量測",
+      "intent": "GUIDE-DEMO-02"
+    },
+    {
+      "text": "冷卻處理完成要留什麼資料",
+      "intent": "GUIDE-DEMO-02"
+    },
+    {
+      "text": "換刀後如何驗收",
+      "intent": "GUIDE-DEMO-03"
+    },
+    {
+      "text": "換刀以後要做哪些檢查",
+      "intent": "GUIDE-DEMO-03"
+    },
+    {
+      "text": "更換刀具怎麼記錄",
+      "intent": "GUIDE-DEMO-03"
+    },
+    {
+      "text": "首件驗收應量什麼",
+      "intent": "GUIDE-DEMO-03"
+    },
+    {
+      "text": "刀具換好後要怎樣確認",
+      "intent": "GUIDE-DEMO-03"
+    },
+    {
+      "text": "換刀試切流程",
+      "intent": "GUIDE-DEMO-03"
+    },
+    {
+      "text": "刀片更換後尺寸怎麼查核",
+      "intent": "GUIDE-DEMO-03"
+    },
+    {
+      "text": "換刀後驗證要留下哪些資料",
+      "intent": "GUIDE-DEMO-03"
+    },
+    {
+      "text": "定位誤差要查什麼",
+      "intent": "GUIDE-DEMO-04"
+    },
+    {
+      "text": "進給螺桿異常如何檢查",
+      "intent": "GUIDE-DEMO-04"
+    },
+    {
+      "text": "螺桿巡檢需要哪些紀錄",
+      "intent": "GUIDE-DEMO-04"
+    },
+    {
+      "text": "尺寸偏差與定位怎麼查核",
+      "intent": "GUIDE-DEMO-04"
+    },
+    {
+      "text": "定位不準應做哪些量測",
+      "intent": "GUIDE-DEMO-04"
+    },
+    {
+      "text": "進給精度驗收要記什麼",
+      "intent": "GUIDE-DEMO-04"
+    },
+    {
+      "text": "螺桿檢查的順序",
+      "intent": "GUIDE-DEMO-04"
+    },
+    {
+      "text": "軸向定位誤差處置流程",
+      "intent": "GUIDE-DEMO-04"
+    },
+    {
+      "text": "交班要留下哪些紀錄",
+      "intent": "GUIDE-DEMO-05"
+    },
+    {
+      "text": "交接時要寫什麼",
+      "intent": "GUIDE-DEMO-05"
+    },
+    {
+      "text": "派工前要確認哪些資料",
+      "intent": "GUIDE-DEMO-05"
+    },
+    {
+      "text": "維修任務交班流程",
+      "intent": "GUIDE-DEMO-05"
+    },
+    {
+      "text": "接手人要收到什麼資訊",
+      "intent": "GUIDE-DEMO-05"
+    },
+    {
+      "text": "交班單應填什麼",
+      "intent": "GUIDE-DEMO-05"
+    },
+    {
+      "text": "工單交接有哪些重點",
+      "intent": "GUIDE-DEMO-05"
+    },
+    {
+      "text": "派工交接的查核項目",
+      "intent": "GUIDE-DEMO-05"
+    },
+    {
+      "text": "維修結案要填什麼",
+      "intent": "GUIDE-DEMO-06"
+    },
+    {
+      "text": "工單結案有哪些紀錄",
+      "intent": "GUIDE-DEMO-06"
+    },
+    {
+      "text": "維修完成怎麼保存結果",
+      "intent": "GUIDE-DEMO-06"
+    },
+    {
+      "text": "結案流程需要哪些資料",
+      "intent": "GUIDE-DEMO-06"
+    },
+    {
+      "text": "結案驗收應核對什麼",
+      "intent": "GUIDE-DEMO-06"
+    },
+    {
+      "text": "修復後的改善追蹤怎麼做",
+      "intent": "GUIDE-DEMO-06"
+    },
+    {
+      "text": "維修工時該如何記錄",
+      "intent": "GUIDE-DEMO-06"
+    },
+    {
+      "text": "工單完成報告要寫什麼",
+      "intent": "GUIDE-DEMO-06"
+    },
+    {
+      "text": "漏油要怎麼通報",
+      "intent": "GUIDE-DEMO-08"
+    },
+    {
+      "text": "漏液事件應記錄什麼",
+      "intent": "GUIDE-DEMO-08"
+    },
+    {
+      "text": "機台漏油檢查流程",
+      "intent": "GUIDE-DEMO-08"
+    },
+    {
+      "text": "液體洩漏如何處置",
+      "intent": "GUIDE-DEMO-08"
+    },
+    {
+      "text": "漏油照片應附哪些說明",
+      "intent": "GUIDE-DEMO-08"
+    },
+    {
+      "text": "漏液修復驗收有哪些項目",
+      "intent": "GUIDE-DEMO-08"
+    },
+    {
+      "text": "洩漏現場要留下哪些資料",
+      "intent": "GUIDE-DEMO-08"
+    },
+    {
+      "text": "油漏出來該怎樣查核",
+      "intent": "GUIDE-DEMO-08"
+    },
+    {
+      "text": "明天天氣會怎樣",
+      "intent": "unknown"
+    },
+    {
+      "text": "公司的老闆是誰",
+      "intent": "unknown"
+    },
+    {
+      "text": "Amy薪資多少",
+      "intent": "unknown"
+    },
+    {
+      "text": "我想買晚餐",
+      "intent": "unknown"
+    },
+    {
+      "text": "幫我寫情書",
+      "intent": "unknown"
+    },
+    {
+      "text": "機台還能撐多久",
+      "intent": "unknown"
+    },
+    {
+      "text": "可以直接復機嗎",
+      "intent": "unknown"
+    },
+    {
+      "text": "哪台會在明天故障",
+      "intent": "unknown"
+    },
+    {
+      "text": "這台正常溫度應是多少度",
+      "intent": "unknown"
+    },
+    {
+      "text": "車床主軸螺絲扭力多少",
+      "intent": "unknown"
+    },
+    {
+      "text": "告訴我帳號密碼",
+      "intent": "unknown"
+    },
+    {
+      "text": "我要問個問題",
+      "intent": "unknown"
+    },
+    {
+      "text": "幫我看那個",
+      "intent": "unknown"
+    },
+    {
+      "text": "庫存還有幾顆軸承",
+      "intent": "unknown"
+    },
+    {
+      "text": "這款軸承原廠壽命多少",
+      "intent": "unknown"
+    },
+    {
+      "text": "所有機器一定不會壞吧",
+      "intent": "unknown"
+    },
+    {
+      "text": "哪些同仁目前沒有工作單",
+      "intent": "idle_people"
+    },
+    {
+      "text": "哪些人沒任務",
+      "intent": "idle_people"
+    },
+    {
+      "text": "目前誰空閒",
+      "intent": "idle_people"
+    },
+    {
+      "text": "有哪些工程師沒有工作單",
+      "intent": "idle_people"
+    },
+    {
+      "text": "找沒有未結案任務的人",
+      "intent": "idle_people"
+    },
+    {
+      "text": "誰現在沒案子",
+      "intent": "idle_people"
+    },
+    {
+      "text": "哪些技師尚未接任務",
+      "intent": "idle_people"
+    },
+    {
+      "text": "有誰還沒被派工",
+      "intent": "idle_people"
+    },
+    {
+      "text": "列出零工單人員",
+      "intent": "idle_people"
+    },
+    {
+      "text": "可以找哪些空閒工程師",
+      "intent": "idle_people"
+    },
+    {
+      "text": "誰的任務負荷最多",
+      "intent": "workload"
+    },
+    {
+      "text": "誰最忙",
+      "intent": "workload"
+    },
+    {
+      "text": "工程師工作量比較",
+      "intent": "workload"
+    },
+    {
+      "text": "各人員有多少未完成任務",
+      "intent": "workload"
+    },
+    {
+      "text": "哪位技師負荷最高",
+      "intent": "workload"
+    },
+    {
+      "text": "列出人員任務數",
+      "intent": "workload"
+    },
+    {
+      "text": "誰手上案件最多",
+      "intent": "workload"
+    },
+    {
+      "text": "目前各工程師忙碌情況",
+      "intent": "workload"
+    },
+    {
+      "text": "所有技師的工單量",
+      "intent": "workload"
+    },
+    {
+      "text": "比較目前維修負荷",
+      "intent": "workload"
+    },
+    {
+      "text": "有哪些待主管審核工單",
+      "intent": "review"
+    },
+    {
+      "text": "哪些維修等主管確認",
+      "intent": "review"
+    },
+    {
+      "text": "待審核的案件",
+      "intent": "review"
+    },
+    {
+      "text": "主管還沒批准哪些工單",
+      "intent": "review"
+    },
+    {
+      "text": "工程師已提交的維修結果",
+      "intent": "review"
+    },
+    {
+      "text": "列出等待審核任務",
+      "intent": "review"
+    },
+    {
+      "text": "還有幾筆待審核",
+      "intent": "review"
+    },
+    {
+      "text": "主管要檢查哪些結案申請",
+      "intent": "review"
+    },
+    {
+      "text": "尚未通過審核的工單",
+      "intent": "review"
+    },
+    {
+      "text": "顯示待主管審核清單",
+      "intent": "review"
+    },
+    {
+      "text": "有哪些未派工工單",
+      "intent": "unassigned"
+    },
+    {
+      "text": "哪些工單還沒人處理",
+      "intent": "unassigned"
+    },
+    {
+      "text": "待指派的案件",
+      "intent": "unassigned"
+    },
+    {
+      "text": "列出還沒有工程師的任務",
+      "intent": "unassigned"
+    },
+    {
+      "text": "哪些維修還沒分配",
+      "intent": "unassigned"
+    },
+    {
+      "text": "找未派工案件",
+      "intent": "unassigned"
+    },
+    {
+      "text": "哪些工單負責人是待指派",
+      "intent": "unassigned"
+    },
+    {
+      "text": "尚未安排人員的工單",
+      "intent": "unassigned"
+    },
+    {
+      "text": "有哪些待分派維修",
+      "intent": "unassigned"
+    },
+    {
+      "text": "還沒指定技師的工作單",
+      "intent": "unassigned"
+    },
+    {
+      "text": "目前未結案工單有哪些",
+      "intent": "open_tickets"
+    },
+    {
+      "text": "還沒完成的工單",
+      "intent": "open_tickets"
+    },
+    {
+      "text": "列出待處理維修",
+      "intent": "open_tickets"
+    },
+    {
+      "text": "有哪些維修中案件",
+      "intent": "open_tickets"
+    },
+    {
+      "text": "哪些任務還沒結束",
+      "intent": "open_tickets"
+    },
+    {
+      "text": "Amy Chen 的未完成任務",
+      "intent": "open_tickets"
+    },
+    {
+      "text": "David Wu 有哪些工作單",
+      "intent": "open_tickets"
+    },
+    {
+      "text": "顯示未結案維修清單",
+      "intent": "open_tickets"
+    },
+    {
+      "text": "CNC14 未完成工單",
+      "intent": "open_tickets"
+    },
+    {
+      "text": "待追蹤的維修任務",
+      "intent": "open_tickets"
+    },
+    {
+      "text": "現在有哪些機台要檢查",
+      "intent": "machine_attention"
+    },
+    {
+      "text": "哪些設備有警示",
+      "intent": "machine_attention"
+    },
+    {
+      "text": "找高風險機台",
+      "intent": "machine_attention"
+    },
+    {
+      "text": "需要保養的機器",
+      "intent": "machine_attention"
+    },
+    {
+      "text": "哪些機台要檢修",
+      "intent": "machine_attention"
+    },
+    {
+      "text": "風險最高的設備",
+      "intent": "machine_attention"
+    },
+    {
+      "text": "哪台機器不健康",
+      "intent": "machine_attention"
+    },
+    {
+      "text": "CNC03 健康度如何",
+      "intent": "machine_attention"
+    },
+    {
+      "text": "有哪些零件異常的機台",
+      "intent": "machine_attention"
+    },
+    {
+      "text": "有哪些設備需要維修",
+      "intent": "machine_attention"
+    },
+    {
+      "text": "CNC14 維修過幾次",
+      "intent": "history"
+    },
+    {
+      "text": "CNC03 的歷史工單",
+      "intent": "history"
+    },
+    {
+      "text": "某台機器的維修紀錄",
+      "intent": "history"
+    },
+    {
+      "text": "哪些機台有報修紀錄",
+      "intent": "history"
+    },
+    {
+      "text": "查看歷年維修工單",
+      "intent": "history"
+    },
+    {
+      "text": "列出設備報修歷史",
+      "intent": "history"
+    },
+    {
+      "text": "CNC05 所有維修紀錄",
+      "intent": "history"
+    },
+    {
+      "text": "機台已結案紀錄",
+      "intent": "history"
+    },
+    {
+      "text": "CNC14 過去修過什麼",
+      "intent": "history"
+    },
+    {
+      "text": "查詢以前的維修案件",
+      "intent": "history"
+    }
+  ],
+  "validation": [
+    {
+      "text": "機台健康不好的是哪些",
+      "intent": "machine_attention"
+    },
+    {
+      "text": "我想看需要注意的設備",
+      "intent": "machine_attention"
+    },
+    {
+      "text": "設備巡檢該先看哪幾台",
+      "intent": "machine_attention"
+    },
+    {
+      "text": "Ivy目前負責幾台設備",
+      "intent": "person_tasks"
+    },
+    {
+      "text": "Amy的維修任務有哪些",
+      "intent": "person_tasks"
+    },
+    {
+      "text": "Grace還有幾張單要處理",
+      "intent": "person_tasks"
+    },
+    {
+      "text": "主軸異音應保存什麼量測",
+      "intent": "GUIDE-DEMO-01"
+    },
+    {
+      "text": "主軸振動巡檢有什麼步驟",
+      "intent": "GUIDE-DEMO-01"
+    },
+    {
+      "text": "軸承發出怪聲要怎樣處置",
+      "intent": "GUIDE-DEMO-01"
+    },
+    {
+      "text": "冷卻循環有問題怎樣處理",
+      "intent": "GUIDE-DEMO-02"
+    },
+    {
+      "text": "冷卻液量變少該查什麼",
+      "intent": "GUIDE-DEMO-02"
+    },
+    {
+      "text": "冷卻泵檢查要準備什麼紀錄",
+      "intent": "GUIDE-DEMO-02"
+    },
+    {
+      "text": "刀具更換後首件怎麼確認",
+      "intent": "GUIDE-DEMO-03"
+    },
+    {
+      "text": "換刀驗收有什麼項目",
+      "intent": "GUIDE-DEMO-03"
+    },
+    {
+      "text": "刀片換好要記哪些東西",
+      "intent": "GUIDE-DEMO-03"
+    },
+    {
+      "text": "進給螺桿不準要怎麼查",
+      "intent": "GUIDE-DEMO-04"
+    },
+    {
+      "text": "定位偏移我要記錄什麼",
+      "intent": "GUIDE-DEMO-04"
+    },
+    {
+      "text": "定位精度檢查有哪些項目",
+      "intent": "GUIDE-DEMO-04"
+    },
+    {
+      "text": "我要交班應準備哪些資料",
+      "intent": "GUIDE-DEMO-05"
+    },
+    {
+      "text": "派工之前有什麼要核對",
+      "intent": "GUIDE-DEMO-05"
+    },
+    {
+      "text": "接班需要什麼維修紀錄",
+      "intent": "GUIDE-DEMO-05"
+    },
+    {
+      "text": "維修結案前該準備什麼",
+      "intent": "GUIDE-DEMO-06"
+    },
+    {
+      "text": "工單完成之後要怎麼追蹤",
+      "intent": "GUIDE-DEMO-06"
+    },
+    {
+      "text": "維修結果要記哪些內容",
+      "intent": "GUIDE-DEMO-06"
+    },
+    {
+      "text": "發現漏液我要記下什麼",
+      "intent": "GUIDE-DEMO-08"
+    },
+    {
+      "text": "機器漏油應先通報哪些資訊",
+      "intent": "GUIDE-DEMO-08"
+    },
+    {
+      "text": "洩漏維修結果如何驗收",
+      "intent": "GUIDE-DEMO-08"
+    },
+    {
+      "text": "今天會不會下雨",
+      "intent": "unknown"
+    },
+    {
+      "text": "修好了能保證復機嗎",
+      "intent": "unknown"
+    },
+    {
+      "text": "那個是怎麼回事",
+      "intent": "unknown"
+    }
+  ],
+  "test": [
+    {
+      "text": "找出機台健康有警訊的",
+      "intent": "machine_attention"
+    },
+    {
+      "text": "哪些機器需要留意一下",
+      "intent": "machine_attention"
+    },
+    {
+      "text": "幫我列出設備巡檢清單",
+      "intent": "machine_attention"
+    },
+    {
+      "text": "Ivy手上待修設備有多少台",
+      "intent": "person_tasks"
+    },
+    {
+      "text": "Alex負責的工單列給我",
+      "intent": "person_tasks"
+    },
+    {
+      "text": "David還有哪些維修沒做完",
+      "intent": "person_tasks"
+    },
+    {
+      "text": "主軸聲音不對該先蒐集什麼",
+      "intent": "GUIDE-DEMO-01"
+    },
+    {
+      "text": "軸承震動的查核順序是啥",
+      "intent": "GUIDE-DEMO-01"
+    },
+    {
+      "text": "主軸振動異常我要準備哪些紀錄",
+      "intent": "GUIDE-DEMO-01"
+    },
+    {
+      "text": "冷卻流量不足我要記下哪些數據",
+      "intent": "GUIDE-DEMO-02"
+    },
+    {
+      "text": "循環泵怪怪的該先核對什麼",
+      "intent": "GUIDE-DEMO-02"
+    },
+    {
+      "text": "冷卻系統巡檢有哪些注意事項",
+      "intent": "GUIDE-DEMO-02"
+    },
+    {
+      "text": "刀換完了該做哪些驗證",
+      "intent": "GUIDE-DEMO-03"
+    },
+    {
+      "text": "新刀試切結果要留下什麼",
+      "intent": "GUIDE-DEMO-03"
+    },
+    {
+      "text": "首件加工完要核對什麼資訊",
+      "intent": "GUIDE-DEMO-03"
+    },
+    {
+      "text": "螺桿量測前要準備哪些資料",
+      "intent": "GUIDE-DEMO-04"
+    },
+    {
+      "text": "定位結果不一致該查核什麼",
+      "intent": "GUIDE-DEMO-04"
+    },
+    {
+      "text": "进给定位異常怎樣確認",
+      "intent": "GUIDE-DEMO-04"
+    },
+    {
+      "text": "交班給下個師傅要說哪些事情",
+      "intent": "GUIDE-DEMO-05"
+    },
+    {
+      "text": "交接單有哪些必填的資訊",
+      "intent": "GUIDE-DEMO-05"
+    },
+    {
+      "text": "維修任務移交該留什麼",
+      "intent": "GUIDE-DEMO-05"
+    },
+    {
+      "text": "要把維修單結束還缺哪些紀錄",
+      "intent": "GUIDE-DEMO-06"
+    },
+    {
+      "text": "修好後的報告有哪些欄位",
+      "intent": "GUIDE-DEMO-06"
+    },
+    {
+      "text": "工單收尾怎樣留下查核依據",
+      "intent": "GUIDE-DEMO-06"
+    },
+    {
+      "text": "看到漏油要蒐集什麼證據",
+      "intent": "GUIDE-DEMO-08"
+    },
+    {
+      "text": "油液滲漏該怎樣回報",
+      "intent": "GUIDE-DEMO-08"
+    },
+    {
+      "text": "漏液處理前後的紀錄要留什麼",
+      "intent": "GUIDE-DEMO-08"
+    },
+    {
+      "text": "你猜設備幾天後會壞",
+      "intent": "unknown"
+    },
+    {
+      "text": "這機型安全轉速多少",
+      "intent": "unknown"
+    },
+    {
+      "text": "Ivy家住哪裡",
+      "intent": "unknown"
+    },
+    {
+      "text": "今晚吃什麼好",
+      "intent": "unknown"
+    },
+    {
+      "text": "幫我處理一下啦",
+      "intent": "unknown"
+    },
+    {
+      "text": "告訴我拆主軸的精確扭力",
+      "intent": "unknown"
+    },
+    {
+      "text": "誰沒有維修工單？",
+      "intent": "idle_people"
+    },
+    {
+      "text": "現在哪些技師手上沒工作？",
+      "intent": "idle_people"
+    },
+    {
+      "text": "可以派給哪位沒任務的工程師？",
+      "intent": "idle_people"
+    },
+    {
+      "text": "哪個人身上工單最多？",
+      "intent": "workload"
+    },
+    {
+      "text": "幫我看工程師的工作負荷",
+      "intent": "workload"
+    },
+    {
+      "text": "哪位師傅最忙？",
+      "intent": "workload"
+    },
+    {
+      "text": "有什麼單子需要主管審核？",
+      "intent": "review"
+    },
+    {
+      "text": "主管還有哪些維修結果未審？",
+      "intent": "review"
+    },
+    {
+      "text": "已提交但待批准的有哪些？",
+      "intent": "review"
+    },
+    {
+      "text": "還有哪幾張單沒指定人？",
+      "intent": "unassigned"
+    },
+    {
+      "text": "哪些案件還沒派給工程師？",
+      "intent": "unassigned"
+    },
+    {
+      "text": "誰都還沒接的工單有哪些？",
+      "intent": "unassigned"
+    },
+    {
+      "text": "Amy Chen 還有什麼工單沒結案？",
+      "intent": "open_tickets"
+    },
+    {
+      "text": "目前還在修的有哪些？",
+      "intent": "open_tickets"
+    },
+    {
+      "text": "CNC14 尚未結束的任務",
+      "intent": "open_tickets"
+    },
+    {
+      "text": "哪幾台機器應該優先檢查？",
+      "intent": "machine_attention"
+    },
+    {
+      "text": "目前有哪些設備需要檢修？",
+      "intent": "machine_attention"
+    },
+    {
+      "text": "CNC05 現在健康嗎？",
+      "intent": "machine_attention"
+    },
+    {
+      "text": "我要看 CNC14 以前報修的內容",
+      "intent": "history"
+    },
+    {
+      "text": "CNC03 曾經維修哪些問題？",
+      "intent": "history"
+    },
+    {
+      "text": "查一下機器過往的維修紀錄",
+      "intent": "history"
+    },
+    {
+      "text": "如何確認換刀之後可以生產？",
+      "intent": "documents"
+    },
+    {
+      "text": "我交班需要準備哪些資料？",
+      "intent": "documents"
+    },
+    {
+      "text": "冷卻循環有問題應該怎麼查？",
+      "intent": "documents"
+    }
+  ]
+}

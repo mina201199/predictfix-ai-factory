@@ -5,3 +5,15 @@ __pycache__
 .pytest_cache
 .git
 tests
+.env
+.env.*
+!.env.example
+backups
+.github
+artifacts/*.png
+artifacts/*proof.jpg
+artifacts/**/*proof.png
+artifacts/demo-photos/upload-record.json
+
+# Isolated local verification databases and scratch files.
+.test-*/

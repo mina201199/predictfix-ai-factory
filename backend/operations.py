@@ -5,7 +5,7 @@ from pathlib import Path
 from fastapi import HTTPException, Request
 from pydantic import BaseModel, Field
 from sqlalchemy import select
-from . import store, auth
+from . import store, auth, config, workforce, repair_flow
 
 PEOPLE=[
  {'name':'Amy Chen','specialty':'主軸／軸承','skills':['主軸','軸承'],'cases':18,'success':16,'shift':'早班','capacity':3,'demo_tasks':['CNC-03 主軸振動巡檢']},
@@ -19,6 +19,7 @@ PEOPLE=[
 ]
 
 def seed():
+    if not config.demo():return
     with store.Session() as s:
         for m in json.loads((Path(__file__).resolve().parents[1]/'artifacts/demo-machines.json').read_text(encoding='utf-8')):
             if s.get(store.Machine,m['id']) is None:
@@ -44,15 +45,22 @@ def active_machine(mid):
         if not m or not m.active:raise HTTPException(422,'設備不存在或已停用')
 
 def people():
+    if not config.demo():return workforce.roster()
     with store.Session() as s:
         tasks=[store.ticket_dict(t) for t in s.scalars(select(store.Ticket).where(store.Ticket.status!='已完成')).all()]
-    return [{**p,'tasks':[t for t in tasks if t['engineer']==p['name']],
+    legacy=[{**p,'tasks':[t for t in tasks if t['engineer']==p['name']],
              'workload':sum(t['engineer']==p['name'] for t in tasks),'source':'履歷與示例任務為 DEMO；正式任務讀取工單資料庫'} for p in PEOPLE]
+    names={p['name'] for p in legacy}
+    return legacy+[p for p in workforce.roster() if p['name'] not in names]
 
 class NewMachine(BaseModel):
-    id:str=Field(pattern=r'^CNC-\d{2,4}$')
+    id:str=Field(pattern=r'^[A-Za-z0-9][A-Za-z0-9_.-]{1,29}$')
     name:str=Field(min_length=2,max_length=50)
     kind:str=Field(pattern=r'^(mill|lathe)$')
+    machine_model:str=Field(default='',max_length=100)
+    manufacturer:str=Field(default='',max_length=100)
+    serial_number:str=Field(default='',max_length=100)
+    template_id:str=Field(default='',max_length=60)
 
 class Assignment(BaseModel):
     engineer:str
@@ -76,12 +84,14 @@ def register(app):
     @app.patch('/api/tickets/{tid}/assign')
     def assign(tid:str,body:Assignment,request:Request):
         auth.supervisor(request)
-        if body.engineer not in ['待指派']+[p['name'] for p in PEOPLE]:raise HTTPException(422,'維修人員不存在')
+        if body.engineer not in ['待指派']+[p['name'] for p in people()]:raise HTTPException(422,'維修人員不存在')
         with store.Session() as s:
+            if not config.demo():workforce.lock_dispatch(s,body.engineer)
             t=s.get(store.Ticket,tid)
             if not t:raise HTTPException(404,'工單不存在')
             if t.status in ['已完成','待主管審核']:raise HTTPException(409,'已結案或待審核工單不可重新派工')
             if t.engineer==body.engineer:return store.ticket_dict(t)
+            if not config.demo():workforce.check_assignment(body.engineer,tid)
             if t.engineer!='待指派' and len(body.reason.strip())<3:raise HTTPException(422,'重新派工需要原因')
             active_machine(t.machine)
             old=t.engineer;t.engineer=body.engineer;t.status='待指派' if body.engineer=='待指派' else '已指派'
@@ -100,12 +110,12 @@ def register(app):
         auth.supervisor(request)
         if len(body.note.strip())<3:raise HTTPException(422,'請填主管與審核說明')
         with store.Session() as s:
-            t=s.get(store.Ticket,tid)
-            if not t:raise HTTPException(404,'工單不存在')
+            t=repair_flow.locked(s,store.Ticket,tid)
             if t.status!='待主管審核':raise HTTPException(409,'工單尚未提交審核')
             t.status='已完成' if body.decision=='approve' else '退回重修'
             meta=s.get(store.Workflow,tid);data=json.loads(meta.payload) if meta else {}
             if meta is None:meta=store.Workflow(id=tid,payload='{}');s.add(meta)
+            repair_flow.on_review(s,t,data,body.decision)
             review={'reviewer':request.state.user['name'],'decision':body.decision,'note':body.note.strip(),'at':datetime.now(timezone.utc).isoformat()}
             data.setdefault('reviews',[]).append(review);meta.payload=json.dumps(data,ensure_ascii=False)
             s.add(store.Audit(kind='ticket_completed' if body.decision=='approve' else 'ticket_rejected',request_id=__import__('uuid').uuid4().hex,payload=json.dumps({'id':tid,**review},ensure_ascii=False)));s.commit();return store.ticket_dict(t)
@@ -141,11 +151,8 @@ def register(app):
         if not body.name.strip():raise HTTPException(422,'名稱不可空白')
         with store.Session() as s:
             if s.get(store.Machine,body.id):raise HTTPException(409,'設備編號已存在（含停用設備）')
-            template=json.loads(s.scalar(select(store.Machine)).payload)
-            template.pop('asset',None)
-            template.update(id=body.id,name=body.name.strip(),kind=body.kind,util=0,hours=0,status='待建檔',risk=0)
-            template['parts']=[[p[0],None,0,p[3],None,'新設備尚未取得量測資料，健康度未知。'] for p in template['parts']]
-            if body.kind=='lathe':template['parts'][1][0]='車削刀片';template['parts'][2][0]='液壓泵'
+            from .equipment_templates import machine_payload
+            template=machine_payload(body,s)
             s.add(store.Machine(id=body.id,payload=json.dumps(template,ensure_ascii=False)));s.commit()
         return template
     @app.delete('/api/machines/{mid}')

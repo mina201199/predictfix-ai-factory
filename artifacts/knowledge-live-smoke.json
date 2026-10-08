@@ -11,14 +11,14 @@
         "PF-MAN-ATC-002",
         "CASE-4b2d1417263b4cfd84c4fe7392bb80ee"
       ],
-      "selected_count": 2,
+      "selected_count": 1,
       "quotes_exist": true,
       "citation_checks": {
-        "accepted": 2,
+        "accepted": 1,
         "rejected": 0,
         "method": "selected_id_to_immutable_source_paragraph"
       },
-      "elapsed_ms": 6213.94,
+      "elapsed_ms": 5450.42,
       "reason": null
     },
     {
@@ -39,7 +39,7 @@
         "rejected": 0,
         "method": "selected_id_to_immutable_source_paragraph"
       },
-      "elapsed_ms": 20472.87,
+      "elapsed_ms": 12376.07,
       "reason": null
     },
     {
@@ -58,7 +58,7 @@
         "rejected": 0,
         "method": "selected_id_to_immutable_source_paragraph"
       },
-      "elapsed_ms": 12092.94,
+      "elapsed_ms": 6246.29,
       "reason": null
     }
   ]

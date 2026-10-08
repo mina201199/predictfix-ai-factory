@@ -1,0 +1,25 @@
+{
+  "model": "gpt-6-luna",
+  "source": "newly authored fictional smoke strings, no local manuals loaded",
+  "selection_passed": true,
+  "llm_used": true,
+  "reason": null,
+  "embedding_passed": true,
+  "embedding_reason": null,
+  "budget_before": {
+    "limit_usd": 3.0,
+    "accounted_usd": 0.0,
+    "remaining_usd": 3.0,
+    "requests": 0,
+    "unsettled_requests": 0,
+    "basis": "standard token prices plus 20% margin; failures retain reservations; not account-wide billing"
+  },
+  "budget_after": {
+    "limit_usd": 3.0,
+    "accounted_usd": 2.7e-05,
+    "remaining_usd": 2.999973,
+    "requests": 2,
+    "unsettled_requests": 0,
+    "basis": "standard token prices plus 20% margin; failures retain reservations; not account-wide billing"
+  }
+}

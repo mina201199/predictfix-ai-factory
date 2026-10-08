@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "checks": [
+    "four structural assemblies",
+    "solid/cutaway toggle",
+    "overview selection",
+    "overview rotation and reset",
+    "detail selection",
+    "detail rotation",
+    "mobile width",
+    "shared theme on console/AI/workflow",
+    "no browser errors"
+  ]
+}

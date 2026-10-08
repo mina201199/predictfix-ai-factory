@@ -1,0 +1,47 @@
+{
+  "verified_date": "2026-10-07",
+  "scope": "Current working directory on this Windows computer; not a clean Git checkout or public deployment",
+  "runtime": {
+    "python": "3.12.14",
+    "sqlalchemy": "2.1.3",
+    "sqlalchemy_native_extensions": false,
+    "windows_security_policy_changed": false,
+    "setup_script_executed": true,
+    "demo_health_check": "passed",
+    "production_health_check": "passed",
+    "production_database_contains_demo_data": false
+  },
+  "tests": {
+    "existing_environment": {"tests": 38, "failures": 0, "errors": 0, "skipped": 0},
+    "fresh_python_environment": {"tests": 38, "failures": 0, "errors": 0, "skipped": 0},
+    "fresh_environment_production_startup": "passed",
+    "fresh_environment_workflow_assets_and_auth_boundary": "passed",
+    "known_warning": "Starlette TestClient httpx deprecation"
+  },
+  "demo": {
+    "preparation_report": "interview-demo-report.json",
+    "walkthrough_report": "interview-walkthrough-report.json",
+    "failed_verification_blocks_submission": true,
+    "reviewed_case_published_and_retrieved": true,
+    "pending_ticket_prepared_for_manual_demo": true,
+    "all_interview_data_synthetic": true,
+    "video_recorded": false
+  },
+  "delivery": {
+    "github_actions_configuration_created": true,
+    "github_actions_executed": false,
+    "docker_workflow_assets_fixed": true,
+    "compose_configuration_checks": "passed",
+    "docker_build_and_startup_verified": false,
+    "docker_blocker": "Docker Desktop cannot rename sailor-ingest.sock; Windows reports the file cannot be accessed. Reversible backup attempt failed; original socket and container data retained.",
+    "postgresql_and_tls_verified": false,
+    "public_deployment": false,
+    "public_deployment_blocker": "No hosting destination or domain supplied"
+  },
+  "security": {
+    "live_qwen_report_date": "2026-10-06",
+    "live_report_checks_passed": 45,
+    "live_report_rerun_today": false,
+    "security_regression_in_full_suite_today": true
+  }
+}

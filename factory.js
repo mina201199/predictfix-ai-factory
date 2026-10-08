@@ -35,17 +35,63 @@ const rotatingMachines=[
 function cube(x,y,z,w,h,d,c,inner='',cls=''){
   return `<div class="cuboid ${cls}" style="--x:${x}px;--y:${y}px;--z:${z}px;--w:${w}px;--h:${h}px;--d:${d}px;${c?`--c:${c};`:''}">${['front','back','right','left','top','bottom'].map(face=>`<div class="face ${face}">${face==='front'?inner:''}</div>`).join('')}</div>`;
 }
-function machineModel(m,interactive=false){
-  let body='';
-  if(m.kind==='mill') body=cube(25,20,0,126,100,74,'#c0d3ce','<div class="cabinet-window"></div>','shell')+cube(151,45,12,24,63,25,'#8faea4','<div class="cabinet-panel"></div>','shell');
-  if(m.kind==='lathe') body=cube(8,45,0,170,72,65,'#c1d2ce','<div class="cabinet-window"></div>','shell')+cube(151,20,9,27,26,22,'#8faea4','<div class="cabinet-panel"></div>','shell');
-  if(m.kind==='motor') body=cube(40,44,0,105,61,69,'#85b1a3','','shell')+cube(145,62,0,33,22,22,'#99b2ac','','shell')+cube(60,22,0,47,24,39,'#c2d7cd','','shell');
-  if(m.kind==='pump') body=cube(24,51,0,76,57,60,'#88afa2','','shell')+cube(99,40,0,48,70,66,'#bfd7c8','','shell')+cube(115,11,0,20,32,25,'#8fafa1','','shell');
-  if(m.kind==='compressor') body=cube(23,21,0,143,96,76,'#a4c5b5','<div class="cabinet-window"></div>','shell');
-  const coordinates=[[76,36,5],[64,73,24],[112,85,8],[38,90,17]];
-  let parts=interactive?coordinates.map((p,i)=>cube(p[0]-9,p[1]-7,p[2],26,19,24,i===activePart?'#e5ba75':'#76ab95','',`part-cube ${i===activePart?'active':''}`)+`<button class="part-dot ${i===activePart?'active':''}" data-part="${i}" aria-label="查看${m.parts[i][0]}" style="--x:${p[0]+1}px;--y:${p[1]-5}px;--z:${p[2]+24}px">${i+1}</button>`).join(''):'';
-  return `<div class="model-stage ${interactive?'interactive-model':''}" ${interactive?'aria-label="可旋轉機器 3D 示意圖"':''}><div class="model-world" ${interactive?`style="transform:scale(1.45) rotateX(-17deg) rotateY(${rotation}deg)"`:''}><div class="model-floor"></div>${cube(14,122,0,166,13,96,'#7d9e91')}${body}${parts}</div></div>`;
+// Code-native cutaway geometry: shells, assemblies and hotspots rotate together.
+function detailedMachineModel(m, interactive = false) {
+  const label=value=>String(value).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+  const metal = '#b7c9d5', dark = '#435e72';
+  const box = (x,y,z,w,h,d,c=metal,html='',cls='housing') => cube(x,y,z,w,h,d,c,html,cls);
+  const isLathe = m.kind === 'lathe';
+  const isCNC = m.kind === 'mill' || isLathe;
+  let structure = box(12,121,0,168,16,98,dark,'','chassis');
+  structure += box(19,137,22,23,8,19,dark,'','foot') + box(145,137,22,23,8,19,dark,'','foot');
+  if (isCNC) {
+    // Open front construction leaves a visible working chamber even in solid mode.
+    structure += box(22,19,-32,130,101,8,metal,'','shell rear-wall');
+    structure += box(22,19,0,12,101,74,metal,'','shell pillar');
+    structure += box(140,19,0,12,101,74,metal,'','shell pillar');
+    structure += box(22,13,0,130,12,74,metal,'','shell roof');
+    structure += box(23,105,0,130,16,74,metal,'<span class="machine-plate">'+(isLathe?'TURNING CENTER':'MACHINING CENTER')+'</span>','shell sill');
+    structure += box(153,36,24,24,64,19,dark,'<div class="control-display"><i></i><span>•••</span><b>●</b></div>','console');
+    structure += box(37,27,38,97,77,2,'#92dcf5','<span class="door-handle"></span>','shell glass-door');
+    structure += box(155,17,0,6,14,6,'#2bf1c8','','signal-light');
+    structure += box(34,97,0,99,6,55,dark,'','machine-table');
+    structure += box(38,92,0,90,4,4,metal,'','rail') + box(38,92,-23,90,4,4,metal,'','rail');
+    structure += box(68,28,-23,27,65,13,dark,'','spindle-column');
+    structure += box(70,28,0,30,13,34,metal,'','spindle-head');
+    structure += box(45,82,2,78,9,45,metal,'','work-bed');
+    structure += box(34,24,34,4,78,4,dark,'','door-frame') + box(135,24,34,4,78,4,dark,'','door-frame');
+  } else {
+    const type = m.kind;
+    structure += box(28,39,-25,130,80,8,metal,'','shell rear-wall');
+    structure += box(28,32,0,12,88,65,metal,'','shell pillar') + box(146,32,0,12,88,65,metal,'','shell pillar');
+    structure += box(28,28,0,130,10,65,metal,'','shell roof');
+    structure += box(42,40,34,101,73,2,'#92dcf5','','shell glass-door');
+    structure += box(53,19,-10,46,13,28,dark,'','terminal-box');
+    structure += box(158,51,10,19,45,15,dark,'<div class="control-display"><i></i><span>•••</span></div>','console');
+    if (type === 'pump') structure += box(118,8,0,15,29,15,metal,'','pipe');
+  }
+  const coords = isLathe ? [[47,54,10],[104,66,23],[123,91,2],[53,99,22]] : isCNC ? [[83,38,5],[84,71,23],[120,91,5],[42,99,22]] : [[58,56,5],[104,56,6],[126,91,5],[45,99,22]];
+  // Exactly one part-cube root per data part keeps existing selection mapping stable.
+  const assemblies = m.parts.map((part,i) => {
+    const p=coords[i]||[30+(i%4)*34,26+Math.floor(i/4)*24,35];
+    const health=m.parts[i][1], state=health == null?'unknown':health<45?'critical':health<70?'watch':'stable';
+    const cls=`part-cube ${state} ${interactive && i===activePart?'active':''}`;
+    const shape = i===0 ? 'bearing' : i===1 ? (isCNC?'tool':'rotor') : i===2?'pump':i===3?'screw':'rotor';
+    const w=i===3?76:i===2?23:25, h=i===0?28:i===1?23:i===2?26:9;
+    const assembly=box(p[0]-8,p[1]-7,p[2],w,h,i===3?9:24,'#71adc6',`<span class="mechanical-${shape}"></span>`,cls);
+    const hotspot=interactive?`<button class="part-dot ${state} ${i===activePart?'active':''}" data-part="${i}" aria-label="查看${label(m.parts[i][0])}" aria-pressed="${i===activePart}" style="--x:${p[0]+5}px;--y:${p[1]-9}px;--z:${p[2]+31}px">${i+1}</button>`:'';
+    return assembly+hotspot;
+  }).join('');
+  return `<div class="model-stage detailed-model ${interactive?'interactive-model cutaway':''}" aria-label="${label(m.name)} · ${interactive?'可旋轉零件剖視模型':'金屬機台模型'}"><div class="model-world" ${interactive?`style="transform:scale(1.45) rotateX(-17deg) rotateY(${rotation}deg)"`:''}><div class="model-floor"></div>${structure}${assemblies}</div>${interactive?'<button type="button" class="model-shell-toggle" aria-pressed="true">外殼透視：開</button>':''}<span class="model-mode">${interactive?'CUTAWAY · 零件透視':'DIGITAL TWIN · 設備模型'}</span></div>`;
 }
+document.addEventListener('click',event=>{
+  const toggle=event.target.closest('.model-shell-toggle');if(!toggle)return;
+  const stage=toggle.closest('.model-stage'),enabled=stage.classList.toggle('cutaway');
+  toggle.setAttribute('aria-pressed',enabled);toggle.textContent='外殼透視：'+(enabled?'開':'關');
+  stage.querySelector('.model-mode').textContent=enabled?'CUTAWAY · 零件透視':'SOLID · 金屬外殼';
+});
+
+function machineModel(m,interactive=false){return detailedMachineModel(m,interactive)}
 function minHealth(m){return Math.min(...m.parts.map(p=>p[1]))}
 function renderEngineers(){
   const m=machines[selected],p=m.parts[activePart];
@@ -69,8 +115,8 @@ renderDetail=function(){
   $('#device-heading').textContent=m.id;$('#device-badge').textContent=m.status;$('#device-badge').className='badge '+(m.risk>70?'orange':'');$('#device-location').textContent=m.name+' · 零件健康';
   document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.tab===currentTab));
   if(currentTab==='parts'){
-    const p=m.parts[activePart],tool=/刀具|刀片/.test(p[0]),unit=tool?'分鐘':'小時',used=Math.min(100,Math.round(p[2]/p[3]*100)),color=p[1]<60?'#d39945':'#319c7d';
-    $('#detail-content').innerHTML=`<div class="component-layout"><div class="viewer"><div class="viewer-title"><b>${m.name} · 內部零件</b><span>3D 簡化模型</span></div>${machineModel(m,true)}<div class="viewer-control"><span>視角</span><input type="range" min="-180" max="180" value="${rotation}" id="model-rotation" aria-label="旋轉機器視角"><button class="link" id="reset-rotation">重設</button></div><p class="subnote">拖曳旋轉，或使用滑桿；點選數字定位零件。位置為概念示意。</p></div><div class="part-list">${m.parts.map((part,i)=>`<button class="part-button ${i===activePart?'active':''}" data-part="${i}"><div class="row">${i+1}. ${part[0]}<span style="color:${part[1]<60?'#c38c3c':'#319c7d'}">健康 ${part[1]}%</span></div><div class="battery">${Array.from({length:10},(_,n)=>`<i style="${n<Math.round(part[1]/10)?`background:${part[1]<60?'#d39945':'#319c7d'}`:''}"></i>`).join('')}</div><small>累積 ${part[2].toLocaleString()} ${/刀具|刀片/.test(part[0])?'分鐘':'小時'} · ${part[1]<60?'建議檢查':'持續監控'}</small></button>`).join('')}</div></div><div class="component-detail"><div style="display:flex;justify-content:space-between;gap:8px"><h3>${p[0]}</h3><span class="badge ${p[1]<60?'orange':''}">${p[1]<60?'需要關注':'狀態穩定'}</span></div><div class="component-kpis"><div><span>健康度 · 越高越健康</span><strong style="color:${color}">${p[1]}%</strong><small>綜合劣化指標 · 模擬</small></div><div><span>額定壽命使用比例</span><strong>${used}%</strong><small>${p[2].toLocaleString()} / ${p[3].toLocaleString()} ${unit}</small></div><div><span>估計剩餘使用時間</span><strong>${p[4]===null?'未估計':p[4]} <small>${p[4]===null?'':unit}</small></strong><small>展示估計，非保證壽命</small></div></div><p>${p[5]}</p><div class="component-explain"><b>健康度 ≠ 使用率。</b>健康度像電池健康，代表狀態劣化程度；額定壽命使用比例是累積使用時間 ÷ 設定參考壽命；設備使用率是今天運轉時間占排程時間的比例。三者分開顯示，所有數值目前為模擬。</div><div class="actions" style="margin-top:16px"><button class="btn primary" id="component-ticket">為此零件建立工單 →</button></div></div>`;
+    const p=m.parts[activePart],tool=/刀具|刀片/.test(p[0]),unit=tool?'分鐘':'小時',used=p[3]>0?Math.min(100,Math.round(p[2]/p[3]*100)):null,color=p[1]<60?'#d39945':'#319c7d';
+    $('#detail-content').innerHTML=`<div class="component-layout"><div class="viewer"><div class="viewer-title"><b>${m.name} · 內部零件</b><span>金屬機台 · 零件透視</span></div>${machineModel(m,true)}<div class="viewer-control"><span>視角</span><input type="range" min="-180" max="180" value="${rotation}" id="model-rotation" aria-label="旋轉機器視角"><button class="link" id="reset-rotation">重設</button></div><p class="subnote">拖曳旋轉，或使用滑桿；點選數字定位零件。位置為概念示意。</p></div><div class="part-list">${m.parts.map((part,i)=>`<button class="part-button ${i===activePart?'active':''}" data-part="${i}"><div class="row">${i+1}. ${part[0]}<span style="color:${part[1]<60?'#c38c3c':'#319c7d'}">健康 ${part[1]}%</span></div><div class="battery">${Array.from({length:10},(_,n)=>`<i style="${n<Math.round(part[1]/10)?`background:${part[1]<60?'#d39945':'#319c7d'}`:''}"></i>`).join('')}</div><small>累積 ${part[2].toLocaleString()} ${/刀具|刀片/.test(part[0])?'分鐘':'小時'} · ${part[1]<60?'建議檢查':'持續監控'}</small></button>`).join('')}</div></div><div class="component-detail"><div style="display:flex;justify-content:space-between;gap:8px"><h3>${p[0]}</h3><span class="badge ${p[1]<60?'orange':''}">${p[1]<60?'需要關注':'狀態穩定'}</span></div><div class="component-kpis"><div><span>健康度 · 越高越健康</span><strong style="color:${color}">${p[1]}%</strong><small>綜合劣化指標 · 模擬</small></div><div><span>額定壽命使用比例</span><strong>${used===null?'未設定':used+'%'}</strong><small>${p[2].toLocaleString()} / ${p[3].toLocaleString()} ${unit}</small></div><div><span>估計剩餘使用時間</span><strong>${p[4]===null?'未估計':p[4]} <small>${p[4]===null?'':unit}</small></strong><small>展示估計，非保證壽命</small></div></div><p>${p[5]}</p><div class="component-explain"><b>健康度 ≠ 使用率。</b>健康度像電池健康，代表狀態劣化程度；額定壽命使用比例是累積使用時間 ÷ 設定參考壽命；設備使用率是今天運轉時間占排程時間的比例。三者分開顯示，所有數值目前為模擬。</div><div class="actions" style="margin-top:16px"><button class="btn primary" id="component-ticket">為此零件建立工單 →</button></div></div>`;
     document.querySelectorAll('[data-part]').forEach(b=>b.onclick=()=>{activePart=+b.dataset.part;renderDetail()});
     const stage=$('.interactive-model'),world=stage.querySelector('.model-world');
     function rotate(v){rotation=+v;world.style.transform=`scale(1.45) rotateX(-17deg) rotateY(${rotation}deg)`;$('#model-rotation').value=rotation}
@@ -88,7 +134,7 @@ const oldSwitch=switchView;
 switchView=function(view){
   oldSwitch(view);
   if(view==='equipment'){
-    $('#other-view').innerHTML=`<div class="card-head"><h2>機器列表 <small>3D EQUIPMENT</small></h2><span class="badge">${machines.length} 台 · 模擬</span></div><div class="equipment-grid">${machines.map((m,i)=>`<article class="equipment-tile"><div style="display:flex;justify-content:space-between"><h3>${m.id}</h3><span class="badge ${m.risk>70?'orange':''}">${m.status}</span></div><p>${m.name}</p>${machineModel(m)}<div class="tile-meta"><span>設備使用率<b>${m.util}%</b></span><span>最低零件健康<b>${minHealth(m)}%</b></span><span>累積運轉<b>${m.hours.toLocaleString()}<small style="font-size:10px"> h</small></b></span></div><div class="tile-bottom"><span style="font-size:10px;color:#8c9e95">${m.parts.length} 個零件可檢視</span><button class="btn primary" data-inspect-parts="${i}">零件健康 →</button></div></article>`).join('')}</div>`;
+    $('#other-view').innerHTML=`<div class="card-head"><h2>機器列表 <small>3D EQUIPMENT</small></h2><span class="badge">${machines.length} 台 · 模擬</span></div><div class="equipment-grid">${machines.map((m,i)=>`<article class="equipment-tile"><div style="display:flex;justify-content:space-between"><h3>${m.id}</h3><span class="badge ${m.risk>70?'orange':''}">${m.status}</span></div><p>${m.name}</p>${machineModel(m)}<div class="tile-meta"><span>設備使用率<b>${m.util}%</b></span><span>最低零件健康<b>${minHealth(m)}%</b></span><span>累積運轉<b>${(m.hours?.toLocaleString()??'未建檔')}<small style="font-size:10px"> h</small></b></span></div><div class="tile-bottom"><span style="font-size:10px;color:#8c9e95">${m.parts.length} 個零件可檢視</span><button class="btn primary" data-inspect-parts="${i}">零件健康 →</button></div></article>`).join('')}</div>`;
     document.querySelectorAll('[data-inspect-parts]').forEach(b=>b.onclick=()=>{selected=+b.dataset.inspectParts;activePart=0;currentTab='parts';switchView('dashboard');renderFleet();renderDetail();$('.detail').scrollIntoView({behavior:'smooth',block:'start'})});
   }
   if(factoryType!=='cnc'&&view==='knowledge')$('#other-view').innerHTML='<div class="view-panel"><h2>旋轉設備知識來源</h2><p style="margin-top:15px">目前僅提供零件健康度與維修建議示例。正式知識庫需加入相應設備的操作與維修手冊。</p><p style="margin-top:15px"><a href="https://engineering.case.edu/bearingdatacenter" target="_blank" rel="noopener">CWRU 軸承實驗資料</a> · <a href="https://catalog.data.gov/dataset/ims-bearings" target="_blank" rel="noopener">NASA IMS 軸承資料</a></p></div>';

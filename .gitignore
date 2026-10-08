@@ -21,7 +21,12 @@ data/uploads/
 *.pfx
 *.p12
 .github-upload/
+backups/
 # Local UI proof captures and upload metadata may contain operational details.
 artifacts/*.png
 artifacts/demo-photos/upload-record.json
 artifacts/**/*proof.png
+artifacts/*proof.jpg
+
+# Isolated local verification databases and scratch files.
+.test-*/

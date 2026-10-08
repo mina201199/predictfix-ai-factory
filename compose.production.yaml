@@ -1,0 +1,65 @@
+services:
+  api:
+    build: .
+    environment:
+      APP_MODE: production
+      DEMO_MODE: "0"
+      COOKIE_SECURE: "1"
+      DATABASE_URL: ${DATABASE_URL:?Set a PostgreSQL connection URL in the deployment env file}
+      BOOTSTRAP_PASSWORD: ${BOOTSTRAP_PASSWORD:?Set a unique 16+ character bootstrap password}
+      LLM_PROVIDER: ollama
+      OLLAMA_URL: http://ollama:11434
+      OLLAMA_MODEL: ${OLLAMA_MODEL:-qwen3:0.6b}
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8080/healthz', timeout=3)"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: predictfix
+      POSTGRES_USER: predictfix
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set a unique database password}
+    volumes:
+      - production-db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U predictfix -d predictfix"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+  ollama:
+    image: ollama/ollama:0.35.1
+    volumes:
+      - production-models:/root/.ollama
+    restart: unless-stopped
+  proxy:
+    image: caddy:2-alpine
+    environment:
+      APP_DOMAIN: ${APP_DOMAIN:?Set the real deployment domain}
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+    depends_on:
+      api:
+        condition: service_healthy
+    restart: unless-stopped
+volumes:
+  production-db:
+  production-models:
+  caddy-data:
+  caddy-config:

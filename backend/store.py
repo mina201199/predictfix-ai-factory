@@ -6,7 +6,8 @@ from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, sessionmaker
 
 ROOT = Path(__file__).resolve().parents[1]
 (ROOT/'data').mkdir(exist_ok=True)
-DATABASE_URL = os.getenv('DATABASE_URL', 'sqlite:///'+str(ROOT/'data'/'predictfix.db'))
+from . import config
+DATABASE_URL = os.getenv('DATABASE_URL', 'sqlite:///'+str(ROOT/'data'/('predictfix.db' if config.demo() else 'factory.db')))
 engine = create_engine(DATABASE_URL, connect_args={'check_same_thread':False} if DATABASE_URL.startswith('sqlite') else {})
 Session = sessionmaker(engine, expire_on_commit=False)
 
@@ -43,6 +44,12 @@ class Workflow(Base):
     id: Mapped[str] = mapped_column(String(60),primary_key=True)
     payload: Mapped[str] = mapped_column(Text,default='{}')
 
+class EquipmentTemplate(Base):
+    __tablename__='equipment_templates'
+    id: Mapped[str] = mapped_column(String(60),primary_key=True)
+    revision: Mapped[int] = mapped_column(Integer,default=1)
+    payload: Mapped[str] = mapped_column(Text)
+
 def init():
     Base.metadata.create_all(engine)
     from sqlalchemy import text
@@ -60,7 +67,7 @@ def ticket_dict(t):
 class User(Base):
     __tablename__='users'
     username: Mapped[str] = mapped_column(String(50),primary_key=True)
-    name: Mapped[str] = mapped_column(String(50))
+    name: Mapped[str] = mapped_column(String(50), unique=True)
     role: Mapped[str] = mapped_column(String(20))
     password_hash: Mapped[str] = mapped_column(Text)
     active: Mapped[int] = mapped_column(Integer,default=1)
@@ -94,4 +101,54 @@ class RepairCase(Base):
     ticket_id: Mapped[str] = mapped_column(String(60), unique=True)
     status: Mapped[str] = mapped_column(String(20), default='draft')
     revision: Mapped[int] = mapped_column(Integer, default=1)
+    payload: Mapped[str] = mapped_column(Text)
+
+class EngineerProfile(Base):
+    __tablename__ = 'engineer_profiles'
+    username: Mapped[str] = mapped_column(String(50), primary_key=True)
+    payload: Mapped[str] = mapped_column(Text)
+
+class Duty(Base):
+    __tablename__ = 'engineer_duties'
+    id: Mapped[str] = mapped_column(String(60), primary_key=True)
+    username: Mapped[str] = mapped_column(String(50), index=True)
+    starts_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+    ends_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+    attendance: Mapped[str] = mapped_column(String(20))
+    capacity_minutes: Mapped[int] = mapped_column(Integer)
+    note: Mapped[str] = mapped_column(Text)
+
+class WorkLog(Base):
+    __tablename__ = 'work_logs'
+    id: Mapped[str] = mapped_column(String(60), primary_key=True)
+    ticket_id: Mapped[str] = mapped_column(String(60), index=True)
+    username: Mapped[str] = mapped_column(String(50))
+    minutes: Mapped[int] = mapped_column(Integer)
+    note: Mapped[str] = mapped_column(Text)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=lambda:datetime.now(timezone.utc))
+
+class SchemaVersion(Base):
+    __tablename__ = 'schema_versions'
+    version: Mapped[int] = mapped_column(Integer, primary_key=True)
+    applied_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=lambda:datetime.now(timezone.utc))
+
+class MaintenancePlan(Base):
+    __tablename__ = 'maintenance_plans'
+    id: Mapped[str] = mapped_column(String(60), primary_key=True)
+    payload: Mapped[str] = mapped_column(Text)
+
+class StockItem(Base):
+    __tablename__ = 'stock_items'
+    id: Mapped[str] = mapped_column(String(60), primary_key=True)
+    name: Mapped[str] = mapped_column(String(100))
+    unit: Mapped[str] = mapped_column(String(20))
+    quantity: Mapped[int] = mapped_column(Integer, default=0)
+    minimum: Mapped[int] = mapped_column(Integer, default=0)
+
+class StockMovement(Base):
+    __tablename__ = 'stock_movements'
+    id: Mapped[str] = mapped_column(String(60), primary_key=True)
+    item_id: Mapped[str] = mapped_column(String(60), index=True)
+    ticket_id: Mapped[str | None] = mapped_column(String(60), nullable=True, index=True)
+    request_key: Mapped[str] = mapped_column(String(100), unique=True)
     payload: Mapped[str] = mapped_column(Text)

@@ -1,0 +1,7 @@
+{$APP_DOMAIN} {
+    request_body {
+        max_size 7MB
+    }
+    reverse_proxy api:8080
+    header Strict-Transport-Security "max-age=31536000"
+}

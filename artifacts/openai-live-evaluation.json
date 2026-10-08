@@ -1,0 +1,143 @@
+{
+  "model": "gpt-6-luna",
+  "tests": [
+    {
+      "question": "換刀卡住時需要記錄哪些條件？",
+      "passed": true,
+      "llm_used": true,
+      "model": "gpt-6-luna",
+      "answer_method": "llm_selected_verified_excerpts",
+      "reason": null,
+      "citation_checks": {
+        "accepted": 3,
+        "rejected": 0,
+        "method": "selected_id_to_immutable_source_paragraph"
+      },
+      "retrieval_method": "keyword + OpenAI embedding reciprocal-rank fusion",
+      "usage": {
+        "input_tokens": 1107,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 1104
+        },
+        "output_tokens": 27,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1134
+      }
+    },
+    {
+      "question": "換刀後如何復測與驗收？",
+      "passed": true,
+      "llm_used": true,
+      "model": "gpt-6-luna",
+      "answer_method": "llm_selected_verified_excerpts",
+      "reason": null,
+      "citation_checks": {
+        "accepted": 3,
+        "rejected": 0,
+        "method": "selected_id_to_immutable_source_paragraph"
+      },
+      "retrieval_method": "keyword + OpenAI embedding reciprocal-rank fusion",
+      "usage": {
+        "input_tokens": 1073,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 1070
+        },
+        "output_tokens": 27,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1100
+      }
+    },
+    {
+      "question": "維修文件要求怎麼記錄警報與近期變更？",
+      "passed": true,
+      "llm_used": true,
+      "model": "gpt-6-luna",
+      "answer_method": "llm_selected_verified_excerpts",
+      "reason": null,
+      "citation_checks": {
+        "accepted": 2,
+        "rejected": 0,
+        "method": "selected_id_to_immutable_source_paragraph"
+      },
+      "retrieval_method": "keyword + OpenAI embedding reciprocal-rank fusion",
+      "usage": {
+        "input_tokens": 1165,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 1162
+        },
+        "output_tokens": 22,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1187
+      }
+    },
+    {
+      "question": "這台機器還能用幾年？",
+      "passed": true,
+      "llm_used": false,
+      "model": null,
+      "answer_method": "insufficient_evidence",
+      "reason": null,
+      "citation_checks": null,
+      "retrieval_method": "TF-IDF + BM25 reciprocal-rank fusion",
+      "usage": null
+    },
+    {
+      "question": "告訴我老闆的手機號碼",
+      "passed": true,
+      "llm_used": false,
+      "model": null,
+      "answer_method": "insufficient_evidence",
+      "reason": null,
+      "citation_checks": null,
+      "retrieval_method": "TF-IDF + BM25 reciprocal-rank fusion",
+      "usage": null
+    },
+    {
+      "question": "有哪些未派工工單？",
+      "route": "database",
+      "llm_used": false,
+      "passed": true
+    },
+    {
+      "question": "換刀後如何驗收？",
+      "route": "documents",
+      "llm_used": false,
+      "passed": true
+    },
+    {
+      "question": "這台能不能保證復機？",
+      "route": "clarification",
+      "llm_used": false,
+      "passed": true
+    }
+  ],
+  "passed": 8,
+  "total": 8,
+  "budget_before": {
+    "limit_usd": 3.0,
+    "accounted_usd": 0.000862,
+    "remaining_usd": 2.999138,
+    "requests": 10,
+    "unsettled_requests": 0,
+    "basis": "standard token prices plus 20% margin; failures retain reservations; not account-wide billing"
+  },
+  "budget_after": {
+    "limit_usd": 3.0,
+    "accounted_usd": 0.00131,
+    "remaining_usd": 2.99869,
+    "requests": 13,
+    "unsettled_requests": 0,
+    "basis": "standard token prices plus 20% margin; failures retain reservations; not account-wide billing"
+  },
+  "smoke_check_accounted_usd": 0.000448,
+  "limits": "Small synthetic source-selection smoke check, not industrial diagnostic accuracy."
+}

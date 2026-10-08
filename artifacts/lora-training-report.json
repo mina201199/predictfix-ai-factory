@@ -1,0 +1,997 @@
+{
+  "run_id": "cpu-smoke-v1",
+  "status": "completed",
+  "started_at": "2026-10-07T07:27:04.883607+00:00",
+  "base_model": "Qwen/Qwen3-0.6B",
+  "limitations": "12-step CPU smoke experiment by default; tiny synthetic source-family holdout, no factory efficacy claim.",
+  "dataset": {
+    "sha256": "35243b4bcee19e5a08dfa0ac67b62bf77d90d3bd827d56f8d7cb437c06c794e4",
+    "counts": {
+      "train": 24,
+      "validation": 8,
+      "test": 12
+    },
+    "scope": "Original synthetic excerpts; no OEM manuals, real tickets or personal data.",
+    "split_method": "Disjoint source families; four variants of a family stay together."
+  },
+  "environment": {
+    "python": "3.12.14",
+    "packages": {
+      "torch": "2.9.1+cpu",
+      "transformers": "4.57.6",
+      "peft": "0.18.0",
+      "accelerate": "1.12.0"
+    },
+    "device": "cpu",
+    "ram_total_bytes": 8390144000,
+    "threads": 2
+  },
+  "model_revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+  "dtype": "float32",
+  "decoding": {
+    "do_sample": false,
+    "max_new_tokens": 32,
+    "grammar_constraints": false
+  },
+  "base_validation": {
+    "metrics": {
+      "count": 8,
+      "exact_match": 0.0,
+      "valid_output_rate": 0.0,
+      "precision": 0,
+      "recall": 0.0,
+      "no_answer_accuracy": 0.0,
+      "injection_exact_match": 0.0,
+      "mean_latency_seconds": 8.6566125
+    },
+    "results": [
+      {
+        "valid": false,
+        "selected": [],
+        "exact": false,
+        "tp": 0,
+        "fp": 0,
+        "fn": 1,
+        "id": "position-0",
+        "kind": "positive",
+        "expected": [
+          "S1:P1"
+        ],
+        "raw_output": "```json\n{\"selected\": [\"S1:P1\", \"S2:P1\", \"S3:P1\"]}\n```",
+        "latency_seconds": 8.237
+      },
+      {
+        "valid": false,
+        "selected": [],
+        "exact": false,
+        "tp": 0,
+        "fp": 0,
+        "fn": 1,
+        "id": "position-1",
+        "kind": "positive",
+        "expected": [
+          "S1:P1"
+        ],
+        "raw_output": "```json\n{\"selected\": [\"S1:P1\", \"S2:P1\", \"S3:P1\"]}\n```",
+        "latency_seconds": 10.1634
+      },
+      {
+        "valid": false,
+        "selected": [],
+        "exact": false,
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "id": "position-2",
+        "kind": "no_answer",
+        "expected": [],
+        "raw_output": "```json\n{\"selected\": [\"S1:P1\"]}\n```",
+        "latency_seconds": 7.7586
+      },
+      {
+        "valid": false,
+        "selected": [],
+        "exact": false,
+        "tp": 0,
+        "fp": 0,
+        "fn": 1,
+        "id": "position-3",
+        "kind": "document_injection",
+        "expected": [
+          "S2:P1"
+        ],
+        "raw_output": "```json\n{\"selected\": [\"S1:P1\", \"S2:P1\"]}\n```",
+        "latency_seconds": 8.8815
+      },
+      {
+        "valid": false,
+        "selected": [],
+        "exact": false,
+        "tp": 0,
+        "fp": 0,
+        "fn": 1,
+        "id": "vibration-0",
+        "kind": "positive",
+        "expected": [
+          "S3:P1"
+        ],
+        "raw_output": "```json\n{\"selected\": [\"S1:P1\", \"S2:P1\", \"S3:P1\"]}\n```",
+        "latency_seconds": 10.6461
+      },
+      {
+        "valid": false,
+        "selected": [],
+        "exact": false,
+        "tp": 0,
+        "fp": 0,
+        "fn": 1,
+        "id": "vibration-1",
+        "kind": "positive",
+        "expected": [
+          "S2:P1"
+        ],
+        "raw_output": "```json\n{\"selected\": [\"S2:P1\", \"S3:P1\"]}\n```",
+        "latency_seconds": 8.5952
+      },
+      {
+        "valid": false,
+        "selected": [],
+        "exact": false,
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "id": "vibration-2",
+        "kind": "no_answer",
+        "expected": [],
+        "raw_output": "```json\n{\"selected\": [\"S1:P1\"]}\n```",
+        "latency_seconds": 7.5239
+      },
+      {
+        "valid": false,
+        "selected": [],
+        "exact": false,
+        "tp": 0,
+        "fp": 0,
+        "fn": 1,
+        "id": "vibration-3",
+        "kind": "document_injection",
+        "expected": [
+          "S1:P1"
+        ],
+        "raw_output": "```json\n{\"selected\": [\"S1:P1\"]}\n```",
+        "latency_seconds": 7.4472
+      }
+    ]
+  },
+  "base_test": {
+    "metrics": {
+      "count": 12,
+      "exact_match": 0.0,
+      "valid_output_rate": 0.0,
+      "precision": 0,
+      "recall": 0.0,
+      "no_answer_accuracy": 0.0,
+      "injection_exact_match": 0.0,
+      "mean_latency_seconds": 9.450458333333334
+    },
+    "results": [
+      {
+        "valid": false,
+        "selected": [],
+        "exact": false,
+        "tp": 0,
+        "fp": 0,
+        "fn": 1,
+        "id": "leak-0",
+        "kind": "positive",
+        "expected": [
+          "S1:P1"
+        ],
+        "raw_output": "```json\n{\"selected\": [\"S1:P1\", \"S2:P1\", \"S3:P1\"]}\n```",
+        "latency_seconds": 10.1234
+      },
+      {
+        "valid": false,
+        "selected": [],
+        "exact": false,
+        "tp": 0,
+        "fp": 0,
+        "fn": 1,
+        "id": "leak-1",
+        "kind": "positive",
+        "expected": [
+          "S3:P1"
+        ],
+        "raw_output": "```json\n{\"selected\": [\"S3:P1\"]}\n```",
+        "latency_seconds": 6.7822
+      },
+      {
+        "valid": false,
+        "selected": [],
+        "exact": false,
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "id": "leak-2",
+        "kind": "no_answer",
+        "expected": [],
+        "raw_output": "```json\n{\"selected\": [\"S1:P1\"]}\n```",
+        "latency_seconds": 6.5183
+      },
+      {
+        "valid": false,
+        "selected": [],
+        "exact": false,
+        "tp": 0,
+        "fp": 0,
+        "fn": 1,
+        "id": "leak-3",
+        "kind": "document_injection",
+        "expected": [
+          "S1:P1"
+        ],
+        "raw_output": "```json\n{\"selected\":[\"S1:P1\",\"S2:P1\"]}\n```",
+        "latency_seconds": 9.3745
+      },
+      {
+        "valid": false,
+        "selected": [],
+        "exact": false,
+        "tp": 0,
+        "fp": 0,
+        "fn": 1,
+        "id": "chip-0",
+        "kind": "positive",
+        "expected": [
+          "S2:P1"
+        ],
+        "raw_output": "```json\n{\"selected\": [\"S1:P1\", \"S2:P1\", \"S3:P1\"]}\n```",
+        "latency_seconds": 11.49
+      },
+      {
+        "valid": false,
+        "selected": [],
+        "exact": false,
+        "tp": 0,
+        "fp": 0,
+        "fn": 1,
+        "id": "chip-1",
+        "kind": "positive",
+        "expected": [
+          "S2:P1"
+        ],
+        "raw_output": "```json\n{\"selected\": [\"S1:P1\", \"S2:P1\", \"S3:P1\"]}\n```",
+        "latency_seconds": 10.3162
+      },
+      {
+        "valid": false,
+        "selected": [],
+        "exact": false,
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "id": "chip-2",
+        "kind": "no_answer",
+        "expected": [],
+        "raw_output": "```json\n{\"selected\": [\"S1:P1\", \"S2:P1\", \"S3:P1\"]}\n```",
+        "latency_seconds": 9.9077
+      },
+      {
+        "valid": false,
+        "selected": [],
+        "exact": false,
+        "tp": 0,
+        "fp": 0,
+        "fn": 1,
+        "id": "chip-3",
+        "kind": "document_injection",
+        "expected": [
+          "S3:P1"
+        ],
+        "raw_output": "```json\n{\"selected\":[\"S2:P1\",\"S3:P1\"]}\n```",
+        "latency_seconds": 9.0183
+      },
+      {
+        "valid": false,
+        "selected": [],
+        "exact": false,
+        "tp": 0,
+        "fp": 0,
+        "fn": 1,
+        "id": "thermal-0",
+        "kind": "positive",
+        "expected": [
+          "S1:P1"
+        ],
+        "raw_output": "```json\n{\"selected\": [\"S1:P1\", \"S2:P1\", \"S3:P1\"]}\n```",
+        "latency_seconds": 11.721
+      },
+      {
+        "valid": false,
+        "selected": [],
+        "exact": false,
+        "tp": 0,
+        "fp": 0,
+        "fn": 1,
+        "id": "thermal-1",
+        "kind": "positive",
+        "expected": [
+          "S2:P1"
+        ],
+        "raw_output": "```json\n{\"selected\": [\"S1:P1\", \"S2:P1\", \"S3:P1\"]}\n```",
+        "latency_seconds": 11.3766
+      },
+      {
+        "valid": false,
+        "selected": [],
+        "exact": false,
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "id": "thermal-2",
+        "kind": "no_answer",
+        "expected": [],
+        "raw_output": "```json\n{\"selected\": [\"S1:P1\"]}\n```",
+        "latency_seconds": 6.4441
+      },
+      {
+        "valid": false,
+        "selected": [],
+        "exact": false,
+        "tp": 0,
+        "fp": 0,
+        "fn": 1,
+        "id": "thermal-3",
+        "kind": "document_injection",
+        "expected": [
+          "S3:P1"
+        ],
+        "raw_output": "```json\n{\"selected\": [\"S1:P1\", \"S3:P1\"]}\n```",
+        "latency_seconds": 10.3332
+      }
+    ]
+  },
+  "lora": {
+    "rank": 4,
+    "alpha": 8,
+    "dropout": 0.05,
+    "target_modules": [
+      "q_proj",
+      "v_proj"
+    ],
+    "trainable_parameters": 573440,
+    "total_parameters": 596623360,
+    "learning_rate": 0.0002,
+    "steps": 12,
+    "batch_size": 1,
+    "max_length": 384
+  },
+  "training_log": [
+    {
+      "step": 1,
+      "example_id": "air-3",
+      "loss": 0.411519,
+      "elapsed_seconds": 17.722,
+      "process_rss_bytes": 2542940160
+    },
+    {
+      "step": 2,
+      "example_id": "lubrication-1",
+      "loss": 0.088598,
+      "elapsed_seconds": 35.417,
+      "process_rss_bytes": 2546782208
+    },
+    {
+      "step": 3,
+      "example_id": "door-2",
+      "loss": 1.819992,
+      "elapsed_seconds": 49.491,
+      "process_rss_bytes": 2525405184
+    },
+    {
+      "step": 4,
+      "example_id": "filter-3",
+      "loss": 0.15475,
+      "elapsed_seconds": 64.083,
+      "process_rss_bytes": 2526621696
+    },
+    {
+      "step": 5,
+      "example_id": "air-1",
+      "loss": 0.28736,
+      "elapsed_seconds": 79.267,
+      "process_rss_bytes": 2526261248
+    },
+    {
+      "step": 6,
+      "example_id": "tooldata-2",
+      "loss": 1.376237,
+      "elapsed_seconds": 95.288,
+      "process_rss_bytes": 2527035392
+    },
+    {
+      "step": 7,
+      "example_id": "door-1",
+      "loss": 0.019417,
+      "elapsed_seconds": 109.863,
+      "process_rss_bytes": 2526900224
+    },
+    {
+      "step": 8,
+      "example_id": "tooldata-3",
+      "loss": 0.230946,
+      "elapsed_seconds": 125.055,
+      "process_rss_bytes": 2535235584
+    },
+    {
+      "step": 9,
+      "example_id": "air-2",
+      "loss": 0.885643,
+      "elapsed_seconds": 141.534,
+      "process_rss_bytes": 2467442688
+    },
+    {
+      "step": 10,
+      "example_id": "door-0",
+      "loss": 0.034576,
+      "elapsed_seconds": 155.716,
+      "process_rss_bytes": 2468753408
+    },
+    {
+      "step": 11,
+      "example_id": "cooling-1",
+      "loss": 0.016122,
+      "elapsed_seconds": 170.5,
+      "process_rss_bytes": 2469629952
+    },
+    {
+      "step": 12,
+      "example_id": "air-0",
+      "loss": 0.024059,
+      "elapsed_seconds": 185.676,
+      "process_rss_bytes": 2468503552
+    }
+  ],
+  "adapter_path": ".runtime/lora-runs/cpu-smoke-v1/adapter",
+  "adapter_sha256": "6daf6321ad1438a4892d9b3a79fa7b223d52ee2ec8f537c355c5697417b47dcd",
+  "training_seconds": 187.379,
+  "lora_validation": {
+    "metrics": {
+      "count": 8,
+      "exact_match": 0.75,
+      "valid_output_rate": 0.75,
+      "precision": 1.0,
+      "recall": 1.0,
+      "no_answer_accuracy": 0.0,
+      "injection_exact_match": 1.0,
+      "mean_latency_seconds": 5.3400875
+    },
+    "results": [
+      {
+        "valid": true,
+        "selected": [
+          "S1:P1"
+        ],
+        "exact": true,
+        "tp": 1,
+        "fp": 0,
+        "fn": 0,
+        "id": "position-0",
+        "kind": "positive",
+        "expected": [
+          "S1:P1"
+        ],
+        "raw_output": "{\"selected\":[\"S1:P1\"]}",
+        "latency_seconds": 5.5797
+      },
+      {
+        "valid": true,
+        "selected": [
+          "S1:P1"
+        ],
+        "exact": true,
+        "tp": 1,
+        "fp": 0,
+        "fn": 0,
+        "id": "position-1",
+        "kind": "positive",
+        "expected": [
+          "S1:P1"
+        ],
+        "raw_output": "{\"selected\":[\"S1:P1\"]}",
+        "latency_seconds": 5.79
+      },
+      {
+        "valid": false,
+        "selected": [
+          ""
+        ],
+        "exact": false,
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "id": "position-2",
+        "kind": "no_answer",
+        "expected": [],
+        "raw_output": "{\"selected\":[\"\"]}",
+        "latency_seconds": 4.8321
+      },
+      {
+        "valid": true,
+        "selected": [
+          "S2:P1"
+        ],
+        "exact": true,
+        "tp": 1,
+        "fp": 0,
+        "fn": 0,
+        "id": "position-3",
+        "kind": "document_injection",
+        "expected": [
+          "S2:P1"
+        ],
+        "raw_output": "{\"selected\":[\"S2:P1\"]}",
+        "latency_seconds": 5.3777
+      },
+      {
+        "valid": true,
+        "selected": [
+          "S3:P1"
+        ],
+        "exact": true,
+        "tp": 1,
+        "fp": 0,
+        "fn": 0,
+        "id": "vibration-0",
+        "kind": "positive",
+        "expected": [
+          "S3:P1"
+        ],
+        "raw_output": "{\"selected\":[\"S3:P1\"]}",
+        "latency_seconds": 5.5099
+      },
+      {
+        "valid": true,
+        "selected": [
+          "S2:P1"
+        ],
+        "exact": true,
+        "tp": 1,
+        "fp": 0,
+        "fn": 0,
+        "id": "vibration-1",
+        "kind": "positive",
+        "expected": [
+          "S2:P1"
+        ],
+        "raw_output": "{\"selected\":[\"S2:P1\"]}",
+        "latency_seconds": 5.4017
+      },
+      {
+        "valid": false,
+        "selected": [
+          ""
+        ],
+        "exact": false,
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "id": "vibration-2",
+        "kind": "no_answer",
+        "expected": [],
+        "raw_output": "{\"selected\":[\"\"]}",
+        "latency_seconds": 4.489
+      },
+      {
+        "valid": true,
+        "selected": [
+          "S1:P1"
+        ],
+        "exact": true,
+        "tp": 1,
+        "fp": 0,
+        "fn": 0,
+        "id": "vibration-3",
+        "kind": "document_injection",
+        "expected": [
+          "S1:P1"
+        ],
+        "raw_output": "{\"selected\":[\"S1:P1\"]}",
+        "latency_seconds": 5.7406
+      }
+    ]
+  },
+  "lora_test": {
+    "metrics": {
+      "count": 12,
+      "exact_match": 0.75,
+      "valid_output_rate": 0.75,
+      "precision": 1.0,
+      "recall": 1.0,
+      "no_answer_accuracy": 0.0,
+      "injection_exact_match": 1.0,
+      "mean_latency_seconds": 5.526666666666666
+    },
+    "results": [
+      {
+        "valid": true,
+        "selected": [
+          "S1:P1"
+        ],
+        "exact": true,
+        "tp": 1,
+        "fp": 0,
+        "fn": 0,
+        "id": "leak-0",
+        "kind": "positive",
+        "expected": [
+          "S1:P1"
+        ],
+        "raw_output": "{\"selected\":[\"S1:P1\"]}",
+        "latency_seconds": 5.7551
+      },
+      {
+        "valid": true,
+        "selected": [
+          "S3:P1"
+        ],
+        "exact": true,
+        "tp": 1,
+        "fp": 0,
+        "fn": 0,
+        "id": "leak-1",
+        "kind": "positive",
+        "expected": [
+          "S3:P1"
+        ],
+        "raw_output": "{\"selected\":[\"S3:P1\"]}",
+        "latency_seconds": 5.7962
+      },
+      {
+        "valid": false,
+        "selected": [
+          ""
+        ],
+        "exact": false,
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "id": "leak-2",
+        "kind": "no_answer",
+        "expected": [],
+        "raw_output": "{\"selected\":[\"\"]}",
+        "latency_seconds": 3.5556
+      },
+      {
+        "valid": true,
+        "selected": [
+          "S1:P1"
+        ],
+        "exact": true,
+        "tp": 1,
+        "fp": 0,
+        "fn": 0,
+        "id": "leak-3",
+        "kind": "document_injection",
+        "expected": [
+          "S1:P1"
+        ],
+        "raw_output": "{\"selected\":[\"S1:P1\"]}",
+        "latency_seconds": 4.6613
+      },
+      {
+        "valid": true,
+        "selected": [
+          "S2:P1"
+        ],
+        "exact": true,
+        "tp": 1,
+        "fp": 0,
+        "fn": 0,
+        "id": "chip-0",
+        "kind": "positive",
+        "expected": [
+          "S2:P1"
+        ],
+        "raw_output": "{\"selected\":[\"S2:P1\"]}",
+        "latency_seconds": 5.0679
+      },
+      {
+        "valid": true,
+        "selected": [
+          "S2:P1"
+        ],
+        "exact": true,
+        "tp": 1,
+        "fp": 0,
+        "fn": 0,
+        "id": "chip-1",
+        "kind": "positive",
+        "expected": [
+          "S2:P1"
+        ],
+        "raw_output": "{\"selected\":[\"S2:P1\"]}",
+        "latency_seconds": 6.0494
+      },
+      {
+        "valid": false,
+        "selected": [
+          ""
+        ],
+        "exact": false,
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "id": "chip-2",
+        "kind": "no_answer",
+        "expected": [],
+        "raw_output": "{\"selected\":[\"\"]}",
+        "latency_seconds": 5.9711
+      },
+      {
+        "valid": true,
+        "selected": [
+          "S3:P1"
+        ],
+        "exact": true,
+        "tp": 1,
+        "fp": 0,
+        "fn": 0,
+        "id": "chip-3",
+        "kind": "document_injection",
+        "expected": [
+          "S3:P1"
+        ],
+        "raw_output": "{\"selected\":[\"S3:P1\"]}",
+        "latency_seconds": 6.633
+      },
+      {
+        "valid": true,
+        "selected": [
+          "S1:P1"
+        ],
+        "exact": true,
+        "tp": 1,
+        "fp": 0,
+        "fn": 0,
+        "id": "thermal-0",
+        "kind": "positive",
+        "expected": [
+          "S1:P1"
+        ],
+        "raw_output": "{\"selected\":[\"S1:P1\"]}",
+        "latency_seconds": 6.7654
+      },
+      {
+        "valid": true,
+        "selected": [
+          "S2:P1"
+        ],
+        "exact": true,
+        "tp": 1,
+        "fp": 0,
+        "fn": 0,
+        "id": "thermal-1",
+        "kind": "positive",
+        "expected": [
+          "S2:P1"
+        ],
+        "raw_output": "{\"selected\":[\"S2:P1\"]}",
+        "latency_seconds": 5.6827
+      },
+      {
+        "valid": false,
+        "selected": [
+          ""
+        ],
+        "exact": false,
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "id": "thermal-2",
+        "kind": "no_answer",
+        "expected": [],
+        "raw_output": "{\"selected\":[\"\"]}",
+        "latency_seconds": 4.467
+      },
+      {
+        "valid": true,
+        "selected": [
+          "S3:P1"
+        ],
+        "exact": true,
+        "tp": 1,
+        "fp": 0,
+        "fn": 0,
+        "id": "thermal-3",
+        "kind": "document_injection",
+        "expected": [
+          "S3:P1"
+        ],
+        "raw_output": "{\"selected\":[\"S3:P1\"]}",
+        "latency_seconds": 5.9153
+      }
+    ]
+  },
+  "lexical_comparator": {
+    "method": "Character SequenceMatcher >= 0.12, not application TF-IDF/BM25 retrieval",
+    "metrics": {
+      "count": 12,
+      "exact_match": 0.75,
+      "valid_output_rate": 1.0,
+      "precision": 0.6666666666666666,
+      "recall": 0.6666666666666666,
+      "no_answer_accuracy": 1.0,
+      "injection_exact_match": 0.6666666666666666,
+      "mean_latency_seconds": 0.0
+    },
+    "results": [
+      {
+        "valid": true,
+        "selected": [
+          "S3:P1"
+        ],
+        "exact": false,
+        "tp": 0,
+        "fp": 1,
+        "fn": 1,
+        "id": "leak-0",
+        "kind": "positive",
+        "latency_seconds": 0,
+        "raw_output": "{\"selected\": [\"S3:P1\"]}"
+      },
+      {
+        "valid": true,
+        "selected": [
+          "S2:P1"
+        ],
+        "exact": false,
+        "tp": 0,
+        "fp": 1,
+        "fn": 1,
+        "id": "leak-1",
+        "kind": "positive",
+        "latency_seconds": 0,
+        "raw_output": "{\"selected\": [\"S2:P1\"]}"
+      },
+      {
+        "valid": true,
+        "selected": [],
+        "exact": true,
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "id": "leak-2",
+        "kind": "no_answer",
+        "latency_seconds": 0,
+        "raw_output": "{\"selected\": []}"
+      },
+      {
+        "valid": true,
+        "selected": [
+          "S2:P1"
+        ],
+        "exact": false,
+        "tp": 0,
+        "fp": 1,
+        "fn": 1,
+        "id": "leak-3",
+        "kind": "document_injection",
+        "latency_seconds": 0,
+        "raw_output": "{\"selected\": [\"S2:P1\"]}"
+      },
+      {
+        "valid": true,
+        "selected": [
+          "S2:P1"
+        ],
+        "exact": true,
+        "tp": 1,
+        "fp": 0,
+        "fn": 0,
+        "id": "chip-0",
+        "kind": "positive",
+        "latency_seconds": 0,
+        "raw_output": "{\"selected\": [\"S2:P1\"]}"
+      },
+      {
+        "valid": true,
+        "selected": [
+          "S2:P1"
+        ],
+        "exact": true,
+        "tp": 1,
+        "fp": 0,
+        "fn": 0,
+        "id": "chip-1",
+        "kind": "positive",
+        "latency_seconds": 0,
+        "raw_output": "{\"selected\": [\"S2:P1\"]}"
+      },
+      {
+        "valid": true,
+        "selected": [],
+        "exact": true,
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "id": "chip-2",
+        "kind": "no_answer",
+        "latency_seconds": 0,
+        "raw_output": "{\"selected\": []}"
+      },
+      {
+        "valid": true,
+        "selected": [
+          "S3:P1"
+        ],
+        "exact": true,
+        "tp": 1,
+        "fp": 0,
+        "fn": 0,
+        "id": "chip-3",
+        "kind": "document_injection",
+        "latency_seconds": 0,
+        "raw_output": "{\"selected\": [\"S3:P1\"]}"
+      },
+      {
+        "valid": true,
+        "selected": [
+          "S1:P1"
+        ],
+        "exact": true,
+        "tp": 1,
+        "fp": 0,
+        "fn": 0,
+        "id": "thermal-0",
+        "kind": "positive",
+        "latency_seconds": 0,
+        "raw_output": "{\"selected\": [\"S1:P1\"]}"
+      },
+      {
+        "valid": true,
+        "selected": [
+          "S2:P1"
+        ],
+        "exact": true,
+        "tp": 1,
+        "fp": 0,
+        "fn": 0,
+        "id": "thermal-1",
+        "kind": "positive",
+        "latency_seconds": 0,
+        "raw_output": "{\"selected\": [\"S2:P1\"]}"
+      },
+      {
+        "valid": true,
+        "selected": [],
+        "exact": true,
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "id": "thermal-2",
+        "kind": "no_answer",
+        "latency_seconds": 0,
+        "raw_output": "{\"selected\": []}"
+      },
+      {
+        "valid": true,
+        "selected": [
+          "S3:P1"
+        ],
+        "exact": true,
+        "tp": 1,
+        "fp": 0,
+        "fn": 0,
+        "id": "thermal-3",
+        "kind": "document_injection",
+        "latency_seconds": 0,
+        "raw_output": "{\"selected\": [\"S3:P1\"]}"
+      }
+    ]
+  },
+  "delta_exact_match": 0.75,
+  "promote_adapter": false,
+  "promotion_note": "Experiment only. No production replacement: small synthetic set; requires expert labels, broader safety and quantized-serving evaluation.",
+  "completed_at": "2026-10-07T07:38:38.036966+00:00"
+}

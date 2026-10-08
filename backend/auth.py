@@ -4,13 +4,23 @@ from urllib.parse import urlparse
 from fastapi import Request, HTTPException
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
-from . import store
+from . import store, config
 COOKIE='predictfix_session'
 ATTEMPTS={}
 def password_hash(password,salt=None):
     salt=salt or secrets.token_hex(16)
     return salt+':'+hashlib.pbkdf2_hmac('sha256',password.encode(),bytes.fromhex(salt),310000).hex()
 def seed(people):
+    if not config.demo():
+        with store.Session() as db:
+            if db.query(store.User).count():
+                return
+            password=os.getenv('BOOTSTRAP_PASSWORD', '')
+            if len(password)<16:
+                raise RuntimeError('First production startup requires BOOTSTRAP_PASSWORD (16+ characters)')
+            db.add(store.User(username='supervisor',name='管理員',role='supervisor',password_hash=password_hash(password)))
+            db.commit()
+        return
     accounts=[('supervisor','陳主管','supervisor')]+[(p['name'].split()[0].lower(),p['name'],'engineer') for p in people]
     created=[]
     with store.Session() as db:
@@ -46,16 +56,23 @@ def register(app):
             if request.method not in ['GET','HEAD'] and not hmac.compare_digest(request.headers.get('x-csrf-token',''),session.csrf):return JSONResponse({'detail':'驗證碼失效，請重新登入'},status_code=403)
         return await call_next(request)
     @app.get('/api/auth/config')
-    def config():return {'demo_mode':os.getenv('DEMO_MODE')=='1'}
+    def auth_config():
+        enabled=config.demo() and os.getenv('DEMO_MODE')=='1'
+        with store.Session() as db:
+            user=db.get(store.User,'interview_demo') if enabled else None
+            interview=bool(user and user.active and user.role=='engineer')
+        return {'demo_mode':enabled,'app_mode':'demo' if config.demo() else 'production',
+                'interview_demo_available':interview}
     class DemoLogin(BaseModel):
         role:str=Field(pattern=r'^(supervisor|engineer)$')
+        username:str=Field(default='',max_length=50)
     @app.post('/api/auth/demo')
     def demo(body:DemoLogin,request:Request):
-        if os.getenv('DEMO_MODE')!='1':raise HTTPException(403,'DEMO 快速登入未開啟')
-        username='supervisor' if body.role=='supervisor' else 'amy'
+        if not config.demo() or os.getenv('DEMO_MODE')!='1':raise HTTPException(403,'DEMO 快速登入未開啟')
+        username='supervisor' if body.role=='supervisor' else (body.username or 'amy')
         with store.Session() as db:
             user=db.get(store.User,username)
-            if not user or not user.active:raise HTTPException(403,'展示帳號未啟用')
+            if not user or not user.active or user.role!=body.role:raise HTTPException(403,'展示帳號未啟用或角色不符')
             old=request.cookies.get(COOKIE)
             if old:
                 previous=db.get(store.LoginSession,hashlib.sha256(old.encode()).hexdigest())

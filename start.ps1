@@ -1,9 +1,12 @@
-param([int]$Port=8080,[switch]$Demo)
+﻿param([int]$Port=8080,[switch]$Demo)
 $ErrorActionPreference='Stop'
 $env:DEMO_MODE=if($Demo){'1'}else{'0'}
+$env:APP_MODE=if($Demo){'demo'}else{'production'}
 Set-Location -LiteralPath $PSScriptRoot
 $projectPython=Join-Path $PSScriptRoot '.venv\Scripts\python.exe'
 if (-not (Test-Path -LiteralPath $projectPython)) { throw '請先依 README 安裝 Python 相依套件。' }
+& $projectPython (Join-Path $PSScriptRoot 'scripts\check_runtime.py')
+if ($LASTEXITCODE -ne 0) { throw '依賴檢查失敗，請先執行 .\setup.ps1。' }
 $localServer=Join-Path $PSScriptRoot '.runtime\llama\llama-server.exe'
 $localModel=Join-Path $PSScriptRoot '.runtime\models\Qwen3-0.6B-Q8_0.gguf'
 if ((Test-Path -LiteralPath $localServer) -and (Test-Path -LiteralPath $localModel)) {
