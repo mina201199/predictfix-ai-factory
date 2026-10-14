@@ -90,3 +90,6 @@ dialog{background:#0f2236;color:#eef8ff;border:1px solid #3c6b89;box-shadow:0 20
 .chat-window.expanded .quick-question-groups{max-height:30dvh}
 .chat-window.expanded .quick-category .question-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 @media(max-width:640px){.chat-window.expanded{inset:8px}.chat-window.expanded .chat-header{padding:12px 14px;font-size:16px}.chat-window.expanded .chat-messages{padding:14px}.chat-window.expanded .chat-bubble{font-size:15px;max-width:96%;padding:13px}.chat-window.expanded form{padding:12px}.chat-window.expanded .quick-category .question-grid{grid-template-columns:1fr}}
+
+/* 深色主題把 --ink 設成淺色，但 knowledge.css 的 .card 欄位是白底，文字會看不見，所以欄位背景也要改成深色 */
+.card input:not([type=checkbox]),.card textarea,.card select{background:#081827;color:#e2f4ff;border-color:#31516a}
