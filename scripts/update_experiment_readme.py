@@ -16,7 +16,7 @@ def main():
     content=[
       f'**本機部署：{deployment["status"]}。** 正式資料模式已在 `{deployment["url"]}` 運行，採獨立資料庫與具有檔案雜湊的版本快照。',
       '',
-      '已驗證登入與主管權限、匿名阻擋、關閉快速登入、重啟後帳號保存，以及 SQLite 備份／新庫還原與工作階段撤銷。尚未部署公網，Docker／PostgreSQL／HTTPS 未完成實測。',
+      '已驗證登入與主管權限、匿名阻擋、關閉快速登入、重啟後帳號保存，以及 SQLite 備份／新庫還原與工作階段撤銷。尚未部署公網；Docker 映像已由 CI 以正式模式實際啟動驗證，PostgreSQL／HTTPS 尚未實測。',
       '',
       '**LoRA 任務：根據報修問題與候選原文，選取相關段落 ID；無依據時輸出空清單。** 資料為 44 題原創虛構案例，按來源主題分組，訓練／驗證／測試為 24／8／12 題。',
       '',f'實驗狀態：`{training["status"]}`；模型：`{training["base_model"]}`；run：`{training["run_id"]}`。',''
