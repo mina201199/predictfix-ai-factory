@@ -221,6 +221,22 @@ async def generate_json(prompt, schema, synthetic=False):
         return None, {'llm_used':False,'model':model,'provider':provider,'reason':'service_or_format_error'}
 
 
+CLAUSE_BOUNDARY='，,、；;：:。！？!?\n'
+
+
+def anchored(fragment, source):
+    # 摘錄必須從子句邊界開始、在子句邊界結束；任意子字串可能截掉「未」「不」而反轉語意
+    fragment=fragment.strip().strip(CLAUSE_BOUNDARY)
+    if not fragment:return False
+    start=source.find(fragment)
+    while start>=0:
+        end=start+len(fragment)
+        if (start==0 or source[start-1] in CLAUSE_BOUNDARY) and (end==len(source) or source[end] in CLAUSE_BOUNDARY):
+            return True
+        start=source.find(fragment,start+1)
+    return False
+
+
 class CaseFields(BaseModel):
     model_config = ConfigDict(extra='forbid')
     title: str = Field(min_length=3, max_length=160)
@@ -476,7 +492,7 @@ def register(app):
         if isinstance(output,dict):
             for key in ['findings','actions','verification']:
                 value=output.get(key)
-                if isinstance(value,str) and len(value.strip())>=3 and value.strip() in source:
+                if isinstance(value,str) and len(value.strip())>=3 and anchored(value,source):
                     suggestions[key]=value.strip()
         with store.Session() as db:
             record(db,'case_ai_suggestion',request.state.user,{'id':cid,'llm_used':execution['llm_used'],'accepted_fields':list(suggestions)})
