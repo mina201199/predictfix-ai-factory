@@ -10,6 +10,8 @@
 
 2026-10-14 完整 pytest 回歸為 **53 項通過、零失敗、零跳過**，本機與 GitHub Actions（[執行紀錄](https://github.com/mina201199/predictfix-ai-factory/actions/runs/38553389662)）結果相同；範圍包含上述四類安全測試，以及之後加入的 OpenAI 預算與設備模板等測試。本次未重跑 `scripts/run_security_checks.py`，45 個情境與真實 Qwen 攻擊結果仍是 2026-10-06 的紀錄。
 
+2026-10-15 本機模型由 Qwen3-0.6B 改為 Gemma 4 E2B（Q8_0）後，重跑 `scripts/run_security_checks.py --live`：**45／45 通過**；live 類別 10 項的每個探測皆確認由 `gemma-4-E2B-it-Q8_0` 回應（`llm_used=True`）。上方 2026-10-06 的 Qwen 結果保留為歷史紀錄。
+
 ## 怎麼重跑
 
 ```powershell

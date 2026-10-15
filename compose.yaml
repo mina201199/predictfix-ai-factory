@@ -8,7 +8,7 @@ services:
       DEMO_MODE: "1"
       DATABASE_URL: postgresql+psycopg://predictfix:local-demo-only@db/predictfix
       OLLAMA_URL: http://ollama:11434
-      OLLAMA_MODEL: qwen3:0.6b
+      OLLAMA_MODEL: gemma4:e2b-it-q8_0
     depends_on:
       db:
         condition: service_healthy

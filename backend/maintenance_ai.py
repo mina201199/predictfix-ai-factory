@@ -205,7 +205,7 @@ async def generate_json(prompt, schema, synthetic=False):
         async with httpx.AsyncClient(timeout=75) as client:
             if provider == 'llamacpp':
                 response = await client.post(os.getenv('LLM_URL', 'http://127.0.0.1:8081')+'/v1/chat/completions',
-                    json={'model': model, 'messages': [{'role':'user','content':prompt+'\n/no_think'}],
+                    json={'model': model, 'messages': [{'role':'user','content':prompt}],
                           'temperature': 0, 'max_tokens': 650,
                           'response_format': {'type':'json_object','schema':schema},
                           'chat_template_kwargs': {'enable_thinking':False}})
