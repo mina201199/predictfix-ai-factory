@@ -68,11 +68,13 @@ def verified_document_answer(result,question=''):
     for topic in ['刀具','換刀','冷卻','異音','主軸','軸承','潤滑','尺寸','定位','螺桿','漏油','漏液','交班','結案','驗收','振動']:
         if topic in question and topic not in answer:return False
     claims=re.split(r'[。！？\n]+',answer)
+    # 要求與原文完整一句相同：只比對子字串會放行截掉「不」「未」或前半子句、語意相反的片段
+    sentences={s.strip() for c in citations for s in re.split(r'[。！？\n]+',str(c.get('text','')))}
     for claim in claims:
         claim=claim.strip()
         if not claim:continue
         if any(claim==str(c.get('title','')) or claim==str(c.get('id','')) for c in citations):continue
-        if claim not in source:return False
+        if claim not in sentences:return False
     return bool(source and answer)
 
 def shift_answer(question):
