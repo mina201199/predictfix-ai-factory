@@ -6,7 +6,7 @@ PredictFix AI 將維修知識查找、資格與容量派工、排查驗收及案
 
 **[本機體驗](#快速開始) · [操作手冊](docs/repair-flow.md) · [系統架構](docs/system-architecture.md) · [安全測試](docs/security-testing.md)**
 
-**已驗證成果：53 項自動化測試通過，零跳過；完整展示流程已跑通。** 2026-10-07 已完成獨立本機部署與備份還原檢查；另有 2026-10-06 的 45 個安全檢查通過紀錄，包含 8 個本機 Qwen 攻擊情境。詳見下方測試與限制。
+**已驗證成果：53 項自動化測試通過，零跳過；完整展示流程已跑通。** 2026-10-07 已完成獨立本機部署與備份還原檢查；2026-10-15 本機模型改用 Gemma 4 E2B 後重跑 45 個安全檢查全數通過，包含 8 個本機模型攻擊情境。詳見下方測試與限制。
 
 ## 目前做到哪裡
 
@@ -77,7 +77,7 @@ flowchart LR
 | **前端** | HTML／CSS／JavaScript | 直接呈現角色、工單狀態與來源，讓完整操作流程容易追查；未使用大型前端框架。 |
 | **API 與資料** | FastAPI、Pydantic、SQLAlchemy；本機 SQLite | 驗證輸入、維持一致 API 契約並保存工單；SQLite 降低單機啟動成本，高並發與 PostgreSQL 仍需另行驗證。 |
 | **知識檢索** | TF-IDF＋BM25 排名融合 | 支援機型、術語與錯誤碼的字詞檢索；合成題比較三種方法目前同分，尚無證據顯示融合更準。未使用 Embedding 或 Vector DB。 |
-| **本機 AI** | Qwen3-0.6B-Q8_0、llama.cpp；另支援 Ollama | 用小模型選取來源段落；模型不負責自動派工、結案或核准復機。模型不可用時退回候選來源。 |
+| **本機 AI** | Gemma 4 E2B Q8_0（Google，Apache 2.0）、llama.cpp 純 CPU；另支援 Ollama | 用小模型選取來源段落；模型不負責自動派工、結案或核准復機。模型不可用時退回候選來源。不需 GPU，選型依據見 [本機模型基準](docs/local-llm-benchmark.md)。 |
 | **工程師推薦** | 規則篩選與排序 | 必要資格、出勤與容量是可核對的條件；目前沒有可用來訓練推薦模型的現場成效資料。 |
 | **一致性與權限** | 工作階段、角色、CSRF、版本檢查、冪等請求 | 限制操作身分，避免重送造成重複工單或扣帳，拒絕過期版本覆寫。 |
 | **部署** | Docker Compose、PostgreSQL、Caddy 設定 | 分開配置 API、資料庫、模型與 HTTPS；目前是待驗證的部署路徑。 |
@@ -98,7 +98,7 @@ flowchart TD
     MAN[已授權手冊] --> FILTER
     CASE[主管發布案例] --> FILTER
     FILTER --> RET[TF-IDF + BM25]
-    RET --> LLM[本機 Qwen 選取段落 ID]
+    RET --> LLM[本機 Gemma 選取段落 ID]
     LLM --> CHECK[格式檢查・原文映射]
     CHECK --> HUMAN[人員核對・主管核准]
     HUMAN --> FLOW
@@ -150,7 +150,7 @@ flowchart TD
 |---|---|---|
 | **功能與整合測試** | 53 項 pytest 通過、零跳過，2026-10-14 | 涵蓋權限、派工、驗收、重修、保養、庫存、備份、持久化、展示及 LoRA 分組／評分器；不能代表工廠現場驗收。 |
 | **重新安裝驗證** | GitHub Actions 從乾淨 Git checkout 安裝固定依賴，通過 53 項測試 | 驗證依賴安裝可在另一台機器重現；CI 為 Ubuntu，尚未驗證 Windows 的 `setup.ps1` 安裝流程。 |
-| **AI／API 安全** | 45／45 個檢查通過，其中含 8 個真實 Qwen 攻擊情境 | 測提示詞注入、越權、敏感資料暴露與捏造引用；是有限情境驗證，未完成全面滲透測試。 |
+| **AI／API 安全** | 45／45 個檢查通過（2026-10-15，Gemma 4 E2B），其中含 8 個真實本機模型攻擊情境 | 測提示詞注入、越權、敏感資料暴露與捏造引用；是有限情境驗證，未完成全面滲透測試。 |
 | **檢索方法比較** | 16 題正例 Top-3 命中 15 題（93.75%）；4 題負例均無結果 | TF-IDF、BM25、融合方法同分；開發用合成題，不是獨立保留集，也不是 AI 回答正確率。 |
 | **完整展示流程** | 驗收失敗阻擋、復測提交、主管審核、案例發布及再檢索通過 | [流程報告](artifacts/interview-walkthrough-report.json) 是 API 操作證據；[60 秒操作影片](docs/media/predictfix-demo.mp4)為本機展示模式錄影。 |
 | **正式資料模式** | 2026-10-07 本機 API、空資料庫、展示功能隔離與模型連線通過 | [本機驗證報告](artifacts/production-live-check.json)；不等於公網或企業上線。 |
@@ -248,7 +248,7 @@ Exact match 變化：**+75.0 個百分點**。這是小規模流程實驗，不�
 ```powershell
 .\.venv\Scripts\python.exe -m pytest -q
 .\.venv\Scripts\python.exe scripts\run_security_checks.py
-# 另測真實本機 Qwen，需先啟動 8081 模型服務
+# 另測真實本機模型（Gemma 4 E2B），需先啟動 8081 模型服務
 .\.venv\Scripts\python.exe scripts\run_security_checks.py --live
 ```
 

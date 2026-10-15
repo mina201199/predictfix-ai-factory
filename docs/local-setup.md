@@ -12,7 +12,7 @@
 
 工具建立 `.venv`、安裝固定版本依賴，再檢查 Python 3.12、主要套件匯入與 SQLite 讀寫。已有環境若仍使用 SQLAlchemy 原生擴充，會重新安裝純 Python 版本。啟動腳本也會先執行環境檢查，失敗時停止並顯示原因。
 
-如需展示公開軸承資料的模型回放，以及本機 Qwen：
+如需展示公開軸承資料的模型回放，以及本機 Gemma 4 E2B 模型：
 
 ```powershell
 .\.venv\Scripts\python.exe scripts\prepare_model.py

@@ -338,6 +338,15 @@ def test_chat_document_verification_rejects_citation_only_and_allows_exact_sourc
     assert not verified_document_answer({'answer':source,'citations':[{'text':source}],'needs_confirmation':True})
 
 
+def test_chat_document_verification_rejects_sentence_fragments():
+    from backend.chat import verified_document_answer
+    source='對比近期換刀、撞刀、保養與加工條件變動，不把一次振動升高直接判成軸承故障。依公司安全規範由合格人員完成必要停機與隔離。'
+    # 每一句都是原文的子字串，但截掉「不把」後意思完全相反
+    dropped_negation='一次振動升高直接判成軸承故障。依公司安全規範由合格人員完成必要停機與隔離。'
+    assert not verified_document_answer({'answer':dropped_negation,'citations':[{'text':source}]})
+    assert verified_document_answer({'answer':source,'citations':[{'text':source}]})
+
+
 def test_chat_health_threshold_boundary(client):
     import json
     from backend import store
@@ -482,6 +491,24 @@ def test_assist_selected_ids_map_to_source_and_case_ai_does_not_autosave(client,
     assert suggestion['suggestions']['findings'] in note
     unchanged=client.get('/api/cases/'+case['id']).json()
     assert unchanged['fields']==case['fields'] and unchanged['revision']==case['revision']
+
+
+def test_case_ai_suggestion_rejects_fragments_that_drop_negation(client,monkeypatch):
+    from backend import maintenance_ai
+    ticket=client.post('/api/tickets',json={'machine':'CNC-03','issue':'AI 摘錄邊界測試','engineer':'Amy Chen'}).json()
+    login(client,'amy')
+    note='檢查發現軸承無異常，未更換軸承，僅清潔並潤滑主軸。復測振動正常。'
+    client.post('/api/tickets/'+ticket['id']+'/complete',json={'note':note})
+    login(client)
+    client.post('/api/tickets/'+ticket['id']+'/review',json={'decision':'approve','note':'確認原文與來源'})
+    case=client.post('/api/tickets/'+ticket['id']+'/case-draft').json()
+    async def classify_source(*args):
+        # 「更換軸承」是原文子字串，但前面的「未」被截掉，必須拒絕；完整子句則應保留
+        return {'findings':'檢查發現軸承無異常','actions':'更換軸承','verification':'復測振動正常。'}, {'llm_used':True,'model':'mock'}
+    monkeypatch.setattr(maintenance_ai,'generate_json',classify_source)
+    suggestions=client.post('/api/cases/'+case['id']+'/ai-suggestion').json()['suggestions']
+    assert 'actions' not in suggestions
+    assert suggestions['findings']=='檢查發現軸承無異常' and suggestions['verification']=='復測振動正常。'
 
 
 def test_search_index_is_reused_until_corpus_changes(client,monkeypatch):

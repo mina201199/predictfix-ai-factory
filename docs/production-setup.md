@@ -42,7 +42,7 @@
 
 ```powershell
 docker compose --env-file .env.production -f compose.production.yaml up -d --build
-docker compose --env-file .env.production -f compose.production.yaml exec ollama ollama pull qwen3:0.6b
+docker compose --env-file .env.production -f compose.production.yaml exec ollama ollama pull gemma4:e2b-it-q8_0
 docker compose --env-file .env.production -f compose.production.yaml ps
 docker compose --env-file .env.production -f compose.production.yaml logs --tail 100 api
 ```
