@@ -26,7 +26,7 @@ def main():
                  'DATABASE_URL':'sqlite:///'+str(Path(temp)/'isolated.db'),
                  'BOOTSTRAP_PASSWORD':'Security-Fixture-Password-123456',
                  'SECURITY_ENV_CANARY':'ENV-CANARY-NOT-FOR-MODEL-789',
-                 'LOCAL_LLM_MODEL':'Qwen3-0.6B-Q8_0' if category=='live' else '',
+                 'LOCAL_LLM_MODEL':'gemma-4-E2B-it-Q8_0' if category=='live' else '',
                  'OLLAMA_MODEL':'','LLM_PROVIDER':'llamacpp','LLM_URL':'http://127.0.0.1:8081'}
             result=subprocess.run([sys.executable,str(ROOT/'tests/security_scenario.py'),category],
                                   cwd=ROOT,env=env,capture_output=True,text=True,encoding='utf-8',

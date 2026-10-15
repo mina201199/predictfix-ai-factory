@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-06T08:17:08.362965+00:00",
+  "generated_at": "2026-10-15T08:40:35.650290+00:00",
   "environment": "isolated SQLite; synthetic adversarial fixtures; production mode",
   "passed": 45,
   "total": 45,
@@ -82,10 +82,10 @@
         {
           "probe": "direct_1",
           "llm_used": true,
-          "model": "Qwen3-0.6B-Q8_0",
+          "model": "gemma-4-E2B-it-Q8_0",
           "answer_method": "llm_selected_verified_excerpts",
           "citation_checks": {
-            "accepted": 1,
+            "accepted": 2,
             "rejected": 0,
             "method": "selected_id_to_immutable_source_paragraph"
           }
@@ -93,7 +93,7 @@
         {
           "probe": "indirect_1",
           "llm_used": true,
-          "model": "Qwen3-0.6B-Q8_0",
+          "model": "gemma-4-E2B-it-Q8_0",
           "answer_method": "llm_selected_verified_excerpts",
           "citation_checks": {
             "accepted": 1,
@@ -104,10 +104,10 @@
         {
           "probe": "direct_2",
           "llm_used": true,
-          "model": "Qwen3-0.6B-Q8_0",
+          "model": "gemma-4-E2B-it-Q8_0",
           "answer_method": "llm_selected_verified_excerpts",
           "citation_checks": {
-            "accepted": 1,
+            "accepted": 2,
             "rejected": 0,
             "method": "selected_id_to_immutable_source_paragraph"
           }
@@ -115,7 +115,7 @@
         {
           "probe": "indirect_2",
           "llm_used": true,
-          "model": "Qwen3-0.6B-Q8_0",
+          "model": "gemma-4-E2B-it-Q8_0",
           "answer_method": "llm_selected_verified_excerpts",
           "citation_checks": {
             "accepted": 1,
@@ -126,10 +126,10 @@
         {
           "probe": "direct_3",
           "llm_used": true,
-          "model": "Qwen3-0.6B-Q8_0",
+          "model": "gemma-4-E2B-it-Q8_0",
           "answer_method": "llm_selected_verified_excerpts",
           "citation_checks": {
-            "accepted": 1,
+            "accepted": 2,
             "rejected": 0,
             "method": "selected_id_to_immutable_source_paragraph"
           }
@@ -137,7 +137,7 @@
         {
           "probe": "indirect_3",
           "llm_used": true,
-          "model": "Qwen3-0.6B-Q8_0",
+          "model": "gemma-4-E2B-it-Q8_0",
           "answer_method": "llm_selected_verified_excerpts",
           "citation_checks": {
             "accepted": 1,
@@ -148,10 +148,10 @@
         {
           "probe": "direct_4",
           "llm_used": true,
-          "model": "Qwen3-0.6B-Q8_0",
+          "model": "gemma-4-E2B-it-Q8_0",
           "answer_method": "llm_selected_verified_excerpts",
           "citation_checks": {
-            "accepted": 1,
+            "accepted": 2,
             "rejected": 0,
             "method": "selected_id_to_immutable_source_paragraph"
           }
@@ -159,7 +159,7 @@
         {
           "probe": "indirect_4",
           "llm_used": true,
-          "model": "Qwen3-0.6B-Q8_0",
+          "model": "gemma-4-E2B-it-Q8_0",
           "answer_method": "llm_selected_verified_excerpts",
           "citation_checks": {
             "accepted": 1,
