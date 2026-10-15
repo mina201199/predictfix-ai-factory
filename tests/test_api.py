@@ -482,3 +482,57 @@ def test_assist_selected_ids_map_to_source_and_case_ai_does_not_autosave(client,
     assert suggestion['suggestions']['findings'] in note
     unchanged=client.get('/api/cases/'+case['id']).json()
     assert unchanged['fields']==case['fields'] and unchanged['revision']==case['revision']
+
+
+def test_search_index_is_reused_until_corpus_changes(client,monkeypatch):
+    from backend import maintenance_ai
+    fits=[]
+    class CountingVectorizer(maintenance_ai.TfidfVectorizer):
+        def fit_transform(self,*args,**kwargs):
+            fits.append(1)
+            return super().fit_transform(*args,**kwargs)
+    monkeypatch.setattr(maintenance_ai,'TfidfVectorizer',CountingVectorizer)
+    maintenance_ai.search('換刀卡住 刀位警報')
+    built=len(fits)
+    # 語料沒變時不該重建索引；每題重建正是上萬筆資料時每次查詢要多花數秒的原因
+    maintenance_ai.search('主軸異音 溫升')
+    assert len(fits)==built
+    content='## 快取失效測試\n'+'快取失效專用詞甲乙丙：換刀卡住時核對刀位編號與刀具主檔。\n'*12
+    created=client.post('/api/knowledge/manuals',json={'title':'快取失效測試手冊','version':'1','machine_model':'PF-VMC850-DEMO',
+        'component':'刀庫','content':content,'source_label':'測試資料','rights_confirmed':True,'is_synthetic':True}).json()
+    # 匯入新文件後必須重建，否則新手冊永遠查不到
+    assert any(hit['id']==created['id'] for hit in maintenance_ai.search('快取失效專用詞甲乙丙'))
+    assert len(fits)==built+1
+
+
+def test_cached_search_matches_uncached_reference(client):
+    from backend import maintenance_ai
+    for query,model,synthetic in [('換刀卡住 刀位警報','',True),('主軸異音 溫升','PF-VMC850-DEMO',True),('冷卻液流量下降','',False)]:
+        cached=maintenance_ai.search(query,machine_model=model,allow_synthetic=synthetic)
+        reference=maintenance_ai.search(query,chunks=maintenance_ai.corpus(),machine_model=model,allow_synthetic=synthetic)
+        assert cached==reference
+
+
+def test_ticket_list_query_count_does_not_grow_with_tickets(client):
+    from sqlalchemy import event
+    from backend import store
+    def countStatements():
+        statements=[]
+        def record(*args):statements.append(1)
+        event.listen(store.engine,'before_cursor_execute',record)
+        try:
+            client.get('/api/tickets')
+        finally:
+            event.remove(store.engine,'before_cursor_execute',record)
+        return len(statements)
+    before=countStatements()
+    for n in range(3):
+        client.post('/api/tickets',json={'machine':'CNC-03','issue':f'查詢次數測試 {n}','engineer':'Amy Chen'})
+    # 原本每張工單各查一次流程資料（N+1），上萬張工單時列表要等好幾秒
+    assert countStatements()==before
+
+
+def test_ticket_list_supports_optional_pagination(client):
+    everything=client.get('/api/tickets').json()
+    assert len(everything)>=3
+    assert client.get('/api/tickets',params={'limit':2,'offset':1}).json()==everything[1:3]

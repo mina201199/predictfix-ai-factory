@@ -9,7 +9,7 @@ from typing import Literal
 import joblib
 import numpy as np
 import httpx
-from fastapi import FastAPI, HTTPException, Header, Request
+from fastapi import FastAPI, HTTPException, Header, Query, Request
 from fastapi.responses import FileResponse
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
@@ -172,9 +172,12 @@ class TicketInput(BaseModel):
         return value.strip()
 
 @app.get('/api/tickets')
-def list_tickets():
+def list_tickets(limit:int|None=Query(default=None,ge=1,le=1000),offset:int=Query(default=0,ge=0)):
+    # 未指定 limit 時維持回傳全部，現有前端不受影響；加上 id 當排序依據，分頁結果才穩定
+    statement=(select(store.Ticket,store.Workflow).outerjoin(store.Workflow,store.Workflow.id==store.Ticket.id)
+               .order_by(store.Ticket.created_at.desc(),store.Ticket.id).offset(offset).limit(limit))
     with store.Session() as session:
-        return [store.ticket_dict(t) for t in session.scalars(select(store.Ticket).order_by(store.Ticket.created_at.desc())).all()]
+        return [store.ticket_dict(t,meta) for t,meta in session.execute(statement).all()]
 
 @app.post('/api/tickets',status_code=201)
 def create_ticket(body:TicketInput,request:Request,idempotency_key:str|None=Header(default=None,max_length=100)):

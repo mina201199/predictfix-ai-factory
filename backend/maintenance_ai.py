@@ -4,14 +4,16 @@ import json
 import math
 import os
 import re
+import threading
 import time
 import uuid
-from collections import Counter
+from collections import Counter, OrderedDict
 from datetime import datetime, timezone
 
 import httpx
 import numpy as np
 from fastapi import HTTPException, Query, Request
+from fastapi.concurrency import run_in_threadpool
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
@@ -136,7 +138,36 @@ def published_chunks():
         return result
 
 
+CACHE_LOCK = threading.Lock()
+CORPUS_CACHE = {'key': None, 'chunks': []}
+INDEX_CACHE = OrderedDict()
+INDEX_CACHE_SIZE = 8
+
+
+def corpusKey():
+    # 以資料庫中會影響語料的欄位當指紋：不論哪個 API 或哪個 process 改了文件或已發布案例，快取都會失效
+    with store.Session() as db:
+        documents = db.execute(select(store.KnowledgeDocument.id, store.KnowledgeDocument.active)
+                               .order_by(store.KnowledgeDocument.id)).all()
+        cases = db.execute(select(store.RepairCase.id, store.RepairCase.revision)
+                           .where(store.RepairCase.status == 'published').order_by(store.RepairCase.id)).all()
+    return (config.demo(), tuple(map(tuple, documents)), tuple(map(tuple, cases)))
+
+
+def cachedCorpus():
+    key = corpusKey()
+    with CACHE_LOCK:
+        if CORPUS_CACHE['key'] != key:
+            CORPUS_CACHE.update(key=key, chunks=buildCorpus())
+        return key, CORPUS_CACHE['chunks']
+
+
 def corpus():
+    # 回傳複本：呼叫端可能修改段落，不能改到共用的快取
+    return [dict(c) for c in cachedCorpus()[1]]
+
+
+def buildCorpus():
     chunks = [dict(c) for c in knowledge.CHUNKS] if config.demo() else []
     for chunk in chunks:
         if chunk.get('source_type')=='synthetic_demo_manual':
@@ -156,22 +187,52 @@ def tokens(text):
                                               if re.search(r'[\u4e00-\u9fff]', text[i:i+2])]
 
 
-def search(query, chunks=None, machine_model='', method='hybrid', limit=5, allow_synthetic=True):
-    """TF-IDF and BM25 fused by reciprocal rank; no embedding claims."""
-    chunks = corpus() if chunks is None else chunks
+def buildIndex(chunks, machine_model, allow_synthetic):
+    # IDF 只在過濾後的候選集合上計算，與原本逐題重建的排名完全相同
     candidates = [c for c in chunks if (allow_synthetic or not c.get('is_synthetic', True))
                   and (not machine_model or machine_model in c.get('machine_models', []))]
     if not candidates:
-        return []
+        return None
     texts = [c['title'] + ' ' + c.get('component', '') + ' ' + c['text'] for c in candidates]
     vectorizer = TfidfVectorizer(analyzer='char', ngram_range=(2, 4))
     matrix = vectorizer.fit_transform(texts)
-    similarity = cosine_similarity(vectorizer.transform([query]), matrix)[0]
     counts = [Counter(tokens(t)) for t in texts]
     lengths = [sum(c.values()) for c in counts]
-    avg_length = max(1, sum(lengths) / len(lengths))
+    documentFrequency = Counter()
+    for c in counts:
+        documentFrequency.update(c.keys())
+    return {'candidates': candidates, 'vectorizer': vectorizer, 'matrix': matrix, 'counts': counts,
+            'lengths': lengths, 'average': max(1, sum(lengths) / len(lengths)), 'frequency': documentFrequency}
+
+
+def cachedIndex(machine_model, allow_synthetic):
+    key, chunks = cachedCorpus()
+    indexKey = (key, machine_model, allow_synthetic)
+    with CACHE_LOCK:
+        if indexKey in INDEX_CACHE:
+            INDEX_CACHE.move_to_end(indexKey)
+            return INDEX_CACHE[indexKey]
+    index = buildIndex(chunks, machine_model, allow_synthetic)
+    with CACHE_LOCK:
+        # 語料改變後舊索引不會再被用到，立即釋放；同時限制不同機型的索引數量，避免記憶體無限成長
+        for stale in [k for k in INDEX_CACHE if k[0] != key]:
+            del INDEX_CACHE[stale]
+        INDEX_CACHE[indexKey] = index
+        while len(INDEX_CACHE) > INDEX_CACHE_SIZE:
+            INDEX_CACHE.popitem(last=False)
+    return index
+
+
+def search(query, chunks=None, machine_model='', method='hybrid', limit=5, allow_synthetic=True):
+    """TF-IDF and BM25 fused by reciprocal rank; no embedding claims."""
+    index = cachedIndex(machine_model, allow_synthetic) if chunks is None else buildIndex(chunks, machine_model, allow_synthetic)
+    if index is None:
+        return []
+    candidates, counts, lengths = index['candidates'], index['counts'], index['lengths']
+    similarity = cosine_similarity(index['vectorizer'].transform([query]), index['matrix'])[0]
+    avg_length = index['average']
     qtokens = set(tokens(query))
-    frequencies = {t: sum(t in c for c in counts) for t in qtokens}
+    frequencies = {t: index['frequency'][t] for t in qtokens}
     bm25 = np.zeros(len(candidates))
     for i, counts_i in enumerate(counts):
         for token in qtokens:
@@ -266,12 +327,13 @@ class AssistInput(BaseModel):
 
 async def assist(body):
     started = time.perf_counter()
-    citations = search(body.question+' '+body.component, machine_model=body.machine_model,
-                       allow_synthetic=body.allow_synthetic, limit=4)
+    # 檢索是同步的 CPU 運算；直接在 async 函式裡執行會卡住事件迴圈，期間其他所有請求都得等
+    citations = await run_in_threadpool(search, body.question+' '+body.component, machine_model=body.machine_model,
+                                        allow_synthetic=body.allow_synthetic, limit=4)
     from . import openai_runtime
     semantic_used=False
     if body.use_llm and openai_runtime.configured() and openai_runtime.document_allowed(True):
-        candidates=[c for c in corpus() if (body.allow_synthetic or not c.get('is_synthetic',True))
+        candidates=[c for c in await run_in_threadpool(corpus) if (body.allow_synthetic or not c.get('is_synthetic',True))
                     and openai_runtime.source_allowed(c)
                     and (not body.machine_model or body.machine_model in c.get('machine_models',[]))]
         if candidates:

@@ -56,11 +56,15 @@ def init():
     with engine.begin() as conn:
         conn.execute(text("UPDATE tickets SET status=CASE WHEN engineer='待指派' THEN '待指派' ELSE '已指派' END WHERE status='待處理'"))
 
-def ticket_dict(t):
+UNLOADED=object()
+
+def ticket_dict(t,meta=UNLOADED):
     import json
-    with Session() as s:
-        meta=s.get(Workflow,t.id)
-        workflow=json.loads(meta.payload) if meta else {}
+    if meta is UNLOADED:
+        # 列表會用 join 一次帶入流程資料；只有單張工單才另外查詢，避免 N+1
+        with Session() as s:
+            meta=s.get(Workflow,t.id)
+    workflow=json.loads(meta.payload) if meta else {}
     return {'id':t.id, 'machine':t.machine, 'issue':t.issue, 'engineer':t.engineer,'workflow':workflow,
             'status':t.status, 'created_at':t.created_at.isoformat(), 'completion_note':t.completion_note}
 

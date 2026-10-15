@@ -1,0 +1,184 @@
+{
+  "runs": {
+    "before": {
+      "measured_at": "2026-10-15T08:59:00.740157+00:00",
+      "tickets": 10000,
+      "results": {
+        "1000": {
+          "documents": 20,
+          "paragraphs": 1000,
+          "tickets": 10000,
+          "assist_cold_seconds": 0.284,
+          "assist_warm_median_seconds": 0.437,
+          "assist_warm_max_seconds": 0.469,
+          "citations_per_query": [
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4
+          ],
+          "idle_healthz_median_seconds": 0.002,
+          "healthz_worst_during_assist_seconds": [
+            0.399,
+            0.437,
+            0.396
+          ],
+          "ticket_list_median_seconds": 6.781,
+          "ticket_list_count": 10000,
+          "server_peak_working_set_mb": 189
+        },
+        "10000": {
+          "documents": 200,
+          "paragraphs": 10000,
+          "tickets": 10000,
+          "assist_cold_seconds": 2.384,
+          "assist_warm_median_seconds": 2.647,
+          "assist_warm_max_seconds": 2.738,
+          "citations_per_query": [
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4
+          ],
+          "idle_healthz_median_seconds": 0.002,
+          "healthz_worst_during_assist_seconds": [
+            2.646,
+            2.581,
+            2.655
+          ],
+          "ticket_list_median_seconds": 6.69,
+          "ticket_list_count": 10000,
+          "server_peak_working_set_mb": 263
+        },
+        "30000": {
+          "documents": 600,
+          "paragraphs": 30000,
+          "tickets": 10000,
+          "assist_cold_seconds": 7.589,
+          "assist_warm_median_seconds": 8.156,
+          "assist_warm_max_seconds": 8.575,
+          "citations_per_query": [
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4
+          ],
+          "idle_healthz_median_seconds": 0.002,
+          "healthz_worst_during_assist_seconds": [
+            8.37,
+            8.117,
+            8.992
+          ],
+          "ticket_list_median_seconds": 7.137,
+          "ticket_list_count": 10000,
+          "server_peak_working_set_mb": 444
+        }
+      }
+    },
+    "after": {
+      "measured_at": "2026-10-15T08:59:48.100343+00:00",
+      "tickets": 10000,
+      "results": {
+        "1000": {
+          "documents": 20,
+          "paragraphs": 1000,
+          "tickets": 10000,
+          "assist_cold_seconds": 0.167,
+          "assist_warm_median_seconds": 0.015,
+          "assist_warm_max_seconds": 0.033,
+          "citations_per_query": [
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4
+          ],
+          "idle_healthz_median_seconds": 0.002,
+          "healthz_worst_during_assist_seconds": [
+            0.011,
+            0.004,
+            0.006
+          ],
+          "ticket_list_median_seconds": 0.479,
+          "ticket_list_count": 10000,
+          "server_peak_working_set_mb": 201
+        },
+        "10000": {
+          "documents": 200,
+          "paragraphs": 10000,
+          "tickets": 10000,
+          "assist_cold_seconds": 2.408,
+          "assist_warm_median_seconds": 0.087,
+          "assist_warm_max_seconds": 0.093,
+          "citations_per_query": [
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4
+          ],
+          "idle_healthz_median_seconds": 0.002,
+          "healthz_worst_during_assist_seconds": [
+            0.033,
+            0.038,
+            0.012
+          ],
+          "ticket_list_median_seconds": 0.489,
+          "ticket_list_count": 10000,
+          "server_peak_working_set_mb": 300
+        },
+        "30000": {
+          "documents": 600,
+          "paragraphs": 30000,
+          "tickets": 10000,
+          "assist_cold_seconds": 7.558,
+          "assist_warm_median_seconds": 0.235,
+          "assist_warm_max_seconds": 0.302,
+          "citations_per_query": [
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4
+          ],
+          "idle_healthz_median_seconds": 0.002,
+          "healthz_worst_during_assist_seconds": [
+            0.092,
+            0.073,
+            0.064
+          ],
+          "ticket_list_median_seconds": 0.535,
+          "ticket_list_count": 10000,
+          "server_peak_working_set_mb": 575
+        }
+      }
+    }
+  },
+  "method": {
+    "data": "程式產生的假手冊與工單，僅量測效能",
+    "assist": "POST /api/assist，use_llm=false，未指定機型（檢索全部段落）",
+    "blocking": "查詢期間另一條連線每 50ms 打 /healthz 的最長延遲",
+    "server": "uvicorn 單一 process，production 模式"
+  }
+}
