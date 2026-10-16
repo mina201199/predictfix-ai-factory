@@ -1,0 +1,46 @@
+{
+  "version": "1.0.0",
+  "createdAt": "2026-10-16",
+  "status": "structural_validation_passed_model_evaluation_not_run",
+  "scenarioFamilies": 100,
+  "singleTurnCases": 400,
+  "multiTurnCases": 20,
+  "totalEvaluationCases": 420,
+  "categoryFamilies": {
+    "手冊外與服務需求": 12,
+    "證據與帳號操作": 8,
+    "換刀": 8,
+    "主軸": 8,
+    "冷卻": 8,
+    "進給定位": 8,
+    "受理與模糊資訊": 8,
+    "工單驗收": 8,
+    "派工人員": 8,
+    "庫存保養": 8,
+    "知識與模板": 8,
+    "查詢與安全邊界": 8
+  },
+  "behaviorFamilies": {
+    "insufficient": 20,
+    "clarify": 13,
+    "answer": 61,
+    "escalate": 4,
+    "query": 2
+  },
+  "sourceFiles": 13,
+  "checks": {
+    "uniqueIds": true,
+    "uniqueSingleTurnQuestions": true,
+    "sourceFilesExist": true,
+    "referencedSectionsExist": true,
+    "answerCriteriaPresent": true,
+    "dialogueFamiliesExist": true,
+    "blindRequestsExcludeGoldFields": true,
+    "exactQuestionOverlapsWithExistingDatasets": []
+  },
+  "limitations": [
+    "Exact overlap check does not detect semantic overlap or prove independent holdout.",
+    "Gold labels are authored, not expert validated.",
+    "No model has been called or graded."
+  ]
+}
