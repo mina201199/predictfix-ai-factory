@@ -90,17 +90,22 @@ def scenario():
         audits=c.get('/api/audit').json()
         assert all('password' not in a['payload'] for a in audits)
         # Online backup retains committed changes, restore clears all sessions.
-        source=Path(store.engine.url.database)
-        dest=source.parent/'backup.db';restored=source.parent/'restored.db'
-        backup(source,dest);restore(dest,restored)
-        import sqlite3
-        with sqlite3.connect(restored) as db:
-            assert db.execute('SELECT count(*) FROM tickets').fetchone()[0]==2
-            assert db.execute('SELECT count(*) FROM work_logs').fetchone()[0]==1
-            assert db.execute('SELECT count(*) FROM login_sessions').fetchone()[0]==0
-        try:restore(dest,restored)
-        except FileExistsError:pass
-        else:raise AssertionError('Restore overwrote an existing database')
+        if store.engine.dialect.name=='sqlite':
+            source=Path(store.engine.url.database)
+            dest=source.parent/'backup.db';restored=source.parent/'restored.db'
+            backup(source,dest);restore(dest,restored)
+            import sqlite3
+            with sqlite3.connect(restored) as db:
+                assert db.execute('SELECT count(*) FROM tickets').fetchone()[0]==2
+                assert db.execute('SELECT count(*) FROM work_logs').fetchone()[0]==1
+                assert db.execute('SELECT count(*) FROM login_sessions').fetchone()[0]==0
+            try:restore(dest,restored)
+            except FileExistsError:pass
+            else:raise AssertionError('Restore overwrote an existing database')
+            backup_result=True
+        else:
+            # PostgreSQL 備份要用容器內的 pg_dump，由 verify_postgres.py 的容器層驗證，這裡不假裝已驗證
+            backup_result='verified_in_container_layer'
     # Restart preserves records and does not seed demonstration records.
     with TestClient(app) as c:
         login(c)
@@ -113,6 +118,6 @@ def scenario():
         with TestClient(app):pass
     except RuntimeError as e:assert 'Demo database' in str(e)
     else:raise AssertionError('Contaminated database was accepted')
-    print(json.dumps({'production_isolation':True,'account_permissions':True,'attendance_dispatch':True,'qualification_and_load_checks':True,'maintenance_workflow':True,'online_backup_restore':True,'restart_persistence':True}))
+    print(json.dumps({'production_isolation':True,'account_permissions':True,'attendance_dispatch':True,'qualification_and_load_checks':True,'maintenance_workflow':True,'online_backup_restore':backup_result,'restart_persistence':True}))
 
 if __name__=='__main__':scenario()
