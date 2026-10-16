@@ -46,7 +46,31 @@ def scenario():
     assert image.status_code==200 and image.headers['content-type']=='image/png'
     assert c.get('/api/scan/samples/..%2Fsecret.png').status_code==404
     assert c.get('/api/scan/samples/CNC-99.png').status_code==404
+    from scripts.seed_machine_history import seed_history
+    seeded=seed_history()
+    assert seeded['machines']==18 and seeded['tickets']>=54,seeded
+    assert seed_history().get('skipped') is True
+    assert c.post('/api/stock',json={'name':'主軸軸承 6206','unit':'個','minimum':2}).status_code==201
+    response=c.get('/api/machines/CNC-07/overview')
+    assert response.status_code==200,response.text
+    overview=response.json()
+    assert set(overview)=={'data_mode','machine','live','parts','people','in_progress','history','maintenance','stock','reliability'}
+    assert overview['data_mode']=='demo' and overview['machine']['id']=='CNC-07' and overview['machine']['installed_on']
+    assert overview['live']['temp'] is not None and len(overview['parts'])==4 and overview['parts'][0]['replaced_on']
+    history=overview['history']
+    assert history and [h['closed_at'] for h in history]==sorted((h['closed_at'] for h in history),reverse=True)
+    assert all(h['issue'].startswith('【DEMO 歷史】') and h['completion_note'] for h in history)
+    assert overview['reliability']['mtbf_days'] is not None and overview['reliability']['mttr_hours'] is not None
+    responsible=overview['people']['responsible']
+    assert responsible['name'] and responsible['on_duty'] in (True,False) and responsible['open_tickets']>=0
+    assert overview['people']['last_inspection']['inspector']
+    assert overview['maintenance']['next_inspection']
+    assert any(s['part']=='主軸軸承' and s['low'] for s in overview['stock']),overview['stock']
+    busy=[o for o in (c.get(f'/api/machines/CNC-{n:02}/overview').json() for n in range(1,19)) if o['in_progress']]
+    assert busy and all(o['in_progress'][0]['latest_log'] and o['in_progress'][0]['logged_minutes']>0 for o in busy)
+    assert c.get('/api/machines/CNC-99/overview').status_code==404
     login(c,'amy')
+    assert c.get('/api/machines/CNC-07/overview').status_code==200
     assert scan(c,png(render_nameplate('CNC-03'))).json()['candidates'][0]['machine_id']=='CNC-03'
     c.post('/api/auth/logout')
     assert scan(c,png(render_nameplate('CNC-03'))).status_code==401
