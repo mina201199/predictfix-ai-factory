@@ -20,7 +20,7 @@ from . import store
 from .ml import features, WINDOW, FEATURE_NAMES, LABELS
 from .copilot import analyze
 from .knowledge import DOCUMENTS, retrieve
-from . import operations, chat, auth, evidence, maintenance_ai, config, workforce, repair_flow, equipment_templates
+from . import operations, chat, auth, evidence, maintenance_ai, config, workforce, repair_flow, equipment_templates, machine_scan
 
 ROOT=Path(__file__).resolve().parents[1]
 ART=ROOT/'artifacts'
@@ -296,6 +296,7 @@ chat.register(app)
 maintenance_ai.register(app)
 repair_flow.register(app)
 equipment_templates.register(app)
+machine_scan.register(app)
 
 STATIC={'':'index.html','index.html':'index.html','index.js':'index.js','index.css':'index.css','dynamic-styles.js':'dynamic-styles.js',
         'auth.css':'auth.css','roles.css':'roles.css',
