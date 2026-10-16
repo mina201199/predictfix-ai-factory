@@ -47,7 +47,7 @@ docker compose --env-file .env.production -f compose.production.yaml ps
 docker compose --env-file .env.production -f compose.production.yaml logs --tail 100 api
 ```
 
-LLM 尚未下載或不可用時，AI 中心顯示檢索候選來源，不會假稱模型已完成整理。0.6B 模型適合目前段落選取的串接驗證，正式回答能力需以企業問題獨立評估。
+LLM 尚未下載或不可用時，AI 中心顯示檢索候選來源，不會假稱模型已完成整理。目前的本機模型 Gemma 4 E2B（Q8_0）在 44 題虛構段落選取題全部選對（見 [本機模型基準](local-llm-benchmark.md)），但題目比實際簡單，正式回答能力需以企業問題獨立評估。
 
 PostgreSQL 備份採原生 `pg_dump`；SQLite 腳本不可用於 PostgreSQL。以下先在容器內產生 archive，再複製檔案，避免 Windows PowerShell 重導向 binary 而破壞內容：
 

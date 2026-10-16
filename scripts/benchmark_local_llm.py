@@ -33,6 +33,7 @@ from train_lora import score_output, summarize
 
 # 固定 revision 與 SHA-256：重跑時下載到的必定是同一份檔案，被替換或損毀就直接失敗
 MODELS={
+  # 已淘汰的對照組（2026-10-15）：選對率只有 22.7%，且台灣案場對中國開發模型有合規疑慮；保留只為重現 docs/local-llm-benchmark.md 的比較
   'qwen3-0.6b-q8_0':{'family':'Qwen3-0.6B','origin':'Alibaba（中國）','license':'apache-2.0','quant':'Q8_0',
     'repo':'Qwen/Qwen3-0.6B-GGUF','revision':'23749fefcc72300e3a2ad315e1317431b06b590a',
     'file':'Qwen3-0.6B-Q8_0.gguf','size':639446688,
