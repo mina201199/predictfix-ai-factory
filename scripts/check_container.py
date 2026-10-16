@@ -26,13 +26,20 @@ for page in ['/','/workflow.html','/knowledge.html']:
         # 從頁面實際引用的檔案取得清單，Dockerfile 漏複製新資產時才會在這裡失敗
         assets.update(re.findall(r'(?:src|href)="([\w.-]+\.(?:js|css))"',response.read().decode()))
 assert assets,'No page assets found'
-for path in ['/'+asset for asset in sorted(assets)]+['/docs']:
+for path in ['/'+asset for asset in sorted(assets)]:
     with urllib.request.urlopen(args.url+path,timeout=5) as response:
         assert response.status==200,path
 with urllib.request.urlopen(args.url+'/api/auth/config') as response:
     assert json.load(response)['demo_mode'] is False
+    assert "script-src 'self';" in response.headers['Content-Security-Policy']
+# 正式模式不提供 API 文件，避免未登入就能看到完整 API 結構
+for path in ['/docs','/openapi.json']:
+    try:
+        urllib.request.urlopen(args.url+path,timeout=5)
+        raise AssertionError(path+' must not be public in production')
+    except urllib.error.HTTPError as exc:assert exc.code==404,path
 try:
     urllib.request.urlopen(args.url+'/api/tickets')
     raise AssertionError('Anonymous operational access must fail')
 except urllib.error.HTTPError as exc:assert exc.code==401
-print('Production service, workflow assets, API docs and authentication boundary passed.')
+print('Production service, workflow assets, CSP, hidden API docs and authentication boundary passed.')

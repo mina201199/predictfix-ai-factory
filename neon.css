@@ -17,7 +17,7 @@ input,textarea,select,.input-wrap{background:#081827;color:#e2f4ff;border:1px so
 button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:2px solid #68e8ff;outline-offset:3px}
 .input-wrap textarea{border:0}.input-bottom{color:#a0bace}.badge{background:#103d3b;color:#63f5cf;border:1px solid #237968}.badge.orange{background:#3b3020;color:#ffda79;border-color:#8c672f}.badge.gray,.demo-badge{background:#263345;color:#c1d2e2;border-color:#43576c}.review-badge{background:#302b51;color:#d2c4ff}
 .machine,.part-button,.overview-part,.factory-option,.question-card,.recommend{background:#10263a;color:var(--ink);border-color:#2b4c66}.machine.selected,.part-button.active,.factory-option.chosen{background:#103247;border-color:#3cdeff;box-shadow:0 0 18px #19cfff20,inset 0 0 20px #19cfff08}
-.risk-bar,.battery i{background:#284057}.risk-bar i,.battery i[style*="background"]{filter:brightness(1.35);box-shadow:0 0 9px currentColor}
+.risk-bar,.battery i{background:#284057}.risk-bar i,.battery i.cell-ok,.battery i.cell-warn{filter:brightness(1.35);box-shadow:0 0 9px currentColor}
 .copilot{background:linear-gradient(145deg,#10314b,#0c1a2b);border-color:#34c7e6;box-shadow:0 0 22px #19cfff18}.ai-icon,.rank,.avatar,.engineer .avatar{background:#123a53;color:#5eeaff}.ai-answer{color:#c1e7f3}
 .alert{background:#312b1e;border-color:#7f642d;color:#ffe1a0}.alert b{color:#ffdd79}.risk-box,.component-kpis>div,.component-explain,.overview-part-info,.work-context,.asset-kpis>div,.model-experiment>summary,#review-submission{background:#102a3e;border-color:#2b5470;color:#b9d2e4}
 .scenario-banner,.overview-intro,.catalog-controls{background:#0d2236;border-color:#27465f;color:#b9d2e4}.catalog-controls span{color:#aac7dc}
