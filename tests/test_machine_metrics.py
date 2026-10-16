@@ -52,3 +52,62 @@ def test_naive_timestamps_are_treated_as_utc():
   # SQLite 讀回的 DateTime 會遺失時區，必須視為 UTC 才能和有時區的審核時間相減
   assert machine_metrics.utc(datetime(2026,1,1,0,0)).tzinfo is not None
   assert machine_metrics.utc('2026-01-01T00:00:00')==datetime(2026,1,1,tzinfo=timezone.utc)
+
+
+def overview(**changes):
+  base={'machine':{'id':'CNC-01','name':'立式加工中心','machine_model':None},
+        'live':{'status':'運行正常','risk':12,'temp':48,'vib':2.1,'util':68},
+        'parts':[{'name':'主軸軸承','health':93,'remaining':540,'note':'潤滑與振動穩定。'},
+                 {'name':'切削刀具','health':78,'remaining':72,'note':'已累積 168 分鐘切削時間，建議檢查刃口磨耗。'}],
+        'people':{'responsible':{'name':'Amy Chen','on_duty':True},'last_inspection':None},
+        'in_progress':[],'history':[],'stock':[],
+        'maintenance':{'next_inspection':'2026-10-20','plans':[]},
+        'reliability':{'failures':4,'mtbf_days':60.5,'mttr_hours':12.3}}
+  return {**base,**changes}
+
+
+ALLOWED_TYPES={'part','ticket','manual','plan','stock'}
+
+
+def test_rule_summary_flags_worn_part():
+  result=machine_metrics.rule_summary(overview())
+  assert len(result['summary'])==3 and all(result['summary'])
+  assert 2<=len(result['suggestions'])<=4
+  assert any(s['source']=={'type':'part','ref':'切削刀具','label':'切削刀具'} for s in result['suggestions'])
+  assert all(s['source']['type'] in ALLOWED_TYPES for s in result['suggestions'])
+
+
+def test_rule_summary_lists_open_ticket_and_low_stock_first():
+  data=overview(in_progress=[{'id':'WO-1','issue':'冷卻泵異音','engineer':'Alex Lin','status':'維修中','latest_log':{'note':'拆換軸封'}}],
+                stock=[{'part':'主軸軸承','item_id':'PART-1','name':'主軸軸承 6206','quantity':0,'minimum':2,'low':True}])
+  refs=[s['source']['ref'] for s in machine_metrics.rule_summary(data)['suggestions']]
+  assert 'WO-1' in refs and 'PART-1' in refs
+
+
+def test_rule_summary_without_any_measurements():
+  parts=[{'name':'主軸','health':None,'remaining':None,'note':'尚無量測資料，健康度未知。'},{'name':'刀具','health':None,'remaining':None,'note':''}]
+  data=overview(live={'status':'待建檔','risk':None,'temp':None,'vib':None,'util':None},parts=parts,
+                people={'responsible':None,'last_inspection':None},maintenance={'next_inspection':None,'plans':[]},
+                reliability={'failures':0,'mtbf_days':None,'mttr_hours':None})
+  result=machine_metrics.rule_summary(data)
+  assert len(result['summary'])==3 and '尚無資料' in ''.join(result['summary'])
+  assert len(result['suggestions'])>=2
+
+
+def test_validated_llm_output_drops_invented_sources():
+  allowed=machine_metrics.allowed_sources(overview(),[{'ref':'PF-MAN-SPINDLE-001#2','title':'主軸手冊'}])
+  output={'summary':['一','二','三'],'suggestions':[
+    {'text':'檢查刀具','source_type':'part','source_ref':'切削刀具'},
+    {'text':'依手冊潤滑','source_type':'manual','source_ref':'PF-MAN-SPINDLE-001#2'},
+    {'text':'捏造的工單','source_type':'ticket','source_ref':'WO-404'}]}
+  result=machine_metrics.validated_llm_output(output,allowed)
+  assert [s['source']['ref'] for s in result['suggestions']]==['切削刀具','PF-MAN-SPINDLE-001#2']
+  assert result['suggestions'][1]['source']['label']=='主軸手冊'
+
+
+def test_validated_llm_output_rejects_too_few_or_malformed():
+  allowed=machine_metrics.allowed_sources(overview(),[])
+  assert machine_metrics.validated_llm_output({'summary':['一','二','三'],'suggestions':[
+    {'text':'檢查刀具','source_type':'part','source_ref':'切削刀具'}]},allowed) is None
+  assert machine_metrics.validated_llm_output({'summary':['只有一行'],'suggestions':[]},allowed) is None
+  assert machine_metrics.validated_llm_output(None,allowed) is None

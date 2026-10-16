@@ -26,6 +26,8 @@ def scenario():
     assert body['people']['responsible'] is None and body['people']['last_inspection'] is None
     assert body['reliability']['mtbf_days'] is None and body['reliability']['failures']==0
     assert c.get('/api/machines/NOPE-01/overview').status_code==404
+    summary=c.post('/api/machines/MILL-001/ai-summary').json()
+    assert summary['mode']=='rule' and len(summary['summary'])==3 and len(summary['suggestions'])>=2,summary
     assert c.get('/api/scan/samples').status_code==404
     buffer=io.BytesIO();render_nameplate('MILL-001').save(buffer,'PNG')
     scan=c.post('/api/scan/nameplate',content=buffer.getvalue()).json()

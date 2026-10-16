@@ -13,7 +13,7 @@ from fastapi.responses import FileResponse
 from PIL import Image, ImageOps, UnidentifiedImageError
 from sqlalchemy import func, select
 
-from . import config, machine_metrics, nameplate, repair_flow, store, workforce
+from . import config, machine_metrics, maintenance_ai, nameplate, repair_flow, store, workforce
 
 ROOT=Path(__file__).resolve().parents[1]
 SAMPLES=ROOT/'artifacts'/'demo-nameplates'
@@ -127,6 +127,62 @@ def build_overview(db,mid):
                                                       'preventive':bool(workflows.get(t.id,{}).get('maintenance_plan_id'))} for t in tickets])}
 
 
+SUMMARY_SCHEMA={'type':'object','required':['summary','suggestions'],'properties':{
+  'summary':{'type':'array','minItems':3,'maxItems':3,'items':{'type':'string'}},
+  'suggestions':{'type':'array','minItems':2,'maxItems':4,'items':{'type':'object','required':['text','source_type','source_ref'],'properties':{
+    'text':{'type':'string'},'source_type':{'type':'string','enum':list(machine_metrics.SOURCE_TYPES)},'source_ref':{'type':'string'}}}}}}
+
+
+def load_overview(mid):
+  with store.Session() as db:
+    return build_overview(db,mid)
+
+
+def manual_hits(overview):
+  parts=overview.get('parts') or []
+  terms=[p['name'] for p in parts if p.get('health') is not None and p['health']<machine_metrics.WORN_PART]
+  terms+=[t['issue'] for t in (overview.get('in_progress') or [])[:2]]
+  query=' '.join(terms) or ' '.join(p['name'] for p in parts if p.get('name'))
+  if not query:return []
+  # 本機模型的 context 只有 2048 token，扣掉輸出後提示要壓在約 1300 token 內，手冊只取兩段短摘錄
+  hits=maintenance_ai.search(query,machine_model=overview['machine'].get('machine_model') or '',limit=2)
+  return [{'ref':h.get('chunk_id',h['id']),'title':(h.get('title','')+' '+h.get('section','')).strip(),'text':h.get('text','')[:160]} for h in hits]
+
+
+def compact_json(value):
+  return json.dumps(value,ensure_ascii=False,separators=(',',':'))
+
+
+def summary_prompt(overview,manuals,allowed):
+  inProgress=overview['in_progress'][:2]
+  history=overview['history'][:3]
+  plans=overview['maintenance']['plans'][:3]
+  lowStock=[s for s in overview['stock'] if s['low']]
+  responsible=overview['people']['responsible']
+  facts={'machine':{k:overview['machine'].get(k) for k in ['id','name','kind']},'live':overview['live'],
+         'parts':[{'name':p['name'],'health':p.get('health'),'remaining':p.get('remaining'),'note':(p.get('note') or '')[:40]} for p in overview['parts']],
+         'responsible':{'name':responsible['name'],'on_duty':responsible['on_duty']} if responsible else None,
+         'in_progress':[{'id':t['id'],'issue':t['issue'],'engineer':t['engineer'],'status':t['status'],
+                         'latest_note':((t.get('latest_log') or {}).get('note') or '')[:60]} for t in inProgress],
+         'recent_history':[{'id':h['id'],'issue':h['issue']} for h in history],
+         'next_inspection':overview['maintenance']['next_inspection'],
+         'plans':[{'id':p['id'],'title':p['title'],'reminder':p['reminder']} for p in plans],
+         'low_stock':[{'id':s['item_id'],'name':s['name'],'quantity':s['quantity'],'minimum':s['minimum']} for s in lowStock],
+         'reliability':{k:overview['reliability'].get(k) for k in ['failures','mtbf_days','mttr_hours']}}
+  # 只列出提示裡看得到的來源；驗證時仍以 allowed 全集比對
+  sources={'part':[p['name'] for p in overview['parts']],'ticket':[t['id'] for t in inProgress+history],
+           'plan':[p['id'] for p in plans],'stock':[s['item_id'] for s in lowStock],'manual':[m['ref'] for m in manuals]}
+  sources={kind:refs for kind,refs in sources.items() if refs and all((kind,ref) in allowed for ref in refs)}
+  return '\n'.join([
+    '你是工廠設備維護助理。根據下列機台資料與手冊摘錄，用正體中文輸出 JSON：',
+    '1. summary：剛好 3 句，每句 60 字以內，說明這台機台現在最需要注意的事。',
+    '2. suggestions：2 到 4 條可執行的維護或優化建議。每條都要用 source_type 與 source_ref 標明依據，'
+    'source_type 是「可引用來源」的鍵、source_ref 是該鍵底下的其中一個值；不得編造數字、工單或手冊。',
+    '機台資料：'+compact_json(facts),
+    '手冊摘錄：'+compact_json(manuals),
+    '可引用來源：'+compact_json(sources)])
+
+
 def register(app):
   @app.post('/api/scan/nameplate')
   async def scan_nameplate(request:Request):
@@ -144,10 +200,22 @@ def register(app):
 
   @app.get('/api/machines/{mid}/overview')
   def machine_overview(mid:str):
-    with store.Session() as db:
-      overview=build_overview(db,mid)
+    overview=load_overview(mid)
     if overview is None:raise HTTPException(404,'設備不存在或已停用')
     return overview
+
+  @app.post('/api/machines/{mid}/ai-summary')
+  async def machine_ai_summary(mid:str):
+    overview=await run_in_threadpool(load_overview,mid)
+    if overview is None:raise HTTPException(404,'設備不存在或已停用')
+    manuals=await run_in_threadpool(manual_hits,overview)
+    allowed=machine_metrics.allowed_sources(overview,manuals)
+    output,meta=await maintenance_ai.generate_json(summary_prompt(overview,manuals,allowed),SUMMARY_SCHEMA,synthetic=config.demo())
+    result=machine_metrics.validated_llm_output(output,allowed)
+    if result:return {'mode':'llm',**result,'meta':meta}
+    # 模型沒開、逾時、格式錯或引用了不存在的來源，都退回規則摘要，畫面照常顯示
+    if meta.get('llm_used'):meta={**meta,'fallback_reason':'invalid_or_ungrounded_output'}
+    return {'mode':'rule',**machine_metrics.rule_summary(overview),'meta':meta}
 
   @app.get('/api/scan/samples')
   def scan_samples():

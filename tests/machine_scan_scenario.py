@@ -69,6 +69,14 @@ def scenario():
     busy=[o for o in (c.get(f'/api/machines/CNC-{n:02}/overview').json() for n in range(1,19)) if o['in_progress']]
     assert busy and all(o['in_progress'][0]['latest_log'] and o['in_progress'][0]['logged_minutes']>0 for o in busy)
     assert c.get('/api/machines/CNC-99/overview').status_code==404
+    summary=c.post('/api/machines/CNC-07/ai-summary')
+    assert summary.status_code==200,summary.text
+    summary=summary.json()
+    # 測試環境沒有本機模型，必須退回規則摘要而不是報錯
+    assert summary['mode']=='rule' and len(summary['summary'])==3 and all(summary['summary'])
+    assert 2<=len(summary['suggestions'])<=4
+    assert all(s['text'] and s['source']['type'] in {'part','ticket','manual','plan','stock'} for s in summary['suggestions'])
+    assert c.post('/api/machines/CNC-99/ai-summary').status_code==404
     login(c,'amy')
     assert c.get('/api/machines/CNC-07/overview').status_code==200
     assert scan(c,png(render_nameplate('CNC-03'))).json()['candidates'][0]['machine_id']=='CNC-03'
