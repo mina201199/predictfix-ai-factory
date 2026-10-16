@@ -62,12 +62,26 @@ async def safe_validation_error(request:Request, exc:RequestValidationError):
 
 auth.register(app)
 
+# 只執行、套用本站的 js／css 檔：注入的 <script>、事件屬性與 style 屬性都不會生效
+CSP=("default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self'; "
+     "object-src 'none'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'")
+# Swagger UI 需要 CDN 與 inline script；/docs 只在展示模式提供，因此只有這幾頁放寬
+DOCS_CSP=("default-src 'self'; script-src 'self' https://cdn.jsdelivr.net 'unsafe-inline'; "
+          "style-src 'self' https://cdn.jsdelivr.net 'unsafe-inline'; img-src 'self' data: https://fastapi.tiangolo.com; "
+          "connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'")
+DOCS_PATHS=['/docs','/docs/oauth2-redirect','/redoc']
+# 正式模式不需登入就能看到完整 API 結構的文件頁也一併關閉
+DEMO_ONLY_PATHS=['/api/replay','/api/predict','/api/model/report','/api/chat','/api/copilot','/api/documents','/demo-measurements.csv',
+                 '/index.html','/index.js','/index.css','/dynamic-styles.js','/roles.css','/factory.js','/live.js','/management.js',
+                 '/openapi.json',*DOCS_PATHS]
+
 @app.middleware('http')
 async def operational_boundary(request:Request,call_next):
     from fastapi.responses import JSONResponse
-    if not config.demo() and request.url.path in ['/api/replay','/api/predict','/api/model/report','/api/chat','/api/copilot','/api/documents','/demo-measurements.csv','/index.html','/factory.js','/live.js','/management.js']:
+    if not config.demo() and request.url.path in DEMO_ONLY_PATHS:
         return JSONResponse({'detail':'展示功能未在正式環境啟用；維修 AI 請使用 /api/assist'},status_code=404)
     response=await call_next(request)
+    response.headers['Content-Security-Policy']=DOCS_CSP if request.url.path in DOCS_PATHS else CSP
     response.headers['X-Content-Type-Options']='nosniff'
     response.headers['Referrer-Policy']='same-origin'
     response.headers['X-Frame-Options']='DENY'
@@ -283,7 +297,9 @@ maintenance_ai.register(app)
 repair_flow.register(app)
 equipment_templates.register(app)
 
-STATIC={'':'index.html','index.html':'index.html','factory.css':'factory.css','factory.js':'factory.js',
+STATIC={'':'index.html','index.html':'index.html','index.js':'index.js','index.css':'index.css','dynamic-styles.js':'dynamic-styles.js',
+        'auth.css':'auth.css','roles.css':'roles.css',
+        'factory.css':'factory.css','factory.js':'factory.js',
         'neon.css':'neon.css','live.css':'live.css','live.js':'live.js','management.js':'management.js','management.css':'management.css','auth.js':'auth.js','evidence.js':'evidence.js','demo-measurements.csv':'demo-measurements.csv',
         'knowledge.html':'knowledge.html','knowledge.js':'knowledge.js','knowledge.css':'knowledge.css',
         'console.html':'console.html','console.js':'console.js','console.css':'console.css','templates.js':'templates.js',
