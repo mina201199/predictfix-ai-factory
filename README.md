@@ -19,7 +19,7 @@ PredictFix AI 將維修知識查找、資格與容量派工、排查驗收及案
 | LoRA 小規模訓練 | 已完成並部署獨立實驗 API | Qwen3-0.6B，12 步 CPU 訓練；保留測試 9／12 題符合，資料不足 3 題皆失敗，未替換正式模型。 |
 | 可重複展示 | 已提供準備工具與展示腳本 | 專用設備、工程師、資格與出勤；驗收阻擋、主管審核、案例發布與檢索已跑通。 |
 | CI | GitHub Actions 通過 | 每次推送與 PR 執行全套測試及容器檢查兩個 job；[執行紀錄](https://github.com/mina201199/predictfix-ai-factory/actions/runs/38715442505)。 |
-| Docker／PostgreSQL／HTTPS | Docker 映像已實際啟動驗證；PostgreSQL／HTTPS 尚未實測 | CI 每次建置映像並以正式模式（SQLite）啟動，檢查健康狀態、頁面資產與匿名阻擋；Compose 的 PostgreSQL 與 Caddy TLS 仍待驗收。 |
+| Docker／PostgreSQL／HTTPS | Docker 與 PostgreSQL 17 已實測（2026-10-16）；HTTPS 尚未實測 | 並發派工、正式模式、維修流程三個情境在 PostgreSQL 上通過；Compose 正式模式「API＋PostgreSQL」通過健康檢查、重啟後資料保存，`pg_dump` 備份可還原到新資料庫並撤銷工作階段。CI 每次重跑。Caddy TLS 仍待驗收。 |
 | 公開網站／企業上線 | 尚未完成 | 尚無外部可用網址，未接真實感測器，未完成工廠現場驗收。 |
 
 **目前定位是具備資料保存與權限流程的本機 MVP。** 「正式資料模式」是應用程式的運行模式，不代表已部署到正式伺服器。
@@ -75,12 +75,12 @@ flowchart LR
 | 環節 | 技術選擇 | 設計理由與取捨 |
 |---|---|---|
 | **前端** | HTML／CSS／JavaScript | 直接呈現角色、工單狀態與來源，讓完整操作流程容易追查；未使用大型前端框架。 |
-| **API 與資料** | FastAPI、Pydantic、SQLAlchemy；本機 SQLite | 驗證輸入、維持一致 API 契約並保存工單；SQLite 降低單機啟動成本，高並發與 PostgreSQL 仍需另行驗證。 |
+| **API 與資料** | FastAPI、Pydantic、SQLAlchemy；本機 SQLite、部署 PostgreSQL 17 | 驗證輸入、維持一致 API 契約並保存工單；SQLite 降低單機啟動成本，PostgreSQL 已用相同情境實測，高並發負載仍需另行壓測。 |
 | **知識檢索** | TF-IDF＋BM25 排名融合 | 支援機型、術語與錯誤碼的字詞檢索；合成題比較三種方法目前同分，尚無證據顯示融合更準。未使用 Embedding 或 Vector DB。 |
 | **本機 AI** | Gemma 4 E2B Q8_0（Google，Apache 2.0）、llama.cpp 純 CPU；另支援 Ollama | 用小模型選取來源段落；模型不負責自動派工、結案或核准復機。模型不可用時退回候選來源。不需 GPU，選型依據見 [本機模型基準](docs/local-llm-benchmark.md)。 |
 | **工程師推薦** | 規則篩選與排序 | 必要資格、出勤與容量是可核對的條件；目前沒有可用來訓練推薦模型的現場成效資料。 |
 | **一致性與權限** | 工作階段、角色、CSRF、版本檢查、冪等請求 | 限制操作身分，避免重送造成重複工單或扣帳，拒絕過期版本覆寫。 |
-| **部署** | Docker Compose、PostgreSQL、Caddy 設定 | 分開配置 API、資料庫、模型與 HTTPS；目前是待驗證的部署路徑。 |
+| **部署** | Docker Compose、PostgreSQL、Caddy 設定 | 分開配置 API、資料庫、模型與 HTTPS；API＋PostgreSQL 已實測，HTTPS 尚待驗證。 |
 
 ## 架構
 
@@ -130,7 +130,7 @@ flowchart TD
 
 **2. 推薦與實際派工各檢查一次。**
 
-介面上的推薦可能過期；正式模式派工 API 再核對資格與剩餘容量。SQLite 並發指派已測，避免兩次操作同時把容量用掉；PostgreSQL 的並發路徑尚未驗收。
+介面上的推薦可能過期；正式模式派工 API 再核對資格與剩餘容量。SQLite 與 PostgreSQL 的並發指派都已實測，避免兩次操作同時把容量用掉。
 
 **3. 結案是一段可回看的流程。**
 
@@ -164,7 +164,7 @@ flowchart TD
 <!-- experiment-results:start -->
 **本機部署：deployed。** 正式資料模式已在 `http://127.0.0.1:8084` 運行，採獨立資料庫與具有檔案雜湊的版本快照。
 
-已驗證登入與主管權限、匿名阻擋、關閉快速登入、重啟後帳號保存，以及 SQLite 備份／新庫還原與工作階段撤銷。尚未部署公網；Docker 映像已由 CI 以正式模式實際啟動驗證，PostgreSQL／HTTPS 尚未實測。
+已驗證登入與主管權限、匿名阻擋、關閉快速登入、重啟後帳號保存，以及 SQLite 備份／新庫還原與工作階段撤銷。尚未部署公網；Docker 映像已由 CI 以正式模式實際啟動驗證，PostgreSQL 已實測（含重啟保存與 `pg_dump` 還原），HTTPS 尚未實測。
 
 **LoRA 任務：根據報修問題與候選原文，選取相關段落 ID；無依據時輸出空清單。** 資料為 44 題原創虛構案例，按來源主題分組，訓練／驗證／測試為 24／8／12 題。
 
@@ -252,7 +252,22 @@ Exact match 變化：**+75.0 個百分點**。這是小規模流程實驗，不�
 .\.venv\Scripts\python.exe scripts\run_security_checks.py --live
 ```
 
-測試建立隔離 SQLite，不寫入運行中的正式資料庫。pytest 的 60 項測試與安全報告的 45 個情境檢查是不同計數，不能直接相加。CI 另解析 JUnit，拒絕零測試或跳過測試的結果。
+測試建立隔離 SQLite，不寫入運行中的正式資料庫。
+
+PostgreSQL 另用獨立腳本驗證（不放進 pytest，因為本機不一定有 PostgreSQL，而 CI 拒絕跳過的測試）：
+
+```powershell
+# 1. 用完即丟的 PostgreSQL 17，密碼只放在這個終端機的環境變數
+$env:PGPASSWORD=[guid]::NewGuid().ToString('N')
+docker run --rm -d --name pf-verify-pg -p 127.0.0.1:55432:5432 -e POSTGRES_PASSWORD=$env:PGPASSWORD postgres:17-alpine
+# 2. 三個情境各自在新的暫存資料庫執行，結束後刪除
+.\.venv\Scripts\python.exe scripts\verify_postgres.py scenarios --admin-url postgresql+psycopg://postgres@127.0.0.1:55432/postgres
+docker stop pf-verify-pg
+# 3. Compose 正式模式：健康檢查、重啟保存、pg_dump 還原到新資料庫；結束時自動 down -v
+.\.venv\Scripts\python.exe scripts\verify_postgres.py container
+```
+
+兩個指令最後一行都是 JSON，所有值為 `true` 即通過。pytest 的 60 項測試與安全報告的 45 個情境檢查是不同計數，不能直接相加。CI 另解析 JUnit，拒絕零測試或跳過測試的結果。
 
 ## 下一步
 

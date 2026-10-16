@@ -49,3 +49,31 @@ jobs:
       - name: Stop test container
         if: always()
         run: docker rm -f predictfix-ci || true
+  postgres:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    services:
+      postgres:
+        image: postgres:17-alpine
+        env:
+          # 只存在於本次 job 的拋棄式資料庫，用 trust 免得把密碼寫進 workflow
+          POSTGRES_HOST_AUTH_METHOD: trust
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - name: Install pinned dependencies
+        run: pip install -r requirements.txt
+      - name: Run production scenarios on PostgreSQL
+        run: python scripts/verify_postgres.py scenarios --admin-url postgresql+psycopg://postgres@127.0.0.1:5432/postgres
+      - name: Verify compose stack, restart and pg_dump restore
+        run: python scripts/verify_postgres.py container

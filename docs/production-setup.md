@@ -58,11 +58,18 @@ docker compose --env-file .env.production -f compose.production.yaml cp db:/tmp/
 
 還原時建立獨立測試資料庫，將 dump 複製進容器後用 `pg_restore`，驗證資料與照片，再依企業切換程序更換連線。不要對使用中的正式資料庫執行清空還原。正式 PostgreSQL 還原後應清除 login_sessions。
 
+也可以用腳本完成同樣的步驟；`restore` 遇到已存在的資料庫會拒絕，不會覆寫：
+
+```powershell
+.\.venv\Scripts\python.exe scripts\backup_database.py backup --postgres --env-file .env.production --destination backups\predictfix.dump
+.\.venv\Scripts\python.exe scripts\backup_database.py restore --postgres --env-file .env.production --source backups\predictfix.dump --target-database predictfix_restore_check
+```
+
 ## 驗證與尚未完成項目
 
 `python -m pytest -q` 覆蓋正式環境空資料啟動、弱初始密碼拒絕、展示污染庫拒絕、權限、出勤、重疊排班、負荷和資格阻擋、完整維修流程、工時、密碼重設撤銷登入、真實標記文件檢索、備份還原與重啟持久化。測試資料只在暫存資料庫，不會混入本機正式库。
 
-本機使用 SQLite 驗證；Docker daemon 此次不可用，因此正式 PostgreSQL、Caddy TLS、容器重啟及 pg_dump／pg_restore 路徑尚未實際驗證。部署設定不能當成已部署雲端的證據。
+2026-10-16 已用 `scripts/verify_postgres.py` 實測 PostgreSQL 17：三個正式模式情境、Compose「API＋PostgreSQL」健康檢查、容器重啟後資料保存，以及 `pg_dump` 備份還原到新資料庫並清除 login_sessions。Caddy TLS 尚未實際驗證。部署設定不能當成已部署雲端的證據。
 
 schema_versions 記錄目前第 1 版 schema，新增表採 create_all；不接受較新的資料庫版本。未建立一般欄位變更的完整 migration／downgrade 流程。現有案例草稿使用版本衝突檢查，仍需補強高並發編輯驗證。派工及排班在 SQLite 以寫入鎖串行核對，PostgreSQL 使用帳號列鎖，但 PostgreSQL 並發路徑未驗收。
 
