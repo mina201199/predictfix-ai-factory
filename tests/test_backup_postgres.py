@@ -92,3 +92,27 @@ def test_restore_creates_new_database_and_revokes_sessions(monkeypatch,tmp_path)
   assert order[0]<order[1]
   assert any('DELETE FROM login_sessions' in ' '.join(c) for c in calls)
   assert result=={'restored':True,'sessions_revoked':True,'database':'pf_restore_check'}
+
+
+def test_concurrent_restore_keeps_each_archive_isolated(monkeypatch,tmp_path):
+  from concurrent.futures import ThreadPoolExecutor
+  from threading import Barrier
+  barrier=Barrier(2)
+  archives={}
+  restored={}
+  def run(compose,*args,check=True):
+    if args[0]=='cp':
+      archives[args[2].removeprefix('db:')]=Path(args[1]).read_bytes()
+      barrier.wait(timeout=10)
+    if 'pg_restore' in args:
+      restored[args[args.index('-d')+1]]=archives[args[-1]]
+    return subprocess.CompletedProcess(args,0,'','')
+  monkeypatch.setattr(backup_database,'run_compose',run)
+  for name in ['first','second']:
+    folder=tmp_path/name
+    folder.mkdir()
+    writeDump(folder,content=name.encode())
+  with ThreadPoolExecutor(max_workers=2) as executor:
+    tasks=[executor.submit(backup_database.restore_postgres,COMPOSE,tmp_path/name/'predictfix.dump','restore_'+name) for name in ['first','second']]
+    for task in tasks:task.result()
+  assert restored=={'restore_first':b'first','restore_second':b'second'}

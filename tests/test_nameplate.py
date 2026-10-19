@@ -80,3 +80,9 @@ def test_blank_image_has_no_candidates():
 def test_engine_info_names_engine():
   info=nameplate.engine_info()
   assert info['engine']=='rapidocr' and info['version']
+
+
+def test_unknown_similar_id_requires_confirmation():
+  candidates=nameplate.match_machine_ids([('MILL-0002',0.99)],['MILL-0001','LATHE-001'])
+  assert candidates[0]['machine_id']=='MILL-0001'
+  assert nameplate.decide(candidates)=='confirm'

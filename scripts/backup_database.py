@@ -4,13 +4,12 @@ import hashlib
 import json
 import os
 import re
+import secrets
 import sqlite3
 import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
 
-CONTAINER_DUMP='/tmp/predictfix-backup.dump'
-CONTAINER_RESTORE='/tmp/predictfix-restore.dump'
 DATABASE_NAME=re.compile(r'^[a-z][a-z0-9_]{2,62}$')
 
 def checksum(path):
@@ -64,14 +63,14 @@ def run_compose(compose, *args, check=True):
 
 def backup_postgres(compose, destination, database='predictfix', user='predictfix'):
     destination=Path(destination)
+    containerDump='/tmp/predictfix-backup-'+secrets.token_hex(16)+'.dump'
     destination.parent.mkdir(parents=True,exist_ok=True)
     fd=os.open(destination,os.O_CREAT|os.O_EXCL|os.O_WRONLY,0o600);os.close(fd)
     try:
         # pg_dump 必須和伺服器同版或更新；在 PostgreSQL 17 容器內執行，不依賴本機或 runner 的 client 版本
-        run_compose(compose,'exec','-T','db','pg_dump','-U',user,'-d',database,'-Fc','-f',CONTAINER_DUMP)
+        run_compose(compose,'exec','-T','db','pg_dump','-U',user,'-d',database,'-Fc','-f',containerDump)
         # 用 cp 取出檔案而非 stdout 重導向，Windows PowerShell 會改寫 binary 內容
-        run_compose(compose,'cp','db:'+CONTAINER_DUMP,str(destination))
-        run_compose(compose,'exec','-T','db','rm','-f',CONTAINER_DUMP,check=False)
+        run_compose(compose,'cp','db:'+containerDump,str(destination))
         metadata={'created_at':datetime.now(timezone.utc).isoformat(),'format':'pg_custom','database':database,
                   'sha256':checksum(destination),'bytes':destination.stat().st_size}
         with destination.with_suffix(destination.suffix+'.json').open('x',encoding='utf-8') as f:json.dump(metadata,f,indent=2)
@@ -79,6 +78,8 @@ def backup_postgres(compose, destination, database='predictfix', user='predictfi
     except Exception:
         destination.unlink(missing_ok=True)
         raise
+    finally:
+        run_compose(compose,'exec','-T','db','rm','-f',containerDump,check=False)
 
 def restore_postgres(compose, source, target_database, user='predictfix'):
     source=Path(source)
@@ -89,12 +90,16 @@ def restore_postgres(compose, source, target_database, user='predictfix'):
     found=run_compose(compose,'exec','-T','db','psql','-U',user,'-d','postgres','-tAc',
                       f"SELECT 1 FROM pg_database WHERE datname='{target_database}'").stdout.strip()
     if found=='1':raise FileExistsError(target_database)
-    run_compose(compose,'cp',str(source),'db:'+CONTAINER_RESTORE)
-    run_compose(compose,'exec','-T','db','createdb','-U',user,target_database)
-    run_compose(compose,'exec','-T','db','pg_restore','-U',user,'-d',target_database,'--no-owner',CONTAINER_RESTORE)
-    # 還原後的環境必須重新登入，與 SQLite 還原的行為一致
-    run_compose(compose,'exec','-T','db','psql','-U',user,'-d',target_database,'-c','DELETE FROM login_sessions')
-    run_compose(compose,'exec','-T','db','rm','-f',CONTAINER_RESTORE,check=False)
+    containerRestore='/tmp/predictfix-restore-'+secrets.token_hex(16)+'.dump'
+    try:
+        # 每次操作使用獨立暫存檔，兩位操作者同時還原才不會讀到彼此的備份。
+        run_compose(compose,'cp',str(source),'db:'+containerRestore)
+        run_compose(compose,'exec','-T','db','createdb','-U',user,target_database)
+        run_compose(compose,'exec','-T','db','pg_restore','-U',user,'-d',target_database,'--no-owner',containerRestore)
+        # 還原後的環境必須重新登入，與 SQLite 還原的行為一致
+        run_compose(compose,'exec','-T','db','psql','-U',user,'-d',target_database,'-v','ON_ERROR_STOP=1','-c','DELETE FROM login_sessions')
+    finally:
+        run_compose(compose,'exec','-T','db','rm','-f',containerRestore,check=False)
     return {'restored':True,'sessions_revoked':True,'database':target_database}
 
 def main():

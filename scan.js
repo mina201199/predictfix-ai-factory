@@ -11,6 +11,7 @@ const MAX_EDGE=1600;
 let machines=[];
 // 使用者可能在 AI 回應前就換了機台；只畫目前這台的回應，避免舊結果蓋掉新畫面
 let current='';
+let scanGeneration=0;
 
 function notice(message,error=false){$('#notice').textContent=message;$('#notice').className=error?'error':''}
 
@@ -41,13 +42,18 @@ async function prepare(blob){
 }
 
 async function scanBlob(blob){
+  const generation=++scanGeneration;
+  current='';
+  $('#overview').hidden=true;
   $('#result').hidden=false;
   $('#result-body').innerHTML='<p class="loading">正在辨識銘牌文字</p>';
   $('#result').scrollIntoView({behavior:'smooth',block:'start'});
   try{
     const upload=await prepare(blob);
-    renderResult(await api('/scan/nameplate',{method:'POST',headers:{'Content-Type':'application/octet-stream'},body:upload}));
-  }catch(e){$('#result-body').innerHTML=`<p class="error">${esc(e.message)}</p>`;notice(e.message,true)}
+    if(generation!==scanGeneration)return;
+    const result=await api('/scan/nameplate',{method:'POST',headers:{'Content-Type':'application/octet-stream'},body:upload});
+    if(generation===scanGeneration)renderResult(result);
+  }catch(e){if(generation===scanGeneration){$('#result-body').innerHTML=`<p class="error">${esc(e.message)}</p>`;notice(e.message,true)}}
 }
 
 function renderResult(r){
@@ -144,7 +150,7 @@ $('#manual-form').onsubmit=e=>{
   const typed=$('#manual-input').value.trim();
   // 手動輸入常常大小寫不一致，對照已建檔編號找出正確寫法
   const match=machines.find(m=>m.id.toLowerCase()===typed.toLowerCase());
-  if(typed){$('#result').hidden=true;loadMachine(match?match.id:typed)}
+  if(typed){++scanGeneration;$('#result').hidden=true;loadMachine(match?match.id:typed)}
 };
-$('#scan-again').onclick=()=>{current='';$('#overview').hidden=true;$('#result').hidden=true;$('#capture').scrollIntoView({behavior:'smooth'})};
+$('#scan-again').onclick=()=>{++scanGeneration;current='';$('#overview').hidden=true;$('#result').hidden=true;$('#capture').scrollIntoView({behavior:'smooth'})};
 init();

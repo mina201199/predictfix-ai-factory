@@ -101,9 +101,12 @@ def validated_llm_output(output,allowed):
   if not isinstance(output,dict):return None
   summary=output.get('summary')
   if not isinstance(summary,list) or len(summary)!=3 or not all(isinstance(s,str) and s.strip() for s in summary):return None
+  suggestions=output.get('suggestions')
+  if not isinstance(suggestions,list):return None
   kept=[]
-  for item in output.get('suggestions') or []:
-    if not isinstance(item,dict) or not str(item.get('text','')).strip():continue
+  for item in suggestions:
+    if not isinstance(item,dict) or not isinstance(item.get('text'),str) or not item['text'].strip():continue
+    if not isinstance(item.get('source_type'),str) or not isinstance(item.get('source_ref'),str):continue
     key=(item.get('source_type'),item.get('source_ref'))
     # 模型只能引用我們提供的零件、工單、保養計畫、備品與手冊；捏造的來源整條丟掉
     if key in allowed:kept.append(suggestion(item['text'].strip(),key[0],key[1],allowed[key]))

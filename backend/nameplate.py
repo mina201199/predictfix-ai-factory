@@ -48,7 +48,10 @@ def match_machine_ids(lines,machine_ids):
   for text,score in lines:
     for fragment in fragments(text):
       for machineId in machine_ids:
-        confidence=round(float(score)*similarity(fragment,machineId),3)
+        matchScore=similarity(fragment,machineId)
+        confidence=round(float(score)*matchScore,3)
+        # 模糊相似只能當候選；候選差距大不代表照片上的編號真的已建檔。
+        if matchScore<1:confidence=min(confidence,AUTO_OPEN-0.001)
         if confidence>best.get(machineId,{'confidence':-1})['confidence']:
           best[machineId]={'machine_id':machineId,'confidence':confidence,'raw_text':text}
   ranked=sorted((c for c in best.values() if c['confidence']>=CONFIRM_MIN),key=lambda c:(-c['confidence'],c['machine_id']))

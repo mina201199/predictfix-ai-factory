@@ -22,6 +22,11 @@ jobs:
         run: pip install -r requirements.txt
       - name: Check runtime
         run: python scripts/check_runtime.py
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check scan request ordering
+        run: node tests/scan_race.cjs
       - name: Run all tests with no skips
         run: |
           mkdir -p .runtime

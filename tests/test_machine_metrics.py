@@ -111,3 +111,13 @@ def test_validated_llm_output_rejects_too_few_or_malformed():
     {'text':'檢查刀具','source_type':'part','source_ref':'切削刀具'}]},allowed) is None
   assert machine_metrics.validated_llm_output({'summary':['只有一行'],'suggestions':[]},allowed) is None
   assert machine_metrics.validated_llm_output(None,allowed) is None
+
+
+def test_invalid_llm_field_types_fall_back_without_exception():
+  allowed=machine_metrics.allowed_sources(overview(),[])
+  invalid=[42,{'text':42,'source_type':'part','source_ref':'切削刀具'},
+           {'text':'檢查','source_type':'part','source_ref':[]},
+           {'text':'檢查','source_type':{},'source_ref':'切削刀具'}]
+  for value in invalid:
+    suggestions=value if isinstance(value,int) else [value]
+    assert machine_metrics.validated_llm_output({'summary':['一','二','三'],'suggestions':suggestions},allowed) is None
