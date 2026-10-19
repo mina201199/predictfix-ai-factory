@@ -6,6 +6,7 @@ import os
 import sys
 import tempfile
 from pathlib import Path
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
@@ -96,10 +97,13 @@ def evaluate(client, questions):
         'noAutomaticActions': result['automaticActions'] == [], 'llmUsed': result['llmUsed'],
         'sourceValidityCorrect': all(item['chunk_id'] in activeSources and
           question['model'] in activeSources[item['chunk_id']]['machineModels'] and
-          str(item['version']) == activeSources[item['chunk_id']]['version'] for item in result['retrieval']) and
+          str(item['version']) == activeSources[item['chunk_id']]['version'] and
+          item['text'] == activeSources[item['chunk_id']]['text'] for item in result['retrieval']) and
           all(edge['sourceChunkId'] in activeSources and
             question['model'] in activeSources[edge['sourceChunkId']]['machineModels'] and
-            edge['sourceHash'] == sourceHash(activeSources[edge['sourceChunkId']])
+            edge['sourceHash'] == sourceHash(activeSources[edge['sourceChunkId']]) and
+            edge['citation']['version'] == activeSources[edge['sourceChunkId']]['version'] and
+            edge['citation']['quote'] in activeSources[edge['sourceChunkId']]['text']
             for path in result['paths'] for edge in path['relations']),
         'unknown': result['unknown'], 'paths': result['paths']}
     rows.append(row)
@@ -114,7 +118,9 @@ def evaluate(client, questions):
       'answerableRateOnPositiveQuestions': sum(v['answerableFromSources'] for v in positives) / len(positives),
       'answerabilityAccuracy': sum(v['answerabilityCorrect'] for v in values) / len(values),
       'allSourcesRelevantRate': sum(v['allSourcesRelevant'] for v in values) / len(values)}
-  return {'summary': summary, 'questions': rows, 'authorizationPassed': all(row['passed'] for row in rows if 'passed' in row)}
+  return {'summary': summary, 'questions': rows,
+    'evaluatedSourceIds': sorted({source['sourceId'] for source in activeSources.values()}),
+    'authorizationPassed': all(row['passed'] for row in rows if 'passed' in row)}
 
 
 def qualityFailures(report):
@@ -159,10 +165,12 @@ def main():
     LOCAL_LLM_MODEL='', OLLAMA_MODEL='', OLLAMA_URL='http://127.0.0.1:9')
   from fastapi.testclient import TestClient
   from backend.app import app
+  from backend import knowledge
   fixturePath = ROOT / 'evals/knowledge-graph/snapshot.json'
   questionPath = ROOT / 'evals/knowledge-graph/questions.json'
   snapshot = json.loads(fixturePath.read_text(encoding='utf-8'))
-  with TestClient(app) as client:
+  # 評估語料只取固定快照，避免展示模式日後新增手冊改變 IDF 與排名。
+  with patch.object(knowledge, 'CHUNKS', []), patch.object(knowledge, 'manual_documents', []), TestClient(app) as client:
     login = client.post('/api/auth/demo', json={'role': 'supervisor'}).json()
     client.headers['X-CSRF-Token'] = login['csrf']
     seedSnapshot(client, snapshot)
@@ -170,6 +178,7 @@ def main():
   report['qualityFailures'] = qualityFailures(report)
   report['qualityGatePassed'] = not report['qualityFailures']
   report.update(datasetVersion=snapshot['version'], provenance=snapshot['provenance'],
+    sourceScope='fixed_snapshot_only',
     sourceSha256=hashlib.sha256(fixturePath.read_bytes()).hexdigest(),
     questionsSha256=hashlib.sha256(questionPath.read_bytes()).hexdigest(),
     database='SQLite', postgresql='not tested', gpuUsed=False,

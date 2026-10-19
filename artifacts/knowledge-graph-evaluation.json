@@ -117,20 +117,20 @@
                   "machineModel": "KG-SYNTH-M1",
                   "status": "approved",
                   "revision": 2,
-                  "createdAt": "2026-10-19T06:32:15.366070",
+                  "createdAt": "2026-10-19T06:42:15.530101",
                   "sourceChunkId": "KG-SYNTH-A:2",
                   "sourceHash": "ee98576e3bd740c6a2b69b7ae53d2ba23d17d0817b9dd32e56179bc0fe266e57",
                   "createdBy": "supervisor",
                   "approvedBy": "supervisor",
-                  "approvedAt": "2026-10-19T06:32:15.369994+00:00",
+                  "approvedAt": "2026-10-19T06:42:15.534104+00:00",
                   "reviewedBy": "supervisor",
-                  "reviewedAt": "2026-10-19T06:32:15.369994+00:00",
+                  "reviewedAt": "2026-10-19T06:42:15.534104+00:00",
                   "reviewNote": "合成金標明示關係",
                   "history": [
                     {
                       "action": "approve",
                       "actor": "supervisor",
-                      "at": "2026-10-19T06:32:15.369994+00:00",
+                      "at": "2026-10-19T06:42:15.534104+00:00",
                       "note": "合成金標明示關係"
                     }
                   ],
@@ -185,20 +185,20 @@
                   "machineModel": "KG-SYNTH-M1",
                   "status": "approved",
                   "revision": 2,
-                  "createdAt": "2026-10-19T06:32:15.366070",
+                  "createdAt": "2026-10-19T06:42:15.530101",
                   "sourceChunkId": "KG-SYNTH-A:2",
                   "sourceHash": "ee98576e3bd740c6a2b69b7ae53d2ba23d17d0817b9dd32e56179bc0fe266e57",
                   "createdBy": "supervisor",
                   "approvedBy": "supervisor",
-                  "approvedAt": "2026-10-19T06:32:15.369994+00:00",
+                  "approvedAt": "2026-10-19T06:42:15.534104+00:00",
                   "reviewedBy": "supervisor",
-                  "reviewedAt": "2026-10-19T06:32:15.369994+00:00",
+                  "reviewedAt": "2026-10-19T06:42:15.534104+00:00",
                   "reviewNote": "合成金標明示關係",
                   "history": [
                     {
                       "action": "approve",
                       "actor": "supervisor",
-                      "at": "2026-10-19T06:32:15.369994+00:00",
+                      "at": "2026-10-19T06:42:15.534104+00:00",
                       "note": "合成金標明示關係"
                     }
                   ],
@@ -232,20 +232,20 @@
                   "machineModel": "KG-SYNTH-M1",
                   "status": "approved",
                   "revision": 2,
-                  "createdAt": "2026-10-19T06:32:15.382172",
+                  "createdAt": "2026-10-19T06:42:15.547102",
                   "sourceChunkId": "KG-SYNTH-B:2",
                   "sourceHash": "e396495b3dbec99cfd9314c650d1b14793408bc72a0fd120721abcd68bc74f1d",
                   "createdBy": "supervisor",
                   "approvedBy": "supervisor",
-                  "approvedAt": "2026-10-19T06:32:15.384170+00:00",
+                  "approvedAt": "2026-10-19T06:42:15.549163+00:00",
                   "reviewedBy": "supervisor",
-                  "reviewedAt": "2026-10-19T06:32:15.384170+00:00",
+                  "reviewedAt": "2026-10-19T06:42:15.549163+00:00",
                   "reviewNote": "合成金標明示關係",
                   "history": [
                     {
                       "action": "approve",
                       "actor": "supervisor",
-                      "at": "2026-10-19T06:32:15.384170+00:00",
+                      "at": "2026-10-19T06:42:15.549163+00:00",
                       "note": "合成金標明示關係"
                     }
                   ],
@@ -306,20 +306,20 @@
                   "machineModel": "KG-SYNTH-M1",
                   "status": "approved",
                   "revision": 2,
-                  "createdAt": "2026-10-19T06:32:15.366070",
+                  "createdAt": "2026-10-19T06:42:15.530101",
                   "sourceChunkId": "KG-SYNTH-A:2",
                   "sourceHash": "ee98576e3bd740c6a2b69b7ae53d2ba23d17d0817b9dd32e56179bc0fe266e57",
                   "createdBy": "supervisor",
                   "approvedBy": "supervisor",
-                  "approvedAt": "2026-10-19T06:32:15.369994+00:00",
+                  "approvedAt": "2026-10-19T06:42:15.534104+00:00",
                   "reviewedBy": "supervisor",
-                  "reviewedAt": "2026-10-19T06:32:15.369994+00:00",
+                  "reviewedAt": "2026-10-19T06:42:15.534104+00:00",
                   "reviewNote": "合成金標明示關係",
                   "history": [
                     {
                       "action": "approve",
                       "actor": "supervisor",
-                      "at": "2026-10-19T06:32:15.369994+00:00",
+                      "at": "2026-10-19T06:42:15.534104+00:00",
                       "note": "合成金標明示關係"
                     }
                   ],
@@ -353,20 +353,20 @@
                   "machineModel": "KG-SYNTH-M1",
                   "status": "approved",
                   "revision": 2,
-                  "createdAt": "2026-10-19T06:32:15.382172",
+                  "createdAt": "2026-10-19T06:42:15.547102",
                   "sourceChunkId": "KG-SYNTH-B:2",
                   "sourceHash": "e396495b3dbec99cfd9314c650d1b14793408bc72a0fd120721abcd68bc74f1d",
                   "createdBy": "supervisor",
                   "approvedBy": "supervisor",
-                  "approvedAt": "2026-10-19T06:32:15.384170+00:00",
+                  "approvedAt": "2026-10-19T06:42:15.549163+00:00",
                   "reviewedBy": "supervisor",
-                  "reviewedAt": "2026-10-19T06:32:15.384170+00:00",
+                  "reviewedAt": "2026-10-19T06:42:15.549163+00:00",
                   "reviewNote": "合成金標明示關係",
                   "history": [
                     {
                       "action": "approve",
                       "actor": "supervisor",
-                      "at": "2026-10-19T06:32:15.384170+00:00",
+                      "at": "2026-10-19T06:42:15.549163+00:00",
                       "note": "合成金標明示關係"
                     }
                   ],
@@ -401,20 +401,20 @@
                   "machineModel": "KG-SYNTH-M1",
                   "status": "approved",
                   "revision": 2,
-                  "createdAt": "2026-10-19T06:32:15.412075",
+                  "createdAt": "2026-10-19T06:42:15.570824",
                   "sourceChunkId": "KG-SYNTH-D:2",
                   "sourceHash": "41a2b1d53ca0afad8d43c8b11138922f00107f9ce29e545fffca140a1d26f54c",
                   "createdBy": "supervisor",
                   "approvedBy": "supervisor",
-                  "approvedAt": "2026-10-19T06:32:15.416864+00:00",
+                  "approvedAt": "2026-10-19T06:42:15.572812+00:00",
                   "reviewedBy": "supervisor",
-                  "reviewedAt": "2026-10-19T06:32:15.416864+00:00",
+                  "reviewedAt": "2026-10-19T06:42:15.572812+00:00",
                   "reviewNote": "合成金標明示關係",
                   "history": [
                     {
                       "action": "approve",
                       "actor": "supervisor",
-                      "at": "2026-10-19T06:32:15.416864+00:00",
+                      "at": "2026-10-19T06:42:15.572812+00:00",
                       "note": "合成金標明示關係"
                     }
                   ],
@@ -475,20 +475,20 @@
                   "machineModel": "KG-SYNTH-M1",
                   "status": "approved",
                   "revision": 2,
-                  "createdAt": "2026-10-19T06:32:15.366070",
+                  "createdAt": "2026-10-19T06:42:15.530101",
                   "sourceChunkId": "KG-SYNTH-A:2",
                   "sourceHash": "ee98576e3bd740c6a2b69b7ae53d2ba23d17d0817b9dd32e56179bc0fe266e57",
                   "createdBy": "supervisor",
                   "approvedBy": "supervisor",
-                  "approvedAt": "2026-10-19T06:32:15.369994+00:00",
+                  "approvedAt": "2026-10-19T06:42:15.534104+00:00",
                   "reviewedBy": "supervisor",
-                  "reviewedAt": "2026-10-19T06:32:15.369994+00:00",
+                  "reviewedAt": "2026-10-19T06:42:15.534104+00:00",
                   "reviewNote": "合成金標明示關係",
                   "history": [
                     {
                       "action": "approve",
                       "actor": "supervisor",
-                      "at": "2026-10-19T06:32:15.369994+00:00",
+                      "at": "2026-10-19T06:42:15.534104+00:00",
                       "note": "合成金標明示關係"
                     }
                   ],
@@ -522,20 +522,20 @@
                   "machineModel": "KG-SYNTH-M1",
                   "status": "approved",
                   "revision": 2,
-                  "createdAt": "2026-10-19T06:32:15.382172",
+                  "createdAt": "2026-10-19T06:42:15.547102",
                   "sourceChunkId": "KG-SYNTH-B:2",
                   "sourceHash": "e396495b3dbec99cfd9314c650d1b14793408bc72a0fd120721abcd68bc74f1d",
                   "createdBy": "supervisor",
                   "approvedBy": "supervisor",
-                  "approvedAt": "2026-10-19T06:32:15.384170+00:00",
+                  "approvedAt": "2026-10-19T06:42:15.549163+00:00",
                   "reviewedBy": "supervisor",
-                  "reviewedAt": "2026-10-19T06:32:15.384170+00:00",
+                  "reviewedAt": "2026-10-19T06:42:15.549163+00:00",
                   "reviewNote": "合成金標明示關係",
                   "history": [
                     {
                       "action": "approve",
                       "actor": "supervisor",
-                      "at": "2026-10-19T06:32:15.384170+00:00",
+                      "at": "2026-10-19T06:42:15.549163+00:00",
                       "note": "合成金標明示關係"
                     }
                   ],
@@ -570,20 +570,20 @@
                   "machineModel": "KG-SYNTH-M1",
                   "status": "approved",
                   "revision": 2,
-                  "createdAt": "2026-10-19T06:32:15.396166",
+                  "createdAt": "2026-10-19T06:42:15.559174",
                   "sourceChunkId": "KG-SYNTH-C:2",
                   "sourceHash": "8523611ac3389957d72c2e43a4bc23861385cc1284fb0a7e33843556f92d945e",
                   "createdBy": "supervisor",
                   "approvedBy": "supervisor",
-                  "approvedAt": "2026-10-19T06:32:15.399753+00:00",
+                  "approvedAt": "2026-10-19T06:42:15.562174+00:00",
                   "reviewedBy": "supervisor",
-                  "reviewedAt": "2026-10-19T06:32:15.399753+00:00",
+                  "reviewedAt": "2026-10-19T06:42:15.562174+00:00",
                   "reviewNote": "合成金標明示關係",
                   "history": [
                     {
                       "action": "approve",
                       "actor": "supervisor",
-                      "at": "2026-10-19T06:32:15.399753+00:00",
+                      "at": "2026-10-19T06:42:15.562174+00:00",
                       "note": "合成金標明示關係"
                     }
                   ],
@@ -707,20 +707,20 @@
                   "machineModel": "KG-SYNTH-M1",
                   "status": "approved",
                   "revision": 2,
-                  "createdAt": "2026-10-19T06:32:15.382172",
+                  "createdAt": "2026-10-19T06:42:15.547102",
                   "sourceChunkId": "KG-SYNTH-B:2",
                   "sourceHash": "e396495b3dbec99cfd9314c650d1b14793408bc72a0fd120721abcd68bc74f1d",
                   "createdBy": "supervisor",
                   "approvedBy": "supervisor",
-                  "approvedAt": "2026-10-19T06:32:15.384170+00:00",
+                  "approvedAt": "2026-10-19T06:42:15.549163+00:00",
                   "reviewedBy": "supervisor",
-                  "reviewedAt": "2026-10-19T06:32:15.384170+00:00",
+                  "reviewedAt": "2026-10-19T06:42:15.549163+00:00",
                   "reviewNote": "合成金標明示關係",
                   "history": [
                     {
                       "action": "approve",
                       "actor": "supervisor",
-                      "at": "2026-10-19T06:32:15.384170+00:00",
+                      "at": "2026-10-19T06:42:15.549163+00:00",
                       "note": "合成金標明示關係"
                     }
                   ],
@@ -776,20 +776,20 @@
                   "machineModel": "KG-SYNTH-M1",
                   "status": "approved",
                   "revision": 2,
-                  "createdAt": "2026-10-19T06:32:15.382172",
+                  "createdAt": "2026-10-19T06:42:15.547102",
                   "sourceChunkId": "KG-SYNTH-B:2",
                   "sourceHash": "e396495b3dbec99cfd9314c650d1b14793408bc72a0fd120721abcd68bc74f1d",
                   "createdBy": "supervisor",
                   "approvedBy": "supervisor",
-                  "approvedAt": "2026-10-19T06:32:15.384170+00:00",
+                  "approvedAt": "2026-10-19T06:42:15.549163+00:00",
                   "reviewedBy": "supervisor",
-                  "reviewedAt": "2026-10-19T06:32:15.384170+00:00",
+                  "reviewedAt": "2026-10-19T06:42:15.549163+00:00",
                   "reviewNote": "合成金標明示關係",
                   "history": [
                     {
                       "action": "approve",
                       "actor": "supervisor",
-                      "at": "2026-10-19T06:32:15.384170+00:00",
+                      "at": "2026-10-19T06:42:15.549163+00:00",
                       "note": "合成金標明示關係"
                     }
                   ],
@@ -824,20 +824,20 @@
                   "machineModel": "KG-SYNTH-M1",
                   "status": "approved",
                   "revision": 2,
-                  "createdAt": "2026-10-19T06:32:15.412075",
+                  "createdAt": "2026-10-19T06:42:15.570824",
                   "sourceChunkId": "KG-SYNTH-D:2",
                   "sourceHash": "41a2b1d53ca0afad8d43c8b11138922f00107f9ce29e545fffca140a1d26f54c",
                   "createdBy": "supervisor",
                   "approvedBy": "supervisor",
-                  "approvedAt": "2026-10-19T06:32:15.416864+00:00",
+                  "approvedAt": "2026-10-19T06:42:15.572812+00:00",
                   "reviewedBy": "supervisor",
-                  "reviewedAt": "2026-10-19T06:32:15.416864+00:00",
+                  "reviewedAt": "2026-10-19T06:42:15.572812+00:00",
                   "reviewNote": "合成金標明示關係",
                   "history": [
                     {
                       "action": "approve",
                       "actor": "supervisor",
-                      "at": "2026-10-19T06:32:15.416864+00:00",
+                      "at": "2026-10-19T06:42:15.572812+00:00",
                       "note": "合成金標明示關係"
                     }
                   ],
@@ -893,20 +893,20 @@
                   "machineModel": "KG-SYNTH-M1",
                   "status": "approved",
                   "revision": 2,
-                  "createdAt": "2026-10-19T06:32:15.382172",
+                  "createdAt": "2026-10-19T06:42:15.547102",
                   "sourceChunkId": "KG-SYNTH-B:2",
                   "sourceHash": "e396495b3dbec99cfd9314c650d1b14793408bc72a0fd120721abcd68bc74f1d",
                   "createdBy": "supervisor",
                   "approvedBy": "supervisor",
-                  "approvedAt": "2026-10-19T06:32:15.384170+00:00",
+                  "approvedAt": "2026-10-19T06:42:15.549163+00:00",
                   "reviewedBy": "supervisor",
-                  "reviewedAt": "2026-10-19T06:32:15.384170+00:00",
+                  "reviewedAt": "2026-10-19T06:42:15.549163+00:00",
                   "reviewNote": "合成金標明示關係",
                   "history": [
                     {
                       "action": "approve",
                       "actor": "supervisor",
-                      "at": "2026-10-19T06:32:15.384170+00:00",
+                      "at": "2026-10-19T06:42:15.549163+00:00",
                       "note": "合成金標明示關係"
                     }
                   ],
@@ -941,20 +941,20 @@
                   "machineModel": "KG-SYNTH-M1",
                   "status": "approved",
                   "revision": 2,
-                  "createdAt": "2026-10-19T06:32:15.396166",
+                  "createdAt": "2026-10-19T06:42:15.559174",
                   "sourceChunkId": "KG-SYNTH-C:2",
                   "sourceHash": "8523611ac3389957d72c2e43a4bc23861385cc1284fb0a7e33843556f92d945e",
                   "createdBy": "supervisor",
                   "approvedBy": "supervisor",
-                  "approvedAt": "2026-10-19T06:32:15.399753+00:00",
+                  "approvedAt": "2026-10-19T06:42:15.562174+00:00",
                   "reviewedBy": "supervisor",
-                  "reviewedAt": "2026-10-19T06:32:15.399753+00:00",
+                  "reviewedAt": "2026-10-19T06:42:15.562174+00:00",
                   "reviewNote": "合成金標明示關係",
                   "history": [
                     {
                       "action": "approve",
                       "actor": "supervisor",
-                      "at": "2026-10-19T06:32:15.399753+00:00",
+                      "at": "2026-10-19T06:42:15.562174+00:00",
                       "note": "合成金標明示關係"
                     }
                   ],
@@ -1077,20 +1077,20 @@
                   "machineModel": "KG-SYNTH-M1",
                   "status": "approved",
                   "revision": 2,
-                  "createdAt": "2026-10-19T06:32:15.412075",
+                  "createdAt": "2026-10-19T06:42:15.570824",
                   "sourceChunkId": "KG-SYNTH-D:2",
                   "sourceHash": "41a2b1d53ca0afad8d43c8b11138922f00107f9ce29e545fffca140a1d26f54c",
                   "createdBy": "supervisor",
                   "approvedBy": "supervisor",
-                  "approvedAt": "2026-10-19T06:32:15.416864+00:00",
+                  "approvedAt": "2026-10-19T06:42:15.572812+00:00",
                   "reviewedBy": "supervisor",
-                  "reviewedAt": "2026-10-19T06:32:15.416864+00:00",
+                  "reviewedAt": "2026-10-19T06:42:15.572812+00:00",
                   "reviewNote": "合成金標明示關係",
                   "history": [
                     {
                       "action": "approve",
                       "actor": "supervisor",
-                      "at": "2026-10-19T06:32:15.416864+00:00",
+                      "at": "2026-10-19T06:42:15.572812+00:00",
                       "note": "合成金標明示關係"
                     }
                   ],
@@ -1142,20 +1142,20 @@
                   "machineModel": "KG-SYNTH-M1",
                   "status": "approved",
                   "revision": 2,
-                  "createdAt": "2026-10-19T06:32:15.396166",
+                  "createdAt": "2026-10-19T06:42:15.559174",
                   "sourceChunkId": "KG-SYNTH-C:2",
                   "sourceHash": "8523611ac3389957d72c2e43a4bc23861385cc1284fb0a7e33843556f92d945e",
                   "createdBy": "supervisor",
                   "approvedBy": "supervisor",
-                  "approvedAt": "2026-10-19T06:32:15.399753+00:00",
+                  "approvedAt": "2026-10-19T06:42:15.562174+00:00",
                   "reviewedBy": "supervisor",
-                  "reviewedAt": "2026-10-19T06:32:15.399753+00:00",
+                  "reviewedAt": "2026-10-19T06:42:15.562174+00:00",
                   "reviewNote": "合成金標明示關係",
                   "history": [
                     {
                       "action": "approve",
                       "actor": "supervisor",
-                      "at": "2026-10-19T06:32:15.399753+00:00",
+                      "at": "2026-10-19T06:42:15.562174+00:00",
                       "note": "合成金標明示關係"
                     }
                   ],
@@ -1268,20 +1268,20 @@
                   "machineModel": "KG-SYNTH-M2",
                   "status": "approved",
                   "revision": 2,
-                  "createdAt": "2026-10-19T06:32:15.429493",
+                  "createdAt": "2026-10-19T06:42:15.583149",
                   "sourceChunkId": "KG-SYNTH-OTHER:2",
                   "sourceHash": "0c82de0980d18e50dd8f9fc6ff0f6df758852d1e849ecb338e5c8d790497f10e",
                   "createdBy": "supervisor",
                   "approvedBy": "supervisor",
-                  "approvedAt": "2026-10-19T06:32:15.432468+00:00",
+                  "approvedAt": "2026-10-19T06:42:15.585115+00:00",
                   "reviewedBy": "supervisor",
-                  "reviewedAt": "2026-10-19T06:32:15.432468+00:00",
+                  "reviewedAt": "2026-10-19T06:42:15.585115+00:00",
                   "reviewNote": "合成金標明示關係",
                   "history": [
                     {
                       "action": "approve",
                       "actor": "supervisor",
-                      "at": "2026-10-19T06:32:15.432468+00:00",
+                      "at": "2026-10-19T06:42:15.585115+00:00",
                       "note": "合成金標明示關係"
                     }
                   ],
@@ -1642,11 +1642,20 @@
       "passed": true
     }
   ],
+  "evaluatedSourceIds": [
+    "KG-SYNTH-A",
+    "KG-SYNTH-B",
+    "KG-SYNTH-C",
+    "KG-SYNTH-D",
+    "KG-SYNTH-INJECTION",
+    "KG-SYNTH-OTHER"
+  ],
   "authorizationPassed": true,
   "qualityFailures": [],
   "qualityGatePassed": true,
   "datasetVersion": "1.0",
   "provenance": "全部為原創合成測試資料，不是原廠手冊或真實維修成效。固定種子，不呼叫 LLM。",
+  "sourceScope": "fixed_snapshot_only",
   "sourceSha256": "00b5a31fd85d265dce4e276cb51ef2081ec03dba8ced918ddb735ba32dd24e89",
   "questionsSha256": "401ef3757cc61370bbfc7ab42b6af5a9907294ee912e50d32704b56fcadc5760",
   "database": "SQLite",

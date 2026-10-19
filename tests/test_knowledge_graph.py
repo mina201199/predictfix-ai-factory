@@ -26,6 +26,9 @@ def test_graph_evaluation_has_real_quality_gates(tmp_path):
   assert result.returncode == 0, result.stdout + result.stderr
   report = json.loads(output.read_text(encoding='utf-8'))
   assert report['qualityGatePassed'] is True
+  assert report['sourceScope'] == 'fixed_snapshot_only'
+  assert report['evaluatedSourceIds'] == ['KG-SYNTH-A', 'KG-SYNTH-B', 'KG-SYNTH-C', 'KG-SYNTH-D',
+    'KG-SYNTH-INJECTION', 'KG-SYNTH-OTHER']
   assert len(report['questions']) == 12 and report['authorizationPassed']
   assert report['summary']['keyword_plus_graph']['macroRecallOnRelevantQuestions'] >= report['summary']['keyword']['macroRecallOnRelevantQuestions']
   from scripts.evaluate_knowledge_graph import qualityFailures

@@ -71,7 +71,7 @@ $env:OLLAMA_MODEL = ''
 
 ## 評估結果與解讀
 
-固定來源為 `evals/knowledge-graph/snapshot.json`，金標為 `questions.json`，報告保存兩者 SHA256 與逐題檢索／路徑。共有 10 題檢索情境及 2 題實際權限情境；含 2–3 hop、同碼異義、錯機型、撤回、草稿、資料不足、反向關係反例、來源注入與越權。
+固定來源為 `evals/knowledge-graph/snapshot.json`，金標為 `questions.json`，報告保存兩者 SHA256、實際評估來源 ID 與逐題檢索／路徑。評估期間排除內建展示手冊，只使用固定快照，避免日後新增展示資料改變 IDF 與排名；保留展示資料庫後，一般 App 仍會依既有展示模式載入內建手冊，因此 UI 是操作展示而非完全相同的評估語料。共有 10 題檢索情境及 2 題實際權限情境；含 2–3 hop、同碼異義、錯機型、撤回、草稿、資料不足、反向關係反例、來源注入與越權。
 
 | 指標 | 純字詞 TF-IDF／BM25 | 字詞＋圖譜 |
 |---|---:|---:|
@@ -96,7 +96,7 @@ git diff --check
 
 圖譜情境使用真實 SQLite／TestClient，涵蓋持久化、去重、主管審查、CAS 與雙 Session 競態、方向／循環／hop／結果／展開與掃描上限、改版／撤回／草稿／同版重發布、特殊字元模板、備品與資格目錄不亂推適用性、引用追溯、工程師／未登入權限。全路由矩陣仍在正式與展示模式逐列執行，沒有關閉守門。瀏覽器實測主管撤回後路徑由 4 減為 3，重新核准恢復；工程師沒有管理區。axe 基本檢查在修正身分文字對比後無違規。
 
-本分支基準為 68 項 pytest 通過；最後全套為 **70 passed，0 failure／error／skip**，140.07 秒；另有既有 Starlette 套件 deprecation warning 一則。圖譜單一情境包含 52 次檢查，不能將其和 pytest 項數相加。見 [驗證紀錄](../artifacts/knowledge-graph-verification.json)、[JUnit](../artifacts/knowledge-graph-tests.xml) 與 [合成畫面](../artifacts/knowledge-graph-engineer.png)。
+本分支基準為 68 項 pytest 通過；全套為 **70 passed，0 failure／error／skip**，140.07 秒；另有既有 Starlette 套件 deprecation warning 一則。後續將評估限定為固定快照，已另重跑圖譜兩項測試，**2 passed**，10.22 秒；重跑評估品質門檻通過、表列指標不變。圖譜單一情境包含 52 次檢查，不能將其和 pytest 項數相加。見 [驗證紀錄](../artifacts/knowledge-graph-verification.json)、[JUnit](../artifacts/knowledge-graph-tests.xml) 與 [合成畫面](../artifacts/knowledge-graph-engineer.png)。
 
 獨立審查已修正：失效邊占配額、模板 JSON 跳脫、預送未讀 revision 的競態、評估成功退出未代表品質門檻。仍需真實來源與領域人員核對；大規模資料的索引／批次有效性維護、PostgreSQL、語意抽取模型及正式現場維修效益尚未驗證。
 

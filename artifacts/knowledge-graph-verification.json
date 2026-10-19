@@ -8,6 +8,15 @@
   "llmUsed": false,
   "baseline": {"pytestPassed": 68, "warnings": 1},
   "final": {"pytestPassed": 70, "failures": 0, "errors": 0, "skipped": 0, "warnings": 1, "seconds": 140.07},
+  "subsequentTargetedVerification": {
+    "change": "Restrict evaluation corpus to fixed snapshot, assert actual source IDs, and compare retrieval text to current source",
+    "pytestPassed": 2,
+    "failures": 0,
+    "skipped": 0,
+    "seconds": 10.22,
+    "evaluationQualityGatePassed": true,
+    "evaluationMetricsUnchanged": true
+  },
   "warning": "Existing StarletteDeprecationWarning: Using httpx with starlette.testclient is deprecated; no dependency changes made.",
   "commands": [
     "../predictfix-ai-factory/.venv/Scripts/python.exe -m pytest --confcutdir=. --rootdir=. tests -q -p no:cacheprovider --basetemp=.runtime/graph-final-suite --junitxml=.runtime/graph-final-junit.xml",
@@ -18,7 +27,7 @@
   ],
   "graphScenarioAssertions": 52,
   "accessMatrix": {"productionPassed": true, "demoPassed": true, "allRoutesGuardRetained": true},
-  "evaluation": {"file": "artifacts/knowledge-graph-evaluation.json", "qualityGatePassed": true, "syntheticOnly": true},
+  "evaluation": {"file": "artifacts/knowledge-graph-evaluation.json", "qualityGatePassed": true, "syntheticOnly": true, "sourceScope": "fixed_snapshot_only"},
   "browser": {
     "tool": "agent-browser 0.39.0, isolated knowledge-graph-wave2 session",
     "fixture": "new SQLite from fixed synthetic evaluation snapshot; no live factory data",
