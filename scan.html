@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PredictFix · 掃描機台</title><link rel="stylesheet" href="scan.css"><link rel="stylesheet" href="neon.css"><link rel="stylesheet" href="auth.css"></head>
+<body><aside><a class="brand" href="/">PredictFix <span>AI</span></a><p>拍下銘牌，馬上看到這台機台的全貌。</p><nav aria-label="頁面"><a href="/">回到首頁</a><a href="/workflow.html">維修流程</a><a href="/knowledge.html">知識中心</a><a class="active" href="/scan.html" aria-current="page">掃描機台</a></nav></aside>
+<main class="main"><header><div><small>拍照 / 辨識 / 現況 / 建議</small><h1>掃描機台</h1></div><div class="header-right"><span id="demo-badge" class="demo-badge" hidden>示範資料</span></div></header><div id="notice" role="status" aria-live="polite"></div>
+<section id="capture" class="card scan-card"><h2>1. 取得機台編號</h2><p class="muted">拍下機台銘牌，系統用本機 OCR 讀出編號；讀不到時可以手動輸入。</p>
+<label class="capture-btn" for="photo">拍攝或選擇銘牌照片<input type="file" id="photo" accept="image/*" capture="environment"></label>
+<div id="drop" class="drop-zone">或把照片拖到這裡</div>
+<div id="sample-box" hidden><h3>範例銘牌</h3><p class="muted">點選一張，系統會實際對這張圖片執行 OCR。</p><div id="samples" class="samples"></div></div>
+<form id="manual-form" class="manual-form"><label>手動輸入編號<input id="manual-input" name="machine" list="machine-list" placeholder="例如 CNC-07" autocomplete="off" required></label><datalist id="machine-list"></datalist><button class="btn">查看機台</button></form></section>
+<section id="result" class="card scan-card" hidden><h2>2. 辨識結果</h2><div class="result-row"><canvas id="preview" width="320" height="160" aria-label="上傳的銘牌照片"></canvas><div id="result-body"></div></div></section>
+<section id="overview" hidden><div class="card overview-head" id="overview-head"></div>
+<section class="card ai-card"><h2>一眼摘要</h2><div id="ai-summary"></div></section>
+<details class="card" open><summary>現況與零件</summary><div id="sec-live"></div></details>
+<details class="card" open><summary>人員與進行中的工作</summary><div id="sec-people"></div></details>
+<details class="card"><summary>歷史檢修</summary><div id="sec-history"></div></details>
+<details class="card"><summary>保養與備品</summary><div id="sec-maintenance"></div></details>
+<details class="card"><summary>可靠度指標</summary><div id="sec-reliability"></div></details>
+<details class="card" open><summary>AI 優化建議</summary><div id="sec-suggestions"></div></details>
+<div class="actions scan-actions"><a class="btn primary" href="/workflow.html">建立工單</a><a class="btn" href="/knowledge.html">問 AI</a><button type="button" class="btn" id="scan-again">再掃一台</button></div></section>
+</main><script src="auth.js"></script><script src="scan.js"></script></body></html>

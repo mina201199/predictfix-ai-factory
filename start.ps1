@@ -1,13 +1,22 @@
-﻿param([int]$Port=8080,[switch]$Demo)
+﻿param([int]$Port=8080,[switch]$Demo,[switch]$Lan)
 $ErrorActionPreference='Stop'
 # 以 .\start.ps1 執行時 $env: 的修改會留在呼叫端的終端機；結束時還原，避免下次換模式啟動沿用到上次的設定
-$managedVariables='DEMO_MODE','APP_MODE','LLM_PROVIDER','LOCAL_LLM_MODEL','LLM_URL','OLLAMA_MODELS','OLLAMA_HOST','OLLAMA_MODEL'
+$managedVariables='DEMO_MODE','APP_MODE','LAN_MODE','BOOTSTRAP_PASSWORD','LLM_PROVIDER','LOCAL_LLM_MODEL','LLM_URL','OLLAMA_MODELS','OLLAMA_HOST','OLLAMA_MODEL'
 $savedVariables=@{}
 foreach ($name in $managedVariables) { $savedVariables[$name]=[Environment]::GetEnvironmentVariable($name,'Process') }
 try {
-  $env:DEMO_MODE=if($Demo){'1'}else{'0'}
+  $env:LAN_MODE=if($Lan){'1'}else{'0'}
+  $env:DEMO_MODE=if($Demo -and -not $Lan){'1'}else{'0'}
   $env:APP_MODE=if($Demo){'demo'}else{'production'}
   Set-Location -LiteralPath $PSScriptRoot
+  if (-not $env:BOOTSTRAP_PASSWORD -and (Test-Path -LiteralPath '.env')) {
+    # 只讀取帳號初始化需要的值，避免把其他設定或金鑰當作 PowerShell 執行。
+    foreach ($line in Get-Content -LiteralPath '.env') {
+      if ($line -match '^\s*BOOTSTRAP_PASSWORD\s*=\s*(.*?)\s*$') {
+        $env:BOOTSTRAP_PASSWORD=$Matches[1].Trim([char]34,[char]39)
+      }
+    }
+  }
   $projectPython=Join-Path $PSScriptRoot '.venv\Scripts\python.exe'
   if (-not (Test-Path -LiteralPath $projectPython)) { throw '請先依 README 安裝 Python 相依套件。' }
   & $projectPython (Join-Path $PSScriptRoot 'scripts\check_runtime.py')
@@ -41,7 +50,18 @@ try {
     catch { Start-Process -FilePath $localOllama -ArgumentList 'serve' -WindowStyle Hidden -RedirectStandardOutput (Join-Path $PSScriptRoot '.runtime\ollama-out.log') -RedirectStandardError (Join-Path $PSScriptRoot '.runtime\ollama-error.log') }
     $env:OLLAMA_MODEL='gemma4:e2b-it-q8_0'
   }
-  & $projectPython -m uvicorn backend.app:app --host 127.0.0.1 --port $Port
+  $listenAddress='127.0.0.1'
+  if ($Lan) {
+    $listenAddress='0.0.0.0'
+    Write-Host '區網模式：快速登入已關閉，請使用既有帳號密碼。'
+    Write-Host '首次建立帳號的密碼來源：環境變數或 .env 的 BOOTSTRAP_PASSWORD；展示帳號未設定時見 data/initial-accounts.json。既有帳號不會重設。'
+    Get-NetIPAddress -AddressFamily IPv4 -ErrorAction SilentlyContinue |
+      Where-Object { $_.IPAddress -notmatch '^(127\.|169\.254\.)' } |
+      ForEach-Object { Write-Host ('手機網址：http://'+$_.IPAddress+':'+$Port+'/scan.html') }
+    Write-Host '如需開放私人網路的防火牆，請自行以系統管理員執行：'
+    Write-Host ('New-NetFirewallRule -DisplayName "PredictFix LAN demo" -Direction Inbound -Protocol TCP -LocalPort '+$Port+' -Profile Private -Action Allow')
+  }
+  & $projectPython -m uvicorn backend.app:app --host $listenAddress --port $Port
 }
 finally {
   foreach ($name in $managedVariables) { [Environment]::SetEnvironmentVariable($name,$savedVariables[$name],'Process') }

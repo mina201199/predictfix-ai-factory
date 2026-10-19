@@ -15,6 +15,8 @@ def main():
         import pydantic
         import sklearn
         import sqlalchemy
+        import onnxruntime
+        import rapidocr
         from PIL import Image
         from sqlalchemy import create_engine, text
         from sqlalchemy.util._has_cython import HAS_CYEXTENSION

@@ -6,7 +6,7 @@ import sys
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[1]
-PAGES=['/','/console.html','/knowledge.html','/workflow.html']
+PAGES=['/','/console.html','/knowledge.html','/workflow.html','/scan.html']
 
 
 def runApp(tmpPath,mode,code):
@@ -59,3 +59,12 @@ def test_served_files_have_no_inline_code_or_style_attributes():
     if path.suffix=='.html':
       assert '<style' not in text,path.name
       assert not re.search(r'<script(?![^>]*\ssrc=)[^>]*>',text),path.name
+
+
+def test_scan_page_is_served_and_linked_in_both_modes(tmp_path):
+  code='    print(json.dumps({p:client.get(p).status_code for p in ["/scan.html","/scan.js","/scan.css"]}))\n'
+  for mode in ['demo','production']:
+    assert set(runApp(tmp_path,mode,code).values())=={200},mode
+  # demo 與正式模式的首頁不同，兩邊的導覽列都要能進到掃描頁
+  for page in ['index.html','console.html']:
+    assert 'href="/scan.html"' in (ROOT/page).read_text(encoding='utf-8'),page
