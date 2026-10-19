@@ -191,7 +191,8 @@ def register(app):
         return {'ok':True,'sessions_revoked':True}
 
     @app.get('/api/duties')
-    def duties():
+    def duties(request:Request):
+        auth.supervisor(request)
         with store.Session() as db:
             return [{'id':d.id,'username':d.username,'starts_at':utc(d.starts_at).isoformat(),'ends_at':utc(d.ends_at).isoformat(),
                      'attendance':d.attendance,'capacity_minutes':d.capacity_minutes,'note':d.note} for d in db.scalars(select(store.Duty).order_by(store.Duty.starts_at.desc())).all()]
@@ -228,7 +229,8 @@ def register(app):
         return {'ok':True}
 
     @app.get('/api/dispatch')
-    def dispatch(part:str='',at:datetime|None=None,minutes:int=60,ticket_id:str=''):
+    def dispatch(request:Request,part:str='',at:datetime|None=None,minutes:int=60,ticket_id:str=''):
+        auth.supervisor(request)
         if minutes<1 or minutes>100000:raise HTTPException(422,'需求工時範圍不符')
         if at is not None and at.tzinfo is None:raise HTTPException(422,'時間必須包含時區')
         required=[]

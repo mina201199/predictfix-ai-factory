@@ -203,6 +203,13 @@ def stockRequest(body):
   return lambda role:{'url':f'/api/stock/{item()}/movements','json':body(),'headers':{'Idempotency-Key':uid('matrix-')}}
 
 
+def recommendationScope(role,response):
+  person=next((p for p in response.json() if p['name']=='Matrix New Engineer'),None)
+  return bool(person and person['method']=='attendance_capacity_rules'
+              and person['attendance']=='no_schedule' and not person['eligible']
+              and 'history' not in person['breakdown'])
+
+
 MATRIX=[
   # 公開頁面與登入
   row('GET','/healthz',PUBLIC),
@@ -270,11 +277,11 @@ MATRIX=[
   row('POST','/api/equipment-templates',SUPERVISOR,lambda role:{'json':TEMPLATE}),
   row('PUT','/api/equipment-templates/{tid}',SUPERVISOR,lambda role:{'url':f'/api/equipment-templates/{template()}','json':{**TEMPLATE,'revision':1}}),
   # 人員、出勤與派工
-  row('GET','/api/personnel',SIGNED_IN),
-  row('GET','/api/engineers',SIGNED_IN,lambda role:{'params':{'machine':MACHINE,'part':'主軸軸承'}}),
-  row('GET','/api/dispatch',SIGNED_IN),
+  row('GET','/api/personnel',SUPERVISOR),
+  row('GET','/api/engineers',SUPERVISOR,lambda role:{'params':{'machine':MACHINE,'part':'主軸軸承'}},check=recommendationScope),
+  row('GET','/api/dispatch',SUPERVISOR),
   row('GET','/api/analytics',SIGNED_IN),
-  row('GET','/api/duties',SIGNED_IN),
+  row('GET','/api/duties',SUPERVISOR),
   row('POST','/api/duties',SUPERVISOR,lambda role:{'json':dutyBody(TARGET[0])}),
   row('PUT','/api/duties/{did}/attendance',SUPERVISOR,attendanceRequest),
   # 帳號管理
@@ -360,6 +367,8 @@ def fixtures(sup):
   add(store.Duty(id=uid('DUTY-MX-'),username=TARGET[0],starts_at=now-timedelta(hours=1),ends_at=now+timedelta(hours=23),
                  attendance='present',capacity_minutes=1440,note='矩陣派工班'))
   login(sup,SUP)
+  r=sup.post('/api/admin/users',json={'username':'matrix_new','name':'Matrix New Engineer','role':'engineer','password':PASSWORD})
+  assert r.status_code==201,r.text
   r=sup.post('/api/machines',json={'id':MACHINE,'name':'矩陣測試機','kind':'mill','machine_model':MODEL})
   assert r.status_code==201,r.text
   r=sup.post('/api/knowledge/manuals',json=MANUAL)
