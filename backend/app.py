@@ -304,7 +304,8 @@ STATIC={'':'index.html','index.html':'index.html','index.js':'index.js','index.c
         'neon.css':'neon.css','live.css':'live.css','live.js':'live.js','management.js':'management.js','management.css':'management.css','auth.js':'auth.js','evidence.js':'evidence.js','demo-measurements.csv':'demo-measurements.csv',
         'knowledge.html':'knowledge.html','knowledge.js':'knowledge.js','knowledge.css':'knowledge.css',
         'console.html':'console.html','console.js':'console.js','console.css':'console.css','templates.js':'templates.js',
-        'workflow.html':'workflow.html','workflow.js':'workflow.js','workflow.css':'workflow.css'}
+        'workflow.html':'workflow.html','workflow.js':'workflow.js','workflow.css':'workflow.css',
+        'scan.html':'scan.html','scan.js':'scan.js','scan.css':'scan.css'}
 @app.get('/')
 def index():
     return FileResponse(ROOT/('index.html' if config.demo() else 'console.html'),headers={'Cache-Control':'no-store'})

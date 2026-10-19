@@ -20,7 +20,7 @@ for _ in range(45):
     except OSError:time.sleep(1)
 assert ready and ready['mode']=='production',ready
 assets=set()
-for page in ['/','/workflow.html','/knowledge.html']:
+for page in ['/','/workflow.html','/knowledge.html','/scan.html']:
     with urllib.request.urlopen(args.url+page,timeout=5) as response:
         assert response.status==200,page
         # 從頁面實際引用的檔案取得清單，Dockerfile 漏複製新資產時才會在這裡失敗
