@@ -1,0 +1,51 @@
+{
+  "purpose": "GTX 1050 Ti 本機 QLoRA 可行性；只記錄可否完成與顯存，不含速度。",
+  "model": {
+    "id": "google/gemma-4-E2B-it",
+    "revision": "3e22461f65e89153144f8adb70e3b8c2cc9845a7"
+  },
+  "kernels": {
+    "checked_at": "2026-10-19T03:47:30+00:00",
+    "device": "NVIDIA GeForce GTX 1050 Ti",
+    "passed": true,
+    "cases": [
+      {
+        "quant_type": "nf4",
+        "compute_dtype": "float32",
+        "double_quant": false,
+        "storage_dtype": "uint8",
+        "max_abs_error_vs_dequantized": 0.0,
+        "mean_abs_quantization_error": 0.001789,
+        "input_grad_finite": true
+      },
+      {
+        "quant_type": "nf4",
+        "compute_dtype": "float32",
+        "double_quant": true,
+        "storage_dtype": "uint8",
+        "max_abs_error_vs_dequantized": 0.0,
+        "mean_abs_quantization_error": 0.001791,
+        "input_grad_finite": true
+      },
+      {
+        "quant_type": "nf4",
+        "compute_dtype": "float16",
+        "double_quant": false,
+        "storage_dtype": "uint8",
+        "max_abs_error_vs_dequantized": 0.000881,
+        "mean_abs_quantization_error": 0.001792,
+        "input_grad_finite": true
+      },
+      {
+        "quant_type": "nf4",
+        "compute_dtype": "float16",
+        "double_quant": true,
+        "storage_dtype": "uint8",
+        "max_abs_error_vs_dequantized": 0.000778,
+        "mean_abs_quantization_error": 0.00179,
+        "input_grad_finite": true
+      }
+    ]
+  },
+  "updated_at": "2026-10-19T03:47:30+00:00"
+}

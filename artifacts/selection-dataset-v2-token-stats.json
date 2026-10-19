@@ -1,0 +1,108 @@
+{
+  "tokenizer": {
+    "model": "google/gemma-4-E2B-it",
+    "revision": "3e22461f65e89153144f8adb70e3b8c2cc9845a7"
+  },
+  "definition": "prompt_tokens = 使用者訊息套用 chat template 並加上 generation prompt；train_tokens = 再加上金標 JSON 答案的完整訓練序列",
+  "limits": {
+    "llama_context": 2048,
+    "llama_max_tokens": 650,
+    "max_prompt_tokens_for_llama": 1398,
+    "train_max_length": 1024
+  },
+  "datasets": {
+    "v1": {
+      "path": "training/selection-dataset.json",
+      "sha256": "35243b4bcee19e5a08dfa0ac67b62bf77d90d3bd827d56f8d7cb437c06c794e4",
+      "rows": 44,
+      "splits": {
+        "train": {
+          "prompt_tokens": {
+            "max": 178,
+            "p95": 177,
+            "mean": 169.8
+          },
+          "train_tokens": {
+            "max": 189,
+            "p95": 188,
+            "mean": 179.6
+          }
+        },
+        "validation": {
+          "prompt_tokens": {
+            "max": 172,
+            "p95": 172,
+            "mean": 165
+          },
+          "train_tokens": {
+            "max": 183,
+            "p95": 183,
+            "mean": 174.8
+          }
+        },
+        "test": {
+          "prompt_tokens": {
+            "max": 175,
+            "p95": 173,
+            "mean": 168
+          },
+          "train_tokens": {
+            "max": 186,
+            "p95": 184,
+            "mean": 177.8
+          }
+        }
+      },
+      "max_prompt_tokens": 178,
+      "max_train_tokens": 189,
+      "min_chars_per_prompt_token": 1.657
+    },
+    "v2": {
+      "path": "training/selection-dataset-v2.json",
+      "sha256": "0bfc18a97a07d809b488c3fd9e52e13dfe3d76618c0f39c0b902a799ddc1f3d1",
+      "rows": 728,
+      "splits": {
+        "train": {
+          "prompt_tokens": {
+            "max": 909,
+            "p95": 891,
+            "mean": 785.9
+          },
+          "train_tokens": {
+            "max": 925,
+            "p95": 903,
+            "mean": 796.9
+          }
+        },
+        "validation": {
+          "prompt_tokens": {
+            "max": 906,
+            "p95": 879,
+            "mean": 772.1
+          },
+          "train_tokens": {
+            "max": 917,
+            "p95": 890,
+            "mean": 783.0
+          }
+        },
+        "test": {
+          "prompt_tokens": {
+            "max": 894,
+            "p95": 876,
+            "mean": 770.2
+          },
+          "train_tokens": {
+            "max": 910,
+            "p95": 885,
+            "mean": 781.1
+          }
+        }
+      },
+      "max_prompt_tokens": 909,
+      "max_train_tokens": 925,
+      "min_chars_per_prompt_token": 1.409
+    }
+  },
+  "passed": true
+}
