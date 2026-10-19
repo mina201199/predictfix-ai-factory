@@ -346,6 +346,7 @@ docker stop pf-verify-pg
 | [操作手冊](docs/repair-flow.md) | 報修、清單、派工、驗收、保養與備品。 |
 | [面試展示指南](docs/interview-demo.md) | 一鍵準備、2–3 分鐘腳本、流程驗證與 CI 邊界。 |
 | [本機部署與 LoRA 實驗](docs/lora-training.md) | 部署快照、資料分組、CPU 訓練、基準比較與適用限制。 |
+| [Gemma 固定 SFT 實驗](docs/gemma-sft-protocol.md) · [實測結果](docs/gemma-sft-results-20261019.md) · [重跑與驗證](docs/gemma-sft-running.md) | 官方權重、獨立保留集與 adapter 重載；本次 QLoRA 全部拒答，未達可用的選段改善。 |
 | [系統架構](docs/system-architecture.md) | 資料流、API、來源管理與實作邊界。 |
 | [安全測試](docs/security-testing.md) | 攻擊情境、發現與修正、重跑方式及限制。 |
 | [權限設計與矩陣](docs/access-control.md) | 主管／工程師權限劃分、資料歸屬、職責分離、逐路由權限矩陣與面試問答。 |

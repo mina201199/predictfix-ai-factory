@@ -1,0 +1,46 @@
+{
+  "scope": "Random tiny Gemma4 CPU fixture only; not pretrained SFT or GPU evidence",
+  "device": "cpu",
+  "loss": 8.393930435180664,
+  "optimizer_steps": 1,
+  "initial_adapter_same_across_fp16_fp32_bases": true,
+  "chunked_cache_matches_full_prefix": true,
+  "reload": {
+    "passed": true,
+    "atol": 0.0001,
+    "rtol": 0.0001,
+    "max_abs_error": 0.0
+  },
+  "initial_adapter_sha256": "77d5b05142c873dece47be712bf8ea4ebcccb0c7554e780b91451aec5d1bab46",
+  "trainable_parameters": 182272,
+  "before": {
+    "adapter_hash": "409b9143583866a892a93eab024d435a84717dfacefb7e961bc783bc41d2ed9f",
+    "adapter_config_hash": "efef502419142da40363f74466edf1f477bca55c50a850e11b375da71c896599",
+    "trainable_parameters": 182272,
+    "probe_id": "cpu-fixture",
+    "probe_output": "{\"selected\":[\"B\"]}",
+    "probe_token_ids": [
+      37,
+      96
+    ],
+    "probe_logits": [
+      0.7101268768310547,
+      0.2673806846141815
+    ]
+  },
+  "after": {
+    "adapter_hash": "409b9143583866a892a93eab024d435a84717dfacefb7e961bc783bc41d2ed9f",
+    "adapter_config_hash": "efef502419142da40363f74466edf1f477bca55c50a850e11b375da71c896599",
+    "trainable_parameters": 182272,
+    "probe_id": "cpu-fixture",
+    "probe_output": "{\"selected\":[\"B\"]}",
+    "probe_token_ids": [
+      37,
+      96
+    ],
+    "probe_logits": [
+      0.7101268768310547,
+      0.2673806846141815
+    ]
+  }
+}

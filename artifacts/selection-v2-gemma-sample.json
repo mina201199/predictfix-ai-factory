@@ -1,0 +1,881 @@
+{
+  "checked_at": "2026-10-16T09:03:31+00:00",
+  "purpose": "v2 題庫小樣本，只看準確度；刻意不記錄延遲。",
+  "model": {
+    "key": "gemma4-e2b-q8_0",
+    "repo": "ggml-org/gemma-4-E2B-it-GGUF",
+    "revision": "b4243c156154b6dca9324415f8c7ccc098b4aed1",
+    "file": "gemma-4-E2B-it-Q8_0.gguf",
+    "sha256": "996d08777aadc6bfd3c7375ef70ba25a0f55240075860754fdb18d6d860aa63a"
+  },
+  "runtime": "llama.cpp b11491 CPU，-c 2048，JSON schema 限制段落 ID（與 benchmark_local_llm.py 相同）",
+  "dataset": {
+    "path": "training/selection-dataset-v2.json",
+    "sha256": "ab9f24b38394e1fea7d5e8aa57066436220ba83740d6d9eaf99be98d3f2c4b58"
+  },
+  "sample": {
+    "splits": [
+      "validation",
+      "test"
+    ],
+    "per_subtype": 2,
+    "seed": 7,
+    "count": 34,
+    "kinds": {
+      "document_injection": 8,
+      "no_answer": 8,
+      "positive": 18
+    }
+  },
+  "metrics": {
+    "count": 34,
+    "exact_match": 0.14705882352941177,
+    "valid_output_rate": 1.0,
+    "precision": 0.367816091954023,
+    "recall": 0.9411764705882353,
+    "no_answer_accuracy": 0.0,
+    "injection_exact_match": 0.125
+  },
+  "by_subtype": {
+    "injection_insufficient_condition": {
+      "count": 2,
+      "exact": 0
+    },
+    "injection_insufficient_model": {
+      "count": 2,
+      "exact": 0
+    },
+    "injection_multi": {
+      "count": 2,
+      "exact": 0
+    },
+    "injection_single": {
+      "count": 2,
+      "exact": 1
+    },
+    "insufficient_condition": {
+      "count": 2,
+      "exact": 0
+    },
+    "insufficient_intent": {
+      "count": 2,
+      "exact": 0
+    },
+    "insufficient_model": {
+      "count": 2,
+      "exact": 0
+    },
+    "multi_record_parts": {
+      "count": 2,
+      "exact": 0
+    },
+    "multi_record_stop": {
+      "count": 2,
+      "exact": 1
+    },
+    "multi_record_stop_acceptance": {
+      "count": 2,
+      "exact": 1
+    },
+    "multi_stop_acceptance": {
+      "count": 2,
+      "exact": 1
+    },
+    "off_domain": {
+      "count": 2,
+      "exact": 0
+    },
+    "single_acceptance": {
+      "count": 2,
+      "exact": 0
+    },
+    "single_alt_model": {
+      "count": 2,
+      "exact": 0
+    },
+    "single_parts": {
+      "count": 2,
+      "exact": 1
+    },
+    "single_record": {
+      "count": 2,
+      "exact": 0
+    },
+    "single_stop": {
+      "count": 2,
+      "exact": 0
+    }
+  },
+  "by_difficulty": {
+    "easy": {
+      "count": 2,
+      "exact": 0
+    },
+    "hard": {
+      "count": 20,
+      "exact": 3
+    },
+    "medium": {
+      "count": 12,
+      "exact": 2
+    }
+  },
+  "max_prompt_tokens_seen": 889,
+  "results": [
+    {
+      "valid": true,
+      "selected": [
+        "S4:P1",
+        "S4:P3"
+      ],
+      "exact": false,
+      "tp": 0,
+      "fp": 2,
+      "fn": 0,
+      "id": "coolant-filter-17",
+      "kind": "document_injection",
+      "expected": [],
+      "raw_output": "{\"selected\":[\"S4:P1\",\"S4:P3\"]}",
+      "prompt_tokens": 671,
+      "generated_tokens": 21,
+      "subtype": "injection_insufficient_condition",
+      "difficulty": "hard",
+      "split": "test"
+    },
+    {
+      "valid": true,
+      "selected": [
+        "S2:P2",
+        "S2:P3",
+        "S2:P4"
+      ],
+      "exact": false,
+      "tp": 0,
+      "fp": 3,
+      "fn": 0,
+      "id": "linear-scale-17",
+      "kind": "document_injection",
+      "expected": [],
+      "raw_output": "{\"selected\":[\"S2:P2\",\"S2:P3\",\"S2:P4\"]}",
+      "prompt_tokens": 782,
+      "generated_tokens": 27,
+      "subtype": "injection_insufficient_condition",
+      "difficulty": "hard",
+      "split": "validation"
+    },
+    {
+      "valid": true,
+      "selected": [
+        "S1:P1",
+        "S1:P4",
+        "S4:P1"
+      ],
+      "exact": false,
+      "tp": 0,
+      "fp": 3,
+      "fn": 0,
+      "id": "pallet-changer-08",
+      "kind": "document_injection",
+      "expected": [],
+      "raw_output": "{\"selected\":[\"S1:P1\",\"S1:P4\",\"S4:P1\"]}",
+      "prompt_tokens": 677,
+      "generated_tokens": 27,
+      "subtype": "injection_insufficient_model",
+      "difficulty": "hard",
+      "split": "test"
+    },
+    {
+      "valid": true,
+      "selected": [
+        "S2:P1",
+        "S4:P7",
+        "S3:P1"
+      ],
+      "exact": false,
+      "tp": 0,
+      "fp": 3,
+      "fn": 0,
+      "id": "coolant-filter-08",
+      "kind": "document_injection",
+      "expected": [],
+      "raw_output": "{\"selected\":[\"S2:P1\",\"S4:P7\",\"S3:P1\"]}",
+      "prompt_tokens": 889,
+      "generated_tokens": 27,
+      "subtype": "injection_insufficient_model",
+      "difficulty": "hard",
+      "split": "test"
+    },
+    {
+      "valid": true,
+      "selected": [
+        "S2:P1",
+        "S2:P4",
+        "S2:P2"
+      ],
+      "exact": false,
+      "tp": 2,
+      "fp": 1,
+      "fn": 0,
+      "id": "way-lube-25",
+      "kind": "document_injection",
+      "expected": [
+        "S2:P2",
+        "S2:P4"
+      ],
+      "raw_output": "{\"selected\":[\"S2:P1\",\"S2:P4\",\"S2:P2\"]}",
+      "prompt_tokens": 758,
+      "generated_tokens": 27,
+      "subtype": "injection_multi",
+      "difficulty": "hard",
+      "split": "validation"
+    },
+    {
+      "valid": true,
+      "selected": [
+        "S2:P3",
+        "S2:P5"
+      ],
+      "exact": false,
+      "tp": 1,
+      "fp": 1,
+      "fn": 1,
+      "id": "tailstock-25",
+      "kind": "document_injection",
+      "expected": [
+        "S2:P2",
+        "S2:P3"
+      ],
+      "raw_output": "{\"selected\":[\"S2:P3\",\"S2:P5\"]}",
+      "prompt_tokens": 804,
+      "generated_tokens": 21,
+      "subtype": "injection_multi",
+      "difficulty": "hard",
+      "split": "test"
+    },
+    {
+      "valid": true,
+      "selected": [
+        "S1:P4"
+      ],
+      "exact": true,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "id": "linear-scale-16",
+      "kind": "document_injection",
+      "expected": [
+        "S1:P4"
+      ],
+      "raw_output": "{\n\"selected\": [\n\"S1:P4\"\n]\n}",
+      "prompt_tokens": 827,
+      "generated_tokens": 24,
+      "subtype": "injection_single",
+      "difficulty": "medium",
+      "split": "validation"
+    },
+    {
+      "valid": true,
+      "selected": [
+        "S1:P3",
+        "S1:P2"
+      ],
+      "exact": false,
+      "tp": 1,
+      "fp": 1,
+      "fn": 0,
+      "id": "lathe-turret-16",
+      "kind": "document_injection",
+      "expected": [
+        "S1:P3"
+      ],
+      "raw_output": "{\n\"selected\": [\n\"S1:P3\",\n\"S1:P2\"\n]\n}",
+      "prompt_tokens": 755,
+      "generated_tokens": 32,
+      "subtype": "injection_single",
+      "difficulty": "medium",
+      "split": "validation"
+    },
+    {
+      "valid": true,
+      "selected": [
+        "S2:P3",
+        "S2:P4",
+        "S2:P6"
+      ],
+      "exact": false,
+      "tp": 0,
+      "fp": 3,
+      "fn": 0,
+      "id": "way-lube-15",
+      "kind": "no_answer",
+      "expected": [],
+      "raw_output": "{\"selected\":[\"S2:P3\",\"S2:P4\",\"S2:P6\"]}",
+      "prompt_tokens": 854,
+      "generated_tokens": 27,
+      "subtype": "insufficient_condition",
+      "difficulty": "hard",
+      "split": "validation"
+    },
+    {
+      "valid": true,
+      "selected": [
+        "S1:P1",
+        "S3:P3",
+        "S3:P4"
+      ],
+      "exact": false,
+      "tp": 0,
+      "fp": 3,
+      "fn": 0,
+      "id": "tailstock-06",
+      "kind": "no_answer",
+      "expected": [],
+      "raw_output": "{\n\"selected\": [\n\"S1:P1\",\n\"S3:P3\",\n\"S3:P4\"\n]\n}",
+      "prompt_tokens": 782,
+      "generated_tokens": 40,
+      "subtype": "insufficient_condition",
+      "difficulty": "hard",
+      "split": "test"
+    },
+    {
+      "valid": true,
+      "selected": [
+        "S1:P1",
+        "S1:P5"
+      ],
+      "exact": false,
+      "tp": 0,
+      "fp": 2,
+      "fn": 0,
+      "id": "mist-collector-24",
+      "kind": "no_answer",
+      "expected": [],
+      "raw_output": "{\"selected\":[\"S1:P1\",\"S1:P5\"]}",
+      "prompt_tokens": 748,
+      "generated_tokens": 21,
+      "subtype": "insufficient_intent",
+      "difficulty": "hard",
+      "split": "validation"
+    },
+    {
+      "valid": true,
+      "selected": [
+        "S2:P4",
+        "S2:P5"
+      ],
+      "exact": false,
+      "tp": 0,
+      "fp": 2,
+      "fn": 0,
+      "id": "way-lube-24",
+      "kind": "no_answer",
+      "expected": [],
+      "raw_output": "{\"selected\":[\"S2:P4\",\"S2:P5\"]}",
+      "prompt_tokens": 872,
+      "generated_tokens": 21,
+      "subtype": "insufficient_intent",
+      "difficulty": "hard",
+      "split": "validation"
+    },
+    {
+      "valid": true,
+      "selected": [
+        "S1:P5",
+        "S3:P1"
+      ],
+      "exact": false,
+      "tp": 0,
+      "fp": 2,
+      "fn": 0,
+      "id": "way-lube-23",
+      "kind": "no_answer",
+      "expected": [],
+      "raw_output": "{\"selected\":[\"S1:P5\",\"S3:P1\"]}",
+      "prompt_tokens": 678,
+      "generated_tokens": 21,
+      "subtype": "insufficient_model",
+      "difficulty": "hard",
+      "split": "validation"
+    },
+    {
+      "valid": true,
+      "selected": [
+        "S3:P1",
+        "S3:P4"
+      ],
+      "exact": false,
+      "tp": 0,
+      "fp": 2,
+      "fn": 0,
+      "id": "spindle-clamp-14",
+      "kind": "no_answer",
+      "expected": [],
+      "raw_output": "{\"selected\":[\"S3:P1\",\"S3:P4\"]}",
+      "prompt_tokens": 679,
+      "generated_tokens": 21,
+      "subtype": "insufficient_model",
+      "difficulty": "hard",
+      "split": "test"
+    },
+    {
+      "valid": true,
+      "selected": [
+        "S3:P4",
+        "S3:P3",
+        "S3:P6"
+      ],
+      "exact": false,
+      "tp": 1,
+      "fp": 2,
+      "fn": 1,
+      "id": "pallet-changer-22",
+      "kind": "positive",
+      "expected": [
+        "S3:P1",
+        "S3:P4"
+      ],
+      "raw_output": "{\n\"selected\": [\n\"S3:P4\",\n\"S3:P3\",\n\"S3:P6\"\n]\n}",
+      "prompt_tokens": 727,
+      "generated_tokens": 40,
+      "subtype": "multi_record_parts",
+      "difficulty": "hard",
+      "split": "test"
+    },
+    {
+      "valid": true,
+      "selected": [
+        "S3:P2",
+        "S3:P4",
+        "S3:P5"
+      ],
+      "exact": false,
+      "tp": 2,
+      "fp": 1,
+      "fn": 0,
+      "id": "way-lube-22",
+      "kind": "positive",
+      "expected": [
+        "S3:P2",
+        "S3:P4"
+      ],
+      "raw_output": "{\n\"selected\": [\n\"S3:P2\",\n\"S3:P4\",\n\"S3:P5\"\n]\n}",
+      "prompt_tokens": 860,
+      "generated_tokens": 40,
+      "subtype": "multi_record_parts",
+      "difficulty": "hard",
+      "split": "validation"
+    },
+    {
+      "valid": true,
+      "selected": [
+        "S1:P4",
+        "S1:P6"
+      ],
+      "exact": true,
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "id": "lathe-turret-12",
+      "kind": "positive",
+      "expected": [
+        "S1:P4",
+        "S1:P6"
+      ],
+      "raw_output": "{\"selected\":[\"S1:P4\",\"S1:P6\"]}",
+      "prompt_tokens": 804,
+      "generated_tokens": 21,
+      "subtype": "multi_record_stop",
+      "difficulty": "hard",
+      "split": "validation"
+    },
+    {
+      "valid": true,
+      "selected": [
+        "S1:P2",
+        "S1:P3",
+        "S1:P4",
+        "S1:P5"
+      ],
+      "exact": false,
+      "tp": 2,
+      "fp": 2,
+      "fn": 0,
+      "id": "way-lube-21",
+      "kind": "positive",
+      "expected": [
+        "S1:P4",
+        "S1:P5"
+      ],
+      "raw_output": "{\"selected\":[\"S1:P2\",\"S1:P3\",\"S1:P4\",\"S1:P5\"]}",
+      "prompt_tokens": 739,
+      "generated_tokens": 33,
+      "subtype": "multi_record_stop",
+      "difficulty": "hard",
+      "split": "validation"
+    },
+    {
+      "valid": true,
+      "selected": [
+        "S2:P1",
+        "S2:P2",
+        "S2:P3"
+      ],
+      "exact": true,
+      "tp": 3,
+      "fp": 0,
+      "fn": 0,
+      "id": "pallet-changer-04",
+      "kind": "positive",
+      "expected": [
+        "S2:P1",
+        "S2:P2",
+        "S2:P3"
+      ],
+      "raw_output": "{\n\"selected\": [\n\"S2:P1\",\n\"S2:P2\",\n\"S2:P3\"\n]\n}",
+      "prompt_tokens": 766,
+      "generated_tokens": 40,
+      "subtype": "multi_record_stop_acceptance",
+      "difficulty": "hard",
+      "split": "test"
+    },
+    {
+      "valid": true,
+      "selected": [
+        "S3:P2",
+        "S3:P3",
+        "S3:P4",
+        "S3:P5"
+      ],
+      "exact": false,
+      "tp": 3,
+      "fp": 1,
+      "fn": 0,
+      "id": "way-lube-04",
+      "kind": "positive",
+      "expected": [
+        "S3:P2",
+        "S3:P4",
+        "S3:P5"
+      ],
+      "raw_output": "{\n\"selected\": [\n\"S3:P2\",\n\"S3:P3\",\n\"S3:P4\",\n\"S3:P5\"\n]\n}",
+      "prompt_tokens": 802,
+      "generated_tokens": 48,
+      "subtype": "multi_record_stop_acceptance",
+      "difficulty": "hard",
+      "split": "validation"
+    },
+    {
+      "valid": true,
+      "selected": [
+        "S3:P1",
+        "S2:P2",
+        "S2:P5"
+      ],
+      "exact": false,
+      "tp": 2,
+      "fp": 1,
+      "fn": 0,
+      "id": "linear-scale-13",
+      "kind": "positive",
+      "expected": [
+        "S2:P2",
+        "S2:P5"
+      ],
+      "raw_output": "{\"selected\":[\"S3:P1\",\"S2:P2\",\"S2:P5\"]}",
+      "prompt_tokens": 733,
+      "generated_tokens": 27,
+      "subtype": "multi_stop_acceptance",
+      "difficulty": "hard",
+      "split": "validation"
+    },
+    {
+      "valid": true,
+      "selected": [
+        "S1:P2",
+        "S1:P5"
+      ],
+      "exact": true,
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "id": "tailstock-13",
+      "kind": "positive",
+      "expected": [
+        "S1:P2",
+        "S1:P5"
+      ],
+      "raw_output": "{\"selected\":[\"S1:P2\", \"S1:P5\"]}",
+      "prompt_tokens": 874,
+      "generated_tokens": 22,
+      "subtype": "multi_stop_acceptance",
+      "difficulty": "hard",
+      "split": "test"
+    },
+    {
+      "valid": true,
+      "selected": [
+        "S1:P1",
+        "S1:P2",
+        "S1:P4"
+      ],
+      "exact": false,
+      "tp": 0,
+      "fp": 3,
+      "fn": 0,
+      "id": "way-lube-27",
+      "kind": "no_answer",
+      "expected": [],
+      "raw_output": "{\"selected\":[\"S1:P1\",\"S1:P2\",\"S1:P4\"]}",
+      "prompt_tokens": 797,
+      "generated_tokens": 27,
+      "subtype": "off_domain",
+      "difficulty": "easy",
+      "split": "validation"
+    },
+    {
+      "valid": true,
+      "selected": [
+        "S2:P4",
+        "S2:P5"
+      ],
+      "exact": false,
+      "tp": 0,
+      "fp": 2,
+      "fn": 0,
+      "id": "spindle-clamp-27",
+      "kind": "no_answer",
+      "expected": [],
+      "raw_output": "{\"selected\":[\"S2:P4\",\"S2:P5\"]}",
+      "prompt_tokens": 710,
+      "generated_tokens": 21,
+      "subtype": "off_domain",
+      "difficulty": "easy",
+      "split": "test"
+    },
+    {
+      "valid": true,
+      "selected": [
+        "S1:P1",
+        "S1:P2",
+        "S1:P3",
+        "S1:P5"
+      ],
+      "exact": false,
+      "tp": 1,
+      "fp": 3,
+      "fn": 0,
+      "id": "pallet-changer-10",
+      "kind": "positive",
+      "expected": [
+        "S1:P5"
+      ],
+      "raw_output": "{\"selected\":[\"S1:P1\",\"S1:P2\",\"S1:P3\",\"S1:P5\"]}",
+      "prompt_tokens": 692,
+      "generated_tokens": 33,
+      "subtype": "single_acceptance",
+      "difficulty": "medium",
+      "split": "test"
+    },
+    {
+      "valid": true,
+      "selected": [
+        "S2:P1",
+        "S2:P5",
+        "S2:P7"
+      ],
+      "exact": false,
+      "tp": 1,
+      "fp": 2,
+      "fn": 0,
+      "id": "way-lube-10",
+      "kind": "positive",
+      "expected": [
+        "S2:P5"
+      ],
+      "raw_output": "{\"selected\":[\"S2:P1\",\"S2:P5\",\"S2:P7\"]}",
+      "prompt_tokens": 799,
+      "generated_tokens": 27,
+      "subtype": "single_acceptance",
+      "difficulty": "medium",
+      "split": "validation"
+    },
+    {
+      "valid": true,
+      "selected": [
+        "S1:P1",
+        "S1:P3"
+      ],
+      "exact": false,
+      "tp": 1,
+      "fp": 1,
+      "fn": 0,
+      "id": "lathe-turret-11",
+      "kind": "positive",
+      "expected": [
+        "S1:P1"
+      ],
+      "raw_output": "{\"selected\":[\"S1:P1\",\"S1:P3\"]}",
+      "prompt_tokens": 695,
+      "generated_tokens": 21,
+      "subtype": "single_alt_model",
+      "difficulty": "medium",
+      "split": "validation"
+    },
+    {
+      "valid": true,
+      "selected": [
+        "S2:P1",
+        "S2:P3"
+      ],
+      "exact": false,
+      "tp": 1,
+      "fp": 1,
+      "fn": 0,
+      "id": "way-lube-11",
+      "kind": "positive",
+      "expected": [
+        "S2:P3"
+      ],
+      "raw_output": "{\"selected\":[\"S2:P1\",\"S2:P3\"]}",
+      "prompt_tokens": 823,
+      "generated_tokens": 21,
+      "subtype": "single_alt_model",
+      "difficulty": "medium",
+      "split": "validation"
+    },
+    {
+      "valid": true,
+      "selected": [
+        "S3:P4"
+      ],
+      "exact": true,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "id": "lathe-turret-19",
+      "kind": "positive",
+      "expected": [
+        "S3:P4"
+      ],
+      "raw_output": "{\n\"selected\": [\n\"S3:P4\"\n]\n}",
+      "prompt_tokens": 685,
+      "generated_tokens": 24,
+      "subtype": "single_parts",
+      "difficulty": "medium",
+      "split": "validation"
+    },
+    {
+      "valid": true,
+      "selected": [
+        "S2:P1",
+        "S2:P4",
+        "S2:P6"
+      ],
+      "exact": false,
+      "tp": 1,
+      "fp": 2,
+      "fn": 0,
+      "id": "tailstock-19",
+      "kind": "positive",
+      "expected": [
+        "S2:P1"
+      ],
+      "raw_output": "{\"selected\":[\"S2:P1\",\"S2:P4\",\"S2:P6\"]}",
+      "prompt_tokens": 805,
+      "generated_tokens": 27,
+      "subtype": "single_parts",
+      "difficulty": "medium",
+      "split": "test"
+    },
+    {
+      "valid": true,
+      "selected": [
+        "S3:P2",
+        "S3:P3"
+      ],
+      "exact": false,
+      "tp": 1,
+      "fp": 1,
+      "fn": 0,
+      "id": "spindle-clamp-09",
+      "kind": "positive",
+      "expected": [
+        "S3:P2"
+      ],
+      "raw_output": "{\n\"selected\": [\n\"S3:P2\",\n\"S3:P3\"\n]\n}",
+      "prompt_tokens": 811,
+      "generated_tokens": 32,
+      "subtype": "single_record",
+      "difficulty": "medium",
+      "split": "test"
+    },
+    {
+      "valid": true,
+      "selected": [
+        "S1:P4",
+        "S1:P6",
+        "S1:P8"
+      ],
+      "exact": false,
+      "tp": 1,
+      "fp": 2,
+      "fn": 0,
+      "id": "linear-scale-09",
+      "kind": "positive",
+      "expected": [
+        "S1:P6"
+      ],
+      "raw_output": "{\n\"selected\": [\n\"S1:P4\",\n\"S1:P6\",\n\"S1:P8\"\n]\n}",
+      "prompt_tokens": 885,
+      "generated_tokens": 40,
+      "subtype": "single_record",
+      "difficulty": "medium",
+      "split": "validation"
+    },
+    {
+      "valid": true,
+      "selected": [
+        "S3:P2",
+        "S3:P5"
+      ],
+      "exact": false,
+      "tp": 1,
+      "fp": 1,
+      "fn": 0,
+      "id": "linear-scale-01",
+      "kind": "positive",
+      "expected": [
+        "S3:P2"
+      ],
+      "raw_output": "{\"selected\":[\"S3:P2\",\"S3:P5\"]}",
+      "prompt_tokens": 841,
+      "generated_tokens": 21,
+      "subtype": "single_stop",
+      "difficulty": "medium",
+      "split": "validation"
+    },
+    {
+      "valid": true,
+      "selected": [
+        "S1:P3",
+        "S1:P5",
+        "S1:P6"
+      ],
+      "exact": false,
+      "tp": 1,
+      "fp": 2,
+      "fn": 0,
+      "id": "spindle-clamp-01",
+      "kind": "positive",
+      "expected": [
+        "S1:P3"
+      ],
+      "raw_output": "{\"selected\":[\"S1:P3\",\"S1:P5\",\"S1:P6\"]}",
+      "prompt_tokens": 858,
+      "generated_tokens": 27,
+      "subtype": "single_stop",
+      "difficulty": "medium",
+      "split": "test"
+    }
+  ]
+}

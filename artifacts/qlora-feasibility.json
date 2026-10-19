@@ -1,0 +1,482 @@
+{
+  "purpose": "GTX 1050 Ti 本機 QLoRA 可行性；只記錄可否完成與顯存，不含速度。",
+  "model": {
+    "id": "google/gemma-4-E2B-it",
+    "revision": "3e22461f65e89153144f8adb70e3b8c2cc9845a7"
+  },
+  "environment": {
+    "checked_at": "2026-10-16T08:43:54+00:00",
+    "python": "3.12.13",
+    "os": "Windows-10-10.0.19045-SP0",
+    "packages": {
+      "torch": "2.14.1+cu126",
+      "transformers": "5.20.0",
+      "peft": "0.21.2",
+      "bitsandbytes": "0.50.2",
+      "accelerate": "1.15.0",
+      "safetensors": "0.8.0",
+      "huggingface_hub": "2.2.0",
+      "tokenizers": "0.23.3"
+    },
+    "nvidia_smi_before_cuda_init": {
+      "name": "NVIDIA GeForce GTX 1050 Ti",
+      "driver": "582.66",
+      "total_mib": 4096,
+      "used_by_others_mib": 1250,
+      "compute_cap": "6.1"
+    },
+    "torch_cuda": "12.6",
+    "cuda_available": true,
+    "device": "NVIDIA GeForce GTX 1050 Ti",
+    "capability": "6.1",
+    "torch_arch_list": [
+      "sm_50",
+      "sm_60",
+      "sm_61",
+      "sm_70",
+      "sm_75",
+      "sm_80",
+      "sm_86",
+      "sm_90"
+    ],
+    "sm61_in_torch_build": true,
+    "bf16_native": false,
+    "after_cuda_init": {
+      "device_used_mib": 738,
+      "device_free_mib": 3357,
+      "peak_allocated_mib": 0,
+      "peak_reserved_mib": 0
+    },
+    "model_access": {
+      "api": "https://huggingface.co/api/models/google/gemma-4-E2B-it/revision/3e22461f65e89153144f8adb70e3b8c2cc9845a7",
+      "gated": false,
+      "private": false,
+      "license": [
+        "license:apache-2.0"
+      ],
+      "sha": "3e22461f65e89153144f8adb70e3b8c2cc9845a7",
+      "weights_bytes": 10246621918,
+      "token_required": false
+    }
+  },
+  "updated_at": "2026-10-16T09:31:02+00:00",
+  "kernels": {
+    "checked_at": "2026-10-16T08:44:11+00:00",
+    "device": "NVIDIA GeForce GTX 1050 Ti",
+    "passed": true,
+    "cases": [
+      {
+        "quant_type": "nf4",
+        "compute_dtype": "float32",
+        "double_quant": false,
+        "storage_dtype": "uint8",
+        "max_abs_error_vs_dequantized": 0.0,
+        "mean_abs_quantization_error": 0.001789,
+        "input_grad_finite": true
+      },
+      {
+        "quant_type": "nf4",
+        "compute_dtype": "float32",
+        "double_quant": true,
+        "storage_dtype": "uint8",
+        "max_abs_error_vs_dequantized": 0.0,
+        "mean_abs_quantization_error": 0.001791,
+        "input_grad_finite": true
+      },
+      {
+        "quant_type": "nf4",
+        "compute_dtype": "float16",
+        "double_quant": false,
+        "storage_dtype": "uint8",
+        "max_abs_error_vs_dequantized": 0.000881,
+        "mean_abs_quantization_error": 0.001792,
+        "input_grad_finite": true
+      },
+      {
+        "quant_type": "nf4",
+        "compute_dtype": "float16",
+        "double_quant": true,
+        "storage_dtype": "uint8",
+        "max_abs_error_vs_dequantized": 0.000778,
+        "mean_abs_quantization_error": 0.00179,
+        "input_grad_finite": true
+      }
+    ]
+  },
+  "estimate": {
+    "checked_at": "2026-10-16T08:45:06+00:00",
+    "source": "官方 config.json 於 meta device 建模計數；只算權重，未含 CUDA context、啟動值與 optimizer。",
+    "parameters": {
+      "vision": 168544256,
+      "audio": 307183904,
+      "text_embed_tokens": 402653184,
+      "text_per_layer_embeddings": 2348810240,
+      "text_decoder_linear": 1876819968,
+      "text_other": 285952
+    },
+    "text_total_parameters": 4628569344,
+    "weights_gib": {
+      "lora_fp32_all_gpu": 17.24,
+      "lora_fp16_all_gpu": 8.62,
+      "lora_fp32_embeddings_on_cpu": 6.99,
+      "lora_fp16_embeddings_on_cpu": 3.5,
+      "qlora_nf4_bnb_default_embeddings_fp16_on_gpu": 6.06,
+      "qlora_nf4_embeddings_on_cpu": 0.93
+    },
+    "gpu_total_gib": 4.0,
+    "note": "PLE 表 = vocab_size_per_layer_input × num_hidden_layers × hidden_size_per_layer_input；bitsandbytes 不量化 embedding。"
+  },
+  "tiny_gemma4": {
+    "checked_at": "2026-10-16T08:56:58+00:00",
+    "purpose": "隨機初始化、結構比照 Gemma 4 E2B 的迷你模型；驗證 transformers Gemma 4 + bitsandbytes nf4 + PEFT LoRA 在 sm_61 的訓練路徑，不下載權重。",
+    "config": {
+      "hidden_size": 256,
+      "num_hidden_layers": 5,
+      "num_kv_shared_layers": 2,
+      "vocab_size": 4096,
+      "hidden_size_per_layer_input": 32
+    },
+    "placement": {
+      "total_layers": 5,
+      "layers_on_gpu": 5,
+      "quantized_linears": 42
+    },
+    "linear4bit_modules": 42,
+    "peft_lora_on_linear4bit": 31,
+    "lora": {
+      "rank": 8,
+      "alpha": 16,
+      "target_modules": [
+        "q_proj",
+        "k_proj",
+        "v_proj",
+        "o_proj",
+        "gate_proj",
+        "up_proj",
+        "down_proj"
+      ],
+      "trainable_parameters": 182272,
+      "lora_wrapped_linears": 31
+    },
+    "weights_before_mib": 0,
+    "steps": [
+      {
+        "step": 1,
+        "sequence_tokens": 96,
+        "answer_tokens": 12,
+        "loss": 8.3176,
+        "device_used_mib": 794,
+        "device_free_mib": 3301,
+        "peak_allocated_mib": 24,
+        "peak_reserved_mib": 30
+      },
+      {
+        "step": 2,
+        "sequence_tokens": 96,
+        "answer_tokens": 12,
+        "loss": 8.1775,
+        "device_used_mib": 796,
+        "device_free_mib": 3299,
+        "peak_allocated_mib": 25,
+        "peak_reserved_mib": 32
+      },
+      {
+        "step": 3,
+        "sequence_tokens": 96,
+        "answer_tokens": 12,
+        "loss": 8.2783,
+        "device_used_mib": 796,
+        "device_free_mib": 3299,
+        "peak_allocated_mib": 25,
+        "peak_reserved_mib": 32
+      }
+    ],
+    "passed": true
+  },
+  "real_qlora_random_short": {
+    "checked_at": "2026-10-16T09:05:10+00:00",
+    "mode": "qlora",
+    "nvidia_smi_before_cuda_init": {
+      "name": "NVIDIA GeForce GTX 1050 Ti",
+      "driver": "582.66",
+      "total_mib": 4096,
+      "used_by_others_mib": 1246,
+      "compute_cap": "6.1"
+    },
+    "status": "completed",
+    "weights": "random",
+    "text_parameters": 4628569344,
+    "after_cuda_init": {
+      "device_used_mib": 738,
+      "device_free_mib": 3357,
+      "peak_allocated_mib": 0,
+      "peak_reserved_mib": 0
+    },
+    "placement": {
+      "total_layers": 35,
+      "layers_on_gpu": 35,
+      "quantized_linears": 276
+    },
+    "after_weights": {
+      "device_used_mib": 1796,
+      "device_free_mib": 2299,
+      "peak_allocated_mib": 1010,
+      "peak_reserved_mib": 1052
+    },
+    "lora": {
+      "rank": 8,
+      "alpha": 16,
+      "target_modules": [
+        "q_proj",
+        "k_proj",
+        "v_proj",
+        "o_proj",
+        "gate_proj",
+        "up_proj",
+        "down_proj"
+      ],
+      "trainable_parameters": 12079104,
+      "lora_wrapped_linears": 205
+    },
+    "dataset": "C:\\Users\\User\\Desktop\\ai factory\\predictfix-qlora-dataset\\training\\selection-dataset.json",
+    "steps": [
+      {
+        "step": 1,
+        "sequence_tokens": 181,
+        "answer_tokens": 11,
+        "loss": 12.7328,
+        "device_used_mib": 2190,
+        "device_free_mib": 1905,
+        "peak_allocated_mib": 1211,
+        "peak_reserved_mib": 1428
+      },
+      {
+        "step": 2,
+        "sequence_tokens": 181,
+        "answer_tokens": 11,
+        "loss": 13.0113,
+        "device_used_mib": 2192,
+        "device_free_mib": 1903,
+        "peak_allocated_mib": 1303,
+        "peak_reserved_mib": 1430
+      },
+      {
+        "step": 3,
+        "sequence_tokens": 172,
+        "answer_tokens": 6,
+        "loss": 12.5276,
+        "device_used_mib": 2192,
+        "device_free_mib": 1903,
+        "peak_allocated_mib": 1298,
+        "peak_reserved_mib": 1430
+      }
+    ]
+  },
+  "real_qlora_random_v2len": {
+    "checked_at": "2026-10-16T09:12:41+00:00",
+    "mode": "qlora",
+    "nvidia_smi_before_cuda_init": {
+      "name": "NVIDIA GeForce GTX 1050 Ti",
+      "driver": "582.66",
+      "total_mib": 4096,
+      "used_by_others_mib": 1279,
+      "compute_cap": "6.1"
+    },
+    "status": "completed",
+    "weights": "random",
+    "text_parameters": 4628569344,
+    "after_cuda_init": {
+      "device_used_mib": 738,
+      "device_free_mib": 3357,
+      "peak_allocated_mib": 0,
+      "peak_reserved_mib": 0
+    },
+    "placement": {
+      "total_layers": 35,
+      "layers_on_gpu": 35,
+      "quantized_linears": 276
+    },
+    "after_weights": {
+      "device_used_mib": 1796,
+      "device_free_mib": 2299,
+      "peak_allocated_mib": 1010,
+      "peak_reserved_mib": 1052
+    },
+    "lora": {
+      "rank": 8,
+      "alpha": 16,
+      "target_modules": [
+        "q_proj",
+        "k_proj",
+        "v_proj",
+        "o_proj",
+        "gate_proj",
+        "up_proj",
+        "down_proj"
+      ],
+      "trainable_parameters": 12079104,
+      "lora_wrapped_linears": 205
+    },
+    "dataset": "training/selection-dataset-v2.json",
+    "steps": [
+      {
+        "step": 1,
+        "sequence_tokens": 801,
+        "answer_tokens": 11,
+        "loss": 12.4415,
+        "device_used_mib": 2618,
+        "device_free_mib": 1477,
+        "peak_allocated_mib": 1610,
+        "peak_reserved_mib": 1856
+      },
+      {
+        "step": 2,
+        "sequence_tokens": 895,
+        "answer_tokens": 11,
+        "loss": 12.8589,
+        "device_used_mib": 2774,
+        "device_free_mib": 1321,
+        "peak_allocated_mib": 1762,
+        "peak_reserved_mib": 2012
+      },
+      {
+        "step": 3,
+        "sequence_tokens": 897,
+        "answer_tokens": 11,
+        "loss": 12.6919,
+        "device_used_mib": 3253,
+        "device_free_mib": 842,
+        "peak_allocated_mib": 1764,
+        "peak_reserved_mib": 2128
+      }
+    ]
+  },
+  "real_fp16_random_short": {
+    "checked_at": "2026-10-16T09:21:03+00:00",
+    "mode": "fp16",
+    "nvidia_smi_before_cuda_init": {
+      "name": "NVIDIA GeForce GTX 1050 Ti",
+      "driver": "582.66",
+      "total_mib": 4096,
+      "used_by_others_mib": 1279,
+      "compute_cap": "6.1"
+    },
+    "status": "failed",
+    "weights": "random",
+    "text_parameters": 4628569344,
+    "after_cuda_init": {
+      "device_used_mib": 738,
+      "device_free_mib": 3357,
+      "peak_allocated_mib": 0,
+      "peak_reserved_mib": 0
+    },
+    "placement": {
+      "total_layers": 35,
+      "layers_on_gpu": 35,
+      "quantized_linears": 0
+    },
+    "after_weights": {
+      "device_used_mib": 4095,
+      "device_free_mib": 0,
+      "peak_allocated_mib": 3583,
+      "peak_reserved_mib": 3644
+    },
+    "lora": {
+      "rank": 8,
+      "alpha": 16,
+      "target_modules": [
+        "q_proj",
+        "k_proj",
+        "v_proj",
+        "o_proj",
+        "gate_proj",
+        "up_proj",
+        "down_proj"
+      ],
+      "trainable_parameters": 12079104,
+      "lora_wrapped_linears": 205
+    },
+    "dataset": "C:\\Users\\User\\Desktop\\ai factory\\predictfix-qlora-dataset\\training\\selection-dataset.json",
+    "error_type": "RuntimeError",
+    "error": "expected mat1 and mat2 to have the same dtype, but got: float != struct c10::Half"
+  },
+  "real_fp32_random_short": {
+    "checked_at": "2026-10-16T09:24:24+00:00",
+    "mode": "fp32",
+    "nvidia_smi_before_cuda_init": {
+      "name": "NVIDIA GeForce GTX 1050 Ti",
+      "driver": "582.66",
+      "total_mib": 4096,
+      "used_by_others_mib": 746,
+      "compute_cap": "6.1"
+    },
+    "status": "completed",
+    "weights": "random",
+    "text_parameters": 4628569344,
+    "after_cuda_init": {
+      "device_used_mib": 738,
+      "device_free_mib": 3357,
+      "peak_allocated_mib": 0,
+      "peak_reserved_mib": 0
+    },
+    "placement": {
+      "total_layers": 35,
+      "layers_on_gpu": 35,
+      "quantized_linears": 0
+    },
+    "after_weights": {
+      "device_used_mib": 4095,
+      "device_free_mib": 0,
+      "peak_allocated_mib": 7169,
+      "peak_reserved_mib": 7172
+    },
+    "lora": {
+      "rank": 8,
+      "alpha": 16,
+      "target_modules": [
+        "q_proj",
+        "k_proj",
+        "v_proj",
+        "o_proj",
+        "gate_proj",
+        "up_proj",
+        "down_proj"
+      ],
+      "trainable_parameters": 12079104,
+      "lora_wrapped_linears": 205
+    },
+    "dataset": "C:\\Users\\User\\Desktop\\ai factory\\predictfix-qlora-dataset\\training\\selection-dataset.json",
+    "steps": [
+      {
+        "step": 1,
+        "sequence_tokens": 181,
+        "answer_tokens": 11,
+        "loss": 12.9337,
+        "device_used_mib": 4095,
+        "device_free_mib": 0,
+        "peak_allocated_mib": 7417,
+        "peak_reserved_mib": 7566
+      },
+      {
+        "step": 2,
+        "sequence_tokens": 181,
+        "answer_tokens": 11,
+        "loss": 12.7757,
+        "device_used_mib": 4095,
+        "device_free_mib": 0,
+        "peak_allocated_mib": 7465,
+        "peak_reserved_mib": 7566
+      },
+      {
+        "step": 3,
+        "sequence_tokens": 172,
+        "answer_tokens": 6,
+        "loss": 12.6692,
+        "device_used_mib": 4095,
+        "device_free_mib": 0,
+        "peak_allocated_mib": 7463,
+        "peak_reserved_mib": 7566
+      }
+    ]
+  }
+}

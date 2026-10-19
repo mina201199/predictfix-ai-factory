@@ -1,0 +1,9 @@
+# QLoRA 可行性測試用的獨立環境（.runtime/qlora-env），不影響專案 .venv 與 CPU LoRA 的 training/requirements.txt。
+# torch 需另外從 PyTorch CUDA 12.6 索引安裝：已實測 2.14.1+cu126 的 arch list 內含 sm_61（GTX 1050 Ti）；其他 CUDA 版本未測。
+#   uv pip install --python .runtime/qlora-env/Scripts/python.exe "torch==2.14.1+cu126" --index-url https://download.pytorch.org/whl/cu126
+# 完整相依版本見 training/qlora-environment-lock.txt。
+transformers==5.20.0
+peft==0.21.2
+bitsandbytes==0.50.2
+accelerate==1.15.0
+psutil==7.2.2

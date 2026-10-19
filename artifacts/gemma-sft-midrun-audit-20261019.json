@@ -1,0 +1,13 @@
+{
+  "scope": "Mid-run execution integrity audit; not final training or quality evidence",
+  "durable_steps_checked": 63,
+  "unique_ids": 63,
+  "frozen_order_matches": true,
+  "recorded_tokens_match_official_tokenizer_audit": true,
+  "counter_sums_match": true,
+  "protocol_unchanged": true,
+  "source_hashes_unchanged": true,
+  "sequence_tokens": 50404,
+  "supervised_tokens": 724,
+  "initial_adapter_sha256": "af8d236e53fd993bdc870b1bf9d75170fc899ce3a9ffccdfa3c48fdcd5eaefbd"
+}
