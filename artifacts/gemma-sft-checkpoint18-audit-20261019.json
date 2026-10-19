@@ -1,0 +1,10 @@
+{
+  "checkpoint_step": 18,
+  "scope": "Official pretrained Gemma4 QLoRA checkpoint inspection; not final adapter reload or quality score",
+  "adapter_sha256": "4b48f02455e265e61635485c6ec6d797e5f08d4677c18cc493730d1eb3dd9eab",
+  "file_bytes": 48370272,
+  "tensor_count": 410,
+  "parameters_saved": 12079104,
+  "only_lora_weights": true,
+  "base_embeddings_saved": false
+}

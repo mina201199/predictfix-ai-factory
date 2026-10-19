@@ -22,7 +22,7 @@ seed 20261019。v2 train 的 18 個家族，各固定抽 positive 4、no_answer 
 
 四個 arm：`base_fp16`（原模型 fp16 decoder）、`base_nf4`（原模型 nf4 decoder）、`lora_fp16`、`qlora_nf4`。embedding／PLE 與 tied lm_head 均留 CPU bf16；fp16 decoder 的輸入為 fp16，nf4 compute fp32。量化前後差異由兩個原模型 arm 補充；QLoRA 必須與 base_nf4 比較、LoRA 必須與 base_fp16 比較，不能把量化差異歸因於訓練。
 
-全部使用相同 `prepare_lora_data.prompt` 與官方 chat template、greedy decoding、最多 64 新 tokens。相同 token trie 限制 canonical JSON：selected 為候選順序的一個 0–3 元素子集合，無重複。訓練答案也採候選順序。grammar 只看候選 ID，不看金標；所有合法子集合都可生成。這是有限 JSON grammar，比自由生成更容易，JSON 合法率接近 100% 是格式限制的結果，不應宣稱為模型能力提升。原始選段／注入錯誤仍可發生。
+全部使用相同 `prepare_lora_data.prompt` 與官方 chat template、greedy decoding、最多 64 新 tokens。相同 token trie 限制 canonical JSON：selected 為候選順序的一個 0–3 元素子集合，無重複。訓練答案也採候選順序。grammar 只看候選 ID，不看金標；所有合法子集合都可生成。這是有限 JSON grammar，選段及生成路徑與自由生成不同；JSON 合法率接近 100% 是格式限制的結果，不應宣稱為模型能力提升。原始選段／注入錯誤仍可發生。
 
 評估記錄 exact match（集合相等且 schema 合法）、micro precision／recall、資料不足拒答（所有金標為空的題目）、文件注入 exact match／誤選注入率、JSON／schema 合法率，分 kind 與 family，保存逐題原始輸出。無效 JSON 不視為空答案答對；零分母 precision／recall 定義為 0。
 
