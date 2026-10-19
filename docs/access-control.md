@@ -246,3 +246,16 @@
 | POST /api/integrations/csv | 401 | 403 | 允許＋CSRF | 401 |
 
 只有精確的機器 POST 入口可用 HMAC，沒有把 `/api/integrations/` 整段列為免登入。來源身分存在 `integrationPrincipal`，不設定 user 或主管角色。瀏覽器登入不能代替 HMAC，HMAC 不能代替主管 session/CSRF。管理回應不提供秘密或目的地 URL；金鑰僅在部署環境。`tests/integration_scenario.py` 額外驗證簽章、跨端點權限與 CSRF。API 契約與展示方式見 [外部工單介接](ticket-integration.md)。
+
+
+## 整合：手機掃描與設備總覽
+
+| Method / 路由 | 未登入 | 工程師 | 主管 |
+| --- | --- | --- | --- |
+| POST /api/scan/nameplate | 401 | 允許＋CSRF | 允許＋CSRF |
+| GET /api/machines/{mid}/overview | 401 | 允許 | 允許 |
+| POST /api/machines/{mid}/ai-summary | 401 | 允許＋CSRF | 允許＋CSRF |
+| GET /api/scan/samples | 401 | 展示允許，正式404 | 展示允許，正式404 |
+| GET /api/scan/samples/{name} | 401 | 展示允許，正式404 | 展示允許，正式404 |
+
+權限矩陣的 OCR 使用隔離替身，AI 摘要使用惡意模型替身並檢查不修改業務資料；真實 OCR 由既有掃描情境另行驗證。
