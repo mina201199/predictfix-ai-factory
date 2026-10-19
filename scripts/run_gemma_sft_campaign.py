@@ -2,6 +2,7 @@
 import argparse
 import json
 import os
+import signal
 import subprocess
 import sys
 import time
@@ -39,6 +40,33 @@ def collectQuality(stages):
     if child.get('command') in ('baseline', 'reload'):
       table[name] = child['metrics_by_split']
   return table
+
+
+def stopOwnedTree(process):
+  if process.poll() is not None:
+    return
+  if os.name == 'nt':
+    from gemma_sft_process import stopWindowsTree
+    stopWindowsTree(process.pid, int(process._handle))
+  else:
+    try:
+      os.killpg(process.pid, signal.SIGKILL)
+    except ProcessLookupError:
+      pass
+  process.wait(timeout=15)
+
+
+def runBounded(command, cwd, environment, log, timeoutSeconds):
+  process = subprocess.Popen(command, cwd=cwd, env=environment, stdout=log,
+    stderr=subprocess.STDOUT, start_new_session=os.name != 'nt')
+  try:
+    return {'exit_code': process.wait(timeout=timeoutSeconds), 'timed_out': False, 'pid': process.pid}
+  except subprocess.TimeoutExpired:
+    stopOwnedTree(process)
+    return {'exit_code': process.returncode, 'timed_out': True, 'pid': process.pid}
+  except BaseException:
+    stopOwnedTree(process)
+    raise
 
 
 def campaign(args):
@@ -87,14 +115,21 @@ def campaign(args):
     environment = dict(os.environ, HF_HUB_OFFLINE='1', PYTHONIOENCODING='utf-8')
     try:
       with (args.run_dir / f'{name}.log').open('w', encoding='utf-8') as log:
-        process = subprocess.run(command, cwd=ROOT, env=environment, stdout=log, stderr=subprocess.STDOUT, timeout=remaining)
-      child = readJson(output / 'report.json') if (output / 'report.json').exists() else {}
-      status = child.get('status', 'failed_no_report')
-      if process.returncode != 0 and status in ('completed', 'trained_pending_reload'):
-        status = 'failed_exit_code'
-      entry.update(status=status, exit_code=process.returncode)
-    except subprocess.TimeoutExpired:
-      entry.update(status='hard_timed_out', reason='Total campaign budget exhausted; only this stage subprocess was terminated')
+        result = runBounded(command, ROOT, environment, log, remaining)
+      entry['pid'] = result['pid']
+      if result['timed_out']:
+        entry.update(status='hard_timed_out', reason='Total campaign budget exhausted; owned stage subprocess tree terminated')
+      else:
+        child = readJson(output / 'report.json') if (output / 'report.json').exists() else {}
+        status = child.get('status', 'failed_no_report')
+        if result['exit_code'] != 0 and status in ('completed', 'trained_pending_reload'):
+          status = 'failed_exit_code'
+        entry.update(status=status, exit_code=result['exit_code'])
+    except Exception as error:
+      entry.update(status='supervision_failed', error_type=type(error).__name__, error=str(error))
+      report['status'] = 'supervision_failed'
+      save()
+      raise
     statuses[name] = entry['status']
     save()
     print(json.dumps({'stage': name, 'status': entry['status']}), flush=True)

@@ -167,3 +167,57 @@ def test_failed_atomic_report_replace_preserves_previous_complete_json(tmp_path,
   with pytest.raises(PermissionError):
     writeJson(report, {'status': 'next'})
   assert json.loads(report.read_text(encoding='utf-8')) == {'status': 'previous'}
+
+
+def test_timeout_stops_owned_grandchild_heartbeat(tmp_path):
+  import os
+  import subprocess
+  import time
+  from run_gemma_sft_campaign import runBounded, stopOwnedTree
+  heartbeat = tmp_path / 'heartbeat.txt'
+  unrelatedHeartbeat = tmp_path / 'unrelated-heartbeat.txt'
+  childCode = ('import sys,time\nfrom pathlib import Path\np=Path(sys.argv[1])\n'
+    'while True:\n  p.write_text(str(time.monotonic()))\n  time.sleep(0.05)\n')
+  parentCode = ('import subprocess,sys,time\n'
+    'subprocess.Popen([sys.executable,"-c",sys.argv[1],sys.argv[2]])\ntime.sleep(60)\n')
+  command = [sys.executable, '-c', parentCode, childCode, str(heartbeat)]
+  with (tmp_path / 'child.log').open('w', encoding='utf-8') as log:
+    unrelated = subprocess.Popen([sys.executable, '-c', childCode, str(unrelatedHeartbeat)],
+      stdout=log, stderr=subprocess.STDOUT, start_new_session=os.name != 'nt')
+    try:
+      result = runBounded(command, tmp_path, None, log, 3)
+      assert result['timed_out']
+      assert heartbeat.exists(), 'Fixture grandchild must actually run before the timeout'
+      previous = heartbeat.read_text(encoding='utf-8')
+      unrelatedTime = unrelatedHeartbeat.stat().st_mtime_ns
+      time.sleep(0.25)
+      assert heartbeat.read_text(encoding='utf-8') == previous
+      assert unrelatedHeartbeat.stat().st_mtime_ns > unrelatedTime
+    finally:
+      stopOwnedTree(unrelated)
+
+
+def test_ownership_rejects_stale_parent_id_from_pid_reuse():
+  from gemma_sft_process import isOwnedEdge
+  parents = {100: 42, 101: 42, 102: 99}
+  created = {42: 1000, 100: 900, 101: 1100, 102: 1200}
+  assert not isOwnedEdge(42, 100, parents, created)
+  assert isOwnedEdge(42, 101, parents, created)
+  assert not isOwnedEdge(42, 102, parents, created)
+
+
+def test_cleanup_accepts_already_exited_race_but_rejects_live_permission_failure():
+  from gemma_sft_process import terminateOwnedHandle
+  class KernelFixture:
+    def __init__(self, exitedAfterAttempt):
+      self.exitedAfterAttempt = exitedAfterAttempt
+      self.attempted = False
+    def WaitForSingleObject(self, handle, milliseconds):
+      return 0 if self.attempted and self.exitedAfterAttempt else 258
+    def TerminateProcess(self, handle, exitCode):
+      self.attempted = True
+      return False
+  errorFactory = lambda: PermissionError('isolated kernel fixture')
+  terminateOwnedHandle(KernelFixture(True), 123, errorFactory)
+  with pytest.raises(PermissionError):
+    terminateOwnedHandle(KernelFixture(False), 123, errorFactory)
