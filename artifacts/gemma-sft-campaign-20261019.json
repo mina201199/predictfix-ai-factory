@@ -1,0 +1,116 @@
+{
+  "scope": "qlora",
+  "max_hours": 2.55,
+  "protocol_sha256": "35074b1a088cb3666f2dac35c16690c558c2a371eb3c516138782c0c6e0570c0",
+  "status": "completed",
+  "stages": {
+    "base_nf4": {
+      "status": "completed",
+      "report": "C:\\Users\\User\\Desktop\\ai factory\\predictfix-wave2-training\\.runtime\\base-nf4-formal-01\\report.json",
+      "reused": true
+    },
+    "qlora_train": {
+      "status": "trained_pending_reload",
+      "report": "C:\\Users\\User\\Desktop\\ai factory\\predictfix-wave2-training\\.runtime\\qlora-campaign-formal-02\\qlora_train\\report.json",
+      "command": [
+        "C:\\Users\\User\\Desktop\\ai factory\\predictfix-ai-factory\\.runtime\\qlora-env\\Scripts\\python.exe",
+        "C:\\Users\\User\\Desktop\\ai factory\\predictfix-wave2-training\\scripts\\run_gemma_sft.py",
+        "train",
+        "--mode",
+        "qlora",
+        "--runtime-dir",
+        "C:\\Users\\User\\Desktop\\ai factory\\predictfix-ai-factory\\.runtime",
+        "--run-dir",
+        "C:\\Users\\User\\Desktop\\ai factory\\predictfix-wave2-training\\.runtime\\qlora-campaign-formal-02\\qlora_train",
+        "--max-seconds",
+        "9180.0",
+        "--baseline-report",
+        "C:\\Users\\User\\Desktop\\ai factory\\predictfix-wave2-training\\.runtime\\base-nf4-formal-01\\report.json"
+      ],
+      "exit_code": 0
+    },
+    "qlora_reload": {
+      "status": "completed",
+      "report": "C:\\Users\\User\\Desktop\\ai factory\\predictfix-wave2-training\\.runtime\\qlora-campaign-formal-02\\qlora_reload\\report.json",
+      "command": [
+        "C:\\Users\\User\\Desktop\\ai factory\\predictfix-ai-factory\\.runtime\\qlora-env\\Scripts\\python.exe",
+        "C:\\Users\\User\\Desktop\\ai factory\\predictfix-wave2-training\\scripts\\run_gemma_sft.py",
+        "reload",
+        "--mode",
+        "qlora",
+        "--runtime-dir",
+        "C:\\Users\\User\\Desktop\\ai factory\\predictfix-ai-factory\\.runtime",
+        "--run-dir",
+        "C:\\Users\\User\\Desktop\\ai factory\\predictfix-wave2-training\\.runtime\\qlora-campaign-formal-02\\qlora_reload",
+        "--max-seconds",
+        "2263.311999999998",
+        "--adapter-run",
+        "C:\\Users\\User\\Desktop\\ai factory\\predictfix-wave2-training\\.runtime\\qlora-campaign-formal-02\\qlora_train"
+      ],
+      "exit_code": 0
+    }
+  },
+  "quality_table": {
+    "base_nf4": {
+      "validation": {
+        "count": 28,
+        "exact_match": 0.03571428571428571,
+        "precision": 0.36,
+        "recall": 0.9310344827586207,
+        "json_valid_rate": 1.0,
+        "schema_valid_rate": 1.0,
+        "insufficient_count": 9,
+        "insufficient_refusal_rate": 0.0,
+        "injection_count": 4,
+        "injection_exact_match": 0.0,
+        "injection_selection_rate": 0.25
+      },
+      "holdout": {
+        "count": 100,
+        "exact_match": 0.09,
+        "precision": 0.3271375464684015,
+        "recall": 0.9777777777777777,
+        "json_valid_rate": 1.0,
+        "schema_valid_rate": 1.0,
+        "insufficient_count": 40,
+        "insufficient_refusal_rate": 0.0,
+        "injection_count": 20,
+        "injection_exact_match": 0.2,
+        "injection_selection_rate": 0.0
+      }
+    },
+    "qlora_reload": {
+      "validation": {
+        "count": 28,
+        "exact_match": 0.32142857142857145,
+        "precision": 0,
+        "recall": 0.0,
+        "json_valid_rate": 1.0,
+        "schema_valid_rate": 1.0,
+        "insufficient_count": 9,
+        "insufficient_refusal_rate": 1.0,
+        "injection_count": 4,
+        "injection_exact_match": 0.25,
+        "injection_selection_rate": 0.0
+      },
+      "holdout": {
+        "count": 100,
+        "exact_match": 0.4,
+        "precision": 0,
+        "recall": 0.0,
+        "json_valid_rate": 1.0,
+        "schema_valid_rate": 1.0,
+        "insufficient_count": 40,
+        "insufficient_refusal_rate": 1.0,
+        "injection_count": 20,
+        "injection_exact_match": 0.5,
+        "injection_selection_rate": 0.0
+      }
+    }
+  },
+  "limitations": [
+    "Concurrent workloads; wall clock is cost evidence, not controlled performance.",
+    "Missing/failed arms have no quality score; resource probe is not formal training."
+  ],
+  "wall_seconds_uncontrolled": 7245.188000000002
+}

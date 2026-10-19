@@ -37,6 +37,8 @@ $env:PYTHONIOENCODING = 'utf-8'
 
 ## 檢查證據
 
+本次完整結果見 [2026-10-19 實測報告](gemma-sft-results-20261019.md)。流程 `completed` 只表示固定步數及評估完成，不能當作品質通過；本次 QLoRA 全部拒答，保留集 recall 為 0%。
+
 1. 開啟 `campaign.json`：正式階段完整時為 `completed`；逾時／失敗則為 `incomplete`，不補填缺失成績。
 2. 開啟 train 的 `report.json`：`optimizer_steps_actual=126`，`train_sequence_tokens=101101`、`supervised_tokens=1399`，最後一筆 step 是 126；`adapter_dir` 指向獨立 adapter。
 3. 開啟 reload 的 `report.json`：`reload_verification.passed=true`；`results` 恰有 128 題，每題含原始 JSON、金標、split、kind、family；`metrics_by_split.holdout.count=100`。

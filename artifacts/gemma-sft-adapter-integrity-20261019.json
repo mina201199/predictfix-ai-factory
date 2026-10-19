@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "adapter_dir": "C:\\Users\\User\\Desktop\\ai factory\\predictfix-wave2-training\\.runtime\\qlora-campaign-formal-02\\qlora_train\\adapter",
+  "adapter_sha256": "af5f9f42178f223c9daecfb1a00ad043e24dee76964c88b14570196bba13eb0a",
+  "adapter_config_sha256": "9091befc2d83c02c8d465d35cca4def319b4a7363a0aa03326b3c7f622eefe32",
+  "tensor_count": 410,
+  "parameters": 12079104,
+  "file_bytes": 48370272,
+  "all_tensors_finite": true,
+  "all_tensors_lora_only": true,
+  "checkpoint126_sha256": "af5f9f42178f223c9daecfb1a00ad043e24dee76964c88b14570196bba13eb0a",
+  "reload_verification": {
+    "passed": true,
+    "atol": 0.0001,
+    "rtol": 0.0001,
+    "max_abs_error": 0.0
+  },
+  "preservation": "Adapter and checkpoints remain in ignored .runtime; preserve before worktree removal. No optimizer/RNG resume state."
+}

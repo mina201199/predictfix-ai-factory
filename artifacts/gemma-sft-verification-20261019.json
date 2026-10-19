@@ -1,0 +1,31 @@
+{
+  "tests": {
+    "command": "../predictfix-ai-factory/.venv/Scripts/python.exe -m pytest --confcutdir=. --rootdir=. tests -q -p no:cacheprovider --basetemp=.runtime/training-full-05",
+    "exit_code": 0,
+    "passed": 93,
+    "skipped": 0,
+    "duration_seconds": 67.93,
+    "warnings": 1,
+    "warning": "Existing StarletteDeprecationWarning for httpx with starlette.testclient"
+  },
+  "holdout_check": {
+    "command": "../predictfix-ai-factory/.venv/Scripts/python.exe scripts/build_selection_holdout.py --check",
+    "exit_code": 0,
+    "frozen_rows": 100
+  },
+  "formal_run_checks": {
+    "train_ids_match_fixed_order": true,
+    "actual_optimizer_steps": 126,
+    "all_losses_and_gradient_norms_finite": true,
+    "sequence_tokens": 101101,
+    "supervised_tokens": 1399,
+    "baseline_and_adapter_eval_ids_match_fixed_order": true,
+    "evaluation_rows_each": 128,
+    "holdout_rows_each": 100,
+    "metrics_recomputed": true,
+    "train_eval_source_hashes_equal": true,
+    "fresh_reload_max_abs_error": 0.0,
+    "final_adapter_and_checkpoint126_hash_equal": true
+  },
+  "review": "Read-only independent reviewer recomputed row scores and checked data/protocol/adapter/config hashes; no material inconsistency."
+}
