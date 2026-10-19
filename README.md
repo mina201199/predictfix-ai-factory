@@ -132,10 +132,14 @@ New-NetFirewallRule -DisplayName "PredictFix LAN demo" -Direction Inbound -Proto
 | **銘牌影像辨識** | RapidOCR、ONNX Runtime、Pillow | 本機 CPU 偵測與辨識文字，比對已建檔機台；低信心交由人確認。模型隨套件安裝，不依賴外部 API。 |
 | **API 與資料** | FastAPI、Pydantic、SQLAlchemy；本機 SQLite、部署 PostgreSQL 17 | 驗證輸入、維持一致 API 契約並保存工單；SQLite 降低單機啟動成本，PostgreSQL 已用相同情境實測，高並發負載仍需另行壓測。 |
 | **知識檢索** | TF-IDF＋BM25 排名融合 | 支援機型、術語與錯誤碼的字詞檢索；合成題比較三種方法目前同分，尚無證據顯示融合更準。未使用 Embedding 或 Vector DB。 |
-| **本機 AI** | Gemma 4 E2B Q8_0（Google，Apache 2.0）、llama.cpp 純 CPU；另支援 Ollama | 用小模型選取來源段落；模型不負責自動派工、結案或核准復機。模型不可用時退回候選來源。不需 GPU，選型依據見 [本機模型基準](docs/local-llm-benchmark.md)。 |
+| **本機 AI** | Gemma 4 E2B Q8_0（Google，Apache 2.0）、llama.cpp 純 CPU；另支援 Ollama | 用小模型選取來源段落；模型不負責自動派工、結案或核准復機。模型不可用時退回候選來源。不需 GPU，選型依據見 [本機模型基準](docs/local-llm-benchmark.md) 與 [模型選型與合規](docs/model-selection.md)。 |
 | **工程師推薦** | 規則篩選與排序 | 必要資格、出勤與容量是可核對的條件；目前沒有可用來訓練推薦模型的現場成效資料。 |
 | **一致性與權限** | 工作階段、角色、CSRF、版本檢查、冪等請求 | 限制操作身分，避免重送造成重複工單或扣帳，拒絕過期版本覆寫。 |
 | **部署** | Docker Compose、PostgreSQL、Caddy 設定 | 分開配置 API、資料庫、模型與 HTTPS；API＋PostgreSQL 已實測，HTTPS 尚待驗證。 |
+
+### 模型選型與合規
+
+本機模型使用 Google 的 Gemma 4 E2B Q8_0（Apache 2.0），在本機 CPU 執行；除選配的 OpenAI 整合外，工單與手冊不會送出工廠。原本的 Qwen3-0.6B 已於 2026-10-15 淘汰，原因有二：44 題段落選取基準只選對 22.7%（Gemma 為 100%），以及台灣案場對中國開發模型的合規疑慮。台灣自製備案為聯發創新基地的 Llama-Breeze2-3B（選對 88.6%，注入題較弱）。來源、授權、離線與檢核清單見 [模型選型與合規](docs/model-selection.md)。
 
 ## 架構
 

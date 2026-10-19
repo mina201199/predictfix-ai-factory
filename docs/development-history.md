@@ -1,6 +1,8 @@
 # 開發紀錄（歷史版本）
 
 > 本文件保存截至 2026-10-06 的原始開發說明。內容依功能加入時間累積，可能包含過時狀態；最新功能以 [專案首頁](../README.md)、[維修流程手冊](repair-flow.md) 與 [正式環境手冊](production-setup.md) 為準。
+>
+> 文中的本機模型 Qwen3-0.6B 已於 2026-10-15 淘汰，現用 Gemma 4 E2B Q8_0。淘汰原因：44 題基準只選對 22.7%，以及台灣案場對中國開發模型的合規疑慮。詳見 [模型選型與合規](model-selection.md)。
 
 # PredictFix AI
 
@@ -173,6 +175,8 @@ LLM smoke test 僅檢查 3 個例子的服務與欄位，不能當成獨立測�
 docker compose up --build -d
 docker compose exec ollama ollama pull qwen3:0.6b
 ```
+
+> 已淘汰：`qwen3:0.6b` 是 2026-10-06 當時的模型，請勿再執行；現行 Compose 設定使用 `gemma4:e2b-it-q8_0`。
 
 容器配置使用 Ollama 替代 Windows llama.cpp；PostgreSQL 不對外開放。固定示例密碼僅供本機開發。容器版的 LLM 推論與資料保存需另行驗證。
 
