@@ -21,6 +21,7 @@ from .ml import features, WINDOW, FEATURE_NAMES, LABELS
 from .copilot import analyze
 from .knowledge import DOCUMENTS, retrieve
 from . import operations, chat, auth, evidence, maintenance_ai, config, workforce, repair_flow, equipment_templates
+from . import knowledge_graph
 
 ROOT=Path(__file__).resolve().parents[1]
 ART=ROOT/'artifacts'
@@ -301,6 +302,7 @@ chat.register(app)
 maintenance_ai.register(app)
 repair_flow.register(app)
 equipment_templates.register(app)
+knowledge_graph.register(app)
 
 STATIC={'':'index.html','index.html':'index.html','index.js':'index.js','index.css':'index.css','dynamic-styles.js':'dynamic-styles.js',
         'auth.css':'auth.css','roles.css':'roles.css',
@@ -308,7 +310,8 @@ STATIC={'':'index.html','index.html':'index.html','index.js':'index.js','index.c
         'neon.css':'neon.css','live.css':'live.css','live.js':'live.js','management.js':'management.js','management.css':'management.css','auth.js':'auth.js','evidence.js':'evidence.js','demo-measurements.csv':'demo-measurements.csv',
         'knowledge.html':'knowledge.html','knowledge.js':'knowledge.js','knowledge.css':'knowledge.css',
         'console.html':'console.html','console.js':'console.js','console.css':'console.css','templates.js':'templates.js',
-        'workflow.html':'workflow.html','workflow.js':'workflow.js','workflow.css':'workflow.css'}
+        'workflow.html':'workflow.html','workflow.js':'workflow.js','workflow.css':'workflow.css',
+        'graph.html':'graph.html','graph.js':'graph.js','graph.css':'graph.css'}
 @app.get('/')
 def index():
     return FileResponse(ROOT/('index.html' if config.demo() else 'console.html'),headers={'Cache-Control':'no-store'})

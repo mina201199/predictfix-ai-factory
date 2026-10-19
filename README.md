@@ -275,5 +275,6 @@ Exact match 變化：**+75.0 個百分點**。這是小規模流程實驗，不�
 | [系統架構](docs/system-architecture.md) | 資料流、API、來源管理與實作邊界。 |
 | [安全測試](docs/security-testing.md) | 攻擊情境、發現與修正、重跑方式及限制。 |
 | [權限設計與矩陣](docs/access-control.md) | 主管／工程師權限劃分、資料歸屬、職責分離、逐路由權限矩陣與面試問答。 |
+| [維修知識圖譜](docs/knowledge-graph.md) | 有來源的候選／核准路徑、主管審查、隔離展示與合成評估。 |
 | [本機安裝](docs/local-setup.md) · [正式環境與部署](docs/production-setup.md) | 安裝、帳號、出勤、備份還原及伺服器設定。 |
 | [歷史開發紀錄](docs/development-history.md) | 過往實作與驗證紀錄，含已被後續版本更新的內容。 |

@@ -210,6 +210,27 @@ def recommendationScope(role,response):
               and 'history' not in person['breakdown'])
 
 
+def graphBody():
+  mid=manual()
+  source=next(chunk for chunk in ai.buildCorpus() if chunk['id']==mid)
+  return {'sourceChunkId':source['chunk_id'],'machineModel':MODEL,
+    'head':{'kind':'symptom','label':'換刀卡住'},
+    'tail':{'kind':'inspect_step','label':'核對刀具資料'},
+    'relation':'inspect','quote':source['text']}
+
+
+def graphReview(role):
+  from backend.knowledge_graph import CandidateInput, createCandidate
+  body=graphBody()
+  with store.Session() as db:
+    relation,_=createCandidate(db,CandidateInput(**body),'supervisor')
+    relationId=relation.id
+    revision=relation.revision
+    db.commit()
+  return {'url':f'/api/graph/relations/{relationId}/review',
+    'json':{'revision':revision,'action':'approve','note':'矩陣來源核對'}}
+
+
 MATRIX=[
   # 公開頁面與登入
   row('GET','/healthz',PUBLIC),
@@ -323,6 +344,18 @@ MATRIX=[
   row('POST','/api/stock/{iid}/movements',SUPERVISOR,stockRequest(lambda:{'kind':'receive','quantity':5,'note':'矩陣入庫'}),variant='入庫'),
   row('POST','/api/stock/{iid}/movements',ASSIGNED_OR_SUPERVISOR,stockRequest(lambda:{'kind':'issue','quantity':1,
       'ticket_id':ticket('維修中'),'note':'矩陣領料'}),variant='依工單領料'),
+]
+
+
+# 知識圖譜獨立區塊，保留既有全路由守門與雙模式真實登入測試。
+MATRIX += [
+  row('GET','/api/graph/sources',SUPERVISOR),
+  row('GET','/api/graph/candidates',SUPERVISOR),
+  row('POST','/api/graph/candidates',SUPERVISOR,lambda role:{'json':graphBody()}),
+  row('POST','/api/graph/rebuild',SUPERVISOR),
+  row('POST','/api/graph/relations/{relationId}/review',SUPERVISOR,graphReview),
+  row('POST','/api/graph/query',SIGNED_IN,lambda role:{'json':{'machineModel':MODEL,'query':'換刀卡住'}}),
+  row('POST','/api/graph/assist',SIGNED_IN,lambda role:{'json':{'machineModel':MODEL,'query':'換刀卡住'}}),
 ]
 
 

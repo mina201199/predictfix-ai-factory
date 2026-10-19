@@ -1,0 +1,25 @@
+:root { color-scheme: dark; font-family: system-ui, sans-serif; background: #101825; color: #e4eef9; }
+* { box-sizing: border-box; }
+body { margin: 0; }
+.main { max-width: 1180px; margin: auto; padding: 30px; }
+header, .header-right, .fields { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; }
+header { justify-content: space-between; }
+h1 { margin: 12px 0; }
+h2 { font-size: 1.25rem; }
+section, article { background: #192639; border: 1px solid #33475f; border-radius: 12px; padding: 20px; margin: 18px 0; }
+article { background: #121f30; overflow-wrap: anywhere; }
+a { color: #72d9e6; }
+.auth-identity { color: #b0c1d3; }
+label { display: block; margin: 12px 0; flex: 1; min-width: 150px; }
+input, select, textarea { display: block; width: 100%; margin-top: 6px; padding: 10px; color: #eef6ff; background: #101825; border: 1px solid #57718d; border-radius: 6px; font: inherit; }
+button, .btn { padding: 10px 15px; margin: 6px 8px 6px 0; cursor: pointer; border: 1px solid #5095a2; border-radius: 6px; background: #184c5a; color: #fff; font: inherit; }
+button:disabled { opacity: .55; cursor: wait; }
+.notice { border-left: 4px solid #ecba69; padding: 14px; background: #30291f; line-height: 1.7; }
+.muted { color: #b0c1d3; }
+#message { min-height: 24px; color: #ffd48f; }
+pre, blockquote { white-space: pre-wrap; overflow-wrap: anywhere; margin: 12px 0; line-height: 1.6; max-height: 360px; overflow-y: auto; }
+blockquote { border-left: 3px solid #486980; padding-left: 14px; }
+summary { cursor: pointer; padding: 10px 0; }
+.path { font-size: 1.12rem; color: #99ebd5; }
+[hidden] { display: none !important; }
+@media (max-width: 650px) { .main { padding: 14px; } section { padding: 14px; } .fields { display: block; } }

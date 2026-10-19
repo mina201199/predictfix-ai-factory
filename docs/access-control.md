@@ -7,9 +7,23 @@
 3. **職責分離管「執行者不能審核自己」**：工程師提交，主管審核。主管核准清單後，由負責工程師填寫結果；主管不能被指派，因此也不能自己執行再自己審核。
 4. **AI 不能改權限、不能結案**：模型只負責選段落、給建議。身分一律由伺服器端 session 決定，任何 AI 回應都不會改變工單、帳號或案例狀態。
 
-全部 81 個路由（方法＋路徑）都列在下方矩陣。[`tests/test_access_matrix.py`](../tests/test_access_matrix.py) 在正式與展示兩種模式下，分別以未登入、工程師、主管實際呼叫每個路由；需要資料歸屬的路由再加一位非指派工程師，每種模式共 277 次呼叫。如果新增 API 卻沒有寫進矩陣，CI 就會失敗。
+全部路由（方法＋路徑）都列在下方矩陣。[`tests/test_access_matrix.py`](../tests/test_access_matrix.py) 在正式與展示兩種模式下，分別以未登入、工程師、主管實際呼叫每個路由；需要資料歸屬的路由再加一位非指派工程師。新增圖譜後共 88 個路由、每種模式 298 次呼叫。如果新增 API 卻沒有寫進矩陣，CI 就會失敗。
 
 ## 三層設計
+
+### 知識圖譜（獨立附加區塊）
+
+| 方法 | 路徑 | 未登入 | 工程師 | 主管 | 資料範圍／備註 | 檢查位置 | 模式 |
+|---|---|---|---|---|---|---|---|
+| GET | `/api/graph/sources` | 401 | 403 | ✓ | 目前有效來源，含模板、備品、資格目錄；不含個人履歷 | `knowledge_graph.py:sources` | 兩者 |
+| GET | `/api/graph/candidates` | 401 | 403 | ✓ | 最近 500 筆關係及來源是否仍有效 | `knowledge_graph.py:candidates` | 兩者 |
+| POST | `/api/graph/candidates` | 401 | 403 | ✓ | 逐字來源／機型／型別驗證；只建立候選 | `knowledge_graph.py:candidate` | 兩者 |
+| POST | `/api/graph/rebuild` | 401 | 403 | ✓ | 結構化來源規則轉換，不自動核准；可重跑 | `knowledge_graph.py:rebuild` | 兩者 |
+| POST | `/api/graph/relations/{relationId}/review` | 401 | 403 | ✓ | 核准／撤回需 revision，操作者取 session | `knowledge_graph.py:review` | 兩者 |
+| POST | `/api/graph/query` | 401 | ✓ | ✓ | 限核准、當下有效、明確機型、出向最多 3 hop；不公開孤立節點 | `knowledge_graph.py:queryGraph` | 兩者 |
+| POST | `/api/graph/assist` | 401 | ✓ | ✓ | 純字詞或加圖譜，可追溯引用，不呼叫 LLM／不執行工單動作 | `knowledge_graph.py:assistGraph` | 兩者 |
+
+`/graph.html`、`/graph.js`、`/graph.css` 屬現有 `/{filename}` 靜態白名單；頁面可載入，API 仍強制登入與角色檢查。草稿與失效來源只保留於主管的審查紀錄，工程師不能由圖鄰接取得。
 
 | 層 | 回答的問題 | 做法 | 程式位置 |
 |---|---|---|---|

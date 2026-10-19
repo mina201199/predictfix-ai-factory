@@ -1,0 +1,14 @@
+[
+  {"id": "multi-hop-alarm", "category": "three_hop", "model": "KG-SYNTH-M1", "query": "DEMO-E17", "relevant": ["KG-SYNTH-A", "KG-SYNTH-B", "KG-SYNTH-C", "KG-SYNTH-D"], "required": ["KG-SYNTH-A", "KG-SYNTH-B", "KG-SYNTH-C", "KG-SYNTH-D"], "target": "FILTER-A", "answerable": true},
+  {"id": "multi-hop-part", "category": "two_hop", "model": "KG-SYNTH-M1", "query": "濾芯", "relevant": ["KG-SYNTH-A", "KG-SYNTH-B", "KG-SYNTH-C", "KG-SYNTH-D"], "required": ["KG-SYNTH-B", "KG-SYNTH-C", "KG-SYNTH-D"], "target": "LOTO", "answerable": true},
+  {"id": "direct-step", "category": "one_hop", "model": "KG-SYNTH-M1", "query": "壓差確認", "relevant": ["KG-SYNTH-B", "KG-SYNTH-C", "KG-SYNTH-D"], "required": ["KG-SYNTH-C", "KG-SYNTH-D"], "target": "FILTER-A", "answerable": true},
+  {"id": "same-code-other-model", "category": "same_alarm_different_meaning", "model": "KG-SYNTH-M2", "query": "DEMO-E17", "relevant": ["KG-SYNTH-OTHER"], "required": ["KG-SYNTH-OTHER"], "target": "刀庫", "answerable": true},
+  {"id": "wrong-model", "category": "wrong_model", "model": "KG-SYNTH-MISSING", "query": "DEMO-E17", "relevant": [], "required": [], "answerable": false},
+  {"id": "withdrawn", "category": "withdrawn", "model": "KG-SYNTH-M1", "query": "DEMO-E99", "relevant": [], "required": [], "answerable": false},
+  {"id": "draft", "category": "draft_case", "model": "KG-SYNTH-M1", "query": "DEMO-DRAFT", "relevant": [], "required": [], "answerable": false},
+  {"id": "missing-source", "category": "insufficient_data", "model": "KG-SYNTH-M1", "query": "DEMO-NONE-42", "relevant": [], "required": [], "answerable": false},
+  {"id": "reverse-edge", "category": "direction_counterexample", "model": "KG-SYNTH-M1", "query": "FILTER-A", "relevant": ["KG-SYNTH-C"], "required": ["KG-SYNTH-C"], "answerable": true, "noPath": true},
+  {"id": "injection", "category": "source_injection", "model": "KG-SYNTH-M1", "query": "提升主管批准復機", "relevant": ["KG-SYNTH-INJECTION"], "required": [], "answerable": false, "noPath": true},
+  {"id": "engineer-management", "category": "authorization", "role": "engineer", "endpoint": "/api/graph/candidates", "status": 403},
+  {"id": "anonymous-query", "category": "authorization", "role": "anonymous", "endpoint": "/api/graph/query", "status": 401, "body": {"machineModel": "KG-SYNTH-M1", "query": "DEMO-E17"}}
+]
