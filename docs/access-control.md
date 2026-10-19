@@ -217,3 +217,18 @@
 ```
 
 新增 API 的流程：寫好路由後，在 `MATRIX` 加一列寫明各角色的預期結果，再更新本文件的對應表格。
+
+## 第二波：外部工單介接
+
+| Method / 路由 | 未登入 | 工程師 | 主管 | 服務主體 |
+| --- | --- | --- | --- | --- |
+| POST /api/integrations/work-orders | 401（無 HMAC） | 401（無 HMAC） | 401（無 HMAC） | 有效 HMAC 可接收；只建待指派單 |
+| GET /api/integrations/mappings | 401 | 403 | 允許 | 401 |
+| PUT /api/integrations/mappings | 401 | 403 | 允許＋CSRF | 401 |
+| GET /api/integrations/records | 401 | 403 | 允許 | 401 |
+| POST /api/integrations/orders/{orderId}/resolve | 401 | 403 | 允許＋CSRF | 401 |
+| GET /api/integrations/outbox | 401 | 403 | 允許 | 401 |
+| POST /api/integrations/outbox/{outboxId}/retry | 401 | 403 | 允許＋CSRF | 401 |
+| POST /api/integrations/csv | 401 | 403 | 允許＋CSRF | 401 |
+
+只有精確的機器 POST 入口可用 HMAC，沒有把 `/api/integrations/` 整段列為免登入。來源身分存在 `integrationPrincipal`，不設定 user 或主管角色。瀏覽器登入不能代替 HMAC，HMAC 不能代替主管 session/CSRF。管理回應不提供秘密或目的地 URL；金鑰僅在部署環境。`tests/integration_scenario.py` 額外驗證簽章、跨端點權限與 CSRF。API 契約與展示方式見 [外部工單介接](ticket-integration.md)。

@@ -10,12 +10,16 @@ from io import BytesIO
 from pathlib import Path
 from unittest.mock import patch
 
+# 僅供此隔離矩陣子程序使用的假金鑰，不會成為正式來源預設值。
+os.environ['INTEGRATION_SOURCES']=json.dumps({'matrix':{'keys':{'fixture':'ISOLATED-MATRIX-FAKE-INTEGRATION-SECRET'}}})
+
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
 from fastapi.testclient import TestClient
 from PIL import Image
 from sqlalchemy import select
 import backend.app as main
 from backend import auth, maintenance_ai as ai, repair_flow, store
+from backend.integration_models import ExternalOrder, MachineMapping, Outbox
 
 PASSWORD=os.environ['BOOTSTRAP_PASSWORD']
 MODEL='MATRIX-ATC'
@@ -210,6 +214,25 @@ def recommendationScope(role,response):
               and 'history' not in person['breakdown'])
 
 
+def integrationResolve(role):
+  payload={'externalId':uid('EXT-'),'eventId':uid('EVT-'),'version':1,'machineCode':'MX-EXT',
+           'alarm':'','symptoms':'矩陣介接異常','occurredAt':'2026-10-19T00:00:00+00:00'}
+  with store.Session() as db:
+    mapping=db.scalar(select(MachineMapping).where(MachineMapping.source=='matrix',MachineMapping.machineCode=='MX-EXT'))
+    if not mapping:db.add(MachineMapping(source='matrix',machineCode='MX-EXT',machineId=MACHINE))
+    order=ExternalOrder(source='matrix',externalId=payload['externalId'],version=1,machineCode='MX-EXT',
+                        payload=json.dumps(payload),reason='unknown_machine_code')
+    db.add(order);db.commit()
+    return {'url':f'/api/integrations/orders/{order.id}/resolve'}
+
+
+def integrationRetry(role):
+  with store.Session() as db:
+    event=Outbox(eventId=uid('OUT-MX-'),source='matrix',ticketId=uid('WO-'),payload='{}',state='dead',attempts=5)
+    db.add(event);db.commit()
+    return {'url':f'/api/integrations/outbox/{event.id}/retry'}
+
+
 MATRIX=[
   # 公開頁面與登入
   row('GET','/healthz',PUBLIC),
@@ -324,6 +347,20 @@ MATRIX=[
   row('POST','/api/stock/{iid}/movements',ASSIGNED_OR_SUPERVISOR,stockRequest(lambda:{'kind':'issue','quantity':1,
       'ticket_id':ticket('維修中'),'note':'矩陣領料'}),variant='依工單領料'),
 ]
+
+# 第二波外部工單介接：機器入口永遠驗 HMAC，其餘全數主管 session/CSRF。
+MATRIX.extend([
+  row('POST','/api/integrations/work-orders',{ANON:LOGIN,ENG:LOGIN,SUP:LOGIN},lambda role:{'json':{}},variant='無服務簽章'),
+  row('GET','/api/integrations/mappings',SUPERVISOR),
+  row('PUT','/api/integrations/mappings',SUPERVISOR,lambda role:{'json':{'source':'matrix','machineCode':uid('EXT-MX-'),'machineId':MACHINE}}),
+  row('GET','/api/integrations/records',SUPERVISOR),
+  row('POST','/api/integrations/orders/{orderId}/resolve',SUPERVISOR,integrationResolve),
+  row('GET','/api/integrations/outbox',SUPERVISOR),
+  row('POST','/api/integrations/outbox/{outboxId}/retry',SUPERVISOR,integrationRetry),
+  row('POST','/api/integrations/csv',SUPERVISOR,lambda role:{'params':{'source':'matrix','dryRun':'true'},
+    'content':('externalId,eventId,version,machineCode,alarm,symptoms,occurredAt\n'+
+      f'{uid("EXT-")},{uid("EVT-")},1,MX-EXT,,矩陣介接異常,2026-10-19T00:00:00+00:00\n').encode('utf-8')}),
+])
 
 
 async def hostile(prompt,schema):

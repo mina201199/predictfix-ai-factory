@@ -302,6 +302,10 @@ maintenance_ai.register(app)
 repair_flow.register(app)
 equipment_templates.register(app)
 
+# 外部工單介接保持獨立註冊，方便與其他第二波子系統依序整合。
+from . import integrations
+integrations.register(app)
+
 STATIC={'':'index.html','index.html':'index.html','index.js':'index.js','index.css':'index.css','dynamic-styles.js':'dynamic-styles.js',
         'auth.css':'auth.css','roles.css':'roles.css',
         'factory.css':'factory.css','factory.js':'factory.js',
@@ -309,6 +313,7 @@ STATIC={'':'index.html','index.html':'index.html','index.js':'index.js','index.c
         'knowledge.html':'knowledge.html','knowledge.js':'knowledge.js','knowledge.css':'knowledge.css',
         'console.html':'console.html','console.js':'console.js','console.css':'console.css','templates.js':'templates.js',
         'workflow.html':'workflow.html','workflow.js':'workflow.js','workflow.css':'workflow.css'}
+STATIC.update({name:name for name in ['integrations.html','integrations.js','integrations.css']})
 @app.get('/')
 def index():
     return FileResponse(ROOT/('index.html' if config.demo() else 'console.html'),headers={'Cache-Control':'no-store'})
