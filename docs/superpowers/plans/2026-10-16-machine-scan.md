@@ -1,5 +1,7 @@
 # 機台銘牌掃描總覽 Implementation Plan
 
+**執行紀錄（2026-10-19）：** 已完成實作並保留在 `feat/postgres-and-machine-scan`。105 項 pytest、零跳過；Node 掃描競態檢查與 PostgreSQL 容器重啟／備份還原驗證通過。OCR 90 張合成銘牌 top-1 100%、自動開錯台 0；桌面及 375×812 手機尺寸已操作。實體手機／Getac 的區網連線與相機仍待裝置實測，HTTPS 與 App 為後續工作。
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal：** 拍機台銘牌 → 伺服器端 OCR 讀出機台編號 → 顯示涵蓋 9 個面向的機台總覽 → 本機模型產生附來源的摘要與建議；另提供選用的區網模式讓手機連線拍照。

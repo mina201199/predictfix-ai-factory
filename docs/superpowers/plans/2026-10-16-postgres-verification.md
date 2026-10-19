@@ -1,5 +1,7 @@
 # PostgreSQL 上線驗證 Implementation Plan
 
+**執行紀錄（2026-10-19）：** 已完成實作並保留在 `feat/postgres-and-machine-scan`。105 項 pytest、零跳過；Node 掃描競態檢查與 PostgreSQL 容器重啟／備份還原驗證通過。OCR 90 張合成銘牌 top-1 100%、自動開錯台 0；桌面及 375×812 手機尺寸已操作。實體手機／Getac 的區網連線與相機仍待裝置實測，HTTPS 與 App 為後續工作。
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal：** 實際讓 PredictFix 跑在 PostgreSQL 17 上並通過既有情境、容器重啟與備份還原驗證，補上 README「PostgreSQL 尚未實測」的缺口。
