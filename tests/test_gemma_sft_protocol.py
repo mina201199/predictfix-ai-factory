@@ -170,10 +170,9 @@ def test_failed_atomic_report_replace_preserves_previous_complete_json(tmp_path,
 
 
 def test_timeout_stops_owned_grandchild_heartbeat(tmp_path):
-  import os
-  import subprocess
   import time
-  from run_gemma_sft_campaign import runBounded, stopOwnedTree
+  from run_gemma_sft_campaign import runBounded
+  from gemma_sft_process import startOwnedProcess
   heartbeat = tmp_path / 'heartbeat.txt'
   unrelatedHeartbeat = tmp_path / 'unrelated-heartbeat.txt'
   childCode = ('import sys,time\nfrom pathlib import Path\np=Path(sys.argv[1])\n'
@@ -182,8 +181,7 @@ def test_timeout_stops_owned_grandchild_heartbeat(tmp_path):
     'subprocess.Popen([sys.executable,"-c",sys.argv[1],sys.argv[2]])\ntime.sleep(60)\n')
   command = [sys.executable, '-c', parentCode, childCode, str(heartbeat)]
   with (tmp_path / 'child.log').open('w', encoding='utf-8') as log:
-    unrelated = subprocess.Popen([sys.executable, '-c', childCode, str(unrelatedHeartbeat)],
-      stdout=log, stderr=subprocess.STDOUT, start_new_session=os.name != 'nt')
+    unrelated = startOwnedProcess([sys.executable, '-c', childCode, str(unrelatedHeartbeat)], tmp_path, None, log)
     try:
       result = runBounded(command, tmp_path, None, log, 3)
       assert result['timed_out']
@@ -194,16 +192,7 @@ def test_timeout_stops_owned_grandchild_heartbeat(tmp_path):
       assert heartbeat.read_text(encoding='utf-8') == previous
       assert unrelatedHeartbeat.stat().st_mtime_ns > unrelatedTime
     finally:
-      stopOwnedTree(unrelated)
-
-
-def test_ownership_rejects_stale_parent_id_from_pid_reuse():
-  from gemma_sft_process import isOwnedEdge
-  parents = {100: 42, 101: 42, 102: 99}
-  created = {42: 1000, 100: 900, 101: 1100, 102: 1200}
-  assert not isOwnedEdge(42, 100, parents, created)
-  assert isOwnedEdge(42, 101, parents, created)
-  assert not isOwnedEdge(42, 102, parents, created)
+      unrelated.close()
 
 
 def test_cleanup_accepts_already_exited_race_but_rejects_live_permission_failure():
@@ -221,3 +210,102 @@ def test_cleanup_accepts_already_exited_race_but_rejects_live_permission_failure
   terminateOwnedHandle(KernelFixture(True), 123, errorFactory)
   with pytest.raises(PermissionError):
     terminateOwnedHandle(KernelFixture(False), 123, errorFactory)
+
+
+@pytest.mark.parametrize('exitCode', [0, 9])
+def test_parent_exit_cannot_leave_owned_descendant_running(tmp_path, exitCode):
+  import time
+  from run_gemma_sft_campaign import runBounded
+  heartbeat = tmp_path / 'orphan-heartbeat.txt'
+  childCode = ('import sys,time\nfrom pathlib import Path\np=Path(sys.argv[1])\n'
+    'end=time.monotonic()+4\nwhile time.monotonic()<end:\n'
+    '  p.write_text(str(time.monotonic()))\n  time.sleep(0.03)\n')
+  parentCode = ('import subprocess,sys,time\nfrom pathlib import Path\n'
+    'subprocess.Popen([sys.executable,"-c",sys.argv[1],sys.argv[2]])\n'
+    'while not Path(sys.argv[2]).exists(): time.sleep(0.01)\n'
+    'sys.exit(int(sys.argv[3]))\n')
+  try:
+    with (tmp_path / 'parent.log').open('w', encoding='utf-8') as log:
+      result = runBounded([sys.executable, '-c', parentCode, childCode, str(heartbeat), str(exitCode)],
+        tmp_path, None, log, 5)
+    assert result['exit_code'] == exitCode and not result['timed_out']
+    assert heartbeat.exists(), 'The descendant must run before its parent exits'
+    previous = heartbeat.read_bytes()
+    time.sleep(0.2)
+    assert heartbeat.read_bytes() == previous, 'runBounded returned while its descendant kept running'
+  finally:
+    # 修正前的回歸測試也會留下孤兒，fixture 自行到期，避免碰觸其他程序。
+    time.sleep(4.1)
+
+
+def test_exception_cleans_owned_processes_before_propagating(tmp_path, monkeypatch):
+  import time
+  import gemma_sft_process
+  from run_gemma_sft_campaign import runBounded
+  heartbeat = tmp_path / 'exception-heartbeat.txt'
+  command = [sys.executable, '-c',
+    'import sys,time\nfrom pathlib import Path\np=Path(sys.argv[1])\n'
+    'end=time.monotonic()+4\nwhile time.monotonic()<end:\n'
+    '  p.write_text(str(time.monotonic()))\n  time.sleep(0.03)\n', str(heartbeat)]
+  originalStart = gemma_sft_process.startOwnedProcess
+  def startWithInterruptedWait(*args):
+    process = originalStart(*args)
+    class InterruptedWait:
+      pid = process.pid
+      def wait(self, timeout=None):
+        deadline = time.monotonic() + 3
+        while not heartbeat.exists() and time.monotonic() < deadline:
+          time.sleep(0.01)
+        assert heartbeat.exists(), 'The real owned fixture must be running before interruption'
+        raise KeyboardInterrupt('injected supervisor interruption')
+      def close(self):
+        process.close()
+    return InterruptedWait()
+  monkeypatch.setattr(gemma_sft_process, 'startOwnedProcess', startWithInterruptedWait)
+  try:
+    with (tmp_path / 'exception.log').open('w', encoding='utf-8') as log:
+      with pytest.raises(KeyboardInterrupt, match='supervisor interruption'):
+        runBounded(command, tmp_path, None, log, 5)
+    previous = heartbeat.read_bytes()
+    time.sleep(0.2)
+    assert heartbeat.read_bytes() == previous
+  finally:
+    time.sleep(4.1)
+
+
+def test_timeout_contains_descendants_born_after_launch(tmp_path, monkeypatch):
+  import time
+  import gemma_sft_process
+  from run_gemma_sft_campaign import runBounded
+  heartbeat = tmp_path / 'late-heartbeat.txt'
+  leafCode = ('import sys,time\nfrom pathlib import Path\np=Path(sys.argv[1])\n'
+    'end=time.monotonic()+4\nwhile time.monotonic()<end:\n'
+    '  p.write_text(str(time.monotonic()))\n  time.sleep(0.03)\n')
+  spawnerCode = ('import subprocess,sys,time\ntime.sleep(0.25)\n'
+    'subprocess.Popen([sys.executable,"-c",sys.argv[1],sys.argv[2]])\ntime.sleep(4)\n')
+  parentCode = ('import subprocess,sys,time\n'
+    'subprocess.Popen([sys.executable,"-c",sys.argv[1],sys.argv[2],sys.argv[3]])\ntime.sleep(4)\n')
+  originalStart = gemma_sft_process.startOwnedProcess
+  def startAndAwaitLateDescendant(*args):
+    process = originalStart(*args)
+    try:
+      deadline = time.monotonic() + 3
+      while not heartbeat.exists() and time.monotonic() < deadline:
+        time.sleep(0.01)
+      assert heartbeat.exists(), 'The late descendant must run before testing cleanup'
+      return process
+    except BaseException:
+      process.close()
+      raise
+  monkeypatch.setattr(gemma_sft_process, 'startOwnedProcess', startAndAwaitLateDescendant)
+  try:
+    with (tmp_path / 'late.log').open('w', encoding='utf-8') as log:
+      result = runBounded([sys.executable, '-c', parentCode, spawnerCode, leafCode, str(heartbeat)],
+        tmp_path, None, log, 0.1)
+    assert result['timed_out']
+    assert heartbeat.exists(), 'The late descendant must run before termination'
+    previous = heartbeat.read_bytes()
+    time.sleep(0.2)
+    assert heartbeat.read_bytes() == previous
+  finally:
+    time.sleep(4.1)

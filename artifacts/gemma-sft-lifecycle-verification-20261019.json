@@ -1,0 +1,40 @@
+{
+  "scope": "CPU-only process lifecycle regression; no GPU experiments rerun",
+  "platform_observed": "Windows",
+  "pre_fix_commit": "ebd4341357b53739d7ecb6cc53ee45c56e7ce746",
+  "red_regression": {
+    "tests": "test_parent_exit_cannot_leave_owned_descendant_running[0,9]",
+    "failed": 2,
+    "duration_seconds": 9.27,
+    "observed": "runBounded returned and descendant heartbeat continued; finite fixtures expired without touching unrelated processes"
+  },
+  "full_regression": {
+    "command": "../predictfix-ai-factory/.venv/Scripts/python.exe -m pytest --confcutdir=. --rootdir=. tests -q -p no:cacheprovider --basetemp=.runtime/lifecycle-full-01",
+    "exit_code": 0,
+    "passed": 96,
+    "skipped": 0,
+    "warnings": 1,
+    "duration_seconds": 90.75,
+    "flow_test_count": 21,
+    "existing_warning": "StarletteDeprecationWarning for httpx with starlette.testclient"
+  },
+  "verified_real_cpu_cases": [
+    "parent success exit with live descendant",
+    "parent exit code 9 with live descendant",
+    "timeout terminates owned descendants",
+    "unrelated separate process keeps heartbeat",
+    "KeyboardInterrupt propagates after cleanup",
+    "descendant born after launch is terminated on timeout"
+  ],
+  "fixture_note": "Late descendant setup uses a bounded heartbeat handshake before testing timeout; an earlier two-second startup assumption was insufficient. No skip added.",
+  "source_sha256": {
+    "scripts/gemma_sft_process.py": "365c2074248605faa4d56606be5ddd0e7e1025e2985e143228ad6640c0af8150",
+    "scripts/run_gemma_sft_campaign.py": "8fece12b26073f1dcb93aed7a48d865d493c38e50ea2e274ba96ea6be54ebccf"
+  },
+  "sha256_encoding": "UTF-8 text with LF line endings",
+  "historical_gpu_reports_modified": false,
+  "gpu_experiments_rerun": false,
+  "posix_runtime_observed": false,
+  "posix_verification": "Static review only on this Windows host; common CPU regression tests must run in Ubuntu integration CI.",
+  "review": "Independent read-only review found no remaining important issue after Windows Job and POSIX WNOWAIT/group-quiescence changes."
+}
