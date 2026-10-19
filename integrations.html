@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PredictFix · 外部工單介接</title><link rel="stylesheet" href="console.css"><link rel="stylesheet" href="auth.css"><link rel="stylesheet" href="integrations.css"></head>
+<body>
+  <aside><a class="brand" href="/">PredictFix <span>AI</span></a><p>外部工單介接</p><nav><a href="/console.html">維修管理</a><a href="/workflow.html">維修流程</a></nav><div class="side-bottom"></div></aside>
+  <main class="main">
+    <header><div><small>主管 / 系統介接</small><h1>外部工單介接</h1></div><div class="header-right"></div></header>
+    <p id="notice" role="status" aria-live="polite"></p>
+    <section id="supervisor-content" hidden>
+      <div class="card"><h2>來源與機台代號映射</h2><p>來源由部署人員預先啟用。未知機台先保留待對應，保存映射後再逐筆確認建單。介接只建立待指派工單，後續維修沿用人工派工與審核。</p>
+        <form id="mapping-form"><div class="grid"><label>來源 ID<input name="source" required maxlength="60" pattern="[A-Za-z0-9][A-Za-z0-9_.:-]{0,59}"></label><label>外部機台代號<input name="machineCode" required maxlength="60" pattern="[A-Za-z0-9][A-Za-z0-9_.:-]{0,59}"></label><label>內部設備<select name="machineId" id="machine-select" required></select></label></div><button class="btn primary">保存映射</button></form>
+        <div id="mapping-list"></div>
+      </div>
+      <div class="card"><h2>CSV 匯入</h2><p>UTF-8／BOM、最多 200 列。欄位：externalId、eventId、version、machineCode、alarm、symptoms、occurredAt。版本從 1 依序遞增；時間須含時區。先預覽逐列結果，再決定實際匯入。</p>
+        <form id="csv-form"><label>來源 ID<input name="source" required maxlength="60"></label><label>工單 CSV<input id="csv-file" type="file" accept=".csv,text/csv" required></label><button class="btn" name="action" value="preview">預覽，不保存</button><button class="btn primary" name="action" value="import">實際匯入</button></form><pre id="csv-result" aria-live="polite"></pre>
+      </div>
+      <div class="card"><div class="toolbar"><h2>外部工單與待對應</h2><button id="refresh" class="btn">重新整理</button></div><div id="order-list"></div></div>
+      <div class="card"><h2>接收事件紀錄</h2><div id="event-list"></div></div>
+      <div class="card"><h2>狀態回寫佇列</h2><p>pending 等待送出、sending 租約處理中、sent 已確認、dead 達重試上限。只有 dead 事件可人工重試；收件系統須依 event ID 去重。固定目的地由部署環境管理。</p><div id="outbox-list"></div></div>
+      <div class="toolbar"><button id="previous" class="btn">上一頁</button><span id="page-label"></span><button id="next" class="btn">下一頁</button></div>
+    </section>
+  </main>
+  <script src="auth.js"></script><script src="integrations.js"></script>
+</body>
+</html>

@@ -46,6 +46,14 @@ def register(app):
             origin=request.headers.get('origin')
             if origin and urlparse(origin).netloc!=request.url.netloc:return JSONResponse({'detail':'不允許跨站請求'},status_code=403)
         if request.url.path in ['/api/auth/login','/api/auth/config','/api/auth/demo']:return await call_next(request)
+        # 機器驗證僅適用單一 POST 入口，其餘介接管理仍走 session 與 CSRF。
+        if request.method=='POST' and request.url.path=='/api/integrations/work-orders':
+            from .integration_service import verifyRequest
+            try:
+                await verifyRequest(request)
+            except HTTPException as error:
+                return JSONResponse({'detail':error.detail},status_code=error.status_code)
+            return await call_next(request)
         token=request.cookies.get(COOKIE,'')
         with store.Session() as db:
             session=db.get(store.LoginSession,hashlib.sha256(token.encode()).hexdigest()) if token else None

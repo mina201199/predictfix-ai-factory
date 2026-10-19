@@ -1,0 +1,314 @@
+{
+  "generatedAt": "2026-10-19T06:41:55.973811+00:00",
+  "database": "SQLite",
+  "postgresqlVerified": false,
+  "realEnterpriseSystemConnected": false,
+  "gpuOrLlmUsed": false,
+  "baseline": {
+    "tests": 68,
+    "failures": 0,
+    "skipped": 0
+  },
+  "regression": {
+    "tests": 70,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "contractScenarios": [
+    {
+      "mode": "production",
+      "tests": 53,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        "test_exact_machine_route_does_not_require_browser_login",
+        "test_hmac_rejects_tampering_and_inactive_keys[body]",
+        "test_hmac_rejects_tampering_and_inactive_keys[secret]",
+        "test_hmac_rejects_tampering_and_inactive_keys[source]",
+        "test_hmac_rejects_tampering_and_inactive_keys[key]",
+        "test_hmac_rejects_tampering_and_inactive_keys[expired]",
+        "test_hmac_rejects_tampering_and_inactive_keys[future]",
+        "test_hmac_rejects_tampering_and_inactive_keys[event]",
+        "test_runtime_key_revocation",
+        "test_payload_rejects_privilege_fields_and_invalid_data[changes0]",
+        "test_payload_rejects_privilege_fields_and_invalid_data[changes1]",
+        "test_payload_rejects_privilege_fields_and_invalid_data[changes2]",
+        "test_payload_rejects_privilege_fields_and_invalid_data[changes3]",
+        "test_payload_rejects_privilege_fields_and_invalid_data[changes4]",
+        "test_payload_rejects_privilege_fields_and_invalid_data[changes5]",
+        "test_payload_rejects_privilege_fields_and_invalid_data[changes6]",
+        "test_payload_rejects_privilege_fields_and_invalid_data[changes7]",
+        "test_payload_rejects_privilege_fields_and_invalid_data[changes8]",
+        "test_payload_rejects_privilege_fields_and_invalid_data[changes9]",
+        "test_size_and_missing_fields",
+        "test_duplicate_returns_original_result_and_conflict_does_not_create",
+        "test_concurrent_duplicate_creates_one_ticket",
+        "test_version_ordering_and_update_preserve_internal_work",
+        "test_unknown_machine_resolution_once_and_inactive_mapping",
+        "test_management_permissions_and_csrf[GET-records-None]",
+        "test_management_permissions_and_csrf[GET-mappings-None]",
+        "test_management_permissions_and_csrf[GET-outbox-None]",
+        "test_management_permissions_and_csrf[PUT-mappings-data3]",
+        "test_management_permissions_and_csrf[POST-orders/999/resolve-None]",
+        "test_management_permissions_and_csrf[POST-outbox/999/retry-None]",
+        "test_management_permissions_and_csrf[POST-csv?source=fixture-None]",
+        "test_csv_dry_run_bom_duplicate_and_per_row_errors",
+        "test_csv_limits[encoding]",
+        "test_csv_limits[columns]",
+        "test_csv_limits[size]",
+        "test_csv_limits[row-count]",
+        "test_outbox_atomic_rollback_and_status_hook",
+        "test_worker_retry_dead_letter_and_manual_retry",
+        "test_worker_restart_lease_and_no_network_inside_transaction",
+        "test_outbox_order_blocks_later_events_and_redirects",
+        "test_disabled_destination_keeps_event",
+        "test_api_workflow_keeps_checklist_and_human_review",
+        "test_ui_has_strict_csp_and_no_secrets",
+        "test_csv_bad_row_shape_and_long_version_are_row_errors",
+        "test_hmac_cannot_access_supervisor_routes",
+        "test_simulator_receiver_deduplicates_across_restart",
+        "test_worker_stale_ack_cannot_overwrite_new_lease",
+        "test_pending_resolve_race_and_initial_ingest_rollback",
+        "test_env_loader_is_explicit_and_does_not_echo_secrets",
+        "test_crash_at_final_attempt_becomes_dead_without_losing_event",
+        "test_date_overflow_is_validation_error_and_csv_keeps_valid_rows[0001-01-01T00:00:00+01:00]",
+        "test_date_overflow_is_validation_error_and_csv_keeps_valid_rows[9999-12-31T23:59:59-01:00]",
+        "test_simulator_unknown_uses_order_specific_machine_code"
+      ]
+    },
+    {
+      "mode": "demo",
+      "tests": 53,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        "test_exact_machine_route_does_not_require_browser_login",
+        "test_hmac_rejects_tampering_and_inactive_keys[body]",
+        "test_hmac_rejects_tampering_and_inactive_keys[secret]",
+        "test_hmac_rejects_tampering_and_inactive_keys[source]",
+        "test_hmac_rejects_tampering_and_inactive_keys[key]",
+        "test_hmac_rejects_tampering_and_inactive_keys[expired]",
+        "test_hmac_rejects_tampering_and_inactive_keys[future]",
+        "test_hmac_rejects_tampering_and_inactive_keys[event]",
+        "test_runtime_key_revocation",
+        "test_payload_rejects_privilege_fields_and_invalid_data[changes0]",
+        "test_payload_rejects_privilege_fields_and_invalid_data[changes1]",
+        "test_payload_rejects_privilege_fields_and_invalid_data[changes2]",
+        "test_payload_rejects_privilege_fields_and_invalid_data[changes3]",
+        "test_payload_rejects_privilege_fields_and_invalid_data[changes4]",
+        "test_payload_rejects_privilege_fields_and_invalid_data[changes5]",
+        "test_payload_rejects_privilege_fields_and_invalid_data[changes6]",
+        "test_payload_rejects_privilege_fields_and_invalid_data[changes7]",
+        "test_payload_rejects_privilege_fields_and_invalid_data[changes8]",
+        "test_payload_rejects_privilege_fields_and_invalid_data[changes9]",
+        "test_size_and_missing_fields",
+        "test_duplicate_returns_original_result_and_conflict_does_not_create",
+        "test_concurrent_duplicate_creates_one_ticket",
+        "test_version_ordering_and_update_preserve_internal_work",
+        "test_unknown_machine_resolution_once_and_inactive_mapping",
+        "test_management_permissions_and_csrf[GET-records-None]",
+        "test_management_permissions_and_csrf[GET-mappings-None]",
+        "test_management_permissions_and_csrf[GET-outbox-None]",
+        "test_management_permissions_and_csrf[PUT-mappings-data3]",
+        "test_management_permissions_and_csrf[POST-orders/999/resolve-None]",
+        "test_management_permissions_and_csrf[POST-outbox/999/retry-None]",
+        "test_management_permissions_and_csrf[POST-csv?source=fixture-None]",
+        "test_csv_dry_run_bom_duplicate_and_per_row_errors",
+        "test_csv_limits[encoding]",
+        "test_csv_limits[columns]",
+        "test_csv_limits[size]",
+        "test_csv_limits[row-count]",
+        "test_outbox_atomic_rollback_and_status_hook",
+        "test_worker_retry_dead_letter_and_manual_retry",
+        "test_worker_restart_lease_and_no_network_inside_transaction",
+        "test_outbox_order_blocks_later_events_and_redirects",
+        "test_disabled_destination_keeps_event",
+        "test_api_workflow_keeps_checklist_and_human_review",
+        "test_ui_has_strict_csp_and_no_secrets",
+        "test_csv_bad_row_shape_and_long_version_are_row_errors",
+        "test_hmac_cannot_access_supervisor_routes",
+        "test_simulator_receiver_deduplicates_across_restart",
+        "test_worker_stale_ack_cannot_overwrite_new_lease",
+        "test_pending_resolve_race_and_initial_ingest_rollback",
+        "test_env_loader_is_explicit_and_does_not_echo_secrets",
+        "test_crash_at_final_attempt_becomes_dead_without_losing_event",
+        "test_date_overflow_is_validation_error_and_csv_keeps_valid_rows[0001-01-01T00:00:00+01:00]",
+        "test_date_overflow_is_validation_error_and_csv_keeps_valid_rows[9999-12-31T23:59:59-01:00]",
+        "test_simulator_unknown_uses_order_specific_machine_code"
+      ]
+    }
+  ],
+  "liveCliObservations": [
+    {
+      "scenario": "normal",
+      "eventId": "EVT-normal",
+      "httpStatus": 200,
+      "result": {
+        "orderId": 2,
+        "source": "fixture",
+        "externalId": "CLI-normal",
+        "version": 1,
+        "ticketId": "WO-325A1A80F76C",
+        "state": "linked",
+        "reason": ""
+      }
+    },
+    {
+      "scenario": "replay",
+      "eventId": "EVT-replay",
+      "httpStatus": 200,
+      "result": {
+        "orderId": 3,
+        "source": "fixture",
+        "externalId": "CLI-replay",
+        "version": 1,
+        "ticketId": "WO-97016FE5C3DA",
+        "state": "linked",
+        "reason": ""
+      }
+    },
+    {
+      "scenario": "replay",
+      "eventId": "EVT-replay",
+      "httpStatus": 200,
+      "result": {
+        "externalId": "CLI-replay",
+        "orderId": 3,
+        "reason": "",
+        "source": "fixture",
+        "state": "linked",
+        "ticketId": "WO-97016FE5C3DA",
+        "version": 1
+      }
+    },
+    {
+      "scenario": "update",
+      "eventId": "EVT-update",
+      "httpStatus": 200,
+      "result": {
+        "orderId": 4,
+        "source": "fixture",
+        "externalId": "CLI-update",
+        "version": 1,
+        "ticketId": "WO-B2D3D44A480C",
+        "state": "linked",
+        "reason": ""
+      }
+    },
+    {
+      "scenario": "update",
+      "eventId": "EVT-update-v2",
+      "httpStatus": 200,
+      "result": {
+        "orderId": 4,
+        "source": "fixture",
+        "externalId": "CLI-update",
+        "version": 2,
+        "ticketId": "WO-B2D3D44A480C",
+        "state": "linked",
+        "reason": ""
+      }
+    },
+    {
+      "scenario": "out-of-order",
+      "eventId": "EVT-out-of-order",
+      "httpStatus": 409,
+      "result": {
+        "detail": "外部版本必須從 1 依序遞增"
+      }
+    },
+    {
+      "scenario": "missing",
+      "eventId": "EVT-missing",
+      "httpStatus": 422,
+      "result": {
+        "detail": "工單欄位、長度或時間格式無效"
+      }
+    },
+    {
+      "scenario": "bad-signature",
+      "eventId": "EVT-bad-signature",
+      "httpStatus": 401,
+      "result": {
+        "detail": "介接來源或驗證資訊無效"
+      }
+    },
+    {
+      "scenario": "expired",
+      "eventId": "EVT-expired",
+      "httpStatus": 401,
+      "result": {
+        "detail": "介接來源或驗證資訊無效"
+      }
+    },
+    {
+      "scenario": "unknown",
+      "eventId": "EVT-unknown",
+      "httpStatus": 200,
+      "result": {
+        "orderId": 5,
+        "source": "fixture",
+        "externalId": "CLI-unknown",
+        "version": 1,
+        "ticketId": "WO-C939F22A4FF2",
+        "state": "linked",
+        "reason": ""
+      }
+    }
+  ],
+  "unknownAfterFix": [
+    {
+      "scenario": "unknown",
+      "eventId": "EVT-unknown-specific",
+      "httpStatus": 200,
+      "result": {
+        "orderId": 6,
+        "source": "fixture",
+        "externalId": "CLI-unknown-specific",
+        "version": 1,
+        "ticketId": null,
+        "state": "pending",
+        "reason": "unknown_machine_code"
+      }
+    }
+  ],
+  "localOutbound": {
+    "firstHttpStatus": 503,
+    "workerRestartFinalState": "sent",
+    "attempts": 2
+  },
+  "receiverRestart": {
+    "receiverRestarted": true,
+    "sameEventReplayHttpStatus": 200,
+    "uniqueAcceptedEvents": 1
+  },
+  "review": {
+    "issuesFound": 1,
+    "priority": "P2",
+    "issue": "UTC conversion OverflowError could roll back valid CSV rows",
+    "fixed": true,
+    "followupReview": "passed"
+  },
+  "notes": [
+    "All credentials are isolated fake fixtures or deployment env; no secrets included in this report.",
+    "The first CLI unknown observation was linked because SIM-UNKNOWN was previously mapped; the simulator now uses per-order codes, and the retest is pending.",
+    "One pre-existing StarletteDeprecationWarning about httpx/httpx2 remains.",
+    "The full regression includes two wrapper tests; their child suites execute 53 cases per mode and explicitly reject skips.",
+    "No controlled performance comparison was conducted on this shared machine."
+  ],
+  "cleanup": {
+    "recordedProcessIdsNoLongerExist": [
+      44768,
+      28068
+    ],
+    "loopbackPortsListening": {
+      "8096": false,
+      "8097": false
+    },
+    "browserSessionClosed": true,
+    "existingLlmServicesTouched": false
+  }
+}
