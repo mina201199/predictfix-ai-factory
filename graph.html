@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>PredictFix AI · 維修知識圖譜</title>
+  <link rel="stylesheet" href="/auth.css">
+  <link rel="stylesheet" href="/graph.css">
+  <script src="/auth.js" defer></script>
+  <script src="/graph.js" defer></script>
+</head>
+<body>
+  <main class="main">
+    <header><div><a href="/console.html">← 維修工作台</a><h1>維修知識圖譜</h1></div><div class="header-right"></div></header>
+    <p class="notice">只顯示有來源、經主管核對的關係。關係路徑不代表診斷正確或原廠認證；AI 不會自動派工、結案或核准復機。</p>
+    <p id="message" role="status" aria-live="polite"></p>
+    <section>
+      <h2>查詢有效路徑</h2>
+      <form id="query-form">
+        <label>明確機型<input name="machineModel" required maxlength="100" placeholder="例如 PF-VMC850-DEMO"></label>
+        <label>起點警報、零件或症狀<input name="query" required maxlength="500" placeholder="使用來源原文字詞"></label>
+        <label>最多關係數<select name="maxHops"><option>3</option><option>2</option><option>1</option></select></label>
+        <label>檢索模式<select name="useGraph"><option value="true">字詞檢索＋圖譜</option><option value="false">純 TF-IDF / BM25</option></select></label>
+        <button>查詢</button>
+      </form>
+      <div id="results"></div>
+    </section>
+    <section id="management" hidden>
+      <h2>主管 · 來源與候選關係</h2>
+      <p>先核對來源的因果與機型適用性，再核准。模板只適用於其模板 ID；目錄中的備品／資格不會自動代表機型相容。</p>
+      <button id="rebuild" type="button">從模板與已發布案例建立候選</button>
+      <button id="refresh" type="button">重新載入來源／狀態</button>
+      <form id="candidate-form">
+        <label>有效來源段落<select id="source" name="sourceChunkId" required></select></label>
+        <details><summary>檢視來源全文與版本</summary><pre id="source-preview"></pre><a id="source-link">開啟來源</a></details>
+        <label>適用機型<select id="source-model" name="machineModel" required></select></label>
+        <div class="fields">
+          <label>起點類型<select id="head-kind" name="headKind"></select></label>
+          <label>起點原文<input name="headLabel" required maxlength="500"></label>
+          <label>關係<select id="relation" name="relation"></select></label>
+          <label>目標類型<select id="tail-kind" name="tailKind"></select></label>
+          <label>目標原文<input name="tailLabel" required maxlength="500"></label>
+        </div>
+        <label>逐字引文（需同時包含兩端原文）<textarea id="quote" name="quote" required maxlength="60000" rows="5"></textarea></label>
+        <button>建立待核對候選</button>
+      </form>
+      <h3>最近 500 筆候選／核准／撤回紀錄</h3>
+      <div id="candidates"></div>
+    </section>
+  </main>
+</body>
+</html>

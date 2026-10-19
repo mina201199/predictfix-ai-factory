@@ -1,0 +1,61 @@
+{
+  "date": "2026-10-19",
+  "branch": "codex/wave2-knowledge-graph",
+  "base": "ad3fc63",
+  "database": "SQLite",
+  "postgresql": "not tested",
+  "gpuUsed": false,
+  "llmUsed": false,
+  "baseline": {"pytestPassed": 68, "warnings": 1},
+  "final": {"pytestPassed": 70, "failures": 0, "errors": 0, "skipped": 0, "warnings": 1, "seconds": 140.07},
+  "subsequentTargetedVerification": {
+    "change": "Restrict evaluation corpus to fixed snapshot, assert actual source IDs, and compare retrieval text to current source",
+    "pytestPassed": 2,
+    "failures": 0,
+    "skipped": 0,
+    "seconds": 10.22,
+    "evaluationQualityGatePassed": true,
+    "evaluationMetricsUnchanged": true
+  },
+  "warning": "Existing StarletteDeprecationWarning: Using httpx with starlette.testclient is deprecated; no dependency changes made.",
+  "commands": [
+    "../predictfix-ai-factory/.venv/Scripts/python.exe -m pytest --confcutdir=. --rootdir=. tests -q -p no:cacheprovider --basetemp=.runtime/graph-final-suite --junitxml=.runtime/graph-final-junit.xml",
+    "../predictfix-ai-factory/.venv/Scripts/python.exe scripts/check_test_report.py .runtime/graph-final-junit.xml",
+    "../predictfix-ai-factory/.venv/Scripts/python.exe scripts/evaluate_knowledge_graph.py",
+    "node --check graph.js",
+    "git diff --check"
+  ],
+  "graphScenarioAssertions": 52,
+  "accessMatrix": {"productionPassed": true, "demoPassed": true, "allRoutesGuardRetained": true},
+  "evaluation": {"file": "artifacts/knowledge-graph-evaluation.json", "qualityGatePassed": true, "syntheticOnly": true, "sourceScope": "fixed_snapshot_only"},
+  "browser": {
+    "tool": "agent-browser 0.39.0, isolated knowledge-graph-wave2 session",
+    "fixture": "new SQLite from fixed synthetic evaluation snapshot; no live factory data",
+    "url": "http://127.0.0.1:8894/graph.html",
+    "supervisorReview": "Withdrew spare relation: paths reduced 4 to 3; reapproved: restored to 4",
+    "engineer": "Only query UI visible; no supervisor source/candidate management",
+    "keywordMode": "No graph paths, same alarm-index baseline source",
+    "modelIsolation": "Same DEMO-E17 in KG-SYNTH-M2 returned only tool-magazine path",
+    "restartPersistence": "Restarted only own demo uvicorn process; original SQLite retained 4 approved paths",
+    "consoleErrors": 0,
+    "axe": {"version": "4.12.1", "violations": 0, "incomplete": 0, "passes": 34},
+    "screenshot": "artifacts/knowledge-graph-engineer.png"
+  },
+  "review": {
+    "independentReadOnly": true,
+    "criticalFound": 0,
+    "resolved": [
+      "Expired source relations no longer consume effective-edge quota; scanning separately bounded and truncation explicit",
+      "Template quotes preserve literal quotation marks and backslashes instead of JSON escaping",
+      "Review validates read revision before assembling payload; CAS preserves concurrent history",
+      "Evaluation quality failures cause nonzero exit; test mutates safety field to verify gate",
+      "Same-revision case republication changes source publication hash and invalidates old approvals"
+    ]
+  },
+  "limits": [
+    "Synthetic retrieval-source coverage is not real maintenance or generated-answer quality",
+    "Human approval is not OEM certification",
+    "Inventory and qualification catalog membership does not infer machine compatibility or worker eligibility",
+    "PostgreSQL and factory deployment acceptance not verified"
+  ]
+}

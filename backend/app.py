@@ -21,6 +21,7 @@ from .ml import features, WINDOW, FEATURE_NAMES, LABELS
 from .copilot import analyze
 from .knowledge import DOCUMENTS, retrieve
 from . import operations, chat, auth, evidence, maintenance_ai, config, workforce, repair_flow, equipment_templates, machine_scan
+from . import knowledge_graph
 
 ROOT=Path(__file__).resolve().parents[1]
 ART=ROOT/'artifacts'
@@ -253,16 +254,21 @@ def complete_ticket(ticket_id:str,body:CompleteInput,request:Request):
     return result
 
 @app.get('/api/engineers')
-def recommend_engineers(machine:str='CNC-03',part:str='主軸軸承'):
+def recommend_engineers(request:Request,machine:str='CNC-03',part:str='主軸軸承'):
+    auth.supervisor(request)
     operations.active_machine(machine)
     if not config.demo():return workforce.recommendations(part)
     output=[]
     for p in operations.people():
+        if 'cases' not in p:continue
         match=any(w in part for w in p['skills'])
         skill=40 if match else 28
         history=round(30*(p['success']+1)/(p['cases']+2))
         availability=max(0,30-6*p['workload'])
         output.append({'name':p['name'],'score':skill+history+availability,'breakdown':{'skill':skill,'history':history,'availability':availability},'workload':p['workload'],'method':'transparent_weighted_rules','reasons':[p['specialty']+'專長；'+('符合' if match else '非主要專長，需確認')+'本零件需求。',f"展示履歷：{p['cases']} 筆案例，{p['success']} 筆成功修復。",f"正式未完成工單 {p['workload']} 筆；班別 {p['shift']}（示例），需確認當班可派工。"]})
+    # 新建帳號沒有展示履歷，沿用出勤與容量規則，避免捏造案例成績。
+    names={p['name'] for p in operations.PEOPLE}
+    output.extend(p for p in workforce.recommendations(part) if p['name'] not in names)
     return sorted(output,key=lambda e:e['score'],reverse=True)
 
 class CopilotInput(BaseModel):
@@ -297,6 +303,7 @@ maintenance_ai.register(app)
 repair_flow.register(app)
 equipment_templates.register(app)
 machine_scan.register(app)
+knowledge_graph.register(app)
 
 STATIC={'':'index.html','index.html':'index.html','index.js':'index.js','index.css':'index.css','dynamic-styles.js':'dynamic-styles.js',
         'auth.css':'auth.css','roles.css':'roles.css',
@@ -305,7 +312,8 @@ STATIC={'':'index.html','index.html':'index.html','index.js':'index.js','index.c
         'knowledge.html':'knowledge.html','knowledge.js':'knowledge.js','knowledge.css':'knowledge.css',
         'console.html':'console.html','console.js':'console.js','console.css':'console.css','templates.js':'templates.js',
         'workflow.html':'workflow.html','workflow.js':'workflow.js','workflow.css':'workflow.css',
-        'scan.html':'scan.html','scan.js':'scan.js','scan.css':'scan.css'}
+        'scan.html':'scan.html','scan.js':'scan.js','scan.css':'scan.css',
+        'graph.html':'graph.html','graph.js':'graph.js','graph.css':'graph.css'}
 @app.get('/')
 def index():
     return FileResponse(ROOT/('index.html' if config.demo() else 'console.html'),headers={'Cache-Control':'no-store'})
