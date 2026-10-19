@@ -48,6 +48,7 @@ def main():
     hf_hub_download(MODEL_ID,name,revision=MODEL_REVISION,cache_dir=cache)
   tokenizer=AutoTokenizer.from_pretrained(MODEL_ID,revision=MODEL_REVISION,cache_dir=cache,local_files_only=True)
   report={'tokenizer':{'model':MODEL_ID,'revision':MODEL_REVISION},
+          'sha256_encoding':'UTF-8 text with LF line endings',
           'definition':'prompt_tokens = 使用者訊息套用 chat template 並加上 generation prompt；'
                        'train_tokens = 再加上金標 JSON 答案的完整訓練序列',
           'limits':{'llama_context':LLAMA_CONTEXT,'llama_max_tokens':LLAMA_MAX_TOKENS,
@@ -62,7 +63,7 @@ def main():
       perSplit[split]={'prompt_tokens':summarize([m[0] for m in measured]),'train_tokens':summarize([m[1] for m in measured])}
       allPrompt+=[m[0] for m in measured];allTrain+=[m[1] for m in measured]
       ratios+=[m[2]/m[0] for m in measured]
-    report['datasets'][version]={'path':relative,'sha256':hashlib.sha256(path.read_bytes()).hexdigest(),
+    report['datasets'][version]={'path':relative,'sha256':hashlib.sha256(path.read_text(encoding='utf-8').encode('utf-8')).hexdigest(),
       'rows':len(allPrompt),'splits':perSplit,'max_prompt_tokens':max(allPrompt),'max_train_tokens':max(allTrain),
       'min_chars_per_prompt_token':round(min(ratios),3)}
   v2=report['datasets']['v2']

@@ -1,0 +1,98 @@
+{
+  "purpose": "GTX 1050 Ti 本機 QLoRA 可行性；只記錄可否完成與顯存，不含速度。",
+  "model": {
+    "id": "google/gemma-4-E2B-it",
+    "revision": "3e22461f65e89153144f8adb70e3b8c2cc9845a7"
+  },
+  "real_qlora_pretrained_v2len": {
+    "checked_at": "2026-10-19T04:17:45+00:00",
+    "mode": "qlora",
+    "nvidia_smi_before_cuda_init": {
+      "name": "NVIDIA GeForce GTX 1050 Ti",
+      "driver": "582.66",
+      "total_mib": 4096,
+      "used_by_others_mib": 2713,
+      "compute_cap": "6.1"
+    },
+    "status": "completed",
+    "dataset": {
+      "path": "training/selection-dataset-v2.json",
+      "sha256": "29233af3e7592ae6c6610fffd7276c6072889705c3f7dd1bd56c5797d8b574c1",
+      "sha256_encoding": "UTF-8 text with LF line endings"
+    },
+    "requested_steps": 3,
+    "sequence_token_limit": 1024,
+    "weights": "pretrained",
+    "checkpoint_loading": {
+      "missing_keys": [],
+      "mismatched_keys": [],
+      "unexpected_key_count": 1400
+    },
+    "text_parameters": 4628569344,
+    "after_cuda_init": {
+      "device_used_mib": 738,
+      "device_free_mib": 3357,
+      "peak_allocated_mib": 0,
+      "peak_reserved_mib": 0
+    },
+    "placement": {
+      "total_layers": 35,
+      "layers_on_gpu": 35,
+      "quantized_linears": 276
+    },
+    "after_weights": {
+      "device_used_mib": 3262,
+      "device_free_mib": 833,
+      "peak_allocated_mib": 1010,
+      "peak_reserved_mib": 1052
+    },
+    "lora": {
+      "rank": 8,
+      "alpha": 16,
+      "target_modules": [
+        "q_proj",
+        "k_proj",
+        "v_proj",
+        "o_proj",
+        "gate_proj",
+        "up_proj",
+        "down_proj"
+      ],
+      "trainable_parameters": 12079104,
+      "lora_wrapped_linears": 205
+    },
+    "steps": [
+      {
+        "step": 1,
+        "sequence_tokens": 801,
+        "answer_tokens": 11,
+        "loss": 4.5377,
+        "device_used_mib": 2618,
+        "device_free_mib": 1477,
+        "peak_allocated_mib": 1610,
+        "peak_reserved_mib": 1856
+      },
+      {
+        "step": 2,
+        "sequence_tokens": 895,
+        "answer_tokens": 11,
+        "loss": 1.4153,
+        "device_used_mib": 2774,
+        "device_free_mib": 1321,
+        "peak_allocated_mib": 1762,
+        "peak_reserved_mib": 2012
+      },
+      {
+        "step": 3,
+        "sequence_tokens": 897,
+        "answer_tokens": 11,
+        "loss": 0.0384,
+        "device_used_mib": 2890,
+        "device_free_mib": 1205,
+        "peak_allocated_mib": 1764,
+        "peak_reserved_mib": 2128
+      }
+    ]
+  },
+  "updated_at": "2026-10-19T04:21:35+00:00"
+}

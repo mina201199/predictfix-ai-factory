@@ -12,6 +12,7 @@
 結果逐段寫入 artifacts/qlora-feasibility.json。
 """
 import argparse
+import hashlib
 import importlib.metadata
 import json
 import os
@@ -204,7 +205,9 @@ def trainSteps(causalLm,examples,device,steps,learningRate,log):
     with torch.no_grad():
       embeds=text.embed_tokens(ids[None])
       perLayer=text.get_per_layer_inputs(ids[None],None)
-    out=text(inputs_embeds=embeds.to(device,torch.float32),per_layer_inputs=perLayer.to(device,torch.float32),use_cache=False)
+    # fp16 對照組必須跟隨 decoder 型別，才能將運算錯誤與資源限制分開判讀。
+    decoderDtype=text.norm.weight.dtype
+    out=text(inputs_embeds=embeds.to(device,decoderDtype),per_layer_inputs=perLayer.to(device,decoderDtype),use_cache=False)
     targets=labels[1:]
     positions=(targets!=-100).nonzero().squeeze(1)
     hidden=out.last_hidden_state[0,positions.to(device)].to('cpu')
@@ -325,6 +328,11 @@ def real(args):
   section=f'real_{args.mode}_{args.weights}'+(f'_{args.label}' if args.label else '')
   result={'checked_at':nowIso(),'mode':args.mode,'nvidia_smi_before_cuda_init':smi,'status':'started'}
   try:
+    result['dataset']={'path':args.dataset,
+      'sha256':hashlib.sha256(Path(args.dataset).read_text(encoding='utf-8').encode('utf-8')).hexdigest(),
+      'sha256_encoding':'UTF-8 text with LF line endings'}
+    result['requested_steps']=args.steps
+    result['sequence_token_limit']=args.seq_len
     config=AutoConfig.from_pretrained(MODEL_ID,revision=MODEL_REVISION,cache_dir=cache,local_files_only=not args.allow_download)
     tokenizer=AutoTokenizer.from_pretrained(MODEL_ID,revision=MODEL_REVISION,cache_dir=cache,local_files_only=not args.allow_download)
     result['weights']=args.weights
@@ -336,8 +344,14 @@ def real(args):
       finally:torch.set_default_dtype(previous)
     else:
       # 多模態 checkpoint 只取文字解碼器；視覺／音訊權重不載入
-      causalLm=Gemma4ForCausalLM.from_pretrained(MODEL_ID,revision=MODEL_REVISION,cache_dir=cache,config=config.text_config,
-        dtype=torch.bfloat16,key_mapping={r'^model\.language_model\.':'model.'},local_files_only=not args.allow_download)
+      causalLm,loadingInfo=Gemma4ForCausalLM.from_pretrained(MODEL_ID,revision=MODEL_REVISION,cache_dir=cache,config=config.text_config,
+        dtype=torch.bfloat16,key_mapping={r'^model\.language_model\.':'model.'},local_files_only=not args.allow_download,
+        output_loading_info=True)
+      result['checkpoint_loading']={'missing_keys':sorted(loadingInfo.get('missing_keys',[])),
+        'mismatched_keys':sorted(loadingInfo.get('mismatched_keys',[]),key=str),
+        'unexpected_key_count':len(loadingInfo.get('unexpected_keys',[]))}
+      if result['checkpoint_loading']['missing_keys'] or result['checkpoint_loading']['mismatched_keys']:
+        raise RuntimeError('Pretrained text weights are incomplete or mismatched')
     result['text_parameters']=sum(p.numel() for p in causalLm.parameters())
     causalLm.requires_grad_(False)
     torch.cuda.init();result['after_cuda_init']=gpuSnapshot(torch)
@@ -346,7 +360,6 @@ def real(args):
     result['after_weights']=gpuSnapshot(torch)
     _,result['lora']=addLora(causalLm,args.rank)
     examples=realExamples(tokenizer,args.steps,Path(args.dataset),args.seq_len)
-    result['dataset']=args.dataset
     result['steps']=trainSteps(causalLm,examples,'cuda',args.steps,2e-4,lambda r:print(json.dumps(r),flush=True))
     result['status']='completed'
   except torch.OutOfMemoryError as error:
@@ -362,6 +375,7 @@ if __name__=='__main__':
   parser=argparse.ArgumentParser()
   parser.add_argument('command',choices=['env','kernels','tiny','estimate','real'])
   parser.add_argument('--runtime-dir',help='放 hf-cache 的 .runtime 目錄；預設為本專案 .runtime')
+  parser.add_argument('--report',type=Path,help='另存報告，保留先前測試紀錄')
   parser.add_argument('--mode',choices=['qlora','fp16','fp32'],default='qlora')
   parser.add_argument('--steps',type=int,default=3)
   parser.add_argument('--seq-len',type=int,default=320)
@@ -372,4 +386,5 @@ if __name__=='__main__':
                       help='random：用官方 config 隨機初始化同形狀模型，只用來量顯存')
   parser.add_argument('--allow-download',action='store_true',help='未加此旗標時只用本機快取，避免未經同意下載 10 GB 權重')
   args=parser.parse_args()
+  if args.report is not None:REPORT=args.report
   {'env':env,'kernels':kernels,'tiny':tiny,'estimate':estimate,'real':real}[args.command](args)

@@ -25,6 +25,8 @@
 
 第一行應回報 `OK: file matches a fresh build` 與 504／112／112；第二行應全部通過。測試涵蓋最少筆數、候選數、有效答案 ID、注入不當正解、跨組外洩、答案位置與 tokenizer 長度紀錄的雜湊一致性。
 
+token 長度報告的 SHA-256 以 UTF-8、LF 換行的文字計算，避免 Git 在 Windows／Linux 切換換行時誤判內容變動。可用 `scripts/measure_selection_tokens.py --runtime-dir ../predictfix-ai-factory/.runtime` 重新量測。
+
 ## 評測紀錄限制
 
 `artifacts/selection-v2-gemma-sample.json` 保存了早期題庫的 34 題探索性評測。其題庫 SHA-256 與目前 728 筆檔案不同，**不能用其中的準確率代表目前題庫**。它還看過部分測試組；正式保留測試應另建未被用來決策的情境組，再執行一次固定版本的完整基準。

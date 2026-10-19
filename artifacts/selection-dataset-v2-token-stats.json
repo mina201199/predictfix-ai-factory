@@ -3,6 +3,7 @@
     "model": "google/gemma-4-E2B-it",
     "revision": "3e22461f65e89153144f8adb70e3b8c2cc9845a7"
   },
+  "sha256_encoding": "UTF-8 text with LF line endings",
   "definition": "prompt_tokens = 使用者訊息套用 chat template 並加上 generation prompt；train_tokens = 再加上金標 JSON 答案的完整訓練序列",
   "limits": {
     "llama_context": 2048,
@@ -13,7 +14,7 @@
   "datasets": {
     "v1": {
       "path": "training/selection-dataset.json",
-      "sha256": "35243b4bcee19e5a08dfa0ac67b62bf77d90d3bd827d56f8d7cb437c06c794e4",
+      "sha256": "bd044d3435148e4026970f51a7675ee63deb03e38d5e810467482ce5319c7bcb",
       "rows": 44,
       "splits": {
         "train": {
@@ -59,7 +60,7 @@
     },
     "v2": {
       "path": "training/selection-dataset-v2.json",
-      "sha256": "0bfc18a97a07d809b488c3fd9e52e13dfe3d76618c0f39c0b902a799ddc1f3d1",
+      "sha256": "29233af3e7592ae6c6610fffd7276c6072889705c3f7dd1bd56c5797d8b574c1",
       "rows": 728,
       "splits": {
         "train": {

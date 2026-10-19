@@ -2,11 +2,13 @@
 
 ## 結論
 
-GTX 1050 Ti 已完成 bitsandbytes nf4 前向／反向檢查，以及依官方設定建立的同尺寸隨機模型 3 步 QLoRA 測試。**官方預訓練權重尚未下載，也未完成實測**，因此目前只能證明此拆分方式的運算路徑與記憶體可行，不能宣稱模型微調有效。
+GTX 1050 Ti 已使用 **Gemma 4 E2B 官方預訓練權重完成 3 步 QLoRA**。採 CPU embedding、GPU nf4 decoder 的拆分方式，序列長度為 801／895／897 tokens；PyTorch 配置記憶體峰值為 **1,764 MiB**，保留記憶體峰值為 **2,128 MiB**。這證明本機可完成此訓練路徑，尚未評估微調後的選段準確率。
 
-2026-10-19 核對快取時僅有設定與 tokenizer，沒有 safetensors 權重。正式權重測試仍需約 10.25 GB 下載；既有報告保留在原檔，當日 kernel 重測另存 `artifacts/qlora-feasibility-recheck-20261019.json`。
+2026-10-19 經同意下載 10,246,621,918 bytes 官方權重並驗證 SHA-256：`2db5482b20d746879bb3ef79b5203e9075a2e2b98f54ec7c2f281c1477ddc550`。模型 revision 固定為 `3e22461f65e89153144f8adb70e3b8c2cc9845a7`，文字權重載入檢查沒有缺失或尺寸不符。
 
-本文只記錄「能否完成」與「顯存」，不記錄速度：測試時本機同時有其他工作，計時不可信。原始數據見 [qlora-feasibility.json](../artifacts/qlora-feasibility.json)。
+官方權重結果另存 [qlora-pretrained-20261019.json](../artifacts/qlora-pretrained-20261019.json)。歷史隨機權重報告保留在原檔，當日 kernel 重測另存 [qlora-feasibility-recheck-20261019.json](../artifacts/qlora-feasibility-recheck-20261019.json)。
+
+本文只記錄「能否完成」與「顯存」，不記錄速度：測試時本機同時有其他工作，計時不可信。歷史原始資料見 [qlora-feasibility.json](../artifacts/qlora-feasibility.json)。
 
 ## 測試環境
 
@@ -25,9 +27,13 @@ GTX 1050 Ti 已完成 bitsandbytes nf4 前向／反向檢查，以及依官方�
 | 迷你 Gemma 4 + nf4 + LoRA 訓練 3 步 | 可以 | 結構比照 E2B 的隨機小模型，PEFT 成功包住 `Linear4bit`，loss 有限 |
 | 同尺寸隨機 E2B，QLoRA，短序列 3 步 | 完成 | 172–181 tokens，PyTorch 配置峰值最高 1,303 MiB |
 | 同尺寸隨機 E2B，v2 題庫長度 | 完成 | 801–897 tokens，PyTorch 配置峰值最高 1,764 MiB |
-| 同尺寸隨機 E2B，一般 LoRA（fp16） | 失敗，尚待修正後重測 | `expected mat1 and mat2 to have the same dtype`；不能解讀為顯存不足 |
+| 同尺寸隨機 E2B，一般 LoRA（fp16） | 型別錯誤已修正；觀察到 1 步完成，後續中止 | 801 tokens，配置峰值 4,046 MiB、保留峰值 4,268 MiB；中止是為了釋放 GPU，不是 OOM，也不是完整 3 步通過 |
 | 同尺寸隨機 E2B，一般 LoRA（fp32） | 完成，但超出實體顯存容量 | PyTorch 配置峰值最高 7,465 MiB；Windows WDDM 可能使用共用記憶體，不能稱為全程放在 4 GB 顯存內 |
-| 官方預訓練 E2B 權重 | 尚未測試 | 快取無權重；不可將隨機初始化結果當作預訓練模型微調結果 |
+| 官方預訓練 E2B，v2 題庫長度 | 完成 3 步 QLoRA | 801／895／897 tokens；loss 為 4.5377／1.4153／0.0384，配置峰值最高 1,764 MiB |
+
+fp16 中止紀錄另存 [qlora-fp16-recheck-20261019.json](../artifacts/qlora-fp16-recheck-20261019.json)，步驟數字轉錄自停止前的實際 stdout。它與官方 QLoRA 的權重、完成步數不同，不當作同條件成效比較。
+
+配置與保留記憶體是 PyTorch allocator 指標，不含全部 CUDA context、桌面或其他服務。官方測試開始前 `nvidia-smi` 顯示其他程式已占用 2,713 MiB，且另有 llama-cuda 服務。Windows WDDM 可能使用共用記憶體，因此不能把配置峰值直接當作獨占實體顯存需求，也不使用本次速度作效能比較。
 
 ## 為什麼 embedding 要留在 CPU
 
@@ -55,7 +61,7 @@ compute dtype 選 fp32，因為 Pascal 沒有原生 bf16（`is_bf16_supported(in
 ## 限制與不確定
 
 - 只跑 3 步，驗證「能跑、放得下」，不代表訓練效果。正式訓練要另外規劃步數、驗證與對照組。
-- 沒有速度數據。Pascal 沒有 Tensor Core，CPU 端查表與 lm_head 也會拖慢；實際一輪訓練要多久，需要在沒有其他工作時另外量測。
+- 沒有速度資料。Pascal 沒有 Tensor Core，CPU 端查表與 lm_head 也會拖慢；實際一輪訓練要多久，需要在沒有其他工作時另外量測。
 - 手動拆分不是 Hugging Face `Trainer` 的標準路徑。正式訓練若沿用，需要同樣的拆分與 adapter 存取流程，並重新驗證存回的 adapter 能被推論端載入。
 - 桌面占用的顯存會隨開啟的程式變動，顯存餘裕以實測當下為準。
 
@@ -85,3 +91,12 @@ $env:PYTHONIOENCODING='utf-8'
 ```
 
 未加 `--allow-download` 時只使用本機快取，避免未經同意就下載大型權重。
+
+本次 worktree 使用主專案既有的獨立環境與快取。要重跑官方權重測試，可在此 worktree 執行以下指令，每次使用新的報告檔名：
+
+```powershell
+$env:HF_HUB_OFFLINE='1'
+../predictfix-ai-factory/.runtime/qlora-env/Scripts/python.exe scripts/check_qlora_feasibility.py real --mode qlora --weights pretrained --steps 3 --seq-len 1024 --rank 8 --dataset training/selection-dataset-v2.json --label v2len --runtime-dir ../predictfix-ai-factory/.runtime --report artifacts/qlora-pretrained-new-run.json
+```
+
+開啟產出的 JSON，`real_qlora_pretrained_v2len.status` 應為 `completed`、`weights` 為 `pretrained`，`steps` 有 3 筆；`checkpoint_loading.missing_keys` 與 `mismatched_keys` 應為空清單。資料雜湊應對應目前 v2 題庫的 LF 正規化 UTF-8 內容。3 筆 loss 有限只代表此測試可執行，不能推論維修效果。

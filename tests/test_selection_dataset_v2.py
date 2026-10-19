@@ -83,7 +83,8 @@ def test_validation_rejects_unknown_ids_short_candidate_lists_and_injection_as_g
 def test_token_stats_were_measured_on_this_exact_file_and_fit_limits():
   stats=json.loads((ROOT/'artifacts/selection-dataset-v2-token-stats.json').read_text(encoding='utf-8'))
   v2=stats['datasets']['v2']
-  assert v2['sha256']==hashlib.sha256(TARGET.read_bytes()).hexdigest(),'re-run scripts/measure_selection_tokens.py'
+  # Git 在 Windows 與 Linux 可能使用不同換行，內容指紋必須對同一份文字一致。
+  assert v2['sha256']==hashlib.sha256(TARGET.read_text(encoding='utf-8').encode('utf-8')).hexdigest(),'re-run scripts/measure_selection_tokens.py'
   assert v2['rows']==len(ALL_ROWS)
   assert v2['max_prompt_tokens']+LLAMA_MAX_TOKENS<=LLAMA_CONTEXT
   assert v2['max_train_tokens']<=TRAIN_MAX_LENGTH

@@ -1,0 +1,30 @@
+{
+  "model": {
+    "id": "google/gemma-4-E2B-it",
+    "revision": "3e22461f65e89153144f8adb70e3b8c2cc9845a7"
+  },
+  "checked_at": "2026-10-19T04:10:59+00:00",
+  "status": "interrupted",
+  "reason": "Stopped to free the GPU for the official pretrained QLoRA test; not an OOM or a completed three-step run.",
+  "mode": "fp16",
+  "weights": "random",
+  "requested_steps": 3,
+  "dataset": {
+    "path": "training/selection-dataset-v2.json",
+    "sha256": "29233af3e7592ae6c6610fffd7276c6072889705c3f7dd1bd56c5797d8b574c1",
+    "sha256_encoding": "UTF-8 text with LF line endings"
+  },
+  "observed_stdout_steps": [
+    {
+      "step": 1,
+      "sequence_tokens": 801,
+      "answer_tokens": 11,
+      "loss": 12.5092,
+      "device_used_mib": 4095,
+      "device_free_mib": 0,
+      "peak_allocated_mib": 4046,
+      "peak_reserved_mib": 4268
+    }
+  ],
+  "provenance": "Step values transcribed from this run stdout before stopping; completed steps beyond the observed output are not inferred."
+}
