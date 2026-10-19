@@ -272,6 +272,7 @@ Exact match 變化：**+75.0 個百分點**。這是小規模流程實驗，不�
 | [操作手冊](docs/repair-flow.md) | 報修、清單、派工、驗收、保養與備品。 |
 | [面試展示指南](docs/interview-demo.md) | 一鍵準備、2–3 分鐘腳本、流程驗證與 CI 邊界。 |
 | [本機部署與 LoRA 實驗](docs/lora-training.md) | 部署快照、資料分組、CPU 訓練、基準比較與適用限制。 |
+| [Gemma 固定 SFT 實驗](docs/gemma-sft-protocol.md) · [重跑與驗證](docs/gemma-sft-running.md) | 官方權重、獨立保留集、相同預算及 adapter 重載；結果依實測紀錄解讀。 |
 | [系統架構](docs/system-architecture.md) | 資料流、API、來源管理與實作邊界。 |
 | [安全測試](docs/security-testing.md) | 攻擊情境、發現與修正、重跑方式及限制。 |
 | [本機安裝](docs/local-setup.md) · [正式環境與部署](docs/production-setup.md) | 安裝、帳號、出勤、備份還原及伺服器設定。 |
