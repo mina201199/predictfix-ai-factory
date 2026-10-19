@@ -62,7 +62,7 @@ CPU embedding／PLE／tied lm_head 使用 bfloat16，GPU decoder 為 nf4、計�
 
 其 CUDA peak allocated／reserved 為 **4160／4316 MiB**，CPU peak working set 為 **10581.46 MiB**；結束採樣 `mem_get_info` free 為 0 MiB，nvidia-smi 全裝置用量為 3929 MiB。配置器高水位已超過顯卡標示的 4096 MiB，不能解讀為全部常駐實體顯存，或宣稱一般 LoRA 完整訓練可順暢容納於 4 GiB。這個 WDDM 實測只能證明兩步完成；沒有發生 OOM，也無法推論後續步數必然成功或失敗。兩步與正式 QLoRA 的 126 步工作量不同，不拿來計算公平的顯存／速度改善倍率。
 
-## 工具驗證與限制
+## 工具驗證與限制（GPU 實驗交付時）
 
 普通專案測試 **93 passed、無 skip**（67.93 秒）；保留既有 Starlette/httpx deprecation warning。資料守門與實驗流程有 18 項新增測試，包括跨家族外洩、資料／protocol 雜湊、無效 JSON、重複列、基準混入 adapter、重載不一致、原子報告寫入與逾時程序樹清理。清理測試使用 CPU fixture，確認不終止不相關的程序，並涵蓋 PID reuse 與已退出程序的競態。
 
@@ -71,3 +71,13 @@ CPU embedding／PLE／tied lm_head 使用 bfloat16，GPU decoder 為 nf4、計�
 [官方 tokenizer 全量檢查](../artifacts/gemma-sft-token-audit-20261019.json) 確認全部固定列符合 1024 cap，沒有截斷、略過或把 validation／holdout 當 train；所有合法 grammar 答案最長 22 tokens。
 
 資料仍為單一作者的規則標註合成案例，沒有維修專家獨立審查與現場驗收。即使保留集改善，也只能主張在此合成選段任務、固定格式與量化條件下改善。
+
+## 後續程序監督修正（僅 CPU 回歸）
+
+獨立審查另發現舊 runner 的生命週期缺陷：直接父程序退出後，`runBounded` 會回傳，但後代可能仍執行；清理時的後代快照也無法涵蓋之後出生的程序。CPU 心跳 fixture 在成功與錯誤退出兩種案例都重現此問題。這項缺陷不能由先前的「逾時時父程序仍存活」測試排除。
+
+現行 Windows runner 先以 suspended 狀態建立程序，加入禁止 breakaway、設定 kill-on-close 的 Job Object 後才 resume。正常退出、逾時或例外都會終止該 job，確認 active process count 為 0 才返回。POSIX 使用獨立 process group；以 `waitid(..., WNOWAIT)` 保留 leader，送出終止訊號後限時確認整組沒有非 zombie 成員，最後才回收 leader，避免 PGID 重用。無法確認清理成功會拋錯，campaign 不會繼續下一階段。
+
+GPU 實驗與 fp16 資源實測均在這次修正之前執行，使用舊 runner；**沒有重跑 GPU、修改原始實驗報告、回填歷史 source hash 或變更品質結論**。新的 runner 原始碼與歷史執行版本不同，不應用新程式碼雜湊冒充當時版本。
+
+Windows 上完整普通回歸為 **96 passed、無 skip**（90.75 秒，1 個既有 warning），其中流程測試 21 項。涵蓋父程序退出碼 0／9、逾時、`KeyboardInterrupt`、啟動後較晚出生的後代，以及不相關程序的心跳持續更新。見 [CPU 回歸紀錄](../artifacts/gemma-sft-lifecycle-verification-20261019.json)。POSIX 實作已完成靜態審查，但本次 Windows 主機沒有實跑 POSIX；仍需整合後的 Ubuntu CI 驗證，不能把本機 96 項通過當成跨平台實測完成。

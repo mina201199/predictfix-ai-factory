@@ -19,6 +19,8 @@ $env:PYTHONIOENCODING = 'utf-8'
 
 每次使用全新 `--run-dir`。工具拒絕覆寫既有實驗，讀取快取時核對官方權重 SHA。以下指令會依序跑原模型 nf4 基準、QLoRA 126 步、全新程序重載及完整評估。外層預算到期只會終止工具自己建立的子程序，不處理既有 llama-cuda 或其他工作。
 
+現行 runner 在 Windows 先 suspended 建立根程序、加入獨立 Job Object，再開始執行；正常父程序退出、逾時與例外都會先收束整組後代，確認 job 無活動程序才返回。POSIX 使用獨立 process group，需 `waitid/WNOWAIT` 與 `ps`，保留 leader 至群組清理完成才回收。不支援或無法確認清理成功時直接失敗，不降級成只清理父程序。這是歷史 GPU 實驗之後的 CPU 驗證修正，見[版本與回歸說明](gemma-sft-results-20261019.md#後續程序監督修正僅-cpu-回歸)；歷史報告與 source hash 保持原樣。
+
 ```powershell
 & $python scripts/run_gemma_sft_campaign.py --scope qlora --max-hours 3 --runtime-dir $runtimeDir --run-dir .runtime/qlora-campaign-new
 ```

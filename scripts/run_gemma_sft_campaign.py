@@ -2,7 +2,6 @@
 import argparse
 import json
 import os
-import signal
 import subprocess
 import sys
 import time
@@ -43,30 +42,20 @@ def collectQuality(stages):
 
 
 def stopOwnedTree(process):
-  if process.poll() is not None:
-    return
-  if os.name == 'nt':
-    from gemma_sft_process import stopWindowsTree
-    stopWindowsTree(process.pid, int(process._handle))
-  else:
-    try:
-      os.killpg(process.pid, signal.SIGKILL)
-    except ProcessLookupError:
-      pass
-  process.wait(timeout=15)
+  process.stop()
 
 
 def runBounded(command, cwd, environment, log, timeoutSeconds):
-  process = subprocess.Popen(command, cwd=cwd, env=environment, stdout=log,
-    stderr=subprocess.STDOUT, start_new_session=os.name != 'nt')
+  from gemma_sft_process import startOwnedProcess
+  process = startOwnedProcess(command, cwd, environment, log)
   try:
     return {'exit_code': process.wait(timeout=timeoutSeconds), 'timed_out': False, 'pid': process.pid}
   except subprocess.TimeoutExpired:
     stopOwnedTree(process)
     return {'exit_code': process.returncode, 'timed_out': True, 'pid': process.pid}
-  except BaseException:
-    stopOwnedTree(process)
-    raise
+  finally:
+    # 根程序退出也不代表後代退出；收束整組後才能開始下一個 GPU 階段。
+    process.close()
 
 
 def campaign(args):
