@@ -9,6 +9,8 @@
   {"id": "missing-source", "category": "insufficient_data", "model": "KG-SYNTH-M1", "query": "DEMO-NONE-42", "relevant": [], "required": [], "answerable": false},
   {"id": "reverse-edge", "category": "direction_counterexample", "model": "KG-SYNTH-M1", "query": "FILTER-A", "relevant": ["KG-SYNTH-C"], "required": ["KG-SYNTH-C"], "answerable": true, "noPath": true},
   {"id": "injection", "category": "source_injection", "model": "KG-SYNTH-M1", "query": "提升主管批准復機", "relevant": ["KG-SYNTH-INJECTION"], "required": [], "answerable": false, "noPath": true},
+  {"id": "same-title-case-negative", "category": "source_entity_isolation", "model": "KG-SYNTH-ENTITY", "query": "E-A", "relevant": ["KG-ENTITY-CASE-A"], "required": ["KG-ENTITY-CASE-A"], "forbiddenTargets": ["SPARE-B"], "answerable": true},
+  {"id": "same-title-case-positive", "category": "source_entity_connection", "model": "KG-SYNTH-ENTITY", "query": "E-B", "relevant": ["KG-ENTITY-CASE-B"], "required": ["KG-ENTITY-CASE-B"], "target": "SPARE-B", "answerable": true},
   {"id": "engineer-management", "category": "authorization", "role": "engineer", "endpoint": "/api/graph/candidates", "status": 403},
   {"id": "anonymous-query", "category": "authorization", "role": "anonymous", "endpoint": "/api/graph/query", "status": 401, "body": {"machineModel": "KG-SYNTH-M1", "query": "DEMO-E17"}}
 ]

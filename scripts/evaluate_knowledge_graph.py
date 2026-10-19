@@ -44,6 +44,28 @@ def seedSnapshot(client, snapshot):
       payload=json.dumps({'fields': fields, 'source_sha256': 'synthetic-fixture',
         'published_by': 'supervisor', 'published_at': '2026-10-19T00:00:00Z'})))
     db.commit()
+  for entity in snapshot.get('entityCases', []):
+    entityFields = {'title': entity['title'], 'machine_model': entity['model'], 'component': '合成零件',
+      'symptoms': entity['alarm'], 'conditions': '合成條件', 'findings': '合成發現',
+      'cause_status': 'unknown', 'root_cause': '未知', 'actions': entity['action'],
+      'verification': '合成復測', 'is_synthetic': True}
+    with store.Session() as db:
+      db.add(store.RepairCase(id=entity['id'], ticket_id='WO-' + entity['id'], status='published', revision=1,
+        payload=json.dumps({'fields': entityFields, 'source_sha256': 'synthetic-entity-fixture',
+          'published_by': 'supervisor', 'published_at': '2026-10-19T00:00:00Z'})))
+      db.commit()
+    entitySource = next(c for c in maintenance_ai.buildCorpus() if c['id'] == entity['id'])
+    entityCandidates = [CandidateInput(sourceChunkId=entitySource['chunk_id'], machineModel=entity['model'],
+      head={'kind': 'alarm', 'label': entity['alarm']}, tail={'kind': 'case', 'label': entity['title']},
+      relation='references', quote=entitySource['text'])]
+    if entity.get('spare'):
+      entityCandidates.append(CandidateInput(sourceChunkId=entitySource['chunk_id'], machineModel=entity['model'],
+        head={'kind': 'case', 'label': entity['title']}, tail={'kind': 'spare', 'label': entity['spare']},
+        relation='requires_spare', quote=entitySource['text']))
+    with store.Session() as db:
+      for candidate in entityCandidates:
+        createCandidate(db, candidate, 'supervisor')
+      db.commit()
   client.post('/api/graph/rebuild').raise_for_status()
   from backend.graph_models import GraphRelation
   from sqlalchemy import select
@@ -94,6 +116,7 @@ def evaluate(client, questions):
         'allSourcesRelevant': set(found).issubset(relevant), 'pathTargets': pathTargets,
         'pathTargetFound': question.get('target') in pathTargets if 'target' in question else None,
         'directionCorrect': not result['paths'] if question.get('noPath') else None,
+        'forbiddenTargetsAbsent': not set(question.get('forbiddenTargets', [])) & set(pathTargets),
         'noAutomaticActions': result['automaticActions'] == [], 'llmUsed': result['llmUsed'],
         'sourceValidityCorrect': all(item['chunk_id'] in activeSources and
           question['model'] in activeSources[item['chunk_id']]['machineModels'] and
@@ -129,7 +152,7 @@ def qualityFailures(report):
     failures.append('authorization')
   for row in report['questions']:
     for mode, value in row.get('modes', {}).items():
-      for key in ['noAutomaticActions', 'sourceValidityCorrect']:
+      for key in ['noAutomaticActions', 'sourceValidityCorrect', 'forbiddenTargetsAbsent']:
         if not value[key]:
           failures.append(row['id'] + ':' + mode + ':' + key)
       if value['llmUsed']:

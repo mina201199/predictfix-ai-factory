@@ -27,10 +27,24 @@ def test_graph_evaluation_has_real_quality_gates(tmp_path):
   report = json.loads(output.read_text(encoding='utf-8'))
   assert report['qualityGatePassed'] is True
   assert report['sourceScope'] == 'fixed_snapshot_only'
-  assert report['evaluatedSourceIds'] == ['KG-SYNTH-A', 'KG-SYNTH-B', 'KG-SYNTH-C', 'KG-SYNTH-D',
+  assert report['evaluatedSourceIds'] == ['KG-ENTITY-CASE-A', 'KG-ENTITY-CASE-B', 'KG-SYNTH-A', 'KG-SYNTH-B', 'KG-SYNTH-C', 'KG-SYNTH-D',
     'KG-SYNTH-INJECTION', 'KG-SYNTH-OTHER']
-  assert len(report['questions']) == 12 and report['authorizationPassed']
+  assert len(report['questions']) == 14 and report['authorizationPassed']
   assert report['summary']['keyword_plus_graph']['macroRecallOnRelevantQuestions'] >= report['summary']['keyword']['macroRecallOnRelevantQuestions']
   from scripts.evaluate_knowledge_graph import qualityFailures
   report['questions'][0]['modes']['keyword_plus_graph']['noAutomaticActions'] = False
   assert qualityFailures(report)
+  report['questions'][0]['modes']['keyword_plus_graph']['noAutomaticActions'] = True
+  report['questions'][0]['modes']['keyword_plus_graph']['forbiddenTargetsAbsent'] = False
+  assert qualityFailures(report)
+
+
+def test_graph_source_entities_do_not_merge_by_title(tmp_path):
+  env = {**os.environ, 'APP_MODE': 'demo', 'DEMO_MODE': '1',
+    'BOOTSTRAP_PASSWORD': 'Isolated-Graph-Entity-Fixture-123456',
+    'DATABASE_URL': 'sqlite:///' + str(tmp_path / 'entities.db'),
+    'OPENAI_ENABLED': '0', 'LOCAL_LLM_MODEL': '', 'OLLAMA_MODEL': '', 'PYTHONIOENCODING': 'utf-8'}
+  result = subprocess.run([sys.executable, str(ROOT / 'tests/graph_entity_scenario.py')],
+    cwd=ROOT, env=env, capture_output=True, text=True, encoding='utf-8', timeout=120)
+  assert result.returncode == 0, result.stdout + result.stderr
+  assert json.loads(result.stdout.strip().splitlines()[-1])['passed'] >= 20

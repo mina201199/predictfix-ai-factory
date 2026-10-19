@@ -104,6 +104,7 @@ async function refreshManagement() {
     const card = element('article');
     card.append(element('h3', `${relation.head.label} → ${graphRelations[relation.relation]} → ${relation.tail.label}`));
     card.append(element('p', `${relation.machineModel} · ${relation.status} · r${relation.revision} · 來源${relation.sourceValid ? '有效' : '失效'} · 建立者 ${relation.createdBy}`));
+    if (!relation.identityValid) card.append(element('p', relation.identityIssue));
     card.append(citationView(relation.citation));
     if (relation.reviewedBy) card.append(element('p', `最近審查 ${relation.reviewedBy} · ${relation.reviewedAt} · ${relation.reviewNote}`));
     const noteLabel = element('label', '核對／撤回理由');
@@ -115,7 +116,7 @@ async function refreshManagement() {
     for (const [action, label] of [['approve', '核對並核准'], ['withdraw', '撤回關係']]) {
       const button = element('button', label);
       button.type = 'button';
-      button.disabled = action === 'approve' && !relation.sourceValid;
+      button.disabled = action === 'approve' && (!relation.sourceValid || !relation.identityValid);
       button.addEventListener('click', async () => {
         if (note.value.trim().length < 3) return showMessage('請填寫至少 3 字的核對理由。');
         button.disabled = true;

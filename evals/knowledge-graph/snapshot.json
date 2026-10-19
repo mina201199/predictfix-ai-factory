@@ -1,5 +1,5 @@
 {
-  "version": "1.0",
+  "version": "2.0",
   "provenance": "全部為原創合成測試資料，不是原廠手冊或真實維修成效。固定種子，不呼叫 LLM。",
   "manuals": [
     {"id": "KG-SYNTH-A", "model": "KG-SYNTH-M1", "section": "警報索引", "text": "合成警報 DEMO-E17 的排查索引指向濾芯。這是索引關係，不能宣稱濾芯已故障。"},
@@ -18,5 +18,9 @@
     {"source": "KG-SYNTH-OTHER", "headKind": "alarm", "head": "DEMO-E17", "tailKind": "part", "tail": "刀庫", "relation": "references"},
     {"source": "KG-SYNTH-WITHDRAWN", "headKind": "alarm", "head": "DEMO-E99", "tailKind": "part", "tail": "電池", "relation": "references"}
   ],
-  "draftCase": {"id": "KG-SYNTH-DRAFT", "model": "KG-SYNTH-M1", "title": "合成未發布案例", "symptom": "DEMO-DRAFT", "action": "候選處置"}
+  "draftCase": {"id": "KG-SYNTH-DRAFT", "model": "KG-SYNTH-M1", "title": "合成未發布案例", "symptom": "DEMO-DRAFT", "action": "候選處置"},
+  "entityCases": [
+    {"id": "KG-ENTITY-CASE-A", "model": "KG-SYNTH-ENTITY", "title": "相同案例標題", "alarm": "E-A", "action": "案例A只記載排查，沒有備品結論。"},
+    {"id": "KG-ENTITY-CASE-B", "model": "KG-SYNTH-ENTITY", "title": "相同案例標題", "alarm": "E-B", "action": "案例B需要備品 SPARE-B。", "spare": "SPARE-B"}
+  ]
 }

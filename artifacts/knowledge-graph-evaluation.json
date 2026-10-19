@@ -2,9 +2,9 @@
   "summary": {
     "keyword": {
       "macroPrecision": 1.0,
-      "macroRecallOnRelevantQuestions": 0.7916666666666666,
-      "answerableRateOnPositiveQuestions": 0.6,
-      "answerabilityAccuracy": 0.8,
+      "macroRecallOnRelevantQuestions": 0.84375,
+      "answerableRateOnPositiveQuestions": 0.7142857142857143,
+      "answerabilityAccuracy": 0.8333333333333334,
       "allSourcesRelevantRate": 1.0
     },
     "keyword_plus_graph": {
@@ -52,6 +52,7 @@
           "pathTargets": [],
           "pathTargetFound": false,
           "directionCorrect": null,
+          "forbiddenTargetsAbsent": true,
           "noAutomaticActions": true,
           "llmUsed": false,
           "sourceValidityCorrect": true,
@@ -80,6 +81,7 @@
           ],
           "pathTargetFound": true,
           "directionCorrect": null,
+          "forbiddenTargetsAbsent": true,
           "noAutomaticActions": true,
           "llmUsed": false,
           "sourceValidityCorrect": true,
@@ -117,20 +119,21 @@
                   "machineModel": "KG-SYNTH-M1",
                   "status": "approved",
                   "revision": 2,
-                  "createdAt": "2026-10-19T06:42:15.530101",
+                  "createdAt": "2026-10-19T06:57:21.464723",
                   "sourceChunkId": "KG-SYNTH-A:2",
                   "sourceHash": "ee98576e3bd740c6a2b69b7ae53d2ba23d17d0817b9dd32e56179bc0fe266e57",
+                  "nodeScopes": {},
                   "createdBy": "supervisor",
                   "approvedBy": "supervisor",
-                  "approvedAt": "2026-10-19T06:42:15.534104+00:00",
+                  "approvedAt": "2026-10-19T06:57:21.469851+00:00",
                   "reviewedBy": "supervisor",
-                  "reviewedAt": "2026-10-19T06:42:15.534104+00:00",
+                  "reviewedAt": "2026-10-19T06:57:21.469851+00:00",
                   "reviewNote": "合成金標明示關係",
                   "history": [
                     {
                       "action": "approve",
                       "actor": "supervisor",
-                      "at": "2026-10-19T06:42:15.534104+00:00",
+                      "at": "2026-10-19T06:57:21.469851+00:00",
                       "note": "合成金標明示關係"
                     }
                   ],
@@ -146,6 +149,8 @@
                     "lineEnd": 2
                   },
                   "sourceValid": true,
+                  "identityValid": true,
+                  "identityIssue": "",
                   "effective": true
                 }
               ]
@@ -185,20 +190,21 @@
                   "machineModel": "KG-SYNTH-M1",
                   "status": "approved",
                   "revision": 2,
-                  "createdAt": "2026-10-19T06:42:15.530101",
+                  "createdAt": "2026-10-19T06:57:21.464723",
                   "sourceChunkId": "KG-SYNTH-A:2",
                   "sourceHash": "ee98576e3bd740c6a2b69b7ae53d2ba23d17d0817b9dd32e56179bc0fe266e57",
+                  "nodeScopes": {},
                   "createdBy": "supervisor",
                   "approvedBy": "supervisor",
-                  "approvedAt": "2026-10-19T06:42:15.534104+00:00",
+                  "approvedAt": "2026-10-19T06:57:21.469851+00:00",
                   "reviewedBy": "supervisor",
-                  "reviewedAt": "2026-10-19T06:42:15.534104+00:00",
+                  "reviewedAt": "2026-10-19T06:57:21.469851+00:00",
                   "reviewNote": "合成金標明示關係",
                   "history": [
                     {
                       "action": "approve",
                       "actor": "supervisor",
-                      "at": "2026-10-19T06:42:15.534104+00:00",
+                      "at": "2026-10-19T06:57:21.469851+00:00",
                       "note": "合成金標明示關係"
                     }
                   ],
@@ -214,6 +220,8 @@
                     "lineEnd": 2
                   },
                   "sourceValid": true,
+                  "identityValid": true,
+                  "identityIssue": "",
                   "effective": true
                 },
                 {
@@ -232,20 +240,21 @@
                   "machineModel": "KG-SYNTH-M1",
                   "status": "approved",
                   "revision": 2,
-                  "createdAt": "2026-10-19T06:42:15.547102",
+                  "createdAt": "2026-10-19T06:57:21.480322",
                   "sourceChunkId": "KG-SYNTH-B:2",
                   "sourceHash": "e396495b3dbec99cfd9314c650d1b14793408bc72a0fd120721abcd68bc74f1d",
+                  "nodeScopes": {},
                   "createdBy": "supervisor",
                   "approvedBy": "supervisor",
-                  "approvedAt": "2026-10-19T06:42:15.549163+00:00",
+                  "approvedAt": "2026-10-19T06:57:21.483338+00:00",
                   "reviewedBy": "supervisor",
-                  "reviewedAt": "2026-10-19T06:42:15.549163+00:00",
+                  "reviewedAt": "2026-10-19T06:57:21.483338+00:00",
                   "reviewNote": "合成金標明示關係",
                   "history": [
                     {
                       "action": "approve",
                       "actor": "supervisor",
-                      "at": "2026-10-19T06:42:15.549163+00:00",
+                      "at": "2026-10-19T06:57:21.483338+00:00",
                       "note": "合成金標明示關係"
                     }
                   ],
@@ -261,6 +270,8 @@
                     "lineEnd": 2
                   },
                   "sourceValid": true,
+                  "identityValid": true,
+                  "identityIssue": "",
                   "effective": true
                 }
               ]
@@ -306,20 +317,21 @@
                   "machineModel": "KG-SYNTH-M1",
                   "status": "approved",
                   "revision": 2,
-                  "createdAt": "2026-10-19T06:42:15.530101",
+                  "createdAt": "2026-10-19T06:57:21.464723",
                   "sourceChunkId": "KG-SYNTH-A:2",
                   "sourceHash": "ee98576e3bd740c6a2b69b7ae53d2ba23d17d0817b9dd32e56179bc0fe266e57",
+                  "nodeScopes": {},
                   "createdBy": "supervisor",
                   "approvedBy": "supervisor",
-                  "approvedAt": "2026-10-19T06:42:15.534104+00:00",
+                  "approvedAt": "2026-10-19T06:57:21.469851+00:00",
                   "reviewedBy": "supervisor",
-                  "reviewedAt": "2026-10-19T06:42:15.534104+00:00",
+                  "reviewedAt": "2026-10-19T06:57:21.469851+00:00",
                   "reviewNote": "合成金標明示關係",
                   "history": [
                     {
                       "action": "approve",
                       "actor": "supervisor",
-                      "at": "2026-10-19T06:42:15.534104+00:00",
+                      "at": "2026-10-19T06:57:21.469851+00:00",
                       "note": "合成金標明示關係"
                     }
                   ],
@@ -335,6 +347,8 @@
                     "lineEnd": 2
                   },
                   "sourceValid": true,
+                  "identityValid": true,
+                  "identityIssue": "",
                   "effective": true
                 },
                 {
@@ -353,20 +367,21 @@
                   "machineModel": "KG-SYNTH-M1",
                   "status": "approved",
                   "revision": 2,
-                  "createdAt": "2026-10-19T06:42:15.547102",
+                  "createdAt": "2026-10-19T06:57:21.480322",
                   "sourceChunkId": "KG-SYNTH-B:2",
                   "sourceHash": "e396495b3dbec99cfd9314c650d1b14793408bc72a0fd120721abcd68bc74f1d",
+                  "nodeScopes": {},
                   "createdBy": "supervisor",
                   "approvedBy": "supervisor",
-                  "approvedAt": "2026-10-19T06:42:15.549163+00:00",
+                  "approvedAt": "2026-10-19T06:57:21.483338+00:00",
                   "reviewedBy": "supervisor",
-                  "reviewedAt": "2026-10-19T06:42:15.549163+00:00",
+                  "reviewedAt": "2026-10-19T06:57:21.483338+00:00",
                   "reviewNote": "合成金標明示關係",
                   "history": [
                     {
                       "action": "approve",
                       "actor": "supervisor",
-                      "at": "2026-10-19T06:42:15.549163+00:00",
+                      "at": "2026-10-19T06:57:21.483338+00:00",
                       "note": "合成金標明示關係"
                     }
                   ],
@@ -382,6 +397,8 @@
                     "lineEnd": 2
                   },
                   "sourceValid": true,
+                  "identityValid": true,
+                  "identityIssue": "",
                   "effective": true
                 },
                 {
@@ -401,20 +418,21 @@
                   "machineModel": "KG-SYNTH-M1",
                   "status": "approved",
                   "revision": 2,
-                  "createdAt": "2026-10-19T06:42:15.570824",
+                  "createdAt": "2026-10-19T06:57:21.503720",
                   "sourceChunkId": "KG-SYNTH-D:2",
                   "sourceHash": "41a2b1d53ca0afad8d43c8b11138922f00107f9ce29e545fffca140a1d26f54c",
+                  "nodeScopes": {},
                   "createdBy": "supervisor",
                   "approvedBy": "supervisor",
-                  "approvedAt": "2026-10-19T06:42:15.572812+00:00",
+                  "approvedAt": "2026-10-19T06:57:21.506736+00:00",
                   "reviewedBy": "supervisor",
-                  "reviewedAt": "2026-10-19T06:42:15.572812+00:00",
+                  "reviewedAt": "2026-10-19T06:57:21.506736+00:00",
                   "reviewNote": "合成金標明示關係",
                   "history": [
                     {
                       "action": "approve",
                       "actor": "supervisor",
-                      "at": "2026-10-19T06:42:15.572812+00:00",
+                      "at": "2026-10-19T06:57:21.506736+00:00",
                       "note": "合成金標明示關係"
                     }
                   ],
@@ -430,6 +448,8 @@
                     "lineEnd": 2
                   },
                   "sourceValid": true,
+                  "identityValid": true,
+                  "identityIssue": "",
                   "effective": true
                 }
               ]
@@ -475,20 +495,21 @@
                   "machineModel": "KG-SYNTH-M1",
                   "status": "approved",
                   "revision": 2,
-                  "createdAt": "2026-10-19T06:42:15.530101",
+                  "createdAt": "2026-10-19T06:57:21.464723",
                   "sourceChunkId": "KG-SYNTH-A:2",
                   "sourceHash": "ee98576e3bd740c6a2b69b7ae53d2ba23d17d0817b9dd32e56179bc0fe266e57",
+                  "nodeScopes": {},
                   "createdBy": "supervisor",
                   "approvedBy": "supervisor",
-                  "approvedAt": "2026-10-19T06:42:15.534104+00:00",
+                  "approvedAt": "2026-10-19T06:57:21.469851+00:00",
                   "reviewedBy": "supervisor",
-                  "reviewedAt": "2026-10-19T06:42:15.534104+00:00",
+                  "reviewedAt": "2026-10-19T06:57:21.469851+00:00",
                   "reviewNote": "合成金標明示關係",
                   "history": [
                     {
                       "action": "approve",
                       "actor": "supervisor",
-                      "at": "2026-10-19T06:42:15.534104+00:00",
+                      "at": "2026-10-19T06:57:21.469851+00:00",
                       "note": "合成金標明示關係"
                     }
                   ],
@@ -504,6 +525,8 @@
                     "lineEnd": 2
                   },
                   "sourceValid": true,
+                  "identityValid": true,
+                  "identityIssue": "",
                   "effective": true
                 },
                 {
@@ -522,20 +545,21 @@
                   "machineModel": "KG-SYNTH-M1",
                   "status": "approved",
                   "revision": 2,
-                  "createdAt": "2026-10-19T06:42:15.547102",
+                  "createdAt": "2026-10-19T06:57:21.480322",
                   "sourceChunkId": "KG-SYNTH-B:2",
                   "sourceHash": "e396495b3dbec99cfd9314c650d1b14793408bc72a0fd120721abcd68bc74f1d",
+                  "nodeScopes": {},
                   "createdBy": "supervisor",
                   "approvedBy": "supervisor",
-                  "approvedAt": "2026-10-19T06:42:15.549163+00:00",
+                  "approvedAt": "2026-10-19T06:57:21.483338+00:00",
                   "reviewedBy": "supervisor",
-                  "reviewedAt": "2026-10-19T06:42:15.549163+00:00",
+                  "reviewedAt": "2026-10-19T06:57:21.483338+00:00",
                   "reviewNote": "合成金標明示關係",
                   "history": [
                     {
                       "action": "approve",
                       "actor": "supervisor",
-                      "at": "2026-10-19T06:42:15.549163+00:00",
+                      "at": "2026-10-19T06:57:21.483338+00:00",
                       "note": "合成金標明示關係"
                     }
                   ],
@@ -551,6 +575,8 @@
                     "lineEnd": 2
                   },
                   "sourceValid": true,
+                  "identityValid": true,
+                  "identityIssue": "",
                   "effective": true
                 },
                 {
@@ -570,20 +596,21 @@
                   "machineModel": "KG-SYNTH-M1",
                   "status": "approved",
                   "revision": 2,
-                  "createdAt": "2026-10-19T06:42:15.559174",
+                  "createdAt": "2026-10-19T06:57:21.492498",
                   "sourceChunkId": "KG-SYNTH-C:2",
                   "sourceHash": "8523611ac3389957d72c2e43a4bc23861385cc1284fb0a7e33843556f92d945e",
+                  "nodeScopes": {},
                   "createdBy": "supervisor",
                   "approvedBy": "supervisor",
-                  "approvedAt": "2026-10-19T06:42:15.562174+00:00",
+                  "approvedAt": "2026-10-19T06:57:21.494489+00:00",
                   "reviewedBy": "supervisor",
-                  "reviewedAt": "2026-10-19T06:42:15.562174+00:00",
+                  "reviewedAt": "2026-10-19T06:57:21.494489+00:00",
                   "reviewNote": "合成金標明示關係",
                   "history": [
                     {
                       "action": "approve",
                       "actor": "supervisor",
-                      "at": "2026-10-19T06:42:15.562174+00:00",
+                      "at": "2026-10-19T06:57:21.494489+00:00",
                       "note": "合成金標明示關係"
                     }
                   ],
@@ -599,6 +626,8 @@
                     "lineEnd": 2
                   },
                   "sourceValid": true,
+                  "identityValid": true,
+                  "identityIssue": "",
                   "effective": true
                 }
               ]
@@ -643,6 +672,7 @@
           "pathTargets": [],
           "pathTargetFound": false,
           "directionCorrect": null,
+          "forbiddenTargetsAbsent": true,
           "noAutomaticActions": true,
           "llmUsed": false,
           "sourceValidityCorrect": true,
@@ -670,6 +700,7 @@
           ],
           "pathTargetFound": true,
           "directionCorrect": null,
+          "forbiddenTargetsAbsent": true,
           "noAutomaticActions": true,
           "llmUsed": false,
           "sourceValidityCorrect": true,
@@ -707,20 +738,21 @@
                   "machineModel": "KG-SYNTH-M1",
                   "status": "approved",
                   "revision": 2,
-                  "createdAt": "2026-10-19T06:42:15.547102",
+                  "createdAt": "2026-10-19T06:57:21.480322",
                   "sourceChunkId": "KG-SYNTH-B:2",
                   "sourceHash": "e396495b3dbec99cfd9314c650d1b14793408bc72a0fd120721abcd68bc74f1d",
+                  "nodeScopes": {},
                   "createdBy": "supervisor",
                   "approvedBy": "supervisor",
-                  "approvedAt": "2026-10-19T06:42:15.549163+00:00",
+                  "approvedAt": "2026-10-19T06:57:21.483338+00:00",
                   "reviewedBy": "supervisor",
-                  "reviewedAt": "2026-10-19T06:42:15.549163+00:00",
+                  "reviewedAt": "2026-10-19T06:57:21.483338+00:00",
                   "reviewNote": "合成金標明示關係",
                   "history": [
                     {
                       "action": "approve",
                       "actor": "supervisor",
-                      "at": "2026-10-19T06:42:15.549163+00:00",
+                      "at": "2026-10-19T06:57:21.483338+00:00",
                       "note": "合成金標明示關係"
                     }
                   ],
@@ -736,6 +768,8 @@
                     "lineEnd": 2
                   },
                   "sourceValid": true,
+                  "identityValid": true,
+                  "identityIssue": "",
                   "effective": true
                 }
               ]
@@ -776,20 +810,21 @@
                   "machineModel": "KG-SYNTH-M1",
                   "status": "approved",
                   "revision": 2,
-                  "createdAt": "2026-10-19T06:42:15.547102",
+                  "createdAt": "2026-10-19T06:57:21.480322",
                   "sourceChunkId": "KG-SYNTH-B:2",
                   "sourceHash": "e396495b3dbec99cfd9314c650d1b14793408bc72a0fd120721abcd68bc74f1d",
+                  "nodeScopes": {},
                   "createdBy": "supervisor",
                   "approvedBy": "supervisor",
-                  "approvedAt": "2026-10-19T06:42:15.549163+00:00",
+                  "approvedAt": "2026-10-19T06:57:21.483338+00:00",
                   "reviewedBy": "supervisor",
-                  "reviewedAt": "2026-10-19T06:42:15.549163+00:00",
+                  "reviewedAt": "2026-10-19T06:57:21.483338+00:00",
                   "reviewNote": "合成金標明示關係",
                   "history": [
                     {
                       "action": "approve",
                       "actor": "supervisor",
-                      "at": "2026-10-19T06:42:15.549163+00:00",
+                      "at": "2026-10-19T06:57:21.483338+00:00",
                       "note": "合成金標明示關係"
                     }
                   ],
@@ -805,6 +840,8 @@
                     "lineEnd": 2
                   },
                   "sourceValid": true,
+                  "identityValid": true,
+                  "identityIssue": "",
                   "effective": true
                 },
                 {
@@ -824,20 +861,21 @@
                   "machineModel": "KG-SYNTH-M1",
                   "status": "approved",
                   "revision": 2,
-                  "createdAt": "2026-10-19T06:42:15.570824",
+                  "createdAt": "2026-10-19T06:57:21.503720",
                   "sourceChunkId": "KG-SYNTH-D:2",
                   "sourceHash": "41a2b1d53ca0afad8d43c8b11138922f00107f9ce29e545fffca140a1d26f54c",
+                  "nodeScopes": {},
                   "createdBy": "supervisor",
                   "approvedBy": "supervisor",
-                  "approvedAt": "2026-10-19T06:42:15.572812+00:00",
+                  "approvedAt": "2026-10-19T06:57:21.506736+00:00",
                   "reviewedBy": "supervisor",
-                  "reviewedAt": "2026-10-19T06:42:15.572812+00:00",
+                  "reviewedAt": "2026-10-19T06:57:21.506736+00:00",
                   "reviewNote": "合成金標明示關係",
                   "history": [
                     {
                       "action": "approve",
                       "actor": "supervisor",
-                      "at": "2026-10-19T06:42:15.572812+00:00",
+                      "at": "2026-10-19T06:57:21.506736+00:00",
                       "note": "合成金標明示關係"
                     }
                   ],
@@ -853,6 +891,8 @@
                     "lineEnd": 2
                   },
                   "sourceValid": true,
+                  "identityValid": true,
+                  "identityIssue": "",
                   "effective": true
                 }
               ]
@@ -893,20 +933,21 @@
                   "machineModel": "KG-SYNTH-M1",
                   "status": "approved",
                   "revision": 2,
-                  "createdAt": "2026-10-19T06:42:15.547102",
+                  "createdAt": "2026-10-19T06:57:21.480322",
                   "sourceChunkId": "KG-SYNTH-B:2",
                   "sourceHash": "e396495b3dbec99cfd9314c650d1b14793408bc72a0fd120721abcd68bc74f1d",
+                  "nodeScopes": {},
                   "createdBy": "supervisor",
                   "approvedBy": "supervisor",
-                  "approvedAt": "2026-10-19T06:42:15.549163+00:00",
+                  "approvedAt": "2026-10-19T06:57:21.483338+00:00",
                   "reviewedBy": "supervisor",
-                  "reviewedAt": "2026-10-19T06:42:15.549163+00:00",
+                  "reviewedAt": "2026-10-19T06:57:21.483338+00:00",
                   "reviewNote": "合成金標明示關係",
                   "history": [
                     {
                       "action": "approve",
                       "actor": "supervisor",
-                      "at": "2026-10-19T06:42:15.549163+00:00",
+                      "at": "2026-10-19T06:57:21.483338+00:00",
                       "note": "合成金標明示關係"
                     }
                   ],
@@ -922,6 +963,8 @@
                     "lineEnd": 2
                   },
                   "sourceValid": true,
+                  "identityValid": true,
+                  "identityIssue": "",
                   "effective": true
                 },
                 {
@@ -941,20 +984,21 @@
                   "machineModel": "KG-SYNTH-M1",
                   "status": "approved",
                   "revision": 2,
-                  "createdAt": "2026-10-19T06:42:15.559174",
+                  "createdAt": "2026-10-19T06:57:21.492498",
                   "sourceChunkId": "KG-SYNTH-C:2",
                   "sourceHash": "8523611ac3389957d72c2e43a4bc23861385cc1284fb0a7e33843556f92d945e",
+                  "nodeScopes": {},
                   "createdBy": "supervisor",
                   "approvedBy": "supervisor",
-                  "approvedAt": "2026-10-19T06:42:15.562174+00:00",
+                  "approvedAt": "2026-10-19T06:57:21.494489+00:00",
                   "reviewedBy": "supervisor",
-                  "reviewedAt": "2026-10-19T06:42:15.562174+00:00",
+                  "reviewedAt": "2026-10-19T06:57:21.494489+00:00",
                   "reviewNote": "合成金標明示關係",
                   "history": [
                     {
                       "action": "approve",
                       "actor": "supervisor",
-                      "at": "2026-10-19T06:42:15.562174+00:00",
+                      "at": "2026-10-19T06:57:21.494489+00:00",
                       "note": "合成金標明示關係"
                     }
                   ],
@@ -970,6 +1014,8 @@
                     "lineEnd": 2
                   },
                   "sourceValid": true,
+                  "identityValid": true,
+                  "identityIssue": "",
                   "effective": true
                 }
               ]
@@ -1013,6 +1059,7 @@
           "pathTargets": [],
           "pathTargetFound": false,
           "directionCorrect": null,
+          "forbiddenTargetsAbsent": true,
           "noAutomaticActions": true,
           "llmUsed": false,
           "sourceValidityCorrect": true,
@@ -1038,6 +1085,7 @@
           ],
           "pathTargetFound": true,
           "directionCorrect": null,
+          "forbiddenTargetsAbsent": true,
           "noAutomaticActions": true,
           "llmUsed": false,
           "sourceValidityCorrect": true,
@@ -1077,20 +1125,21 @@
                   "machineModel": "KG-SYNTH-M1",
                   "status": "approved",
                   "revision": 2,
-                  "createdAt": "2026-10-19T06:42:15.570824",
+                  "createdAt": "2026-10-19T06:57:21.503720",
                   "sourceChunkId": "KG-SYNTH-D:2",
                   "sourceHash": "41a2b1d53ca0afad8d43c8b11138922f00107f9ce29e545fffca140a1d26f54c",
+                  "nodeScopes": {},
                   "createdBy": "supervisor",
                   "approvedBy": "supervisor",
-                  "approvedAt": "2026-10-19T06:42:15.572812+00:00",
+                  "approvedAt": "2026-10-19T06:57:21.506736+00:00",
                   "reviewedBy": "supervisor",
-                  "reviewedAt": "2026-10-19T06:42:15.572812+00:00",
+                  "reviewedAt": "2026-10-19T06:57:21.506736+00:00",
                   "reviewNote": "合成金標明示關係",
                   "history": [
                     {
                       "action": "approve",
                       "actor": "supervisor",
-                      "at": "2026-10-19T06:42:15.572812+00:00",
+                      "at": "2026-10-19T06:57:21.506736+00:00",
                       "note": "合成金標明示關係"
                     }
                   ],
@@ -1106,6 +1155,8 @@
                     "lineEnd": 2
                   },
                   "sourceValid": true,
+                  "identityValid": true,
+                  "identityIssue": "",
                   "effective": true
                 }
               ]
@@ -1142,20 +1193,21 @@
                   "machineModel": "KG-SYNTH-M1",
                   "status": "approved",
                   "revision": 2,
-                  "createdAt": "2026-10-19T06:42:15.559174",
+                  "createdAt": "2026-10-19T06:57:21.492498",
                   "sourceChunkId": "KG-SYNTH-C:2",
                   "sourceHash": "8523611ac3389957d72c2e43a4bc23861385cc1284fb0a7e33843556f92d945e",
+                  "nodeScopes": {},
                   "createdBy": "supervisor",
                   "approvedBy": "supervisor",
-                  "approvedAt": "2026-10-19T06:42:15.562174+00:00",
+                  "approvedAt": "2026-10-19T06:57:21.494489+00:00",
                   "reviewedBy": "supervisor",
-                  "reviewedAt": "2026-10-19T06:42:15.562174+00:00",
+                  "reviewedAt": "2026-10-19T06:57:21.494489+00:00",
                   "reviewNote": "合成金標明示關係",
                   "history": [
                     {
                       "action": "approve",
                       "actor": "supervisor",
-                      "at": "2026-10-19T06:42:15.562174+00:00",
+                      "at": "2026-10-19T06:57:21.494489+00:00",
                       "note": "合成金標明示關係"
                     }
                   ],
@@ -1171,6 +1223,8 @@
                     "lineEnd": 2
                   },
                   "sourceValid": true,
+                  "identityValid": true,
+                  "identityIssue": "",
                   "effective": true
                 }
               ]
@@ -1209,6 +1263,7 @@
           "pathTargets": [],
           "pathTargetFound": false,
           "directionCorrect": null,
+          "forbiddenTargetsAbsent": true,
           "noAutomaticActions": true,
           "llmUsed": false,
           "sourceValidityCorrect": true,
@@ -1231,6 +1286,7 @@
           ],
           "pathTargetFound": true,
           "directionCorrect": null,
+          "forbiddenTargetsAbsent": true,
           "noAutomaticActions": true,
           "llmUsed": false,
           "sourceValidityCorrect": true,
@@ -1268,20 +1324,21 @@
                   "machineModel": "KG-SYNTH-M2",
                   "status": "approved",
                   "revision": 2,
-                  "createdAt": "2026-10-19T06:42:15.583149",
+                  "createdAt": "2026-10-19T06:57:21.515843",
                   "sourceChunkId": "KG-SYNTH-OTHER:2",
                   "sourceHash": "0c82de0980d18e50dd8f9fc6ff0f6df758852d1e849ecb338e5c8d790497f10e",
+                  "nodeScopes": {},
                   "createdBy": "supervisor",
                   "approvedBy": "supervisor",
-                  "approvedAt": "2026-10-19T06:42:15.585115+00:00",
+                  "approvedAt": "2026-10-19T06:57:21.517944+00:00",
                   "reviewedBy": "supervisor",
-                  "reviewedAt": "2026-10-19T06:42:15.585115+00:00",
+                  "reviewedAt": "2026-10-19T06:57:21.517944+00:00",
                   "reviewNote": "合成金標明示關係",
                   "history": [
                     {
                       "action": "approve",
                       "actor": "supervisor",
-                      "at": "2026-10-19T06:42:15.585115+00:00",
+                      "at": "2026-10-19T06:57:21.517944+00:00",
                       "note": "合成金標明示關係"
                     }
                   ],
@@ -1297,6 +1354,8 @@
                     "lineEnd": 2
                   },
                   "sourceValid": true,
+                  "identityValid": true,
+                  "identityIssue": "",
                   "effective": true
                 }
               ]
@@ -1328,6 +1387,7 @@
           "pathTargets": [],
           "pathTargetFound": null,
           "directionCorrect": null,
+          "forbiddenTargetsAbsent": true,
           "noAutomaticActions": true,
           "llmUsed": false,
           "sourceValidityCorrect": true,
@@ -1346,6 +1406,7 @@
           "pathTargets": [],
           "pathTargetFound": null,
           "directionCorrect": null,
+          "forbiddenTargetsAbsent": true,
           "noAutomaticActions": true,
           "llmUsed": false,
           "sourceValidityCorrect": true,
@@ -1379,6 +1440,7 @@
           "pathTargets": [],
           "pathTargetFound": null,
           "directionCorrect": null,
+          "forbiddenTargetsAbsent": true,
           "noAutomaticActions": true,
           "llmUsed": false,
           "sourceValidityCorrect": true,
@@ -1397,6 +1459,7 @@
           "pathTargets": [],
           "pathTargetFound": null,
           "directionCorrect": null,
+          "forbiddenTargetsAbsent": true,
           "noAutomaticActions": true,
           "llmUsed": false,
           "sourceValidityCorrect": true,
@@ -1430,6 +1493,7 @@
           "pathTargets": [],
           "pathTargetFound": null,
           "directionCorrect": null,
+          "forbiddenTargetsAbsent": true,
           "noAutomaticActions": true,
           "llmUsed": false,
           "sourceValidityCorrect": true,
@@ -1448,6 +1512,7 @@
           "pathTargets": [],
           "pathTargetFound": null,
           "directionCorrect": null,
+          "forbiddenTargetsAbsent": true,
           "noAutomaticActions": true,
           "llmUsed": false,
           "sourceValidityCorrect": true,
@@ -1481,6 +1546,7 @@
           "pathTargets": [],
           "pathTargetFound": null,
           "directionCorrect": null,
+          "forbiddenTargetsAbsent": true,
           "noAutomaticActions": true,
           "llmUsed": false,
           "sourceValidityCorrect": true,
@@ -1499,6 +1565,7 @@
           "pathTargets": [],
           "pathTargetFound": null,
           "directionCorrect": null,
+          "forbiddenTargetsAbsent": true,
           "noAutomaticActions": true,
           "llmUsed": false,
           "sourceValidityCorrect": true,
@@ -1539,6 +1606,7 @@
           "pathTargets": [],
           "pathTargetFound": null,
           "directionCorrect": true,
+          "forbiddenTargetsAbsent": true,
           "noAutomaticActions": true,
           "llmUsed": false,
           "sourceValidityCorrect": true,
@@ -1559,6 +1627,7 @@
           "pathTargets": [],
           "pathTargetFound": null,
           "directionCorrect": true,
+          "forbiddenTargetsAbsent": true,
           "noAutomaticActions": true,
           "llmUsed": false,
           "sourceValidityCorrect": true,
@@ -1597,6 +1666,7 @@
           "pathTargets": [],
           "pathTargetFound": null,
           "directionCorrect": true,
+          "forbiddenTargetsAbsent": true,
           "noAutomaticActions": true,
           "llmUsed": false,
           "sourceValidityCorrect": true,
@@ -1617,6 +1687,7 @@
           "pathTargets": [],
           "pathTargetFound": null,
           "directionCorrect": true,
+          "forbiddenTargetsAbsent": true,
           "noAutomaticActions": true,
           "llmUsed": false,
           "sourceValidityCorrect": true,
@@ -1624,6 +1695,1206 @@
             "沒有符合機型且已核准的有效出向路徑；請補來源或明確警報／零件名稱。"
           ],
           "paths": []
+        }
+      }
+    },
+    {
+      "id": "same-title-case-negative",
+      "category": "source_entity_isolation",
+      "gold": {
+        "id": "same-title-case-negative",
+        "category": "source_entity_isolation",
+        "model": "KG-SYNTH-ENTITY",
+        "query": "E-A",
+        "relevant": [
+          "KG-ENTITY-CASE-A"
+        ],
+        "required": [
+          "KG-ENTITY-CASE-A"
+        ],
+        "forbiddenTargets": [
+          "SPARE-B"
+        ],
+        "answerable": true
+      },
+      "modes": {
+        "keyword": {
+          "retrieved": [
+            "KG-ENTITY-CASE-A"
+          ],
+          "precision": 1.0,
+          "recall": 1.0,
+          "answerableFromSources": true,
+          "answerabilityCorrect": true,
+          "allSourcesRelevant": true,
+          "pathTargets": [],
+          "pathTargetFound": null,
+          "directionCorrect": null,
+          "forbiddenTargetsAbsent": true,
+          "noAutomaticActions": true,
+          "llmUsed": false,
+          "sourceValidityCorrect": true,
+          "unknown": [
+            "純字詞檢索，不提供關係推論。"
+          ],
+          "paths": []
+        },
+        "keyword_plus_graph": {
+          "retrieved": [
+            "KG-ENTITY-CASE-A"
+          ],
+          "precision": 1.0,
+          "recall": 1.0,
+          "answerableFromSources": true,
+          "answerabilityCorrect": true,
+          "allSourcesRelevant": true,
+          "pathTargets": [
+            "相同案例標題",
+            "E-A",
+            "案例A只記載排查，沒有備品結論。",
+            "合成復測"
+          ],
+          "pathTargetFound": null,
+          "directionCorrect": null,
+          "forbiddenTargetsAbsent": true,
+          "noAutomaticActions": true,
+          "llmUsed": false,
+          "sourceValidityCorrect": true,
+          "unknown": [
+            "此查詢未判定根因、備品相容性或復機條件；仍須逐項核對來源。"
+          ],
+          "paths": [
+            {
+              "nodes": [
+                {
+                  "id": "GN-d4774b9d649dad344b636bea265bd7b754c367da7600ca653751de80faf4e41a",
+                  "kind": "alarm",
+                  "label": "E-A"
+                },
+                {
+                  "id": "GN-52bd8961db3f390fb58a79e0aab33ca3a5d592158cc7b88cf1bcb382a85432c3",
+                  "kind": "case",
+                  "label": "相同案例標題"
+                }
+              ],
+              "relations": [
+                {
+                  "id": "GR-d07507624ebf13efbf0036db3bad43d6a0240fce3ea8cd158f8f50dd8dbe520f",
+                  "head": {
+                    "id": "GN-d4774b9d649dad344b636bea265bd7b754c367da7600ca653751de80faf4e41a",
+                    "kind": "alarm",
+                    "label": "E-A"
+                  },
+                  "tail": {
+                    "id": "GN-52bd8961db3f390fb58a79e0aab33ca3a5d592158cc7b88cf1bcb382a85432c3",
+                    "kind": "case",
+                    "label": "相同案例標題"
+                  },
+                  "relation": "references",
+                  "machineModel": "KG-SYNTH-ENTITY",
+                  "status": "approved",
+                  "revision": 2,
+                  "createdAt": "2026-10-19T06:57:21.559410",
+                  "sourceChunkId": "KG-ENTITY-CASE-A:r1",
+                  "sourceHash": "b36488e96faacab6373ea064827b30eb58cb5bc6f3f5bcf46f190a358656e387",
+                  "nodeScopes": {
+                    "tail": {
+                      "sourceId": "KG-ENTITY-CASE-A",
+                      "entityType": "case"
+                    }
+                  },
+                  "createdBy": "supervisor",
+                  "approvedBy": "supervisor",
+                  "approvedAt": "2026-10-19T06:57:21.612879+00:00",
+                  "reviewedBy": "supervisor",
+                  "reviewedAt": "2026-10-19T06:57:21.612879+00:00",
+                  "reviewNote": "合成固定案例核對",
+                  "history": [
+                    {
+                      "action": "approve",
+                      "actor": "supervisor",
+                      "at": "2026-10-19T06:57:21.612879+00:00",
+                      "note": "合成固定案例核對"
+                    }
+                  ],
+                  "citation": {
+                    "sourceId": "KG-ENTITY-CASE-A",
+                    "chunkId": "KG-ENTITY-CASE-A:r1",
+                    "version": "1",
+                    "section": "主管發布的維修案例",
+                    "quote": "原因狀態：未知\n症狀：E-A\n發生條件：合成條件\n檢查發現：合成發現\n原因：未知\n處置：案例A只記載排查，沒有備品結論。\n驗收：合成復測",
+                    "url": "/api/cases/KG-ENTITY-CASE-A",
+                    "isSynthetic": true,
+                    "lineStart": null,
+                    "lineEnd": null
+                  },
+                  "sourceValid": true,
+                  "identityValid": true,
+                  "identityIssue": "",
+                  "effective": true
+                }
+              ]
+            },
+            {
+              "nodes": [
+                {
+                  "id": "GN-d4774b9d649dad344b636bea265bd7b754c367da7600ca653751de80faf4e41a",
+                  "kind": "alarm",
+                  "label": "E-A"
+                },
+                {
+                  "id": "GN-52bd8961db3f390fb58a79e0aab33ca3a5d592158cc7b88cf1bcb382a85432c3",
+                  "kind": "case",
+                  "label": "相同案例標題"
+                },
+                {
+                  "id": "GN-aef42217df56ddcb74505640de6f6aa924734c5f1daca6c45ebfe04175785807",
+                  "kind": "symptom",
+                  "label": "E-A"
+                }
+              ],
+              "relations": [
+                {
+                  "id": "GR-d07507624ebf13efbf0036db3bad43d6a0240fce3ea8cd158f8f50dd8dbe520f",
+                  "head": {
+                    "id": "GN-d4774b9d649dad344b636bea265bd7b754c367da7600ca653751de80faf4e41a",
+                    "kind": "alarm",
+                    "label": "E-A"
+                  },
+                  "tail": {
+                    "id": "GN-52bd8961db3f390fb58a79e0aab33ca3a5d592158cc7b88cf1bcb382a85432c3",
+                    "kind": "case",
+                    "label": "相同案例標題"
+                  },
+                  "relation": "references",
+                  "machineModel": "KG-SYNTH-ENTITY",
+                  "status": "approved",
+                  "revision": 2,
+                  "createdAt": "2026-10-19T06:57:21.559410",
+                  "sourceChunkId": "KG-ENTITY-CASE-A:r1",
+                  "sourceHash": "b36488e96faacab6373ea064827b30eb58cb5bc6f3f5bcf46f190a358656e387",
+                  "nodeScopes": {
+                    "tail": {
+                      "sourceId": "KG-ENTITY-CASE-A",
+                      "entityType": "case"
+                    }
+                  },
+                  "createdBy": "supervisor",
+                  "approvedBy": "supervisor",
+                  "approvedAt": "2026-10-19T06:57:21.612879+00:00",
+                  "reviewedBy": "supervisor",
+                  "reviewedAt": "2026-10-19T06:57:21.612879+00:00",
+                  "reviewNote": "合成固定案例核對",
+                  "history": [
+                    {
+                      "action": "approve",
+                      "actor": "supervisor",
+                      "at": "2026-10-19T06:57:21.612879+00:00",
+                      "note": "合成固定案例核對"
+                    }
+                  ],
+                  "citation": {
+                    "sourceId": "KG-ENTITY-CASE-A",
+                    "chunkId": "KG-ENTITY-CASE-A:r1",
+                    "version": "1",
+                    "section": "主管發布的維修案例",
+                    "quote": "原因狀態：未知\n症狀：E-A\n發生條件：合成條件\n檢查發現：合成發現\n原因：未知\n處置：案例A只記載排查，沒有備品結論。\n驗收：合成復測",
+                    "url": "/api/cases/KG-ENTITY-CASE-A",
+                    "isSynthetic": true,
+                    "lineStart": null,
+                    "lineEnd": null
+                  },
+                  "sourceValid": true,
+                  "identityValid": true,
+                  "identityIssue": "",
+                  "effective": true
+                },
+                {
+                  "id": "GR-0a64d5cef33d362caf0b5866fde9e36673a8431f9d39e950ec0f20fa5a8d6ebf",
+                  "head": {
+                    "id": "GN-52bd8961db3f390fb58a79e0aab33ca3a5d592158cc7b88cf1bcb382a85432c3",
+                    "kind": "case",
+                    "label": "相同案例標題"
+                  },
+                  "tail": {
+                    "id": "GN-aef42217df56ddcb74505640de6f6aa924734c5f1daca6c45ebfe04175785807",
+                    "kind": "symptom",
+                    "label": "E-A"
+                  },
+                  "relation": "references",
+                  "machineModel": "KG-SYNTH-ENTITY",
+                  "status": "approved",
+                  "revision": 2,
+                  "createdAt": "2026-10-19T06:57:21.596245",
+                  "sourceChunkId": "KG-ENTITY-CASE-A:r1",
+                  "sourceHash": "b36488e96faacab6373ea064827b30eb58cb5bc6f3f5bcf46f190a358656e387",
+                  "nodeScopes": {
+                    "head": {
+                      "sourceId": "KG-ENTITY-CASE-A",
+                      "entityType": "case"
+                    }
+                  },
+                  "createdBy": "supervisor",
+                  "approvedBy": "supervisor",
+                  "approvedAt": "2026-10-19T06:57:21.654702+00:00",
+                  "reviewedBy": "supervisor",
+                  "reviewedAt": "2026-10-19T06:57:21.654702+00:00",
+                  "reviewNote": "合成固定案例核對",
+                  "history": [
+                    {
+                      "action": "approve",
+                      "actor": "supervisor",
+                      "at": "2026-10-19T06:57:21.654702+00:00",
+                      "note": "合成固定案例核對"
+                    }
+                  ],
+                  "citation": {
+                    "sourceId": "KG-ENTITY-CASE-A",
+                    "chunkId": "KG-ENTITY-CASE-A:r1",
+                    "version": "1",
+                    "section": "主管發布的維修案例",
+                    "quote": "原因狀態：未知\n症狀：E-A\n發生條件：合成條件\n檢查發現：合成發現\n原因：未知\n處置：案例A只記載排查，沒有備品結論。\n驗收：合成復測",
+                    "url": "/api/cases/KG-ENTITY-CASE-A",
+                    "isSynthetic": true,
+                    "lineStart": null,
+                    "lineEnd": null
+                  },
+                  "sourceValid": true,
+                  "identityValid": true,
+                  "identityIssue": "",
+                  "effective": true
+                }
+              ]
+            },
+            {
+              "nodes": [
+                {
+                  "id": "GN-d4774b9d649dad344b636bea265bd7b754c367da7600ca653751de80faf4e41a",
+                  "kind": "alarm",
+                  "label": "E-A"
+                },
+                {
+                  "id": "GN-52bd8961db3f390fb58a79e0aab33ca3a5d592158cc7b88cf1bcb382a85432c3",
+                  "kind": "case",
+                  "label": "相同案例標題"
+                },
+                {
+                  "id": "GN-55e470e5f6f1759ce269e15372a029cb79d6b061b8307f1b174fd054e3a94e81",
+                  "kind": "inspect_step",
+                  "label": "案例A只記載排查，沒有備品結論。"
+                }
+              ],
+              "relations": [
+                {
+                  "id": "GR-d07507624ebf13efbf0036db3bad43d6a0240fce3ea8cd158f8f50dd8dbe520f",
+                  "head": {
+                    "id": "GN-d4774b9d649dad344b636bea265bd7b754c367da7600ca653751de80faf4e41a",
+                    "kind": "alarm",
+                    "label": "E-A"
+                  },
+                  "tail": {
+                    "id": "GN-52bd8961db3f390fb58a79e0aab33ca3a5d592158cc7b88cf1bcb382a85432c3",
+                    "kind": "case",
+                    "label": "相同案例標題"
+                  },
+                  "relation": "references",
+                  "machineModel": "KG-SYNTH-ENTITY",
+                  "status": "approved",
+                  "revision": 2,
+                  "createdAt": "2026-10-19T06:57:21.559410",
+                  "sourceChunkId": "KG-ENTITY-CASE-A:r1",
+                  "sourceHash": "b36488e96faacab6373ea064827b30eb58cb5bc6f3f5bcf46f190a358656e387",
+                  "nodeScopes": {
+                    "tail": {
+                      "sourceId": "KG-ENTITY-CASE-A",
+                      "entityType": "case"
+                    }
+                  },
+                  "createdBy": "supervisor",
+                  "approvedBy": "supervisor",
+                  "approvedAt": "2026-10-19T06:57:21.612879+00:00",
+                  "reviewedBy": "supervisor",
+                  "reviewedAt": "2026-10-19T06:57:21.612879+00:00",
+                  "reviewNote": "合成固定案例核對",
+                  "history": [
+                    {
+                      "action": "approve",
+                      "actor": "supervisor",
+                      "at": "2026-10-19T06:57:21.612879+00:00",
+                      "note": "合成固定案例核對"
+                    }
+                  ],
+                  "citation": {
+                    "sourceId": "KG-ENTITY-CASE-A",
+                    "chunkId": "KG-ENTITY-CASE-A:r1",
+                    "version": "1",
+                    "section": "主管發布的維修案例",
+                    "quote": "原因狀態：未知\n症狀：E-A\n發生條件：合成條件\n檢查發現：合成發現\n原因：未知\n處置：案例A只記載排查，沒有備品結論。\n驗收：合成復測",
+                    "url": "/api/cases/KG-ENTITY-CASE-A",
+                    "isSynthetic": true,
+                    "lineStart": null,
+                    "lineEnd": null
+                  },
+                  "sourceValid": true,
+                  "identityValid": true,
+                  "identityIssue": "",
+                  "effective": true
+                },
+                {
+                  "id": "GR-52b8c455ad8c4ed323755a0435555efa50a38ec85122e705b9b024c3bf49a8b7",
+                  "head": {
+                    "id": "GN-52bd8961db3f390fb58a79e0aab33ca3a5d592158cc7b88cf1bcb382a85432c3",
+                    "kind": "case",
+                    "label": "相同案例標題"
+                  },
+                  "tail": {
+                    "id": "GN-55e470e5f6f1759ce269e15372a029cb79d6b061b8307f1b174fd054e3a94e81",
+                    "kind": "inspect_step",
+                    "label": "案例A只記載排查，沒有備品結論。"
+                  },
+                  "relation": "inspect",
+                  "machineModel": "KG-SYNTH-ENTITY",
+                  "status": "approved",
+                  "revision": 2,
+                  "createdAt": "2026-10-19T06:57:21.597246",
+                  "sourceChunkId": "KG-ENTITY-CASE-A:r1",
+                  "sourceHash": "b36488e96faacab6373ea064827b30eb58cb5bc6f3f5bcf46f190a358656e387",
+                  "nodeScopes": {
+                    "head": {
+                      "sourceId": "KG-ENTITY-CASE-A",
+                      "entityType": "case"
+                    }
+                  },
+                  "createdBy": "supervisor",
+                  "approvedBy": "supervisor",
+                  "approvedAt": "2026-10-19T06:57:21.659209+00:00",
+                  "reviewedBy": "supervisor",
+                  "reviewedAt": "2026-10-19T06:57:21.659209+00:00",
+                  "reviewNote": "合成固定案例核對",
+                  "history": [
+                    {
+                      "action": "approve",
+                      "actor": "supervisor",
+                      "at": "2026-10-19T06:57:21.659209+00:00",
+                      "note": "合成固定案例核對"
+                    }
+                  ],
+                  "citation": {
+                    "sourceId": "KG-ENTITY-CASE-A",
+                    "chunkId": "KG-ENTITY-CASE-A:r1",
+                    "version": "1",
+                    "section": "主管發布的維修案例",
+                    "quote": "原因狀態：未知\n症狀：E-A\n發生條件：合成條件\n檢查發現：合成發現\n原因：未知\n處置：案例A只記載排查，沒有備品結論。\n驗收：合成復測",
+                    "url": "/api/cases/KG-ENTITY-CASE-A",
+                    "isSynthetic": true,
+                    "lineStart": null,
+                    "lineEnd": null
+                  },
+                  "sourceValid": true,
+                  "identityValid": true,
+                  "identityIssue": "",
+                  "effective": true
+                }
+              ]
+            },
+            {
+              "nodes": [
+                {
+                  "id": "GN-d4774b9d649dad344b636bea265bd7b754c367da7600ca653751de80faf4e41a",
+                  "kind": "alarm",
+                  "label": "E-A"
+                },
+                {
+                  "id": "GN-52bd8961db3f390fb58a79e0aab33ca3a5d592158cc7b88cf1bcb382a85432c3",
+                  "kind": "case",
+                  "label": "相同案例標題"
+                },
+                {
+                  "id": "GN-36476f28fc111bff00d8323e224ff8a6c87c3a10de71372b36867e8988f4016a",
+                  "kind": "verify_step",
+                  "label": "合成復測"
+                }
+              ],
+              "relations": [
+                {
+                  "id": "GR-d07507624ebf13efbf0036db3bad43d6a0240fce3ea8cd158f8f50dd8dbe520f",
+                  "head": {
+                    "id": "GN-d4774b9d649dad344b636bea265bd7b754c367da7600ca653751de80faf4e41a",
+                    "kind": "alarm",
+                    "label": "E-A"
+                  },
+                  "tail": {
+                    "id": "GN-52bd8961db3f390fb58a79e0aab33ca3a5d592158cc7b88cf1bcb382a85432c3",
+                    "kind": "case",
+                    "label": "相同案例標題"
+                  },
+                  "relation": "references",
+                  "machineModel": "KG-SYNTH-ENTITY",
+                  "status": "approved",
+                  "revision": 2,
+                  "createdAt": "2026-10-19T06:57:21.559410",
+                  "sourceChunkId": "KG-ENTITY-CASE-A:r1",
+                  "sourceHash": "b36488e96faacab6373ea064827b30eb58cb5bc6f3f5bcf46f190a358656e387",
+                  "nodeScopes": {
+                    "tail": {
+                      "sourceId": "KG-ENTITY-CASE-A",
+                      "entityType": "case"
+                    }
+                  },
+                  "createdBy": "supervisor",
+                  "approvedBy": "supervisor",
+                  "approvedAt": "2026-10-19T06:57:21.612879+00:00",
+                  "reviewedBy": "supervisor",
+                  "reviewedAt": "2026-10-19T06:57:21.612879+00:00",
+                  "reviewNote": "合成固定案例核對",
+                  "history": [
+                    {
+                      "action": "approve",
+                      "actor": "supervisor",
+                      "at": "2026-10-19T06:57:21.612879+00:00",
+                      "note": "合成固定案例核對"
+                    }
+                  ],
+                  "citation": {
+                    "sourceId": "KG-ENTITY-CASE-A",
+                    "chunkId": "KG-ENTITY-CASE-A:r1",
+                    "version": "1",
+                    "section": "主管發布的維修案例",
+                    "quote": "原因狀態：未知\n症狀：E-A\n發生條件：合成條件\n檢查發現：合成發現\n原因：未知\n處置：案例A只記載排查，沒有備品結論。\n驗收：合成復測",
+                    "url": "/api/cases/KG-ENTITY-CASE-A",
+                    "isSynthetic": true,
+                    "lineStart": null,
+                    "lineEnd": null
+                  },
+                  "sourceValid": true,
+                  "identityValid": true,
+                  "identityIssue": "",
+                  "effective": true
+                },
+                {
+                  "id": "GR-5d6204b687dbefd0224d45ff7a2d5c925fb66f325befbc409f5a42a6d6b78638",
+                  "head": {
+                    "id": "GN-52bd8961db3f390fb58a79e0aab33ca3a5d592158cc7b88cf1bcb382a85432c3",
+                    "kind": "case",
+                    "label": "相同案例標題"
+                  },
+                  "tail": {
+                    "id": "GN-36476f28fc111bff00d8323e224ff8a6c87c3a10de71372b36867e8988f4016a",
+                    "kind": "verify_step",
+                    "label": "合成復測"
+                  },
+                  "relation": "verify",
+                  "machineModel": "KG-SYNTH-ENTITY",
+                  "status": "approved",
+                  "revision": 2,
+                  "createdAt": "2026-10-19T06:57:21.598245",
+                  "sourceChunkId": "KG-ENTITY-CASE-A:r1",
+                  "sourceHash": "b36488e96faacab6373ea064827b30eb58cb5bc6f3f5bcf46f190a358656e387",
+                  "nodeScopes": {
+                    "head": {
+                      "sourceId": "KG-ENTITY-CASE-A",
+                      "entityType": "case"
+                    }
+                  },
+                  "createdBy": "supervisor",
+                  "approvedBy": "supervisor",
+                  "approvedAt": "2026-10-19T06:57:21.664209+00:00",
+                  "reviewedBy": "supervisor",
+                  "reviewedAt": "2026-10-19T06:57:21.664209+00:00",
+                  "reviewNote": "合成固定案例核對",
+                  "history": [
+                    {
+                      "action": "approve",
+                      "actor": "supervisor",
+                      "at": "2026-10-19T06:57:21.664209+00:00",
+                      "note": "合成固定案例核對"
+                    }
+                  ],
+                  "citation": {
+                    "sourceId": "KG-ENTITY-CASE-A",
+                    "chunkId": "KG-ENTITY-CASE-A:r1",
+                    "version": "1",
+                    "section": "主管發布的維修案例",
+                    "quote": "原因狀態：未知\n症狀：E-A\n發生條件：合成條件\n檢查發現：合成發現\n原因：未知\n處置：案例A只記載排查，沒有備品結論。\n驗收：合成復測",
+                    "url": "/api/cases/KG-ENTITY-CASE-A",
+                    "isSynthetic": true,
+                    "lineStart": null,
+                    "lineEnd": null
+                  },
+                  "sourceValid": true,
+                  "identityValid": true,
+                  "identityIssue": "",
+                  "effective": true
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "same-title-case-positive",
+      "category": "source_entity_connection",
+      "gold": {
+        "id": "same-title-case-positive",
+        "category": "source_entity_connection",
+        "model": "KG-SYNTH-ENTITY",
+        "query": "E-B",
+        "relevant": [
+          "KG-ENTITY-CASE-B"
+        ],
+        "required": [
+          "KG-ENTITY-CASE-B"
+        ],
+        "target": "SPARE-B",
+        "answerable": true
+      },
+      "modes": {
+        "keyword": {
+          "retrieved": [
+            "KG-ENTITY-CASE-B"
+          ],
+          "precision": 1.0,
+          "recall": 1.0,
+          "answerableFromSources": true,
+          "answerabilityCorrect": true,
+          "allSourcesRelevant": true,
+          "pathTargets": [],
+          "pathTargetFound": false,
+          "directionCorrect": null,
+          "forbiddenTargetsAbsent": true,
+          "noAutomaticActions": true,
+          "llmUsed": false,
+          "sourceValidityCorrect": true,
+          "unknown": [
+            "純字詞檢索，不提供關係推論。"
+          ],
+          "paths": []
+        },
+        "keyword_plus_graph": {
+          "retrieved": [
+            "KG-ENTITY-CASE-B"
+          ],
+          "precision": 1.0,
+          "recall": 1.0,
+          "answerableFromSources": true,
+          "answerabilityCorrect": true,
+          "allSourcesRelevant": true,
+          "pathTargets": [
+            "相同案例標題",
+            "案例B需要備品 SPARE-B。",
+            "E-B",
+            "SPARE-B",
+            "合成復測"
+          ],
+          "pathTargetFound": true,
+          "directionCorrect": null,
+          "forbiddenTargetsAbsent": true,
+          "noAutomaticActions": true,
+          "llmUsed": false,
+          "sourceValidityCorrect": true,
+          "unknown": [
+            "此查詢未判定根因、備品相容性或復機條件；仍須逐項核對來源。"
+          ],
+          "paths": [
+            {
+              "nodes": [
+                {
+                  "id": "GN-9080110d1afd0d6a3ad5d1f96c9ca54ffe7f9467329252f71b42c91601109b66",
+                  "kind": "alarm",
+                  "label": "E-B"
+                },
+                {
+                  "id": "GN-2b30ac54f3a64dd429832c2e1dc44e9bc33e8933404303ac1a3a576827a84a34",
+                  "kind": "case",
+                  "label": "相同案例標題"
+                }
+              ],
+              "relations": [
+                {
+                  "id": "GR-913539d95a7621c70e6192112b93100de8a6d1d2c92909f73ad120a491f93db7",
+                  "head": {
+                    "id": "GN-9080110d1afd0d6a3ad5d1f96c9ca54ffe7f9467329252f71b42c91601109b66",
+                    "kind": "alarm",
+                    "label": "E-B"
+                  },
+                  "tail": {
+                    "id": "GN-2b30ac54f3a64dd429832c2e1dc44e9bc33e8933404303ac1a3a576827a84a34",
+                    "kind": "case",
+                    "label": "相同案例標題"
+                  },
+                  "relation": "references",
+                  "machineModel": "KG-SYNTH-ENTITY",
+                  "status": "approved",
+                  "revision": 2,
+                  "createdAt": "2026-10-19T06:57:21.574622",
+                  "sourceChunkId": "KG-ENTITY-CASE-B:r1",
+                  "sourceHash": "9531525deb13c7e18c20e2aa140b89c91f01c1ffe3b74df283dcd553990daea3",
+                  "nodeScopes": {
+                    "tail": {
+                      "sourceId": "KG-ENTITY-CASE-B",
+                      "entityType": "case"
+                    }
+                  },
+                  "createdBy": "supervisor",
+                  "approvedBy": "supervisor",
+                  "approvedAt": "2026-10-19T06:57:21.618877+00:00",
+                  "reviewedBy": "supervisor",
+                  "reviewedAt": "2026-10-19T06:57:21.618877+00:00",
+                  "reviewNote": "合成固定案例核對",
+                  "history": [
+                    {
+                      "action": "approve",
+                      "actor": "supervisor",
+                      "at": "2026-10-19T06:57:21.618877+00:00",
+                      "note": "合成固定案例核對"
+                    }
+                  ],
+                  "citation": {
+                    "sourceId": "KG-ENTITY-CASE-B",
+                    "chunkId": "KG-ENTITY-CASE-B:r1",
+                    "version": "1",
+                    "section": "主管發布的維修案例",
+                    "quote": "原因狀態：未知\n症狀：E-B\n發生條件：合成條件\n檢查發現：合成發現\n原因：未知\n處置：案例B需要備品 SPARE-B。\n驗收：合成復測",
+                    "url": "/api/cases/KG-ENTITY-CASE-B",
+                    "isSynthetic": true,
+                    "lineStart": null,
+                    "lineEnd": null
+                  },
+                  "sourceValid": true,
+                  "identityValid": true,
+                  "identityIssue": "",
+                  "effective": true
+                }
+              ]
+            },
+            {
+              "nodes": [
+                {
+                  "id": "GN-9080110d1afd0d6a3ad5d1f96c9ca54ffe7f9467329252f71b42c91601109b66",
+                  "kind": "alarm",
+                  "label": "E-B"
+                },
+                {
+                  "id": "GN-2b30ac54f3a64dd429832c2e1dc44e9bc33e8933404303ac1a3a576827a84a34",
+                  "kind": "case",
+                  "label": "相同案例標題"
+                },
+                {
+                  "id": "GN-52862c6e29d3f3bd168fa2427c1a33f37249e892a007763ce365e7a0826ad41e",
+                  "kind": "inspect_step",
+                  "label": "案例B需要備品 SPARE-B。"
+                }
+              ],
+              "relations": [
+                {
+                  "id": "GR-913539d95a7621c70e6192112b93100de8a6d1d2c92909f73ad120a491f93db7",
+                  "head": {
+                    "id": "GN-9080110d1afd0d6a3ad5d1f96c9ca54ffe7f9467329252f71b42c91601109b66",
+                    "kind": "alarm",
+                    "label": "E-B"
+                  },
+                  "tail": {
+                    "id": "GN-2b30ac54f3a64dd429832c2e1dc44e9bc33e8933404303ac1a3a576827a84a34",
+                    "kind": "case",
+                    "label": "相同案例標題"
+                  },
+                  "relation": "references",
+                  "machineModel": "KG-SYNTH-ENTITY",
+                  "status": "approved",
+                  "revision": 2,
+                  "createdAt": "2026-10-19T06:57:21.574622",
+                  "sourceChunkId": "KG-ENTITY-CASE-B:r1",
+                  "sourceHash": "9531525deb13c7e18c20e2aa140b89c91f01c1ffe3b74df283dcd553990daea3",
+                  "nodeScopes": {
+                    "tail": {
+                      "sourceId": "KG-ENTITY-CASE-B",
+                      "entityType": "case"
+                    }
+                  },
+                  "createdBy": "supervisor",
+                  "approvedBy": "supervisor",
+                  "approvedAt": "2026-10-19T06:57:21.618877+00:00",
+                  "reviewedBy": "supervisor",
+                  "reviewedAt": "2026-10-19T06:57:21.618877+00:00",
+                  "reviewNote": "合成固定案例核對",
+                  "history": [
+                    {
+                      "action": "approve",
+                      "actor": "supervisor",
+                      "at": "2026-10-19T06:57:21.618877+00:00",
+                      "note": "合成固定案例核對"
+                    }
+                  ],
+                  "citation": {
+                    "sourceId": "KG-ENTITY-CASE-B",
+                    "chunkId": "KG-ENTITY-CASE-B:r1",
+                    "version": "1",
+                    "section": "主管發布的維修案例",
+                    "quote": "原因狀態：未知\n症狀：E-B\n發生條件：合成條件\n檢查發現：合成發現\n原因：未知\n處置：案例B需要備品 SPARE-B。\n驗收：合成復測",
+                    "url": "/api/cases/KG-ENTITY-CASE-B",
+                    "isSynthetic": true,
+                    "lineStart": null,
+                    "lineEnd": null
+                  },
+                  "sourceValid": true,
+                  "identityValid": true,
+                  "identityIssue": "",
+                  "effective": true
+                },
+                {
+                  "id": "GR-0d05ca921509bbc085b709faa2d52816599230aa993fa2f5e984d323ae232871",
+                  "head": {
+                    "id": "GN-2b30ac54f3a64dd429832c2e1dc44e9bc33e8933404303ac1a3a576827a84a34",
+                    "kind": "case",
+                    "label": "相同案例標題"
+                  },
+                  "tail": {
+                    "id": "GN-52862c6e29d3f3bd168fa2427c1a33f37249e892a007763ce365e7a0826ad41e",
+                    "kind": "inspect_step",
+                    "label": "案例B需要備品 SPARE-B。"
+                  },
+                  "relation": "inspect",
+                  "machineModel": "KG-SYNTH-ENTITY",
+                  "status": "approved",
+                  "revision": 2,
+                  "createdAt": "2026-10-19T06:57:21.601246",
+                  "sourceChunkId": "KG-ENTITY-CASE-B:r1",
+                  "sourceHash": "9531525deb13c7e18c20e2aa140b89c91f01c1ffe3b74df283dcd553990daea3",
+                  "nodeScopes": {
+                    "head": {
+                      "sourceId": "KG-ENTITY-CASE-B",
+                      "entityType": "case"
+                    }
+                  },
+                  "createdBy": "supervisor",
+                  "approvedBy": "supervisor",
+                  "approvedAt": "2026-10-19T06:57:21.679430+00:00",
+                  "reviewedBy": "supervisor",
+                  "reviewedAt": "2026-10-19T06:57:21.679430+00:00",
+                  "reviewNote": "合成固定案例核對",
+                  "history": [
+                    {
+                      "action": "approve",
+                      "actor": "supervisor",
+                      "at": "2026-10-19T06:57:21.679430+00:00",
+                      "note": "合成固定案例核對"
+                    }
+                  ],
+                  "citation": {
+                    "sourceId": "KG-ENTITY-CASE-B",
+                    "chunkId": "KG-ENTITY-CASE-B:r1",
+                    "version": "1",
+                    "section": "主管發布的維修案例",
+                    "quote": "原因狀態：未知\n症狀：E-B\n發生條件：合成條件\n檢查發現：合成發現\n原因：未知\n處置：案例B需要備品 SPARE-B。\n驗收：合成復測",
+                    "url": "/api/cases/KG-ENTITY-CASE-B",
+                    "isSynthetic": true,
+                    "lineStart": null,
+                    "lineEnd": null
+                  },
+                  "sourceValid": true,
+                  "identityValid": true,
+                  "identityIssue": "",
+                  "effective": true
+                }
+              ]
+            },
+            {
+              "nodes": [
+                {
+                  "id": "GN-9080110d1afd0d6a3ad5d1f96c9ca54ffe7f9467329252f71b42c91601109b66",
+                  "kind": "alarm",
+                  "label": "E-B"
+                },
+                {
+                  "id": "GN-2b30ac54f3a64dd429832c2e1dc44e9bc33e8933404303ac1a3a576827a84a34",
+                  "kind": "case",
+                  "label": "相同案例標題"
+                },
+                {
+                  "id": "GN-e24978f06d60dd0679bb80d1f969bc38b2ebcb4e9a7461a2e7c69e770d422ef2",
+                  "kind": "symptom",
+                  "label": "E-B"
+                }
+              ],
+              "relations": [
+                {
+                  "id": "GR-913539d95a7621c70e6192112b93100de8a6d1d2c92909f73ad120a491f93db7",
+                  "head": {
+                    "id": "GN-9080110d1afd0d6a3ad5d1f96c9ca54ffe7f9467329252f71b42c91601109b66",
+                    "kind": "alarm",
+                    "label": "E-B"
+                  },
+                  "tail": {
+                    "id": "GN-2b30ac54f3a64dd429832c2e1dc44e9bc33e8933404303ac1a3a576827a84a34",
+                    "kind": "case",
+                    "label": "相同案例標題"
+                  },
+                  "relation": "references",
+                  "machineModel": "KG-SYNTH-ENTITY",
+                  "status": "approved",
+                  "revision": 2,
+                  "createdAt": "2026-10-19T06:57:21.574622",
+                  "sourceChunkId": "KG-ENTITY-CASE-B:r1",
+                  "sourceHash": "9531525deb13c7e18c20e2aa140b89c91f01c1ffe3b74df283dcd553990daea3",
+                  "nodeScopes": {
+                    "tail": {
+                      "sourceId": "KG-ENTITY-CASE-B",
+                      "entityType": "case"
+                    }
+                  },
+                  "createdBy": "supervisor",
+                  "approvedBy": "supervisor",
+                  "approvedAt": "2026-10-19T06:57:21.618877+00:00",
+                  "reviewedBy": "supervisor",
+                  "reviewedAt": "2026-10-19T06:57:21.618877+00:00",
+                  "reviewNote": "合成固定案例核對",
+                  "history": [
+                    {
+                      "action": "approve",
+                      "actor": "supervisor",
+                      "at": "2026-10-19T06:57:21.618877+00:00",
+                      "note": "合成固定案例核對"
+                    }
+                  ],
+                  "citation": {
+                    "sourceId": "KG-ENTITY-CASE-B",
+                    "chunkId": "KG-ENTITY-CASE-B:r1",
+                    "version": "1",
+                    "section": "主管發布的維修案例",
+                    "quote": "原因狀態：未知\n症狀：E-B\n發生條件：合成條件\n檢查發現：合成發現\n原因：未知\n處置：案例B需要備品 SPARE-B。\n驗收：合成復測",
+                    "url": "/api/cases/KG-ENTITY-CASE-B",
+                    "isSynthetic": true,
+                    "lineStart": null,
+                    "lineEnd": null
+                  },
+                  "sourceValid": true,
+                  "identityValid": true,
+                  "identityIssue": "",
+                  "effective": true
+                },
+                {
+                  "id": "GR-1bb88b7733a77e9c1a6374c2d9253d4b223ac8080fcb9d5bfe03e9c8511599c1",
+                  "head": {
+                    "id": "GN-2b30ac54f3a64dd429832c2e1dc44e9bc33e8933404303ac1a3a576827a84a34",
+                    "kind": "case",
+                    "label": "相同案例標題"
+                  },
+                  "tail": {
+                    "id": "GN-e24978f06d60dd0679bb80d1f969bc38b2ebcb4e9a7461a2e7c69e770d422ef2",
+                    "kind": "symptom",
+                    "label": "E-B"
+                  },
+                  "relation": "references",
+                  "machineModel": "KG-SYNTH-ENTITY",
+                  "status": "approved",
+                  "revision": 2,
+                  "createdAt": "2026-10-19T06:57:21.600245",
+                  "sourceChunkId": "KG-ENTITY-CASE-B:r1",
+                  "sourceHash": "9531525deb13c7e18c20e2aa140b89c91f01c1ffe3b74df283dcd553990daea3",
+                  "nodeScopes": {
+                    "head": {
+                      "sourceId": "KG-ENTITY-CASE-B",
+                      "entityType": "case"
+                    }
+                  },
+                  "createdBy": "supervisor",
+                  "approvedBy": "supervisor",
+                  "approvedAt": "2026-10-19T06:57:21.674430+00:00",
+                  "reviewedBy": "supervisor",
+                  "reviewedAt": "2026-10-19T06:57:21.674430+00:00",
+                  "reviewNote": "合成固定案例核對",
+                  "history": [
+                    {
+                      "action": "approve",
+                      "actor": "supervisor",
+                      "at": "2026-10-19T06:57:21.674430+00:00",
+                      "note": "合成固定案例核對"
+                    }
+                  ],
+                  "citation": {
+                    "sourceId": "KG-ENTITY-CASE-B",
+                    "chunkId": "KG-ENTITY-CASE-B:r1",
+                    "version": "1",
+                    "section": "主管發布的維修案例",
+                    "quote": "原因狀態：未知\n症狀：E-B\n發生條件：合成條件\n檢查發現：合成發現\n原因：未知\n處置：案例B需要備品 SPARE-B。\n驗收：合成復測",
+                    "url": "/api/cases/KG-ENTITY-CASE-B",
+                    "isSynthetic": true,
+                    "lineStart": null,
+                    "lineEnd": null
+                  },
+                  "sourceValid": true,
+                  "identityValid": true,
+                  "identityIssue": "",
+                  "effective": true
+                }
+              ]
+            },
+            {
+              "nodes": [
+                {
+                  "id": "GN-9080110d1afd0d6a3ad5d1f96c9ca54ffe7f9467329252f71b42c91601109b66",
+                  "kind": "alarm",
+                  "label": "E-B"
+                },
+                {
+                  "id": "GN-2b30ac54f3a64dd429832c2e1dc44e9bc33e8933404303ac1a3a576827a84a34",
+                  "kind": "case",
+                  "label": "相同案例標題"
+                },
+                {
+                  "id": "GN-7de8e67609ff2049af1e14de728b512d44c64d224e368e57a543e73e71804844",
+                  "kind": "spare",
+                  "label": "SPARE-B",
+                  "catalogUrl": "/api/stock"
+                }
+              ],
+              "relations": [
+                {
+                  "id": "GR-913539d95a7621c70e6192112b93100de8a6d1d2c92909f73ad120a491f93db7",
+                  "head": {
+                    "id": "GN-9080110d1afd0d6a3ad5d1f96c9ca54ffe7f9467329252f71b42c91601109b66",
+                    "kind": "alarm",
+                    "label": "E-B"
+                  },
+                  "tail": {
+                    "id": "GN-2b30ac54f3a64dd429832c2e1dc44e9bc33e8933404303ac1a3a576827a84a34",
+                    "kind": "case",
+                    "label": "相同案例標題"
+                  },
+                  "relation": "references",
+                  "machineModel": "KG-SYNTH-ENTITY",
+                  "status": "approved",
+                  "revision": 2,
+                  "createdAt": "2026-10-19T06:57:21.574622",
+                  "sourceChunkId": "KG-ENTITY-CASE-B:r1",
+                  "sourceHash": "9531525deb13c7e18c20e2aa140b89c91f01c1ffe3b74df283dcd553990daea3",
+                  "nodeScopes": {
+                    "tail": {
+                      "sourceId": "KG-ENTITY-CASE-B",
+                      "entityType": "case"
+                    }
+                  },
+                  "createdBy": "supervisor",
+                  "approvedBy": "supervisor",
+                  "approvedAt": "2026-10-19T06:57:21.618877+00:00",
+                  "reviewedBy": "supervisor",
+                  "reviewedAt": "2026-10-19T06:57:21.618877+00:00",
+                  "reviewNote": "合成固定案例核對",
+                  "history": [
+                    {
+                      "action": "approve",
+                      "actor": "supervisor",
+                      "at": "2026-10-19T06:57:21.618877+00:00",
+                      "note": "合成固定案例核對"
+                    }
+                  ],
+                  "citation": {
+                    "sourceId": "KG-ENTITY-CASE-B",
+                    "chunkId": "KG-ENTITY-CASE-B:r1",
+                    "version": "1",
+                    "section": "主管發布的維修案例",
+                    "quote": "原因狀態：未知\n症狀：E-B\n發生條件：合成條件\n檢查發現：合成發現\n原因：未知\n處置：案例B需要備品 SPARE-B。\n驗收：合成復測",
+                    "url": "/api/cases/KG-ENTITY-CASE-B",
+                    "isSynthetic": true,
+                    "lineStart": null,
+                    "lineEnd": null
+                  },
+                  "sourceValid": true,
+                  "identityValid": true,
+                  "identityIssue": "",
+                  "effective": true
+                },
+                {
+                  "id": "GR-7ab5acde04eb7da99f1affd2f8eb220c4289f58c99cf9d798107bd70cafaab1f",
+                  "head": {
+                    "id": "GN-2b30ac54f3a64dd429832c2e1dc44e9bc33e8933404303ac1a3a576827a84a34",
+                    "kind": "case",
+                    "label": "相同案例標題"
+                  },
+                  "tail": {
+                    "id": "GN-7de8e67609ff2049af1e14de728b512d44c64d224e368e57a543e73e71804844",
+                    "kind": "spare",
+                    "label": "SPARE-B",
+                    "catalogUrl": "/api/stock"
+                  },
+                  "relation": "requires_spare",
+                  "machineModel": "KG-SYNTH-ENTITY",
+                  "status": "approved",
+                  "revision": 2,
+                  "createdAt": "2026-10-19T06:57:21.578622",
+                  "sourceChunkId": "KG-ENTITY-CASE-B:r1",
+                  "sourceHash": "9531525deb13c7e18c20e2aa140b89c91f01c1ffe3b74df283dcd553990daea3",
+                  "nodeScopes": {
+                    "head": {
+                      "sourceId": "KG-ENTITY-CASE-B",
+                      "entityType": "case"
+                    }
+                  },
+                  "createdBy": "supervisor",
+                  "approvedBy": "supervisor",
+                  "approvedAt": "2026-10-19T06:57:21.624083+00:00",
+                  "reviewedBy": "supervisor",
+                  "reviewedAt": "2026-10-19T06:57:21.624083+00:00",
+                  "reviewNote": "合成固定案例核對",
+                  "history": [
+                    {
+                      "action": "approve",
+                      "actor": "supervisor",
+                      "at": "2026-10-19T06:57:21.624083+00:00",
+                      "note": "合成固定案例核對"
+                    }
+                  ],
+                  "citation": {
+                    "sourceId": "KG-ENTITY-CASE-B",
+                    "chunkId": "KG-ENTITY-CASE-B:r1",
+                    "version": "1",
+                    "section": "主管發布的維修案例",
+                    "quote": "原因狀態：未知\n症狀：E-B\n發生條件：合成條件\n檢查發現：合成發現\n原因：未知\n處置：案例B需要備品 SPARE-B。\n驗收：合成復測",
+                    "url": "/api/cases/KG-ENTITY-CASE-B",
+                    "isSynthetic": true,
+                    "lineStart": null,
+                    "lineEnd": null
+                  },
+                  "sourceValid": true,
+                  "identityValid": true,
+                  "identityIssue": "",
+                  "effective": true
+                }
+              ]
+            },
+            {
+              "nodes": [
+                {
+                  "id": "GN-9080110d1afd0d6a3ad5d1f96c9ca54ffe7f9467329252f71b42c91601109b66",
+                  "kind": "alarm",
+                  "label": "E-B"
+                },
+                {
+                  "id": "GN-2b30ac54f3a64dd429832c2e1dc44e9bc33e8933404303ac1a3a576827a84a34",
+                  "kind": "case",
+                  "label": "相同案例標題"
+                },
+                {
+                  "id": "GN-36476f28fc111bff00d8323e224ff8a6c87c3a10de71372b36867e8988f4016a",
+                  "kind": "verify_step",
+                  "label": "合成復測"
+                }
+              ],
+              "relations": [
+                {
+                  "id": "GR-913539d95a7621c70e6192112b93100de8a6d1d2c92909f73ad120a491f93db7",
+                  "head": {
+                    "id": "GN-9080110d1afd0d6a3ad5d1f96c9ca54ffe7f9467329252f71b42c91601109b66",
+                    "kind": "alarm",
+                    "label": "E-B"
+                  },
+                  "tail": {
+                    "id": "GN-2b30ac54f3a64dd429832c2e1dc44e9bc33e8933404303ac1a3a576827a84a34",
+                    "kind": "case",
+                    "label": "相同案例標題"
+                  },
+                  "relation": "references",
+                  "machineModel": "KG-SYNTH-ENTITY",
+                  "status": "approved",
+                  "revision": 2,
+                  "createdAt": "2026-10-19T06:57:21.574622",
+                  "sourceChunkId": "KG-ENTITY-CASE-B:r1",
+                  "sourceHash": "9531525deb13c7e18c20e2aa140b89c91f01c1ffe3b74df283dcd553990daea3",
+                  "nodeScopes": {
+                    "tail": {
+                      "sourceId": "KG-ENTITY-CASE-B",
+                      "entityType": "case"
+                    }
+                  },
+                  "createdBy": "supervisor",
+                  "approvedBy": "supervisor",
+                  "approvedAt": "2026-10-19T06:57:21.618877+00:00",
+                  "reviewedBy": "supervisor",
+                  "reviewedAt": "2026-10-19T06:57:21.618877+00:00",
+                  "reviewNote": "合成固定案例核對",
+                  "history": [
+                    {
+                      "action": "approve",
+                      "actor": "supervisor",
+                      "at": "2026-10-19T06:57:21.618877+00:00",
+                      "note": "合成固定案例核對"
+                    }
+                  ],
+                  "citation": {
+                    "sourceId": "KG-ENTITY-CASE-B",
+                    "chunkId": "KG-ENTITY-CASE-B:r1",
+                    "version": "1",
+                    "section": "主管發布的維修案例",
+                    "quote": "原因狀態：未知\n症狀：E-B\n發生條件：合成條件\n檢查發現：合成發現\n原因：未知\n處置：案例B需要備品 SPARE-B。\n驗收：合成復測",
+                    "url": "/api/cases/KG-ENTITY-CASE-B",
+                    "isSynthetic": true,
+                    "lineStart": null,
+                    "lineEnd": null
+                  },
+                  "sourceValid": true,
+                  "identityValid": true,
+                  "identityIssue": "",
+                  "effective": true
+                },
+                {
+                  "id": "GR-a9cd09e4c003806cd5fb5801a130ce0c4b4225cad7530730de40a13b74e8fcdd",
+                  "head": {
+                    "id": "GN-2b30ac54f3a64dd429832c2e1dc44e9bc33e8933404303ac1a3a576827a84a34",
+                    "kind": "case",
+                    "label": "相同案例標題"
+                  },
+                  "tail": {
+                    "id": "GN-36476f28fc111bff00d8323e224ff8a6c87c3a10de71372b36867e8988f4016a",
+                    "kind": "verify_step",
+                    "label": "合成復測"
+                  },
+                  "relation": "verify",
+                  "machineModel": "KG-SYNTH-ENTITY",
+                  "status": "approved",
+                  "revision": 2,
+                  "createdAt": "2026-10-19T06:57:21.601246",
+                  "sourceChunkId": "KG-ENTITY-CASE-B:r1",
+                  "sourceHash": "9531525deb13c7e18c20e2aa140b89c91f01c1ffe3b74df283dcd553990daea3",
+                  "nodeScopes": {
+                    "head": {
+                      "sourceId": "KG-ENTITY-CASE-B",
+                      "entityType": "case"
+                    }
+                  },
+                  "createdBy": "supervisor",
+                  "approvedBy": "supervisor",
+                  "approvedAt": "2026-10-19T06:57:21.684671+00:00",
+                  "reviewedBy": "supervisor",
+                  "reviewedAt": "2026-10-19T06:57:21.684671+00:00",
+                  "reviewNote": "合成固定案例核對",
+                  "history": [
+                    {
+                      "action": "approve",
+                      "actor": "supervisor",
+                      "at": "2026-10-19T06:57:21.684671+00:00",
+                      "note": "合成固定案例核對"
+                    }
+                  ],
+                  "citation": {
+                    "sourceId": "KG-ENTITY-CASE-B",
+                    "chunkId": "KG-ENTITY-CASE-B:r1",
+                    "version": "1",
+                    "section": "主管發布的維修案例",
+                    "quote": "原因狀態：未知\n症狀：E-B\n發生條件：合成條件\n檢查發現：合成發現\n原因：未知\n處置：案例B需要備品 SPARE-B。\n驗收：合成復測",
+                    "url": "/api/cases/KG-ENTITY-CASE-B",
+                    "isSynthetic": true,
+                    "lineStart": null,
+                    "lineEnd": null
+                  },
+                  "sourceValid": true,
+                  "identityValid": true,
+                  "identityIssue": "",
+                  "effective": true
+                }
+              ]
+            }
+          ]
         }
       }
     },
@@ -1643,6 +2914,8 @@
     }
   ],
   "evaluatedSourceIds": [
+    "KG-ENTITY-CASE-A",
+    "KG-ENTITY-CASE-B",
     "KG-SYNTH-A",
     "KG-SYNTH-B",
     "KG-SYNTH-C",
@@ -1653,11 +2926,11 @@
   "authorizationPassed": true,
   "qualityFailures": [],
   "qualityGatePassed": true,
-  "datasetVersion": "1.0",
+  "datasetVersion": "2.0",
   "provenance": "全部為原創合成測試資料，不是原廠手冊或真實維修成效。固定種子，不呼叫 LLM。",
   "sourceScope": "fixed_snapshot_only",
-  "sourceSha256": "00b5a31fd85d265dce4e276cb51ef2081ec03dba8ced918ddb735ba32dd24e89",
-  "questionsSha256": "401ef3757cc61370bbfc7ab42b6af5a9907294ee912e50d32704b56fcadc5760",
+  "sourceSha256": "73c2899f3763d292a78cd2f41f6c8c89bef61a8a910dc83765596909d3f2cff1",
+  "questionsSha256": "affe7b021dd26350ab912b941cf965f4e88ddbf4d8dc1fcc274d3e63afb3bced",
   "database": "SQLite",
   "postgresql": "not tested",
   "gpuUsed": false,

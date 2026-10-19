@@ -11,6 +11,7 @@ from sqlalchemy.exc import IntegrityError
 from . import auth, maintenance_ai, store
 from .graph_models import GraphNode, GraphRelation
 from .graph_sources import currentSources, sourceHash, structuredCandidates
+from .graph_identity import entityScope, nodeIdentity, relationIdentityValid
 
 NodeKind = Literal['machine_model', 'part', 'alarm', 'symptom', 'fault', 'cause',
   'inspect_step', 'verify_step', 'manual_section', 'case', 'spare', 'qualification']
@@ -108,15 +109,17 @@ def relationDict(row, sources, db):
   data = json.loads(row.payload)
   source = sources.get(data['sourceChunkId'])
   valid = bool(source and sourceHash(source) == data['sourceHash'])
+  identityValid = relationIdentityValid(row, data, source, db)
   return {'id': row.id, 'head': nodeDict(db.get(GraphNode, row.headId)),
     'tail': nodeDict(db.get(GraphNode, row.tailId)), 'relation': row.kind,
     'machineModel': row.machineModel, 'status': row.status, 'revision': row.revision,
     'createdAt': row.createdAt.isoformat(), **data, 'sourceValid': valid,
-    'effective': valid and row.status == 'approved'}
+    'identityValid': identityValid, 'identityIssue': '' if identityValid else '來源實體識別不明，請重建候選並重新核對',
+    'effective': valid and identityValid and row.status == 'approved'}
 
 
-def ensureNode(db, node, model):
-  nodeId = 'GN-' + maintenance_ai.digest([model, node.kind, node.label])
+def ensureNode(db, node, model, source=None):
+  nodeId = nodeIdentity(node, model, entityScope(node, source))
   if not db.get(GraphNode, nodeId):
     db.add(GraphNode(id=nodeId, kind=node.kind, label=node.label, machineModel=model))
     db.flush()
@@ -131,19 +134,26 @@ def createCandidate(db, body, actor, sources=None):
   if body.machineModel not in source['machineModels'] or body.quote not in source['text']:
     raise HTTPException(422, '適用機型或逐字引文不符')
   for node in [body.head, body.tail]:
+    entityScope(node, source)
     metadataMatch = (node.kind == 'machine_model' and node.label == body.machineModel) or (
-      node.kind == 'case' and source['sourceType'] == 'reviewed_repair_case' and node.label == source['title'])
+      node.kind == 'case' and node.label == source['title']) or (
+      node.kind == 'manual_section' and node.label == source['section'])
     if not metadataMatch and node.label not in body.quote:
       raise HTTPException(422, '節點文字必須逐字出現在引文')
   fingerprint = sourceHash(source)
-  relationId = 'GR-' + maintenance_ai.digest([body.model_dump(), fingerprint])
+  scopes = {side: entityScope(node, source) for side, node in [('head', body.head), ('tail', body.tail)]
+    if node.kind in {'case', 'manual_section'}}
+  relationKey = [body.model_dump(), fingerprint]
+  if scopes:
+    relationKey += ['source-entities-v1', scopes]
+  relationId = 'GR-' + maintenance_ai.digest(relationKey)
   existing = db.get(GraphRelation, relationId)
   if existing:
     return existing, False
-  headId = ensureNode(db, body.head, body.machineModel)
-  tailId = ensureNode(db, body.tail, body.machineModel)
+  headId = ensureNode(db, body.head, body.machineModel, source)
+  tailId = ensureNode(db, body.tail, body.machineModel, source)
   data = {'sourceChunkId': body.sourceChunkId, 'sourceHash': fingerprint,
-    'createdBy': actor, 'approvedBy': None, 'approvedAt': None,
+    'nodeScopes': scopes, 'createdBy': actor, 'approvedBy': None, 'approvedAt': None,
     'reviewedBy': None, 'reviewedAt': None, 'reviewNote': '', 'history': [],
     'citation': {'sourceId': source['sourceId'], 'chunkId': source['chunkId'],
       'version': source['version'], 'section': source['section'], 'quote': body.quote,
@@ -169,6 +179,8 @@ def reviewRelation(db, relationId, body, actor):
   source = sources.get(data['sourceChunkId'])
   if body.action == 'approve' and (not source or sourceHash(source) != data['sourceHash']):
     raise HTTPException(409, '來源已撤回或改版，請重新建立候選')
+  if body.action == 'approve' and not relationIdentityValid(row, data, source, db):
+    raise HTTPException(409, '來源實體識別不明，請重建候選並重新核對')
   timestamp = now()
   data.update(reviewedBy=actor, reviewedAt=timestamp, reviewNote=body.note)
   if body.action == 'approve':
@@ -201,6 +213,8 @@ def queryGraph(db, body, sources=None):
     data = json.loads(row.payload)
     source = sources.get(data['sourceChunkId'])
     if not source or sourceHash(source) != data['sourceHash']:
+      continue
+    if not relationIdentityValid(row, data, source, db):
       continue
     effectiveCount += 1
     if effectiveCount > LIMITS['maxEdges']:

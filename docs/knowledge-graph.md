@@ -8,13 +8,21 @@
 
 | 表 | 欄位／用途 |
 |---|---|
-| `graph_nodes` | 穩定 SHA256 ID、kind、label、machineModel。相同文字在不同機型是不同節點。 |
+| `graph_nodes` | 穩定 SHA256 ID、kind、label、machineModel。概念節點在機型內共用；案例與手冊段落另有來源實體作用域，不以標題判斷同一實體。 |
 | `graph_relations` | 穩定 SHA256 ID、headId／tailId 外鍵、kind、machineModel、status、revision、createdAt、payload。 |
-| relation payload | sourceChunkId、完整 sourceHash、citation（來源 ID／段落／版本／逐字引文／行號／本機連結／合成標記）、createdBy、approvedBy／approvedAt、reviewedBy／reviewedAt、reviewNote、完整審查 history。 |
+| relation payload | sourceChunkId、完整 sourceHash、nodeScopes（案例來源 ID／手冊來源 ID＋chunk ID）、citation（來源 ID／段落／版本／逐字引文／行號／本機連結／合成標記）、createdBy、approvedBy／approvedAt、reviewedBy／reviewedAt、reviewNote、完整審查 history。 |
 
 節點型別：機型、零件、警報碼、症狀、故障、原因、排查步驟、驗收步驟、手冊段落、已發布案例、備品、資格。關係白名單：`has_part`、`references`、`possible_cause`、`inspect`、`verify`、`requires_spare`、`requires_qualification`；目標型別與機型→零件的方向有 schema 約束。
 
 來源流程：有效來源 → 指定逐字引文／規則轉換 → `candidate` → 主管核對來源的語意與適用性 → `approved` → `withdrawn`。節點及關係採固定指紋去重；重建不會把撤回關係重新核准。審查先比對已讀 revision，再用資料庫 CAS 更新，避免並行操作覆蓋歷史；操作者一律取登入 session。
+
+### 同名實體與舊資料
+
+`case` 節點依機型＋案例來源 ID＋正式標題識別，因此兩筆案例即使同標題也不會連成同一個案例；同一案例跨段仍以同一來源 ID 連接。`manual_section` 依機型＋手冊來源 ID＋chunk ID＋段落標題識別，連同一手冊內重複的段落標題也會分開。一般零件／警報／步驟等概念節點維持原本機型內共用，這次沒有把全部概念都改成來源內專用。
+
+實體 scope 同時寫入節點 ID、關係 ID 及 relation payload，建立候選與查詢／核准時均驗證；案例節點只能取自該已發布案例的正式標題，手冊段落節點只能取目前手冊段落。無需新增資料表欄位或刪除舊紀錄。
+
+**升級注意：舊的無 scope 案例／手冊段落關係不會自動沿用核准。** 即使來源 hash 仍正確，API 仍回 `identityValid: false`、`effective: false`，查詢會排除，直接重新核准回 409。主管畫面會顯示「來源實體識別不明，請重建候選並重新核對」，且停用核准按鈕；撤回仍可保存稽核紀錄。已發布案例可按「從模板與已發布案例建立候選」重建；手冊段落須重新選取來源建立候選，再逐筆核對。新候選有新的 scope 指紋，重跑不重複，不會把歧義舊節點悄悄回填成確定來源。
 
 | 來源 | 如何建立候選 | 邊界 |
 |---|---|---|
@@ -71,19 +79,23 @@ $env:OLLAMA_MODEL = ''
 
 ## 評估結果與解讀
 
-固定來源為 `evals/knowledge-graph/snapshot.json`，金標為 `questions.json`，報告保存兩者 SHA256、實際評估來源 ID 與逐題檢索／路徑。評估期間排除內建展示手冊，只使用固定快照，避免日後新增展示資料改變 IDF 與排名；保留展示資料庫後，一般 App 仍會依既有展示模式載入內建手冊，因此 UI 是操作展示而非完全相同的評估語料。共有 10 題檢索情境及 2 題實際權限情境；含 2–3 hop、同碼異義、錯機型、撤回、草稿、資料不足、反向關係反例、來源注入與越權。
+固定來源為 `evals/knowledge-graph/snapshot.json`，金標為 `questions.json`，報告保存兩者 SHA256、實際評估來源 ID 與逐題檢索／路徑。評估期間排除內建展示手冊，只使用固定快照，避免日後新增展示資料改變 IDF 與排名；保留展示資料庫後，一般 App 仍會依既有展示模式載入內建手冊，因此 UI 是操作展示而非完全相同的評估語料。**v2.0** 共有 12 題檢索情境及 2 題實際權限情境；含 2–3 hop、同碼異義、錯機型、撤回、草稿、資料不足、反向關係反例、來源注入、同標題不同案例正／負例與越權。v1 報告保留於 [knowledge-graph-evaluation-v1.json](../artifacts/knowledge-graph-evaluation-v1.json)，其題集在歷史提交 `bb089d0`，不能把 v1 與 v2 的分數直接當作同題集比較。
 
 | 指標 | 純字詞 TF-IDF／BM25 | 字詞＋圖譜 |
 |---|---:|---:|
 | Macro retrieval precision | 100% | 100% |
-| Macro recall（6 題有相關來源） | 79.17% | 100% |
-| 可答題取得完整 required 來源（5 題） | 60% | 100% |
-| 可答性判定正確（10 題） | 80% | 100% |
+| Macro recall（8 題有相關來源） | 84.38% | 100% |
+| 可答題取得完整 required 來源（7 題） | 71.43% | 100% |
+| 可答性判定正確（12 題） | 83.33% | 100% |
 | 逐題全部回傳來源均相關 | 100% | 100% |
 
 指標是**文件 ID 集合覆蓋**：兩組共用 top-5 baseline；圖譜組額外加入有界路徑來源，不是相同 k 的排名比較，不是 nDCG／MRR。空結果 precision 定為 1；沒有 relevant 來源的題目不計 recall。可答性只是 required 金標來源是否齊全，不能代表模型作答品質、診斷正確性、維修成功率或工廠停機時間改善。圖譜來源與金標為原創合成、人工設計關係，**沒有獨立領域專家驗收，也沒有真實現場成效證據**。precision 沒有提升。
 
 報告另檢查來源當下有效／機型／版本與 hash、目標路徑／方向、自動操作為空、無 LLM、越權狀態，以及圖譜指標不低於 baseline。任何品質門檻失敗會保留報告並以非零狀態退出；不使用 skip。
+
+同標題負例 `E-A` 的路徑不得包含另一案例的 `SPARE-B`，正例 `E-B` 則必須能沿它自己的案例找到 `SPARE-B`；`forbiddenTargetsAbsent` 納入失敗門檻。額外的 SQLite／API 回歸測試驗證同案例跨段連接、同名手冊段落隔離、有效來源但無 scope 的舊關係排除、重新核准拒絕、重建候選、來源撤回與工程師權限。
+
+v1 沒有包含同名不同案例反例，不能作為本次實體識別修補的安全證據。修補前新增回歸已在錯接 `SPARE-B` 的斷言失敗；修補後全套 **71 passed、0 failure／error／skip**，100.08 秒，仍只有既有 Starlette deprecation warning。新增來源實體情境包含 29 次檢查（不可和 pytest 項數相加）。本次結果見 [來源實體修補驗證](../artifacts/knowledge-graph-entity-verification.json) 與 [最新 JUnit](../artifacts/knowledge-graph-entity-tests.xml)，下方原驗證紀錄保留為先前交付歷史。
 
 ## 測試與交付邊界
 

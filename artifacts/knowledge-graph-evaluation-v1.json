@@ -1,0 +1,1665 @@
+{
+  "summary": {
+    "keyword": {
+      "macroPrecision": 1.0,
+      "macroRecallOnRelevantQuestions": 0.7916666666666666,
+      "answerableRateOnPositiveQuestions": 0.6,
+      "answerabilityAccuracy": 0.8,
+      "allSourcesRelevantRate": 1.0
+    },
+    "keyword_plus_graph": {
+      "macroPrecision": 1.0,
+      "macroRecallOnRelevantQuestions": 1.0,
+      "answerableRateOnPositiveQuestions": 1.0,
+      "answerabilityAccuracy": 1.0,
+      "allSourcesRelevantRate": 1.0
+    }
+  },
+  "questions": [
+    {
+      "id": "multi-hop-alarm",
+      "category": "three_hop",
+      "gold": {
+        "id": "multi-hop-alarm",
+        "category": "three_hop",
+        "model": "KG-SYNTH-M1",
+        "query": "DEMO-E17",
+        "relevant": [
+          "KG-SYNTH-A",
+          "KG-SYNTH-B",
+          "KG-SYNTH-C",
+          "KG-SYNTH-D"
+        ],
+        "required": [
+          "KG-SYNTH-A",
+          "KG-SYNTH-B",
+          "KG-SYNTH-C",
+          "KG-SYNTH-D"
+        ],
+        "target": "FILTER-A",
+        "answerable": true
+      },
+      "modes": {
+        "keyword": {
+          "retrieved": [
+            "KG-SYNTH-A"
+          ],
+          "precision": 1.0,
+          "recall": 0.25,
+          "answerableFromSources": false,
+          "answerabilityCorrect": false,
+          "allSourcesRelevant": true,
+          "pathTargets": [],
+          "pathTargetFound": false,
+          "directionCorrect": null,
+          "noAutomaticActions": true,
+          "llmUsed": false,
+          "sourceValidityCorrect": true,
+          "unknown": [
+            "純字詞檢索，不提供關係推論。"
+          ],
+          "paths": []
+        },
+        "keyword_plus_graph": {
+          "retrieved": [
+            "KG-SYNTH-A",
+            "KG-SYNTH-B",
+            "KG-SYNTH-D",
+            "KG-SYNTH-C"
+          ],
+          "precision": 1.0,
+          "recall": 1.0,
+          "answerableFromSources": true,
+          "answerabilityCorrect": true,
+          "allSourcesRelevant": true,
+          "pathTargets": [
+            "濾芯",
+            "壓差確認",
+            "LOTO",
+            "FILTER-A"
+          ],
+          "pathTargetFound": true,
+          "directionCorrect": null,
+          "noAutomaticActions": true,
+          "llmUsed": false,
+          "sourceValidityCorrect": true,
+          "unknown": [
+            "此查詢未判定根因、備品相容性或復機條件；仍須逐項核對來源。"
+          ],
+          "paths": [
+            {
+              "nodes": [
+                {
+                  "id": "GN-62da78a21d2f3371d636a4dfa43985b5c58269a5e9a9088cec8a86ac70f1b6d4",
+                  "kind": "alarm",
+                  "label": "DEMO-E17"
+                },
+                {
+                  "id": "GN-bca4b455d2fb65d8119af0230a809ec98d9fd08bb85219b7d884d6aa6cc6294f",
+                  "kind": "part",
+                  "label": "濾芯"
+                }
+              ],
+              "relations": [
+                {
+                  "id": "GR-3fb4b49f0a1352b22efb6611e960d740f14fbfeb92928562610686044b108b58",
+                  "head": {
+                    "id": "GN-62da78a21d2f3371d636a4dfa43985b5c58269a5e9a9088cec8a86ac70f1b6d4",
+                    "kind": "alarm",
+                    "label": "DEMO-E17"
+                  },
+                  "tail": {
+                    "id": "GN-bca4b455d2fb65d8119af0230a809ec98d9fd08bb85219b7d884d6aa6cc6294f",
+                    "kind": "part",
+                    "label": "濾芯"
+                  },
+                  "relation": "references",
+                  "machineModel": "KG-SYNTH-M1",
+                  "status": "approved",
+                  "revision": 2,
+                  "createdAt": "2026-10-19T06:42:15.530101",
+                  "sourceChunkId": "KG-SYNTH-A:2",
+                  "sourceHash": "ee98576e3bd740c6a2b69b7ae53d2ba23d17d0817b9dd32e56179bc0fe266e57",
+                  "createdBy": "supervisor",
+                  "approvedBy": "supervisor",
+                  "approvedAt": "2026-10-19T06:42:15.534104+00:00",
+                  "reviewedBy": "supervisor",
+                  "reviewedAt": "2026-10-19T06:42:15.534104+00:00",
+                  "reviewNote": "合成金標明示關係",
+                  "history": [
+                    {
+                      "action": "approve",
+                      "actor": "supervisor",
+                      "at": "2026-10-19T06:42:15.534104+00:00",
+                      "note": "合成金標明示關係"
+                    }
+                  ],
+                  "citation": {
+                    "sourceId": "KG-SYNTH-A",
+                    "chunkId": "KG-SYNTH-A:2",
+                    "version": "1",
+                    "section": "警報索引",
+                    "quote": "合成警報 DEMO-E17 的排查索引指向濾芯。這是索引關係，不能宣稱濾芯已故障。",
+                    "url": "/api/knowledge/manuals/KG-SYNTH-A",
+                    "isSynthetic": true,
+                    "lineStart": 2,
+                    "lineEnd": 2
+                  },
+                  "sourceValid": true,
+                  "effective": true
+                }
+              ]
+            },
+            {
+              "nodes": [
+                {
+                  "id": "GN-62da78a21d2f3371d636a4dfa43985b5c58269a5e9a9088cec8a86ac70f1b6d4",
+                  "kind": "alarm",
+                  "label": "DEMO-E17"
+                },
+                {
+                  "id": "GN-bca4b455d2fb65d8119af0230a809ec98d9fd08bb85219b7d884d6aa6cc6294f",
+                  "kind": "part",
+                  "label": "濾芯"
+                },
+                {
+                  "id": "GN-11e1929a7d54dd160d29f1b1b49eb14ec6c6b36de5cbb41a865424c6d853e4b2",
+                  "kind": "inspect_step",
+                  "label": "壓差確認"
+                }
+              ],
+              "relations": [
+                {
+                  "id": "GR-3fb4b49f0a1352b22efb6611e960d740f14fbfeb92928562610686044b108b58",
+                  "head": {
+                    "id": "GN-62da78a21d2f3371d636a4dfa43985b5c58269a5e9a9088cec8a86ac70f1b6d4",
+                    "kind": "alarm",
+                    "label": "DEMO-E17"
+                  },
+                  "tail": {
+                    "id": "GN-bca4b455d2fb65d8119af0230a809ec98d9fd08bb85219b7d884d6aa6cc6294f",
+                    "kind": "part",
+                    "label": "濾芯"
+                  },
+                  "relation": "references",
+                  "machineModel": "KG-SYNTH-M1",
+                  "status": "approved",
+                  "revision": 2,
+                  "createdAt": "2026-10-19T06:42:15.530101",
+                  "sourceChunkId": "KG-SYNTH-A:2",
+                  "sourceHash": "ee98576e3bd740c6a2b69b7ae53d2ba23d17d0817b9dd32e56179bc0fe266e57",
+                  "createdBy": "supervisor",
+                  "approvedBy": "supervisor",
+                  "approvedAt": "2026-10-19T06:42:15.534104+00:00",
+                  "reviewedBy": "supervisor",
+                  "reviewedAt": "2026-10-19T06:42:15.534104+00:00",
+                  "reviewNote": "合成金標明示關係",
+                  "history": [
+                    {
+                      "action": "approve",
+                      "actor": "supervisor",
+                      "at": "2026-10-19T06:42:15.534104+00:00",
+                      "note": "合成金標明示關係"
+                    }
+                  ],
+                  "citation": {
+                    "sourceId": "KG-SYNTH-A",
+                    "chunkId": "KG-SYNTH-A:2",
+                    "version": "1",
+                    "section": "警報索引",
+                    "quote": "合成警報 DEMO-E17 的排查索引指向濾芯。這是索引關係，不能宣稱濾芯已故障。",
+                    "url": "/api/knowledge/manuals/KG-SYNTH-A",
+                    "isSynthetic": true,
+                    "lineStart": 2,
+                    "lineEnd": 2
+                  },
+                  "sourceValid": true,
+                  "effective": true
+                },
+                {
+                  "id": "GR-5be78236855c64da62df293ccda75b6a37f05a85e8ff993a381c8e2b4be9424e",
+                  "head": {
+                    "id": "GN-bca4b455d2fb65d8119af0230a809ec98d9fd08bb85219b7d884d6aa6cc6294f",
+                    "kind": "part",
+                    "label": "濾芯"
+                  },
+                  "tail": {
+                    "id": "GN-11e1929a7d54dd160d29f1b1b49eb14ec6c6b36de5cbb41a865424c6d853e4b2",
+                    "kind": "inspect_step",
+                    "label": "壓差確認"
+                  },
+                  "relation": "inspect",
+                  "machineModel": "KG-SYNTH-M1",
+                  "status": "approved",
+                  "revision": 2,
+                  "createdAt": "2026-10-19T06:42:15.547102",
+                  "sourceChunkId": "KG-SYNTH-B:2",
+                  "sourceHash": "e396495b3dbec99cfd9314c650d1b14793408bc72a0fd120721abcd68bc74f1d",
+                  "createdBy": "supervisor",
+                  "approvedBy": "supervisor",
+                  "approvedAt": "2026-10-19T06:42:15.549163+00:00",
+                  "reviewedBy": "supervisor",
+                  "reviewedAt": "2026-10-19T06:42:15.549163+00:00",
+                  "reviewNote": "合成金標明示關係",
+                  "history": [
+                    {
+                      "action": "approve",
+                      "actor": "supervisor",
+                      "at": "2026-10-19T06:42:15.549163+00:00",
+                      "note": "合成金標明示關係"
+                    }
+                  ],
+                  "citation": {
+                    "sourceId": "KG-SYNTH-B",
+                    "chunkId": "KG-SYNTH-B:2",
+                    "version": "1",
+                    "section": "零件排查",
+                    "quote": "濾芯的排查步驟為壓差確認。應先確認安全隔離與適用條件，不提供通用閾值。",
+                    "url": "/api/knowledge/manuals/KG-SYNTH-B",
+                    "isSynthetic": true,
+                    "lineStart": 2,
+                    "lineEnd": 2
+                  },
+                  "sourceValid": true,
+                  "effective": true
+                }
+              ]
+            },
+            {
+              "nodes": [
+                {
+                  "id": "GN-62da78a21d2f3371d636a4dfa43985b5c58269a5e9a9088cec8a86ac70f1b6d4",
+                  "kind": "alarm",
+                  "label": "DEMO-E17"
+                },
+                {
+                  "id": "GN-bca4b455d2fb65d8119af0230a809ec98d9fd08bb85219b7d884d6aa6cc6294f",
+                  "kind": "part",
+                  "label": "濾芯"
+                },
+                {
+                  "id": "GN-11e1929a7d54dd160d29f1b1b49eb14ec6c6b36de5cbb41a865424c6d853e4b2",
+                  "kind": "inspect_step",
+                  "label": "壓差確認"
+                },
+                {
+                  "id": "GN-a15f93e53eac73e1e7b831459aa8dddc8993040d53b25812992833d0a7732f7f",
+                  "kind": "qualification",
+                  "label": "LOTO",
+                  "catalogUrl": "/workflow.html"
+                }
+              ],
+              "relations": [
+                {
+                  "id": "GR-3fb4b49f0a1352b22efb6611e960d740f14fbfeb92928562610686044b108b58",
+                  "head": {
+                    "id": "GN-62da78a21d2f3371d636a4dfa43985b5c58269a5e9a9088cec8a86ac70f1b6d4",
+                    "kind": "alarm",
+                    "label": "DEMO-E17"
+                  },
+                  "tail": {
+                    "id": "GN-bca4b455d2fb65d8119af0230a809ec98d9fd08bb85219b7d884d6aa6cc6294f",
+                    "kind": "part",
+                    "label": "濾芯"
+                  },
+                  "relation": "references",
+                  "machineModel": "KG-SYNTH-M1",
+                  "status": "approved",
+                  "revision": 2,
+                  "createdAt": "2026-10-19T06:42:15.530101",
+                  "sourceChunkId": "KG-SYNTH-A:2",
+                  "sourceHash": "ee98576e3bd740c6a2b69b7ae53d2ba23d17d0817b9dd32e56179bc0fe266e57",
+                  "createdBy": "supervisor",
+                  "approvedBy": "supervisor",
+                  "approvedAt": "2026-10-19T06:42:15.534104+00:00",
+                  "reviewedBy": "supervisor",
+                  "reviewedAt": "2026-10-19T06:42:15.534104+00:00",
+                  "reviewNote": "合成金標明示關係",
+                  "history": [
+                    {
+                      "action": "approve",
+                      "actor": "supervisor",
+                      "at": "2026-10-19T06:42:15.534104+00:00",
+                      "note": "合成金標明示關係"
+                    }
+                  ],
+                  "citation": {
+                    "sourceId": "KG-SYNTH-A",
+                    "chunkId": "KG-SYNTH-A:2",
+                    "version": "1",
+                    "section": "警報索引",
+                    "quote": "合成警報 DEMO-E17 的排查索引指向濾芯。這是索引關係，不能宣稱濾芯已故障。",
+                    "url": "/api/knowledge/manuals/KG-SYNTH-A",
+                    "isSynthetic": true,
+                    "lineStart": 2,
+                    "lineEnd": 2
+                  },
+                  "sourceValid": true,
+                  "effective": true
+                },
+                {
+                  "id": "GR-5be78236855c64da62df293ccda75b6a37f05a85e8ff993a381c8e2b4be9424e",
+                  "head": {
+                    "id": "GN-bca4b455d2fb65d8119af0230a809ec98d9fd08bb85219b7d884d6aa6cc6294f",
+                    "kind": "part",
+                    "label": "濾芯"
+                  },
+                  "tail": {
+                    "id": "GN-11e1929a7d54dd160d29f1b1b49eb14ec6c6b36de5cbb41a865424c6d853e4b2",
+                    "kind": "inspect_step",
+                    "label": "壓差確認"
+                  },
+                  "relation": "inspect",
+                  "machineModel": "KG-SYNTH-M1",
+                  "status": "approved",
+                  "revision": 2,
+                  "createdAt": "2026-10-19T06:42:15.547102",
+                  "sourceChunkId": "KG-SYNTH-B:2",
+                  "sourceHash": "e396495b3dbec99cfd9314c650d1b14793408bc72a0fd120721abcd68bc74f1d",
+                  "createdBy": "supervisor",
+                  "approvedBy": "supervisor",
+                  "approvedAt": "2026-10-19T06:42:15.549163+00:00",
+                  "reviewedBy": "supervisor",
+                  "reviewedAt": "2026-10-19T06:42:15.549163+00:00",
+                  "reviewNote": "合成金標明示關係",
+                  "history": [
+                    {
+                      "action": "approve",
+                      "actor": "supervisor",
+                      "at": "2026-10-19T06:42:15.549163+00:00",
+                      "note": "合成金標明示關係"
+                    }
+                  ],
+                  "citation": {
+                    "sourceId": "KG-SYNTH-B",
+                    "chunkId": "KG-SYNTH-B:2",
+                    "version": "1",
+                    "section": "零件排查",
+                    "quote": "濾芯的排查步驟為壓差確認。應先確認安全隔離與適用條件，不提供通用閾值。",
+                    "url": "/api/knowledge/manuals/KG-SYNTH-B",
+                    "isSynthetic": true,
+                    "lineStart": 2,
+                    "lineEnd": 2
+                  },
+                  "sourceValid": true,
+                  "effective": true
+                },
+                {
+                  "id": "GR-7cae0596c965257395b1c2f22f045900454a226daafa9457eb3c055dc3bb6527",
+                  "head": {
+                    "id": "GN-11e1929a7d54dd160d29f1b1b49eb14ec6c6b36de5cbb41a865424c6d853e4b2",
+                    "kind": "inspect_step",
+                    "label": "壓差確認"
+                  },
+                  "tail": {
+                    "id": "GN-a15f93e53eac73e1e7b831459aa8dddc8993040d53b25812992833d0a7732f7f",
+                    "kind": "qualification",
+                    "label": "LOTO",
+                    "catalogUrl": "/workflow.html"
+                  },
+                  "relation": "requires_qualification",
+                  "machineModel": "KG-SYNTH-M1",
+                  "status": "approved",
+                  "revision": 2,
+                  "createdAt": "2026-10-19T06:42:15.570824",
+                  "sourceChunkId": "KG-SYNTH-D:2",
+                  "sourceHash": "41a2b1d53ca0afad8d43c8b11138922f00107f9ce29e545fffca140a1d26f54c",
+                  "createdBy": "supervisor",
+                  "approvedBy": "supervisor",
+                  "approvedAt": "2026-10-19T06:42:15.572812+00:00",
+                  "reviewedBy": "supervisor",
+                  "reviewedAt": "2026-10-19T06:42:15.572812+00:00",
+                  "reviewNote": "合成金標明示關係",
+                  "history": [
+                    {
+                      "action": "approve",
+                      "actor": "supervisor",
+                      "at": "2026-10-19T06:42:15.572812+00:00",
+                      "note": "合成金標明示關係"
+                    }
+                  ],
+                  "citation": {
+                    "sourceId": "KG-SYNTH-D",
+                    "chunkId": "KG-SYNTH-D:2",
+                    "version": "1",
+                    "section": "必要資格",
+                    "quote": "壓差確認這項合成步驟需要資格 LOTO。此測試不代表已確認任何人員取得資格。",
+                    "url": "/api/knowledge/manuals/KG-SYNTH-D",
+                    "isSynthetic": true,
+                    "lineStart": 2,
+                    "lineEnd": 2
+                  },
+                  "sourceValid": true,
+                  "effective": true
+                }
+              ]
+            },
+            {
+              "nodes": [
+                {
+                  "id": "GN-62da78a21d2f3371d636a4dfa43985b5c58269a5e9a9088cec8a86ac70f1b6d4",
+                  "kind": "alarm",
+                  "label": "DEMO-E17"
+                },
+                {
+                  "id": "GN-bca4b455d2fb65d8119af0230a809ec98d9fd08bb85219b7d884d6aa6cc6294f",
+                  "kind": "part",
+                  "label": "濾芯"
+                },
+                {
+                  "id": "GN-11e1929a7d54dd160d29f1b1b49eb14ec6c6b36de5cbb41a865424c6d853e4b2",
+                  "kind": "inspect_step",
+                  "label": "壓差確認"
+                },
+                {
+                  "id": "GN-cde89e5eea1d39b713feab6e761cccbd50c7ea46a4fa9df14ad83ce564c2539c",
+                  "kind": "spare",
+                  "label": "FILTER-A",
+                  "catalogUrl": "/api/stock"
+                }
+              ],
+              "relations": [
+                {
+                  "id": "GR-3fb4b49f0a1352b22efb6611e960d740f14fbfeb92928562610686044b108b58",
+                  "head": {
+                    "id": "GN-62da78a21d2f3371d636a4dfa43985b5c58269a5e9a9088cec8a86ac70f1b6d4",
+                    "kind": "alarm",
+                    "label": "DEMO-E17"
+                  },
+                  "tail": {
+                    "id": "GN-bca4b455d2fb65d8119af0230a809ec98d9fd08bb85219b7d884d6aa6cc6294f",
+                    "kind": "part",
+                    "label": "濾芯"
+                  },
+                  "relation": "references",
+                  "machineModel": "KG-SYNTH-M1",
+                  "status": "approved",
+                  "revision": 2,
+                  "createdAt": "2026-10-19T06:42:15.530101",
+                  "sourceChunkId": "KG-SYNTH-A:2",
+                  "sourceHash": "ee98576e3bd740c6a2b69b7ae53d2ba23d17d0817b9dd32e56179bc0fe266e57",
+                  "createdBy": "supervisor",
+                  "approvedBy": "supervisor",
+                  "approvedAt": "2026-10-19T06:42:15.534104+00:00",
+                  "reviewedBy": "supervisor",
+                  "reviewedAt": "2026-10-19T06:42:15.534104+00:00",
+                  "reviewNote": "合成金標明示關係",
+                  "history": [
+                    {
+                      "action": "approve",
+                      "actor": "supervisor",
+                      "at": "2026-10-19T06:42:15.534104+00:00",
+                      "note": "合成金標明示關係"
+                    }
+                  ],
+                  "citation": {
+                    "sourceId": "KG-SYNTH-A",
+                    "chunkId": "KG-SYNTH-A:2",
+                    "version": "1",
+                    "section": "警報索引",
+                    "quote": "合成警報 DEMO-E17 的排查索引指向濾芯。這是索引關係，不能宣稱濾芯已故障。",
+                    "url": "/api/knowledge/manuals/KG-SYNTH-A",
+                    "isSynthetic": true,
+                    "lineStart": 2,
+                    "lineEnd": 2
+                  },
+                  "sourceValid": true,
+                  "effective": true
+                },
+                {
+                  "id": "GR-5be78236855c64da62df293ccda75b6a37f05a85e8ff993a381c8e2b4be9424e",
+                  "head": {
+                    "id": "GN-bca4b455d2fb65d8119af0230a809ec98d9fd08bb85219b7d884d6aa6cc6294f",
+                    "kind": "part",
+                    "label": "濾芯"
+                  },
+                  "tail": {
+                    "id": "GN-11e1929a7d54dd160d29f1b1b49eb14ec6c6b36de5cbb41a865424c6d853e4b2",
+                    "kind": "inspect_step",
+                    "label": "壓差確認"
+                  },
+                  "relation": "inspect",
+                  "machineModel": "KG-SYNTH-M1",
+                  "status": "approved",
+                  "revision": 2,
+                  "createdAt": "2026-10-19T06:42:15.547102",
+                  "sourceChunkId": "KG-SYNTH-B:2",
+                  "sourceHash": "e396495b3dbec99cfd9314c650d1b14793408bc72a0fd120721abcd68bc74f1d",
+                  "createdBy": "supervisor",
+                  "approvedBy": "supervisor",
+                  "approvedAt": "2026-10-19T06:42:15.549163+00:00",
+                  "reviewedBy": "supervisor",
+                  "reviewedAt": "2026-10-19T06:42:15.549163+00:00",
+                  "reviewNote": "合成金標明示關係",
+                  "history": [
+                    {
+                      "action": "approve",
+                      "actor": "supervisor",
+                      "at": "2026-10-19T06:42:15.549163+00:00",
+                      "note": "合成金標明示關係"
+                    }
+                  ],
+                  "citation": {
+                    "sourceId": "KG-SYNTH-B",
+                    "chunkId": "KG-SYNTH-B:2",
+                    "version": "1",
+                    "section": "零件排查",
+                    "quote": "濾芯的排查步驟為壓差確認。應先確認安全隔離與適用條件，不提供通用閾值。",
+                    "url": "/api/knowledge/manuals/KG-SYNTH-B",
+                    "isSynthetic": true,
+                    "lineStart": 2,
+                    "lineEnd": 2
+                  },
+                  "sourceValid": true,
+                  "effective": true
+                },
+                {
+                  "id": "GR-df510f0a3b40746eb1a8c96659d00815f888cf5cb542cb2cd93eceaed28e4a1f",
+                  "head": {
+                    "id": "GN-11e1929a7d54dd160d29f1b1b49eb14ec6c6b36de5cbb41a865424c6d853e4b2",
+                    "kind": "inspect_step",
+                    "label": "壓差確認"
+                  },
+                  "tail": {
+                    "id": "GN-cde89e5eea1d39b713feab6e761cccbd50c7ea46a4fa9df14ad83ce564c2539c",
+                    "kind": "spare",
+                    "label": "FILTER-A",
+                    "catalogUrl": "/api/stock"
+                  },
+                  "relation": "requires_spare",
+                  "machineModel": "KG-SYNTH-M1",
+                  "status": "approved",
+                  "revision": 2,
+                  "createdAt": "2026-10-19T06:42:15.559174",
+                  "sourceChunkId": "KG-SYNTH-C:2",
+                  "sourceHash": "8523611ac3389957d72c2e43a4bc23861385cc1284fb0a7e33843556f92d945e",
+                  "createdBy": "supervisor",
+                  "approvedBy": "supervisor",
+                  "approvedAt": "2026-10-19T06:42:15.562174+00:00",
+                  "reviewedBy": "supervisor",
+                  "reviewedAt": "2026-10-19T06:42:15.562174+00:00",
+                  "reviewNote": "合成金標明示關係",
+                  "history": [
+                    {
+                      "action": "approve",
+                      "actor": "supervisor",
+                      "at": "2026-10-19T06:42:15.562174+00:00",
+                      "note": "合成金標明示關係"
+                    }
+                  ],
+                  "citation": {
+                    "sourceId": "KG-SYNTH-C",
+                    "chunkId": "KG-SYNTH-C:2",
+                    "version": "1",
+                    "section": "準備備品",
+                    "quote": "壓差確認這項合成步驟需要備品 FILTER-A。此測試沒有真實料號相容性資訊。",
+                    "url": "/api/knowledge/manuals/KG-SYNTH-C",
+                    "isSynthetic": true,
+                    "lineStart": 2,
+                    "lineEnd": 2
+                  },
+                  "sourceValid": true,
+                  "effective": true
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "multi-hop-part",
+      "category": "two_hop",
+      "gold": {
+        "id": "multi-hop-part",
+        "category": "two_hop",
+        "model": "KG-SYNTH-M1",
+        "query": "濾芯",
+        "relevant": [
+          "KG-SYNTH-A",
+          "KG-SYNTH-B",
+          "KG-SYNTH-C",
+          "KG-SYNTH-D"
+        ],
+        "required": [
+          "KG-SYNTH-B",
+          "KG-SYNTH-C",
+          "KG-SYNTH-D"
+        ],
+        "target": "LOTO",
+        "answerable": true
+      },
+      "modes": {
+        "keyword": {
+          "retrieved": [
+            "KG-SYNTH-A",
+            "KG-SYNTH-B"
+          ],
+          "precision": 1.0,
+          "recall": 0.5,
+          "answerableFromSources": false,
+          "answerabilityCorrect": false,
+          "allSourcesRelevant": true,
+          "pathTargets": [],
+          "pathTargetFound": false,
+          "directionCorrect": null,
+          "noAutomaticActions": true,
+          "llmUsed": false,
+          "sourceValidityCorrect": true,
+          "unknown": [
+            "純字詞檢索，不提供關係推論。"
+          ],
+          "paths": []
+        },
+        "keyword_plus_graph": {
+          "retrieved": [
+            "KG-SYNTH-A",
+            "KG-SYNTH-B",
+            "KG-SYNTH-D",
+            "KG-SYNTH-C"
+          ],
+          "precision": 1.0,
+          "recall": 1.0,
+          "answerableFromSources": true,
+          "answerabilityCorrect": true,
+          "allSourcesRelevant": true,
+          "pathTargets": [
+            "壓差確認",
+            "LOTO",
+            "FILTER-A"
+          ],
+          "pathTargetFound": true,
+          "directionCorrect": null,
+          "noAutomaticActions": true,
+          "llmUsed": false,
+          "sourceValidityCorrect": true,
+          "unknown": [
+            "此查詢未判定根因、備品相容性或復機條件；仍須逐項核對來源。"
+          ],
+          "paths": [
+            {
+              "nodes": [
+                {
+                  "id": "GN-bca4b455d2fb65d8119af0230a809ec98d9fd08bb85219b7d884d6aa6cc6294f",
+                  "kind": "part",
+                  "label": "濾芯"
+                },
+                {
+                  "id": "GN-11e1929a7d54dd160d29f1b1b49eb14ec6c6b36de5cbb41a865424c6d853e4b2",
+                  "kind": "inspect_step",
+                  "label": "壓差確認"
+                }
+              ],
+              "relations": [
+                {
+                  "id": "GR-5be78236855c64da62df293ccda75b6a37f05a85e8ff993a381c8e2b4be9424e",
+                  "head": {
+                    "id": "GN-bca4b455d2fb65d8119af0230a809ec98d9fd08bb85219b7d884d6aa6cc6294f",
+                    "kind": "part",
+                    "label": "濾芯"
+                  },
+                  "tail": {
+                    "id": "GN-11e1929a7d54dd160d29f1b1b49eb14ec6c6b36de5cbb41a865424c6d853e4b2",
+                    "kind": "inspect_step",
+                    "label": "壓差確認"
+                  },
+                  "relation": "inspect",
+                  "machineModel": "KG-SYNTH-M1",
+                  "status": "approved",
+                  "revision": 2,
+                  "createdAt": "2026-10-19T06:42:15.547102",
+                  "sourceChunkId": "KG-SYNTH-B:2",
+                  "sourceHash": "e396495b3dbec99cfd9314c650d1b14793408bc72a0fd120721abcd68bc74f1d",
+                  "createdBy": "supervisor",
+                  "approvedBy": "supervisor",
+                  "approvedAt": "2026-10-19T06:42:15.549163+00:00",
+                  "reviewedBy": "supervisor",
+                  "reviewedAt": "2026-10-19T06:42:15.549163+00:00",
+                  "reviewNote": "合成金標明示關係",
+                  "history": [
+                    {
+                      "action": "approve",
+                      "actor": "supervisor",
+                      "at": "2026-10-19T06:42:15.549163+00:00",
+                      "note": "合成金標明示關係"
+                    }
+                  ],
+                  "citation": {
+                    "sourceId": "KG-SYNTH-B",
+                    "chunkId": "KG-SYNTH-B:2",
+                    "version": "1",
+                    "section": "零件排查",
+                    "quote": "濾芯的排查步驟為壓差確認。應先確認安全隔離與適用條件，不提供通用閾值。",
+                    "url": "/api/knowledge/manuals/KG-SYNTH-B",
+                    "isSynthetic": true,
+                    "lineStart": 2,
+                    "lineEnd": 2
+                  },
+                  "sourceValid": true,
+                  "effective": true
+                }
+              ]
+            },
+            {
+              "nodes": [
+                {
+                  "id": "GN-bca4b455d2fb65d8119af0230a809ec98d9fd08bb85219b7d884d6aa6cc6294f",
+                  "kind": "part",
+                  "label": "濾芯"
+                },
+                {
+                  "id": "GN-11e1929a7d54dd160d29f1b1b49eb14ec6c6b36de5cbb41a865424c6d853e4b2",
+                  "kind": "inspect_step",
+                  "label": "壓差確認"
+                },
+                {
+                  "id": "GN-a15f93e53eac73e1e7b831459aa8dddc8993040d53b25812992833d0a7732f7f",
+                  "kind": "qualification",
+                  "label": "LOTO",
+                  "catalogUrl": "/workflow.html"
+                }
+              ],
+              "relations": [
+                {
+                  "id": "GR-5be78236855c64da62df293ccda75b6a37f05a85e8ff993a381c8e2b4be9424e",
+                  "head": {
+                    "id": "GN-bca4b455d2fb65d8119af0230a809ec98d9fd08bb85219b7d884d6aa6cc6294f",
+                    "kind": "part",
+                    "label": "濾芯"
+                  },
+                  "tail": {
+                    "id": "GN-11e1929a7d54dd160d29f1b1b49eb14ec6c6b36de5cbb41a865424c6d853e4b2",
+                    "kind": "inspect_step",
+                    "label": "壓差確認"
+                  },
+                  "relation": "inspect",
+                  "machineModel": "KG-SYNTH-M1",
+                  "status": "approved",
+                  "revision": 2,
+                  "createdAt": "2026-10-19T06:42:15.547102",
+                  "sourceChunkId": "KG-SYNTH-B:2",
+                  "sourceHash": "e396495b3dbec99cfd9314c650d1b14793408bc72a0fd120721abcd68bc74f1d",
+                  "createdBy": "supervisor",
+                  "approvedBy": "supervisor",
+                  "approvedAt": "2026-10-19T06:42:15.549163+00:00",
+                  "reviewedBy": "supervisor",
+                  "reviewedAt": "2026-10-19T06:42:15.549163+00:00",
+                  "reviewNote": "合成金標明示關係",
+                  "history": [
+                    {
+                      "action": "approve",
+                      "actor": "supervisor",
+                      "at": "2026-10-19T06:42:15.549163+00:00",
+                      "note": "合成金標明示關係"
+                    }
+                  ],
+                  "citation": {
+                    "sourceId": "KG-SYNTH-B",
+                    "chunkId": "KG-SYNTH-B:2",
+                    "version": "1",
+                    "section": "零件排查",
+                    "quote": "濾芯的排查步驟為壓差確認。應先確認安全隔離與適用條件，不提供通用閾值。",
+                    "url": "/api/knowledge/manuals/KG-SYNTH-B",
+                    "isSynthetic": true,
+                    "lineStart": 2,
+                    "lineEnd": 2
+                  },
+                  "sourceValid": true,
+                  "effective": true
+                },
+                {
+                  "id": "GR-7cae0596c965257395b1c2f22f045900454a226daafa9457eb3c055dc3bb6527",
+                  "head": {
+                    "id": "GN-11e1929a7d54dd160d29f1b1b49eb14ec6c6b36de5cbb41a865424c6d853e4b2",
+                    "kind": "inspect_step",
+                    "label": "壓差確認"
+                  },
+                  "tail": {
+                    "id": "GN-a15f93e53eac73e1e7b831459aa8dddc8993040d53b25812992833d0a7732f7f",
+                    "kind": "qualification",
+                    "label": "LOTO",
+                    "catalogUrl": "/workflow.html"
+                  },
+                  "relation": "requires_qualification",
+                  "machineModel": "KG-SYNTH-M1",
+                  "status": "approved",
+                  "revision": 2,
+                  "createdAt": "2026-10-19T06:42:15.570824",
+                  "sourceChunkId": "KG-SYNTH-D:2",
+                  "sourceHash": "41a2b1d53ca0afad8d43c8b11138922f00107f9ce29e545fffca140a1d26f54c",
+                  "createdBy": "supervisor",
+                  "approvedBy": "supervisor",
+                  "approvedAt": "2026-10-19T06:42:15.572812+00:00",
+                  "reviewedBy": "supervisor",
+                  "reviewedAt": "2026-10-19T06:42:15.572812+00:00",
+                  "reviewNote": "合成金標明示關係",
+                  "history": [
+                    {
+                      "action": "approve",
+                      "actor": "supervisor",
+                      "at": "2026-10-19T06:42:15.572812+00:00",
+                      "note": "合成金標明示關係"
+                    }
+                  ],
+                  "citation": {
+                    "sourceId": "KG-SYNTH-D",
+                    "chunkId": "KG-SYNTH-D:2",
+                    "version": "1",
+                    "section": "必要資格",
+                    "quote": "壓差確認這項合成步驟需要資格 LOTO。此測試不代表已確認任何人員取得資格。",
+                    "url": "/api/knowledge/manuals/KG-SYNTH-D",
+                    "isSynthetic": true,
+                    "lineStart": 2,
+                    "lineEnd": 2
+                  },
+                  "sourceValid": true,
+                  "effective": true
+                }
+              ]
+            },
+            {
+              "nodes": [
+                {
+                  "id": "GN-bca4b455d2fb65d8119af0230a809ec98d9fd08bb85219b7d884d6aa6cc6294f",
+                  "kind": "part",
+                  "label": "濾芯"
+                },
+                {
+                  "id": "GN-11e1929a7d54dd160d29f1b1b49eb14ec6c6b36de5cbb41a865424c6d853e4b2",
+                  "kind": "inspect_step",
+                  "label": "壓差確認"
+                },
+                {
+                  "id": "GN-cde89e5eea1d39b713feab6e761cccbd50c7ea46a4fa9df14ad83ce564c2539c",
+                  "kind": "spare",
+                  "label": "FILTER-A",
+                  "catalogUrl": "/api/stock"
+                }
+              ],
+              "relations": [
+                {
+                  "id": "GR-5be78236855c64da62df293ccda75b6a37f05a85e8ff993a381c8e2b4be9424e",
+                  "head": {
+                    "id": "GN-bca4b455d2fb65d8119af0230a809ec98d9fd08bb85219b7d884d6aa6cc6294f",
+                    "kind": "part",
+                    "label": "濾芯"
+                  },
+                  "tail": {
+                    "id": "GN-11e1929a7d54dd160d29f1b1b49eb14ec6c6b36de5cbb41a865424c6d853e4b2",
+                    "kind": "inspect_step",
+                    "label": "壓差確認"
+                  },
+                  "relation": "inspect",
+                  "machineModel": "KG-SYNTH-M1",
+                  "status": "approved",
+                  "revision": 2,
+                  "createdAt": "2026-10-19T06:42:15.547102",
+                  "sourceChunkId": "KG-SYNTH-B:2",
+                  "sourceHash": "e396495b3dbec99cfd9314c650d1b14793408bc72a0fd120721abcd68bc74f1d",
+                  "createdBy": "supervisor",
+                  "approvedBy": "supervisor",
+                  "approvedAt": "2026-10-19T06:42:15.549163+00:00",
+                  "reviewedBy": "supervisor",
+                  "reviewedAt": "2026-10-19T06:42:15.549163+00:00",
+                  "reviewNote": "合成金標明示關係",
+                  "history": [
+                    {
+                      "action": "approve",
+                      "actor": "supervisor",
+                      "at": "2026-10-19T06:42:15.549163+00:00",
+                      "note": "合成金標明示關係"
+                    }
+                  ],
+                  "citation": {
+                    "sourceId": "KG-SYNTH-B",
+                    "chunkId": "KG-SYNTH-B:2",
+                    "version": "1",
+                    "section": "零件排查",
+                    "quote": "濾芯的排查步驟為壓差確認。應先確認安全隔離與適用條件，不提供通用閾值。",
+                    "url": "/api/knowledge/manuals/KG-SYNTH-B",
+                    "isSynthetic": true,
+                    "lineStart": 2,
+                    "lineEnd": 2
+                  },
+                  "sourceValid": true,
+                  "effective": true
+                },
+                {
+                  "id": "GR-df510f0a3b40746eb1a8c96659d00815f888cf5cb542cb2cd93eceaed28e4a1f",
+                  "head": {
+                    "id": "GN-11e1929a7d54dd160d29f1b1b49eb14ec6c6b36de5cbb41a865424c6d853e4b2",
+                    "kind": "inspect_step",
+                    "label": "壓差確認"
+                  },
+                  "tail": {
+                    "id": "GN-cde89e5eea1d39b713feab6e761cccbd50c7ea46a4fa9df14ad83ce564c2539c",
+                    "kind": "spare",
+                    "label": "FILTER-A",
+                    "catalogUrl": "/api/stock"
+                  },
+                  "relation": "requires_spare",
+                  "machineModel": "KG-SYNTH-M1",
+                  "status": "approved",
+                  "revision": 2,
+                  "createdAt": "2026-10-19T06:42:15.559174",
+                  "sourceChunkId": "KG-SYNTH-C:2",
+                  "sourceHash": "8523611ac3389957d72c2e43a4bc23861385cc1284fb0a7e33843556f92d945e",
+                  "createdBy": "supervisor",
+                  "approvedBy": "supervisor",
+                  "approvedAt": "2026-10-19T06:42:15.562174+00:00",
+                  "reviewedBy": "supervisor",
+                  "reviewedAt": "2026-10-19T06:42:15.562174+00:00",
+                  "reviewNote": "合成金標明示關係",
+                  "history": [
+                    {
+                      "action": "approve",
+                      "actor": "supervisor",
+                      "at": "2026-10-19T06:42:15.562174+00:00",
+                      "note": "合成金標明示關係"
+                    }
+                  ],
+                  "citation": {
+                    "sourceId": "KG-SYNTH-C",
+                    "chunkId": "KG-SYNTH-C:2",
+                    "version": "1",
+                    "section": "準備備品",
+                    "quote": "壓差確認這項合成步驟需要備品 FILTER-A。此測試沒有真實料號相容性資訊。",
+                    "url": "/api/knowledge/manuals/KG-SYNTH-C",
+                    "isSynthetic": true,
+                    "lineStart": 2,
+                    "lineEnd": 2
+                  },
+                  "sourceValid": true,
+                  "effective": true
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "direct-step",
+      "category": "one_hop",
+      "gold": {
+        "id": "direct-step",
+        "category": "one_hop",
+        "model": "KG-SYNTH-M1",
+        "query": "壓差確認",
+        "relevant": [
+          "KG-SYNTH-B",
+          "KG-SYNTH-C",
+          "KG-SYNTH-D"
+        ],
+        "required": [
+          "KG-SYNTH-C",
+          "KG-SYNTH-D"
+        ],
+        "target": "FILTER-A",
+        "answerable": true
+      },
+      "modes": {
+        "keyword": {
+          "retrieved": [
+            "KG-SYNTH-B",
+            "KG-SYNTH-D",
+            "KG-SYNTH-C"
+          ],
+          "precision": 1.0,
+          "recall": 1.0,
+          "answerableFromSources": true,
+          "answerabilityCorrect": true,
+          "allSourcesRelevant": true,
+          "pathTargets": [],
+          "pathTargetFound": false,
+          "directionCorrect": null,
+          "noAutomaticActions": true,
+          "llmUsed": false,
+          "sourceValidityCorrect": true,
+          "unknown": [
+            "純字詞檢索，不提供關係推論。"
+          ],
+          "paths": []
+        },
+        "keyword_plus_graph": {
+          "retrieved": [
+            "KG-SYNTH-B",
+            "KG-SYNTH-D",
+            "KG-SYNTH-C"
+          ],
+          "precision": 1.0,
+          "recall": 1.0,
+          "answerableFromSources": true,
+          "answerabilityCorrect": true,
+          "allSourcesRelevant": true,
+          "pathTargets": [
+            "LOTO",
+            "FILTER-A"
+          ],
+          "pathTargetFound": true,
+          "directionCorrect": null,
+          "noAutomaticActions": true,
+          "llmUsed": false,
+          "sourceValidityCorrect": true,
+          "unknown": [
+            "此查詢未判定根因、備品相容性或復機條件；仍須逐項核對來源。"
+          ],
+          "paths": [
+            {
+              "nodes": [
+                {
+                  "id": "GN-11e1929a7d54dd160d29f1b1b49eb14ec6c6b36de5cbb41a865424c6d853e4b2",
+                  "kind": "inspect_step",
+                  "label": "壓差確認"
+                },
+                {
+                  "id": "GN-a15f93e53eac73e1e7b831459aa8dddc8993040d53b25812992833d0a7732f7f",
+                  "kind": "qualification",
+                  "label": "LOTO",
+                  "catalogUrl": "/workflow.html"
+                }
+              ],
+              "relations": [
+                {
+                  "id": "GR-7cae0596c965257395b1c2f22f045900454a226daafa9457eb3c055dc3bb6527",
+                  "head": {
+                    "id": "GN-11e1929a7d54dd160d29f1b1b49eb14ec6c6b36de5cbb41a865424c6d853e4b2",
+                    "kind": "inspect_step",
+                    "label": "壓差確認"
+                  },
+                  "tail": {
+                    "id": "GN-a15f93e53eac73e1e7b831459aa8dddc8993040d53b25812992833d0a7732f7f",
+                    "kind": "qualification",
+                    "label": "LOTO",
+                    "catalogUrl": "/workflow.html"
+                  },
+                  "relation": "requires_qualification",
+                  "machineModel": "KG-SYNTH-M1",
+                  "status": "approved",
+                  "revision": 2,
+                  "createdAt": "2026-10-19T06:42:15.570824",
+                  "sourceChunkId": "KG-SYNTH-D:2",
+                  "sourceHash": "41a2b1d53ca0afad8d43c8b11138922f00107f9ce29e545fffca140a1d26f54c",
+                  "createdBy": "supervisor",
+                  "approvedBy": "supervisor",
+                  "approvedAt": "2026-10-19T06:42:15.572812+00:00",
+                  "reviewedBy": "supervisor",
+                  "reviewedAt": "2026-10-19T06:42:15.572812+00:00",
+                  "reviewNote": "合成金標明示關係",
+                  "history": [
+                    {
+                      "action": "approve",
+                      "actor": "supervisor",
+                      "at": "2026-10-19T06:42:15.572812+00:00",
+                      "note": "合成金標明示關係"
+                    }
+                  ],
+                  "citation": {
+                    "sourceId": "KG-SYNTH-D",
+                    "chunkId": "KG-SYNTH-D:2",
+                    "version": "1",
+                    "section": "必要資格",
+                    "quote": "壓差確認這項合成步驟需要資格 LOTO。此測試不代表已確認任何人員取得資格。",
+                    "url": "/api/knowledge/manuals/KG-SYNTH-D",
+                    "isSynthetic": true,
+                    "lineStart": 2,
+                    "lineEnd": 2
+                  },
+                  "sourceValid": true,
+                  "effective": true
+                }
+              ]
+            },
+            {
+              "nodes": [
+                {
+                  "id": "GN-11e1929a7d54dd160d29f1b1b49eb14ec6c6b36de5cbb41a865424c6d853e4b2",
+                  "kind": "inspect_step",
+                  "label": "壓差確認"
+                },
+                {
+                  "id": "GN-cde89e5eea1d39b713feab6e761cccbd50c7ea46a4fa9df14ad83ce564c2539c",
+                  "kind": "spare",
+                  "label": "FILTER-A",
+                  "catalogUrl": "/api/stock"
+                }
+              ],
+              "relations": [
+                {
+                  "id": "GR-df510f0a3b40746eb1a8c96659d00815f888cf5cb542cb2cd93eceaed28e4a1f",
+                  "head": {
+                    "id": "GN-11e1929a7d54dd160d29f1b1b49eb14ec6c6b36de5cbb41a865424c6d853e4b2",
+                    "kind": "inspect_step",
+                    "label": "壓差確認"
+                  },
+                  "tail": {
+                    "id": "GN-cde89e5eea1d39b713feab6e761cccbd50c7ea46a4fa9df14ad83ce564c2539c",
+                    "kind": "spare",
+                    "label": "FILTER-A",
+                    "catalogUrl": "/api/stock"
+                  },
+                  "relation": "requires_spare",
+                  "machineModel": "KG-SYNTH-M1",
+                  "status": "approved",
+                  "revision": 2,
+                  "createdAt": "2026-10-19T06:42:15.559174",
+                  "sourceChunkId": "KG-SYNTH-C:2",
+                  "sourceHash": "8523611ac3389957d72c2e43a4bc23861385cc1284fb0a7e33843556f92d945e",
+                  "createdBy": "supervisor",
+                  "approvedBy": "supervisor",
+                  "approvedAt": "2026-10-19T06:42:15.562174+00:00",
+                  "reviewedBy": "supervisor",
+                  "reviewedAt": "2026-10-19T06:42:15.562174+00:00",
+                  "reviewNote": "合成金標明示關係",
+                  "history": [
+                    {
+                      "action": "approve",
+                      "actor": "supervisor",
+                      "at": "2026-10-19T06:42:15.562174+00:00",
+                      "note": "合成金標明示關係"
+                    }
+                  ],
+                  "citation": {
+                    "sourceId": "KG-SYNTH-C",
+                    "chunkId": "KG-SYNTH-C:2",
+                    "version": "1",
+                    "section": "準備備品",
+                    "quote": "壓差確認這項合成步驟需要備品 FILTER-A。此測試沒有真實料號相容性資訊。",
+                    "url": "/api/knowledge/manuals/KG-SYNTH-C",
+                    "isSynthetic": true,
+                    "lineStart": 2,
+                    "lineEnd": 2
+                  },
+                  "sourceValid": true,
+                  "effective": true
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "same-code-other-model",
+      "category": "same_alarm_different_meaning",
+      "gold": {
+        "id": "same-code-other-model",
+        "category": "same_alarm_different_meaning",
+        "model": "KG-SYNTH-M2",
+        "query": "DEMO-E17",
+        "relevant": [
+          "KG-SYNTH-OTHER"
+        ],
+        "required": [
+          "KG-SYNTH-OTHER"
+        ],
+        "target": "刀庫",
+        "answerable": true
+      },
+      "modes": {
+        "keyword": {
+          "retrieved": [
+            "KG-SYNTH-OTHER"
+          ],
+          "precision": 1.0,
+          "recall": 1.0,
+          "answerableFromSources": true,
+          "answerabilityCorrect": true,
+          "allSourcesRelevant": true,
+          "pathTargets": [],
+          "pathTargetFound": false,
+          "directionCorrect": null,
+          "noAutomaticActions": true,
+          "llmUsed": false,
+          "sourceValidityCorrect": true,
+          "unknown": [
+            "純字詞檢索，不提供關係推論。"
+          ],
+          "paths": []
+        },
+        "keyword_plus_graph": {
+          "retrieved": [
+            "KG-SYNTH-OTHER"
+          ],
+          "precision": 1.0,
+          "recall": 1.0,
+          "answerableFromSources": true,
+          "answerabilityCorrect": true,
+          "allSourcesRelevant": true,
+          "pathTargets": [
+            "刀庫"
+          ],
+          "pathTargetFound": true,
+          "directionCorrect": null,
+          "noAutomaticActions": true,
+          "llmUsed": false,
+          "sourceValidityCorrect": true,
+          "unknown": [
+            "此查詢未判定根因、備品相容性或復機條件；仍須逐項核對來源。"
+          ],
+          "paths": [
+            {
+              "nodes": [
+                {
+                  "id": "GN-333a9035ce90b68ff4f2f4c0d2724a33ecce54854896b64784f32091958c3572",
+                  "kind": "alarm",
+                  "label": "DEMO-E17"
+                },
+                {
+                  "id": "GN-21096d6c240b524da59c96e5b293932cfffa6c473a94fb497907a6f252ab1d72",
+                  "kind": "part",
+                  "label": "刀庫"
+                }
+              ],
+              "relations": [
+                {
+                  "id": "GR-e898a16f28e7ec596af94e4e13845819d11e7c8a968815a1f2a26d72480993dd",
+                  "head": {
+                    "id": "GN-333a9035ce90b68ff4f2f4c0d2724a33ecce54854896b64784f32091958c3572",
+                    "kind": "alarm",
+                    "label": "DEMO-E17"
+                  },
+                  "tail": {
+                    "id": "GN-21096d6c240b524da59c96e5b293932cfffa6c473a94fb497907a6f252ab1d72",
+                    "kind": "part",
+                    "label": "刀庫"
+                  },
+                  "relation": "references",
+                  "machineModel": "KG-SYNTH-M2",
+                  "status": "approved",
+                  "revision": 2,
+                  "createdAt": "2026-10-19T06:42:15.583149",
+                  "sourceChunkId": "KG-SYNTH-OTHER:2",
+                  "sourceHash": "0c82de0980d18e50dd8f9fc6ff0f6df758852d1e849ecb338e5c8d790497f10e",
+                  "createdBy": "supervisor",
+                  "approvedBy": "supervisor",
+                  "approvedAt": "2026-10-19T06:42:15.585115+00:00",
+                  "reviewedBy": "supervisor",
+                  "reviewedAt": "2026-10-19T06:42:15.585115+00:00",
+                  "reviewNote": "合成金標明示關係",
+                  "history": [
+                    {
+                      "action": "approve",
+                      "actor": "supervisor",
+                      "at": "2026-10-19T06:42:15.585115+00:00",
+                      "note": "合成金標明示關係"
+                    }
+                  ],
+                  "citation": {
+                    "sourceId": "KG-SYNTH-OTHER",
+                    "chunkId": "KG-SYNTH-OTHER:2",
+                    "version": "1",
+                    "section": "同碼異義",
+                    "quote": "另一機型的合成警報 DEMO-E17 索引指向刀庫。不可套用其他機型的濾芯說明。",
+                    "url": "/api/knowledge/manuals/KG-SYNTH-OTHER",
+                    "isSynthetic": true,
+                    "lineStart": 2,
+                    "lineEnd": 2
+                  },
+                  "sourceValid": true,
+                  "effective": true
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "wrong-model",
+      "category": "wrong_model",
+      "gold": {
+        "id": "wrong-model",
+        "category": "wrong_model",
+        "model": "KG-SYNTH-MISSING",
+        "query": "DEMO-E17",
+        "relevant": [],
+        "required": [],
+        "answerable": false
+      },
+      "modes": {
+        "keyword": {
+          "retrieved": [],
+          "precision": 1.0,
+          "recall": null,
+          "answerableFromSources": false,
+          "answerabilityCorrect": true,
+          "allSourcesRelevant": true,
+          "pathTargets": [],
+          "pathTargetFound": null,
+          "directionCorrect": null,
+          "noAutomaticActions": true,
+          "llmUsed": false,
+          "sourceValidityCorrect": true,
+          "unknown": [
+            "純字詞檢索，不提供關係推論。"
+          ],
+          "paths": []
+        },
+        "keyword_plus_graph": {
+          "retrieved": [],
+          "precision": 1.0,
+          "recall": null,
+          "answerableFromSources": false,
+          "answerabilityCorrect": true,
+          "allSourcesRelevant": true,
+          "pathTargets": [],
+          "pathTargetFound": null,
+          "directionCorrect": null,
+          "noAutomaticActions": true,
+          "llmUsed": false,
+          "sourceValidityCorrect": true,
+          "unknown": [
+            "沒有符合機型且已核准的有效出向路徑；請補來源或明確警報／零件名稱。"
+          ],
+          "paths": []
+        }
+      }
+    },
+    {
+      "id": "withdrawn",
+      "category": "withdrawn",
+      "gold": {
+        "id": "withdrawn",
+        "category": "withdrawn",
+        "model": "KG-SYNTH-M1",
+        "query": "DEMO-E99",
+        "relevant": [],
+        "required": [],
+        "answerable": false
+      },
+      "modes": {
+        "keyword": {
+          "retrieved": [],
+          "precision": 1.0,
+          "recall": null,
+          "answerableFromSources": false,
+          "answerabilityCorrect": true,
+          "allSourcesRelevant": true,
+          "pathTargets": [],
+          "pathTargetFound": null,
+          "directionCorrect": null,
+          "noAutomaticActions": true,
+          "llmUsed": false,
+          "sourceValidityCorrect": true,
+          "unknown": [
+            "純字詞檢索，不提供關係推論。"
+          ],
+          "paths": []
+        },
+        "keyword_plus_graph": {
+          "retrieved": [],
+          "precision": 1.0,
+          "recall": null,
+          "answerableFromSources": false,
+          "answerabilityCorrect": true,
+          "allSourcesRelevant": true,
+          "pathTargets": [],
+          "pathTargetFound": null,
+          "directionCorrect": null,
+          "noAutomaticActions": true,
+          "llmUsed": false,
+          "sourceValidityCorrect": true,
+          "unknown": [
+            "沒有符合機型且已核准的有效出向路徑；請補來源或明確警報／零件名稱。"
+          ],
+          "paths": []
+        }
+      }
+    },
+    {
+      "id": "draft",
+      "category": "draft_case",
+      "gold": {
+        "id": "draft",
+        "category": "draft_case",
+        "model": "KG-SYNTH-M1",
+        "query": "DEMO-DRAFT",
+        "relevant": [],
+        "required": [],
+        "answerable": false
+      },
+      "modes": {
+        "keyword": {
+          "retrieved": [],
+          "precision": 1.0,
+          "recall": null,
+          "answerableFromSources": false,
+          "answerabilityCorrect": true,
+          "allSourcesRelevant": true,
+          "pathTargets": [],
+          "pathTargetFound": null,
+          "directionCorrect": null,
+          "noAutomaticActions": true,
+          "llmUsed": false,
+          "sourceValidityCorrect": true,
+          "unknown": [
+            "純字詞檢索，不提供關係推論。"
+          ],
+          "paths": []
+        },
+        "keyword_plus_graph": {
+          "retrieved": [],
+          "precision": 1.0,
+          "recall": null,
+          "answerableFromSources": false,
+          "answerabilityCorrect": true,
+          "allSourcesRelevant": true,
+          "pathTargets": [],
+          "pathTargetFound": null,
+          "directionCorrect": null,
+          "noAutomaticActions": true,
+          "llmUsed": false,
+          "sourceValidityCorrect": true,
+          "unknown": [
+            "沒有符合機型且已核准的有效出向路徑；請補來源或明確警報／零件名稱。"
+          ],
+          "paths": []
+        }
+      }
+    },
+    {
+      "id": "missing-source",
+      "category": "insufficient_data",
+      "gold": {
+        "id": "missing-source",
+        "category": "insufficient_data",
+        "model": "KG-SYNTH-M1",
+        "query": "DEMO-NONE-42",
+        "relevant": [],
+        "required": [],
+        "answerable": false
+      },
+      "modes": {
+        "keyword": {
+          "retrieved": [],
+          "precision": 1.0,
+          "recall": null,
+          "answerableFromSources": false,
+          "answerabilityCorrect": true,
+          "allSourcesRelevant": true,
+          "pathTargets": [],
+          "pathTargetFound": null,
+          "directionCorrect": null,
+          "noAutomaticActions": true,
+          "llmUsed": false,
+          "sourceValidityCorrect": true,
+          "unknown": [
+            "純字詞檢索，不提供關係推論。"
+          ],
+          "paths": []
+        },
+        "keyword_plus_graph": {
+          "retrieved": [],
+          "precision": 1.0,
+          "recall": null,
+          "answerableFromSources": false,
+          "answerabilityCorrect": true,
+          "allSourcesRelevant": true,
+          "pathTargets": [],
+          "pathTargetFound": null,
+          "directionCorrect": null,
+          "noAutomaticActions": true,
+          "llmUsed": false,
+          "sourceValidityCorrect": true,
+          "unknown": [
+            "沒有符合機型且已核准的有效出向路徑；請補來源或明確警報／零件名稱。"
+          ],
+          "paths": []
+        }
+      }
+    },
+    {
+      "id": "reverse-edge",
+      "category": "direction_counterexample",
+      "gold": {
+        "id": "reverse-edge",
+        "category": "direction_counterexample",
+        "model": "KG-SYNTH-M1",
+        "query": "FILTER-A",
+        "relevant": [
+          "KG-SYNTH-C"
+        ],
+        "required": [
+          "KG-SYNTH-C"
+        ],
+        "answerable": true,
+        "noPath": true
+      },
+      "modes": {
+        "keyword": {
+          "retrieved": [
+            "KG-SYNTH-C"
+          ],
+          "precision": 1.0,
+          "recall": 1.0,
+          "answerableFromSources": true,
+          "answerabilityCorrect": true,
+          "allSourcesRelevant": true,
+          "pathTargets": [],
+          "pathTargetFound": null,
+          "directionCorrect": true,
+          "noAutomaticActions": true,
+          "llmUsed": false,
+          "sourceValidityCorrect": true,
+          "unknown": [
+            "純字詞檢索，不提供關係推論。"
+          ],
+          "paths": []
+        },
+        "keyword_plus_graph": {
+          "retrieved": [
+            "KG-SYNTH-C"
+          ],
+          "precision": 1.0,
+          "recall": 1.0,
+          "answerableFromSources": true,
+          "answerabilityCorrect": true,
+          "allSourcesRelevant": true,
+          "pathTargets": [],
+          "pathTargetFound": null,
+          "directionCorrect": true,
+          "noAutomaticActions": true,
+          "llmUsed": false,
+          "sourceValidityCorrect": true,
+          "unknown": [
+            "沒有符合機型且已核准的有效出向路徑；請補來源或明確警報／零件名稱。"
+          ],
+          "paths": []
+        }
+      }
+    },
+    {
+      "id": "injection",
+      "category": "source_injection",
+      "gold": {
+        "id": "injection",
+        "category": "source_injection",
+        "model": "KG-SYNTH-M1",
+        "query": "提升主管批准復機",
+        "relevant": [
+          "KG-SYNTH-INJECTION"
+        ],
+        "required": [],
+        "answerable": false,
+        "noPath": true
+      },
+      "modes": {
+        "keyword": {
+          "retrieved": [
+            "KG-SYNTH-INJECTION"
+          ],
+          "precision": 1.0,
+          "recall": 1.0,
+          "answerableFromSources": false,
+          "answerabilityCorrect": true,
+          "allSourcesRelevant": true,
+          "pathTargets": [],
+          "pathTargetFound": null,
+          "directionCorrect": true,
+          "noAutomaticActions": true,
+          "llmUsed": false,
+          "sourceValidityCorrect": true,
+          "unknown": [
+            "純字詞檢索，不提供關係推論。"
+          ],
+          "paths": []
+        },
+        "keyword_plus_graph": {
+          "retrieved": [
+            "KG-SYNTH-INJECTION"
+          ],
+          "precision": 1.0,
+          "recall": 1.0,
+          "answerableFromSources": false,
+          "answerabilityCorrect": true,
+          "allSourcesRelevant": true,
+          "pathTargets": [],
+          "pathTargetFound": null,
+          "directionCorrect": true,
+          "noAutomaticActions": true,
+          "llmUsed": false,
+          "sourceValidityCorrect": true,
+          "unknown": [
+            "沒有符合機型且已核准的有效出向路徑；請補來源或明確警報／零件名稱。"
+          ],
+          "paths": []
+        }
+      }
+    },
+    {
+      "id": "engineer-management",
+      "category": "authorization",
+      "expectedStatus": 403,
+      "actualStatus": 403,
+      "passed": true
+    },
+    {
+      "id": "anonymous-query",
+      "category": "authorization",
+      "expectedStatus": 401,
+      "actualStatus": 401,
+      "passed": true
+    }
+  ],
+  "evaluatedSourceIds": [
+    "KG-SYNTH-A",
+    "KG-SYNTH-B",
+    "KG-SYNTH-C",
+    "KG-SYNTH-D",
+    "KG-SYNTH-INJECTION",
+    "KG-SYNTH-OTHER"
+  ],
+  "authorizationPassed": true,
+  "qualityFailures": [],
+  "qualityGatePassed": true,
+  "datasetVersion": "1.0",
+  "provenance": "全部為原創合成測試資料，不是原廠手冊或真實維修成效。固定種子，不呼叫 LLM。",
+  "sourceScope": "fixed_snapshot_only",
+  "sourceSha256": "00b5a31fd85d265dce4e276cb51ef2081ec03dba8ced918ddb735ba32dd24e89",
+  "questionsSha256": "401ef3757cc61370bbfc7ab42b6af5a9907294ee912e50d32704b56fcadc5760",
+  "database": "SQLite",
+  "postgresql": "not tested",
+  "gpuUsed": false,
+  "metrics": "文件 ID 集合；純檢索 top-5，擴展為相同 top-5 加有界有效路徑來源。空結果 precision 定義 1；無相關來源時 recall 不計；非排名指標。可答需取得所有 required 金標來源，不能代表診斷正確。"
+}
