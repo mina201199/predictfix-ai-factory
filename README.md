@@ -106,7 +106,7 @@ $env:APP_MODE='demo'
 
 開啟 `http://127.0.0.1:8080/scan.html`，點 CNC-07 範例銘牌，應自動看到機台總覽、負責人、維修中的工作與歷史檢修；展開各區段查看細節。範例也會實際執行 OCR。上傳沒有文字的照片，應聚焦到手動輸入欄；輸入 `cnc-12` 應找到 CNC-12。18 張範例與可列印總表位於 [artifacts/demo-nameplates](artifacts/demo-nameplates/)，頁面截圖可由瀏覽器在總覽顯示後擷取。
 
-手機或 Getac 平板與筆電連同一個內網 Wi-Fi，再執行：
+目前以手機操作展示。手機與筆電連同一個內網 Wi-Fi，再執行：
 
 ```powershell
 .\start.ps1 -Demo -Lan
@@ -120,7 +120,7 @@ $env:APP_MODE='demo'
 New-NetFirewallRule -DisplayName "PredictFix LAN demo" -Direction Inbound -Protocol TCP -LocalPort 8080 -Profile Private -Action Allow
 ```
 
-實體手機／Getac 的連線與拍攝仍待裝置實測。瀏覽器測試已覆蓋手機版 375×812 與桌面版、範例辨識、無文字圖片及手動輸入。另以 `node tests/scan_race.cjs` 檢查舊 OCR 回應不會蓋掉使用者後續選擇。
+實體手機的連線與拍攝仍待裝置實測；Getac 工業平板僅列入未來選型評估，不屬於目前展示範圍。瀏覽器測試已覆蓋手機版 375×812 與桌面版、範例辨識、無文字圖片及手動輸入。另以 `node tests/scan_race.cjs` 檢查舊 OCR 回應不會蓋掉使用者後續選擇。
 
 面試說法：「目前以響應式網頁展示，先驗證拍照、離線 OCR、維修資料整合與附來源的 AI 建議。後續可用 Capacitor 包裝成 App，或以原生 App 接同一套 API，再整合工業平板掃描器、MDM 派送與離線快取。」這些 App 能力是後續規劃。
 
