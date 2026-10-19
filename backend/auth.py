@@ -57,18 +57,18 @@ def register(app):
         return await call_next(request)
     @app.get('/api/auth/config')
     def auth_config():
-        enabled=config.demo() and os.getenv('DEMO_MODE')=='1'
+        enabled=config.demo() and not config.lan() and os.getenv('DEMO_MODE')=='1'
         with store.Session() as db:
             user=db.get(store.User,'interview_demo') if enabled else None
             interview=bool(user and user.active and user.role=='engineer')
         return {'demo_mode':enabled,'app_mode':'demo' if config.demo() else 'production',
-                'interview_demo_available':interview}
+                'interview_demo_available':interview,'lan_mode':config.lan()}
     class DemoLogin(BaseModel):
         role:str=Field(pattern=r'^(supervisor|engineer)$')
         username:str=Field(default='',max_length=50)
     @app.post('/api/auth/demo')
     def demo(body:DemoLogin,request:Request):
-        if not config.demo() or os.getenv('DEMO_MODE')!='1':raise HTTPException(403,'DEMO 快速登入未開啟')
+        if config.lan() or not config.demo() or os.getenv('DEMO_MODE')!='1':raise HTTPException(403,'DEMO 快速登入未開啟')
         username='supervisor' if body.role=='supervisor' else (body.username or 'amy')
         with store.Session() as db:
             user=db.get(store.User,username)
