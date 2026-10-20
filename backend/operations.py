@@ -173,7 +173,9 @@ def register(app):
             m.active=1;s.commit()
         return {'id':mid,'active':True}
     @app.get('/api/personnel')
-    def personnel():return people()
+    def personnel(request:Request):
+        auth.supervisor(request)
+        return people()
     @app.get('/api/analytics')
     def analytics():
         with store.Session() as s:

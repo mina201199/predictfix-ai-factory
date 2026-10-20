@@ -28,12 +28,18 @@ $('#ticket-form').onsubmit=async e=>{
   try{await api('/tickets',{method:'POST',headers:{'Idempotency-Key':crypto.randomUUID()},body:JSON.stringify({machine:$('#ticket-machine').value,issue:$('#ticket-issue').value,engineer:$('#ticket-engineer').value})});$('#ticket-dialog').close();await refreshTickets();toast('工單已建立並保存於後端資料庫')}catch(error){toast(error.message)}finally{button.disabled=false}
 };
 renderEngineers=async function(){
+  await window.authReady;
   if(factoryType!=='cnc')return;
+  if(window.authUser?.role!=='supervisor'){
+    $('#engineers').innerHTML='<p>工程師推薦由主管查看與派工。</p>';
+    $('#engineers').nextElementSibling.textContent='';
+    return;
+  }
   const sequence=++engineerRequest,m=machines[selected],part=m.parts[activePart][0];
   try{
     const people=await api('/engineers?machine='+encodeURIComponent(m.id)+'&part='+encodeURIComponent(part));if(sequence!==engineerRequest)return;
-    $('#engineers').innerHTML=people.slice(0,3).map(e=>`<div class="engineer"><span class="avatar">${escapeHTML(e.name.split(' ').map(n=>n[0]).join(''))}</span><div class="engineer-info"><b>${escapeHTML(e.name)}</b><p>推薦原因 · ${escapeHTML(m.id)} / ${escapeHTML(part)}</p><ul class="engineer-reasons">${e.reasons.map(r=>`<li>${escapeHTML(r)}</li>`).join('')}</ul><div class="reason-breakdown"><span>專長 ${e.breakdown.skill}/40</span><span>案例 ${e.breakdown.history}/30</span><span>可用性 ${e.breakdown.availability}/30</span></div><button class="assign" data-live-assign="${escapeHTML(e.name)}">指派工單 →</button></div><div class="mini-score">${e.score}<small>規則評分</small></div></div>`).join('');
-    $('#engineers').nextElementSibling.textContent='專長與案例為展示履歷；工作負荷讀取後端未結案工單。分數由規則計算，未使用 AI 模型。';
+    $('#engineers').innerHTML=people.slice(0,3).map(e=>`<div class="engineer"><span class="avatar">${escapeHTML(e.name.split(' ').map(n=>n[0]).join(''))}</span><div class="engineer-info"><b>${escapeHTML(e.name)}</b><p>推薦原因 · ${escapeHTML(m.id)} / ${escapeHTML(part)}</p><ul class="engineer-reasons">${e.reasons.map(r=>`<li>${escapeHTML(r)}</li>`).join('')}</ul><div class="reason-breakdown"><span>專長 ${e.breakdown.skill}/${e.method==='attendance_capacity_rules'?60:40}</span>${e.breakdown.history===undefined?'':`<span>案例 ${e.breakdown.history}/30</span>`}<span>可用性 ${e.breakdown.availability}/${e.method==='attendance_capacity_rules'?40:30}</span></div><button class="assign" data-live-assign="${escapeHTML(e.name)}">指派工單 →</button></div><div class="mini-score">${e.score}<small>規則評分</small></div></div>`).join('');
+    $('#engineers').nextElementSibling.textContent='內建人員採展示履歷評分；新建帳號依出勤、資格與剩餘工時推薦。分數由規則計算。';
     document.querySelectorAll('[data-live-assign]').forEach(b=>b.onclick=()=>openTicket(b.dataset.liveAssign));
   }catch(error){if(sequence===engineerRequest)$('#engineers').innerHTML='<div class="engineer-loader">無法讀取推薦：'+escapeHTML(error.message)+'</div>'}
 };
