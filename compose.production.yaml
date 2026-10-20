@@ -10,6 +10,8 @@ services:
       LLM_PROVIDER: ollama
       OLLAMA_URL: http://ollama:11434
       OLLAMA_MODEL: ${OLLAMA_MODEL:-gemma4:e2b-it-q8_0}
+      # 只信任反向代理，避免所有使用者共用同一登入節流來源。
+      FORWARDED_ALLOW_IPS: ${PROXY_IP:-172.31.250.10}
       # 選填：不使用工單介接的部署不必設定，未設定時介接入口一律回 401
       INTEGRATION_SOURCES: ${INTEGRATION_SOURCES:-}
     depends_on:
@@ -76,6 +78,9 @@ services:
     ports:
       - "80:80"
       - "443:443"
+    networks:
+      default:
+        ipv4_address: ${PROXY_IP:-172.31.250.10}
     volumes:
       - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
       - caddy-data:/data
@@ -84,6 +89,12 @@ services:
       api:
         condition: service_healthy
     restart: unless-stopped
+networks:
+  default:
+    ipam:
+      config:
+        # 與主機上其他網路衝突時，在 env 檔改 PROXY_SUBNET 與 PROXY_IP
+        - subnet: ${PROXY_SUBNET:-172.31.250.0/24}
 volumes:
   production-db:
   production-models:

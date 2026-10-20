@@ -84,3 +84,9 @@ schema_versions 記錄目前第 1 版 schema，新增表採 create_all；不接�
 2026-10-07 已透過 SQLAlchemy 純 Python 安裝恢復本機兩模式；正式模式健康檢查、空資料庫、展示功能隔離與模型連線通過，見 [本機檢查報告](../artifacts/production-live-check.json)。兩份 Compose 設定已通過語法與環境代入檢查，Dockerfile 已補齊維修流程頁面資產。
 
 Docker Desktop 啟動仍失敗：引擎無法重新命名 `sailor-ingest.sock`，Windows 回報無法存取該檔案。保留原檔的復原嘗試也遭相同錯誤阻擋；未刪除 Docker 資料或修改安全設定。須在可運作的 Docker 引擎驗證容器、PostgreSQL、HTTPS 與還原流程。目前沒有公開部署網址。
+
+## 2026-10-20 系統檢查修正
+
+API 僅信任固定 Caddy 位址的代理標頭。網段衝突時請在部署環境檔同步調整 `PROXY_SUBNET` 與 `PROXY_IP`。既有部署須安排停機，先執行 Compose `down`（不可加 `-v`），再 `up -d --build`，以重建網路並保留資料卷。本次程式碼修改不會自動更新運行中的部署。
+
+使用外部工單介接時，請在未追蹤的 `.env.production` 設定 `INTEGRATION_SOURCES`；API 與 `integration-worker` 共用資料庫及介接設定。worker 在 API 健康後啟動，出站失敗依 outbox 狀態重試。未設定來源時，介接入口仍回傳 401。
