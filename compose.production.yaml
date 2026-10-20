@@ -10,6 +10,10 @@ services:
       LLM_PROVIDER: ollama
       OLLAMA_URL: http://ollama:11434
       OLLAMA_MODEL: ${OLLAMA_MODEL:-gemma4:e2b-it-q8_0}
+      # 未設定來源時仍拒絕介接請求；金鑰只由環境變數傳入。
+      INTEGRATION_SOURCES: ${INTEGRATION_SOURCES:-}
+      # 只信任反向代理，避免所有使用者共用同一登入節流來源。
+      FORWARDED_ALLOW_IPS: ${PROXY_IP:-172.31.250.10}
     depends_on:
       db:
         condition: service_healthy
@@ -19,6 +23,30 @@ services:
       interval: 30s
       timeout: 5s
       retries: 3
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+  integration-worker:
+    build: .
+    command: ["python", "-m", "backend.integration_worker"]
+    environment:
+      APP_MODE: production
+      DEMO_MODE: "0"
+      DATABASE_URL: ${DATABASE_URL:?Set a PostgreSQL connection URL in the deployment env file}
+      INTEGRATION_SOURCES: ${INTEGRATION_SOURCES:-}
+    depends_on:
+      db:
+        condition: service_healthy
+      # 等 api 完成建表再啟動，避免兩個程序同時對空資料庫執行 create_all
+      api:
+        condition: service_healthy
+    # 沒有 HTTP port 可做 healthcheck；資料庫斷線時程序會結束，由 restart 重新啟動。
+    # 送達失敗不會結束程序，而是記在 outbox 的 state／lastError 供主管查看。
+    restart: unless-stopped
+    # Python 是容器的 PID 1，會忽略 SIGTERM；改送 SIGINT 走程式既有的 KeyboardInterrupt 結束流程
+    stop_signal: SIGINT
     logging:
       driver: json-file
       options:
@@ -50,6 +78,9 @@ services:
     ports:
       - "80:80"
       - "443:443"
+    networks:
+      default:
+        ipv4_address: ${PROXY_IP:-172.31.250.10}
     volumes:
       - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
       - caddy-data:/data
@@ -58,6 +89,12 @@ services:
       api:
         condition: service_healthy
     restart: unless-stopped
+networks:
+  default:
+    ipam:
+      config:
+        # 與主機上其他網路衝突時，在 env 檔改 PROXY_SUBNET 與 PROXY_IP
+        - subnet: ${PROXY_SUBNET:-172.31.250.0/24}
 volumes:
   production-db:
   production-models:
