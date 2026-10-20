@@ -10,7 +10,7 @@ from datetime import datetime, timezone
 
 from fastapi import HTTPException
 from pydantic import BaseModel, ConfigDict, Field, ValidationError, field_validator
-from sqlalchemy import event, inspect, select
+from sqlalchemy import event, inspect, select, text
 
 from . import repair_flow, store
 from .integration_models import ExternalOrder, InboundEvent, MachineMapping, Outbox
@@ -123,6 +123,12 @@ def lockTransaction(db):
     db.connection().exec_driver_sql('BEGIN IMMEDIATE')
 
 
+def lockExternalOrder(db, source, externalId):
+  # 新工單尚無資料列可鎖定，必須先依來源與外部編號序列化事件。
+  if db.bind.dialect.name == 'postgresql':
+    db.execute(text('SELECT pg_advisory_xact_lock(hashtextextended(:key, 0))'), {'key': source + '\n' + externalId})
+
+
 def orderResult(order):
   return {'orderId': order.id, 'source': order.source, 'externalId': order.externalId,
     'version': order.version, 'ticketId': order.ticketId, 'state': 'linked' if order.ticketId else 'pending',
@@ -167,6 +173,7 @@ def receiveEvent(db, source, rawBody, expectedEvent=None):
   data = normalize(rawBody)
   if expectedEvent is not None and data.eventId != expectedEvent:
     raise HTTPException(422, '事件標頭與工單事件不一致')
+  lockExternalOrder(db, source, data.externalId)
   digest = hashlib.sha256(rawBody).hexdigest()
   existing = db.scalar(select(InboundEvent).where(InboundEvent.source == source, InboundEvent.eventId == data.eventId))
   if existing:

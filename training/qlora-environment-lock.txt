@@ -1,3 +1,4 @@
+# 2026-10-20：安裝工具安全更新；歷史 GPU 實驗實際版本以 artifacts 報告為準。
 accelerate==1.15.0
 annotated-doc==0.0.5
 anyio==4.15.1
@@ -27,7 +28,7 @@ pyyaml==6.0.3
 regex==2026.9.29
 rich==15.0.0
 safetensors==0.8.0
-setuptools==78.1.0
+setuptools==83.0.0
 shellingham==1.5.4
 sympy==1.14.0
 tokenizers==0.23.3
