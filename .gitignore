@@ -30,3 +30,6 @@ artifacts/*proof.jpg
 
 # Isolated local verification databases and scratch files.
 .test-*/
+
+# 企業題庫與逐題回答只保留在本機；已追蹤的歷史檔案另行處理。
+evals/

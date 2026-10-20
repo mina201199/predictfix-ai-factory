@@ -1,0 +1,41 @@
+{
+  "date": "2026-10-20",
+  "status": "formal_generation_completed_scoring_pending",
+  "formalRunId": "cpu-formal-20261020",
+  "verification": {"passedTests": 269, "newRunnerTests": 15, "warnings": 1},
+  "model": "gemma-4-E2B-it-Q8_0",
+  "mode": "snapshot_product_hybrid_retrieval_free_answer_not_product_e2e",
+  "hardware": {"runtime": "CPU", "threads": 12, "gpuLayers": 0, "contextTokens": 8192},
+  "plannedCases": 420,
+  "formal": {
+    "attemptedCases": 420,
+    "uniqueCases": 420,
+    "completedCases": 418,
+    "executionStatuses": {"completed": 418, "truncated": 2},
+    "latencyMedianMs": 10275.435,
+    "latencyP95Ms": 38929.8,
+    "reviewedCases": 0,
+    "qualityScore": null,
+    "passRate": null,
+    "criticalFailureRate": null
+  },
+  "pilot": {
+    "runId": "cpu-baseline-20261020-v2",
+    "attemptedCases": 5,
+    "completedCases": 5,
+    "latencyMedianMs": 6653.91,
+    "latencyP95Ms": 59294.53,
+    "qualityScore": null,
+    "aiInitiallyReviewedCases": 5,
+    "aiInitialPilotPassedCases": 0,
+    "humanReviewed": false
+  },
+  "releaseDecision": "pending_human_review",
+  "independentHoldout": false,
+  "limitations": [
+    "Pilot timing is not representative of the entire question bank",
+    "Question bank is already tracked by Git; adding ignore rules does not remove existing history",
+    "Source-chapter diagnostics are not paragraph precision or recall",
+    "CPU configuration does not establish production hardware requirements"
+  ]
+}
