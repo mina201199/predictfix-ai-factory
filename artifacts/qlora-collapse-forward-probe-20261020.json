@@ -1,0 +1,136 @@
+{
+  "row": "lathe-chuck-03",
+  "gold": [
+    "S1:P3",
+    "S1:P4"
+  ],
+  "loading": {
+    "checkpoint_sha256": "2db5482b20d746879bb3ef79b5203e9075a2e2b98f54ec7c2f281c1477ddc550",
+    "checkpoint_loading": {
+      "missing_keys": [],
+      "mismatched_keys": [],
+      "unexpected_key_count": 1400
+    },
+    "placement": {
+      "total_layers": 35,
+      "layers_on_gpu": 35,
+      "quantized_linears": 276
+    },
+    "adapter_parameters": 12079104
+  },
+  "teacher_tokens": [
+    {
+      "position": 0,
+      "target": 14937,
+      "target_probability": 0.999923825263977,
+      "argmax": 14937
+    },
+    {
+      "position": 1,
+      "target": 11951,
+      "target_probability": 0.9997826218605042,
+      "argmax": 11951
+    },
+    {
+      "position": 2,
+      "target": 138609,
+      "target_probability": 0.46116015315055847,
+      "argmax": 1083
+    },
+    {
+      "position": 3,
+      "target": 236773,
+      "target_probability": 0.9999920129776001,
+      "argmax": 236773
+    },
+    {
+      "position": 4,
+      "target": 236770,
+      "target_probability": 0.9989107847213745,
+      "argmax": 236770
+    },
+    {
+      "position": 5,
+      "target": 236787,
+      "target_probability": 0.9999991655349731,
+      "argmax": 236787
+    },
+    {
+      "position": 6,
+      "target": 236791,
+      "target_probability": 0.9999985694885254,
+      "argmax": 236791
+    },
+    {
+      "position": 7,
+      "target": 236800,
+      "target_probability": 0.9886758327484131,
+      "argmax": 236800
+    },
+    {
+      "position": 8,
+      "target": 4337,
+      "target_probability": 0.9994055032730103,
+      "argmax": 4337
+    },
+    {
+      "position": 9,
+      "target": 236773,
+      "target_probability": 0.9999929666519165,
+      "argmax": 236773
+    },
+    {
+      "position": 10,
+      "target": 236770,
+      "target_probability": 0.9998202919960022,
+      "argmax": 236770
+    },
+    {
+      "position": 11,
+      "target": 236787,
+      "target_probability": 1.0,
+      "argmax": 236787
+    },
+    {
+      "position": 12,
+      "target": 236791,
+      "target_probability": 0.9999995231628418,
+      "argmax": 236791
+    },
+    {
+      "position": 13,
+      "target": 236812,
+      "target_probability": 0.9998488426208496,
+      "argmax": 236812
+    },
+    {
+      "position": 14,
+      "target": 99471,
+      "target_probability": 0.9999866485595703,
+      "argmax": 99471
+    }
+  ],
+  "full_teacher_branch_logits": [
+    29.824813842773438,
+    29.670822143554688
+  ],
+  "prefix_branch_logits": [
+    29.824813842773438,
+    29.670822143554688
+  ],
+  "constrained": {
+    "raw": "{\"selected\":[]}",
+    "prompt_tokens": 838,
+    "generated_tokens": 4,
+    "first_branch": {
+      "token_ids": [
+        1083,
+        138609
+      ],
+      "logits": [
+        29.824813842773438,
+        29.670822143554688
+      ]
+    }
+  }
+}

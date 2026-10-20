@@ -67,12 +67,12 @@ def sampleRows(rows, seed):
   return [r['id'] for r in result]
 
 
-def buildManifest(datasetPath, holdoutPath):
+def buildManifest(datasetPath, holdoutPath, decisionObjective=False):
   data = json.loads(Path(datasetPath).read_text(encoding='utf-8'))
   holdout = json.loads(Path(holdoutPath).read_text(encoding='utf-8'))
   validateHoldout(holdout, data)
   trainIds = sampleRows(data['splits']['train'], 20261019)
-  return {'version': 'gemma-sft-v1', 'model_id': MODEL_ID, 'revision': MODEL_REVISION,
+  manifest = {'version': 'gemma-sft-v1', 'model_id': MODEL_ID, 'revision': MODEL_REVISION,
     'seed': 20261019, 'dataset_sha256': textHash(datasetPath), 'holdout_sha256': textHash(holdoutPath),
     'sha256_encoding': 'UTF-8 text with LF line endings', 'prompt_sha256': hashlib.sha256(PROMPT.encode()).hexdigest(),
     'train_ids': trainIds, 'validation_ids': sampleRows(data['splits']['validation'], 20261019),
@@ -85,10 +85,16 @@ def buildManifest(datasetPath, holdoutPath):
     'reload_atol': 0.0001, 'reload_rtol': 0.0001,
     'arms': ['base_fp16', 'base_nf4', 'lora_fp16', 'qlora_nf4'],
     'selection_policy': 'Final step only; no early stopping or tuning using holdout.'}
+  if decisionObjective:
+    manifest['version'] = 'gemma-sft-v2'
+    manifest['objective'] = {'name': 'grammar-decision-balanced-v1',
+      'first_branch_weight': 1.0, 'remaining_branches_total_weight': 1.0,
+      'forced_tokens_weight': 0.0, 'normalization': 'first branch plus mean remaining decision losses'}
+  return manifest
 
 
 def validateManifest(manifest, datasetPath, holdoutPath):
-  if manifest != buildManifest(datasetPath, holdoutPath):
+  if manifest != buildManifest(datasetPath, holdoutPath, decisionObjective=manifest.get('version') == 'gemma-sft-v2'):
     raise ValueError('Manifest protocol, row ids, or data hash changed; freeze a new experiment')
   return True
 

@@ -242,12 +242,23 @@ def train(model, tokenizer, manifest, args, report, save, probe=False):
     output = forwardText(model, ids, cache=False)
     targets = labels[1:]
     positions = (targets != -100).nonzero().squeeze(1)
-    hidden = output.last_hidden_state[0, positions.to('cuda')].to('cpu', model.lm_head.weight.dtype)
-    logits = model.lm_head(hidden).float()
-    softcap = model.config.final_logit_softcapping
-    if softcap:
-      logits = torch.tanh(logits / softcap) * softcap
-    loss = functional.cross_entropy(logits, targets[positions])
+    decisionCount = None
+    if manifest.get('objective', {}).get('name') == 'grammar-decision-balanced-v1':
+      from selection_decisions import decisionPlan, decisionLoss
+      row = next(row for row in rows if row['id'] == rowId)
+      answer = tokenizer.encode(canonicalAnswer(row), add_special_tokens=False)
+      choices = [tokenizer.encode(value, add_special_tokens=False) for value in grammarAnswers(row)]
+      plan = decisionPlan(choices, answer)
+      promptLength = sum(value == -100 for value in labelValues)
+      loss = decisionLoss(model, output.last_hidden_state, promptLength, plan)
+      decisionCount = len(plan)
+    else:
+      hidden = output.last_hidden_state[0, positions.to('cuda')].to('cpu', model.lm_head.weight.dtype)
+      logits = model.lm_head(hidden).float()
+      softcap = model.config.final_logit_softcapping
+      if softcap:
+        logits = torch.tanh(logits / softcap) * softcap
+      loss = functional.cross_entropy(logits, targets[positions])
     if not torch.isfinite(loss):
       raise RuntimeError('Nonfinite training loss')
     loss.backward()
@@ -255,12 +266,13 @@ def train(model, tokenizer, manifest, args, report, save, probe=False):
     optimizer.step()
     torch.cuda.synchronize()
     record = {'step': len(records) + 1, 'id': rowId, 'loss': float(loss.detach()),
-      'grad_norm': float(gradNorm), 'sequence_tokens': len(ids), 'supervised_tokens': len(positions),
+      'grad_norm': float(gradNorm), 'sequence_tokens': len(ids),
+      'supervised_tokens': decisionCount if decisionCount is not None else len(positions),
       'wall_seconds_uncontrolled': time.monotonic() - stepStart, 'resources': resources()}
     records.append(record)
     report['optimizer_steps_actual'] = len(records)
     report['train_sequence_tokens'] += len(ids)
-    report['supervised_tokens'] += len(positions)
+    report['supervised_tokens'] += record['supervised_tokens']
     save()
     print(json.dumps({'step': record['step'], 'loss': record['loss'], 'wall_seconds_uncontrolled': record['wall_seconds_uncontrolled']}), flush=True)
     # 只保存已完成 optimizer 更新的獨立 checkpoint，不覆寫先前 adapter。
@@ -269,7 +281,9 @@ def train(model, tokenizer, manifest, args, report, save, probe=False):
       wrapped.save_pretrained(checkpoint, safe_serialization=True)
       report.setdefault('checkpoint_dirs', []).append(str(checkpoint))
       save()
-    del output, hidden, logits, loss
+    del output, loss
+    if decisionCount is None:
+      del hidden, logits
   if probe:
     return wrapped
   if len(records) != manifest['optimizer_steps']:
@@ -323,7 +337,7 @@ def run(args):
     'dataset_sha256': textHash(DATASET), 'holdout_sha256': textHash(HOLDOUT),
     'protocol': manifest, 'python': sys.version, 'platform': platform.platform(),
     'source_sha256': {name: textHash(ROOT / 'scripts' / name) for name in
-      ['run_gemma_sft.py', 'gemma_sft_protocol.py', 'check_qlora_feasibility.py', 'prepare_lora_data.py']},
+      ['run_gemma_sft.py', 'gemma_sft_protocol.py', 'selection_decisions.py', 'check_qlora_feasibility.py', 'prepare_lora_data.py']},
     'adapter_source': str(args.adapter_run) if args.adapter_run else None,
     'clock_context': 'Uncontrolled concurrent workloads; wall time is budget evidence, not performance comparison.'}
   reportPath = args.run_dir / 'report.json'
@@ -402,6 +416,7 @@ def run(args):
 
 
 def main():
+  global PROTOCOL, HOLDOUT
   parser = argparse.ArgumentParser(description=__doc__)
   parser.add_argument('command', choices=['freeze', 'probe', 'baseline', 'train', 'reload'])
   parser.add_argument('--mode', choices=['fp16', 'qlora'], default='qlora')
@@ -412,10 +427,22 @@ def main():
   parser.add_argument('--verify-only', action='store_true')
   parser.add_argument('--max-seconds', type=float, default=0, help='Cooperative budget checked between rows/steps')
   parser.add_argument('--cpu-threads', type=int, default=6)
+  parser.add_argument('--protocol', type=Path)
+  parser.add_argument('--holdout', type=Path)
+  parser.add_argument('--decision-objective', action='store_true', help='Freeze v2 decision-balanced objective')
   args = parser.parse_args()
+  for argument, name in [(args.protocol, 'protocol'), (args.holdout, 'holdout')]:
+    if argument and not argument.resolve().is_relative_to(ROOT / 'training'):
+      parser.error(f'--{name} must be inside this worktree training folder')
+  if args.protocol:
+    PROTOCOL = args.protocol.resolve()
+  if args.holdout:
+    HOLDOUT = args.holdout.resolve()
+  if args.decision_objective and args.command != 'freeze':
+    parser.error('--decision-objective is only valid when freezing the protocol')
   if args.command == 'freeze':
     with PROTOCOL.open('x', encoding='utf-8', newline='\n') as handle:
-      json.dump(buildManifest(DATASET, HOLDOUT), handle, ensure_ascii=False, indent=2)
+      json.dump(buildManifest(DATASET, HOLDOUT, decisionObjective=args.decision_objective), handle, ensure_ascii=False, indent=2)
       handle.write('\n')
     print(PROTOCOL)
   else:

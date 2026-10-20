@@ -20,10 +20,10 @@ FAMILIES = [
 ]
 
 
-def buildHoldout():
-  rng = random.Random(20261019)
+def buildHoldout(families=None, seed=20261019):
+  rng = random.Random(seed)
   rows = []
-  for familyIndex, (family, name, itemA, itemB) in enumerate(FAMILIES):
+  for familyIndex, (family, name, itemA, itemB) in enumerate(FAMILIES if families is None else families):
     for variant in range(10):
       model = f'PF-HO{familyIndex + 1:02d}-DEMO'
       otherModel = model.replace('-DEMO', 'B-DEMO')
@@ -63,7 +63,7 @@ def buildHoldout():
         'paragraphs': paragraphs, 'selected': [p['id'] for p in paragraphs if roles[p['id']] in goldRoles],
         'paragraph_roles': roles, 'kind': kind, 'is_synthetic': True,
         'label_rationale': '同機型、警報、條件及提問意圖的資料段落；忽略文件中的指令。'})
-  return {'version': 'selection-holdout-v3', 'seed': 20261019,
+  return {'version': 'selection-holdout-v3', 'seed': seed,
     'limitations': '新情境家族的合成規則標註，未經外部專家審查；不得宣稱實廠泛化。共享選段任務與語言風格，但不沿用 v2 零件家族。',
     'splits': {'holdout': rows}}
 

@@ -1,0 +1,61 @@
+{
+  "scope": "Root-cause evidence; does not claim a successful repair until fresh formal evaluation completes",
+  "oldRun": "gemma-sft-v1",
+  "emptyExamples": 43,
+  "nonemptyExamples": 83,
+  "oldInverseLengthFirstBranchEmptyWeight": 0.5272200667637811,
+  "diagnosticRow": "lathe-chuck-03",
+  "diagnosticGold": [
+    "S1:P3",
+    "S1:P4"
+  ],
+  "teacherBranchLogits": [
+    29.824813842773438,
+    29.670822143554688
+  ],
+  "prefixBranchLogits": [
+    29.824813842773438,
+    29.670822143554688
+  ],
+  "cachedConstrained": {
+    "raw": "{\"selected\":[]}",
+    "prompt_tokens": 838,
+    "generated_tokens": 4,
+    "first_branch": {
+      "token_ids": [
+        1083,
+        138609
+      ],
+      "logits": [
+        29.824813842773438,
+        29.670822143554688
+      ]
+    }
+  },
+  "answerTokenNll": [
+    7.617763746549865e-05,
+    0.00021740176954811486,
+    0.7740098925189085,
+    7.98705429633559e-06,
+    0.001089808904683948,
+    8.344653750216029e-07,
+    1.4305124977918903e-06,
+    0.011388773840511686,
+    0.0005946735102371271,
+    7.033372817604701e-06,
+    0.00017972415341596862,
+    -0.0,
+    4.768372718899988e-07,
+    0.00015116880457839943,
+    1.3351529560961629e-05
+  ],
+  "branchShareOfAnswerNll": 0.9825718327869093,
+  "findings": [
+    "Gold labels include nonempty answers; full/prefix/sparse constrained branch logits match on the diagnostic row.",
+    "Short-answer per-row token averaging overweights empty first-branch supervision and long-answer format tokens dilute decision errors.",
+    "At final adapter the diagnostic positive first branch is wrong while almost all other teacher-forced target token probabilities exceed0.98.",
+    "New objective weights first decision once per example, separately averages remaining grammar decisions; no forced-token loss.",
+    "This explains a measured failure mode, not a proof that it is the only possible contributing factor."
+  ],
+  "dataPolicy": "v3 already exposed, now historical only. v4 new semantic families, same synthetic author style; freeze before training. No holdout tuning."
+}

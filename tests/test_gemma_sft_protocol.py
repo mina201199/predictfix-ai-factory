@@ -282,14 +282,15 @@ def test_timeout_contains_descendants_born_after_launch(tmp_path, monkeypatch):
     'end=time.monotonic()+4\nwhile time.monotonic()<end:\n'
     '  p.write_text(str(time.monotonic()))\n  time.sleep(0.03)\n')
   spawnerCode = ('import subprocess,sys,time\ntime.sleep(0.25)\n'
-    'subprocess.Popen([sys.executable,"-c",sys.argv[1],sys.argv[2]])\ntime.sleep(4)\n')
+    'subprocess.Popen([sys.executable,"-c",sys.argv[1],sys.argv[2]])\ntime.sleep(20)\n')
   parentCode = ('import subprocess,sys,time\n'
-    'subprocess.Popen([sys.executable,"-c",sys.argv[1],sys.argv[2],sys.argv[3]])\ntime.sleep(4)\n')
+    'subprocess.Popen([sys.executable,"-c",sys.argv[1],sys.argv[2],sys.argv[3]])\ntime.sleep(20)\n')
   originalStart = gemma_sft_process.startOwnedProcess
   def startAndAwaitLateDescendant(*args):
     process = originalStart(*args)
     try:
-      deadline = time.monotonic() + 3
+      # 背景訓練時 Windows Python 啟動可能超過三秒；先確認 fixture 真正啟動再測清理。
+      deadline = time.monotonic() + 15
       while not heartbeat.exists() and time.monotonic() < deadline:
         time.sleep(0.01)
       assert heartbeat.exists(), 'The late descendant must run before testing cleanup'

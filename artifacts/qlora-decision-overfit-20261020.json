@@ -1,0 +1,867 @@
+{
+  "scope": "train-only 2-example overfit diagnostic, not formal quality",
+  "steps": [
+    {
+      "step": 1,
+      "id": "feed-servo-19",
+      "loss": 1.482554316520691,
+      "gradNorm": 143.5792999267578,
+      "seconds": 9.45299999999952
+    },
+    {
+      "step": 2,
+      "id": "atc-arm-15",
+      "loss": 12.270423889160156,
+      "gradNorm": 100.61643981933594,
+      "seconds": 8.703999999999724,
+      "predictions": [
+        {
+          "id": "feed-servo-19",
+          "expected": [
+            "S3:P4"
+          ],
+          "raw": "{\"selected\":[]}",
+          "prompt_tokens": 877,
+          "generated_tokens": 4,
+          "first_branch": {
+            "token_ids": [
+              1083,
+              138609
+            ],
+            "logits": [
+              17.483489990234375,
+              15.570653915405273
+            ]
+          }
+        },
+        {
+          "id": "atc-arm-15",
+          "expected": [],
+          "raw": "{\"selected\":[]}",
+          "prompt_tokens": 796,
+          "generated_tokens": 4,
+          "first_branch": {
+            "token_ids": [
+              1083,
+              138609
+            ],
+            "logits": [
+              17.647777557373047,
+              17.065750122070312
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "id": "feed-servo-19",
+      "loss": 2.050572633743286,
+      "gradNorm": 96.75524139404297,
+      "seconds": 9.139999999999418
+    },
+    {
+      "step": 4,
+      "id": "atc-arm-15",
+      "loss": 4.297891139984131,
+      "gradNorm": 74.20781707763672,
+      "seconds": 8.780999999999949,
+      "predictions": [
+        {
+          "id": "feed-servo-19",
+          "expected": [
+            "S3:P4"
+          ],
+          "raw": "{\"selected\":[\"S3:P4\"]}",
+          "prompt_tokens": 877,
+          "generated_tokens": 9,
+          "first_branch": {
+            "token_ids": [
+              1083,
+              138609
+            ],
+            "logits": [
+              19.128843307495117,
+              20.129013061523438
+            ]
+          }
+        },
+        {
+          "id": "atc-arm-15",
+          "expected": [],
+          "raw": "{\"selected\":[\"S3:P1\"]}",
+          "prompt_tokens": 796,
+          "generated_tokens": 9,
+          "first_branch": {
+            "token_ids": [
+              1083,
+              138609
+            ],
+            "logits": [
+              19.494823455810547,
+              19.92110252380371
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "step": 5,
+      "id": "feed-servo-19",
+      "loss": 0.31322386860847473,
+      "gradNorm": 120.19876861572266,
+      "seconds": 9.188000000000102
+    },
+    {
+      "step": 6,
+      "id": "atc-arm-15",
+      "loss": 0.2420608103275299,
+      "gradNorm": 12.40462875366211,
+      "seconds": 8.780999999999949,
+      "predictions": [
+        {
+          "id": "feed-servo-19",
+          "expected": [
+            "S3:P4"
+          ],
+          "raw": "{\"selected\":[]}",
+          "prompt_tokens": 877,
+          "generated_tokens": 4,
+          "first_branch": {
+            "token_ids": [
+              1083,
+              138609
+            ],
+            "logits": [
+              22.249906539916992,
+              17.15009880065918
+            ]
+          }
+        },
+        {
+          "id": "atc-arm-15",
+          "expected": [],
+          "raw": "{\"selected\":[]}",
+          "prompt_tokens": 796,
+          "generated_tokens": 4,
+          "first_branch": {
+            "token_ids": [
+              1083,
+              138609
+            ],
+            "logits": [
+              22.361698150634766,
+              16.376537322998047
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "step": 7,
+      "id": "feed-servo-19",
+      "loss": 5.049829959869385,
+      "gradNorm": 132.09808349609375,
+      "seconds": 9.17199999999957
+    },
+    {
+      "step": 8,
+      "id": "atc-arm-15",
+      "loss": 0.0004051103023812175,
+      "gradNorm": 0.026540298014879227,
+      "seconds": 8.782000000000153,
+      "predictions": [
+        {
+          "id": "feed-servo-19",
+          "expected": [
+            "S3:P4"
+          ],
+          "raw": "{\"selected\":[]}",
+          "prompt_tokens": 877,
+          "generated_tokens": 4,
+          "first_branch": {
+            "token_ids": [
+              1083,
+              138609
+            ],
+            "logits": [
+              23.55075454711914,
+              15.752516746520996
+            ]
+          }
+        },
+        {
+          "id": "atc-arm-15",
+          "expected": [],
+          "raw": "{\"selected\":[]}",
+          "prompt_tokens": 796,
+          "generated_tokens": 4,
+          "first_branch": {
+            "token_ids": [
+              1083,
+              138609
+            ],
+            "logits": [
+              23.55075454711914,
+              14.494452476501465
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "step": 9,
+      "id": "feed-servo-19",
+      "loss": 7.893924713134766,
+      "gradNorm": 65.64118957519531,
+      "seconds": 9.186999999999898
+    },
+    {
+      "step": 10,
+      "id": "atc-arm-15",
+      "loss": 0.0015817285748198628,
+      "gradNorm": 0.08874531835317612,
+      "seconds": 8.766000000000531,
+      "predictions": [
+        {
+          "id": "feed-servo-19",
+          "expected": [
+            "S3:P4"
+          ],
+          "raw": "{\"selected\":[]}",
+          "prompt_tokens": 877,
+          "generated_tokens": 4,
+          "first_branch": {
+            "token_ids": [
+              1083,
+              138609
+            ],
+            "logits": [
+              23.64606285095215,
+              20.265695571899414
+            ]
+          }
+        },
+        {
+          "id": "atc-arm-15",
+          "expected": [],
+          "raw": "{\"selected\":[]}",
+          "prompt_tokens": 796,
+          "generated_tokens": 4,
+          "first_branch": {
+            "token_ids": [
+              1083,
+              138609
+            ],
+            "logits": [
+              23.59856414794922,
+              18.90453338623047
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "step": 11,
+      "id": "feed-servo-19",
+      "loss": 3.413841724395752,
+      "gradNorm": 45.271392822265625,
+      "seconds": 9.188000000000102
+    },
+    {
+      "step": 12,
+      "id": "atc-arm-15",
+      "loss": 0.22025643289089203,
+      "gradNorm": 8.083218574523926,
+      "seconds": 8.686999999999898,
+      "predictions": [
+        {
+          "id": "feed-servo-19",
+          "expected": [
+            "S3:P4"
+          ],
+          "raw": "{\"selected\":[\"S3:P4\"]}",
+          "prompt_tokens": 877,
+          "generated_tokens": 9,
+          "first_branch": {
+            "token_ids": [
+              1083,
+              138609
+            ],
+            "logits": [
+              23.454191207885742,
+              23.55075454711914
+            ]
+          }
+        },
+        {
+          "id": "atc-arm-15",
+          "expected": [],
+          "raw": "{\"selected\":[]}",
+          "prompt_tokens": 796,
+          "generated_tokens": 4,
+          "first_branch": {
+            "token_ids": [
+              1083,
+              138609
+            ],
+            "logits": [
+              23.50263023376465,
+              22.30597686767578
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "step": 13,
+      "id": "feed-servo-19",
+      "loss": 0.6240079998970032,
+      "gradNorm": 16.061687469482422,
+      "seconds": 9.140999999999622
+    },
+    {
+      "step": 14,
+      "id": "atc-arm-15",
+      "loss": 0.9733351469039917,
+      "gradNorm": 22.294904708862305,
+      "seconds": 8.79700000000048,
+      "predictions": [
+        {
+          "id": "feed-servo-19",
+          "expected": [
+            "S3:P4"
+          ],
+          "raw": "{\"selected\":[\"S3:P4\"]}",
+          "prompt_tokens": 877,
+          "generated_tokens": 9,
+          "first_branch": {
+            "token_ids": [
+              1083,
+              138609
+            ],
+            "logits": [
+              23.003822326660156,
+              24.85499382019043
+            ]
+          }
+        },
+        {
+          "id": "atc-arm-15",
+          "expected": [],
+          "raw": "{\"selected\":[\"S3:P1\"]}",
+          "prompt_tokens": 796,
+          "generated_tokens": 9,
+          "first_branch": {
+            "token_ids": [
+              1083,
+              138609
+            ],
+            "logits": [
+              23.30696678161621,
+              23.55075454711914
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "step": 15,
+      "id": "feed-servo-19",
+      "loss": 0.14256469905376434,
+      "gradNorm": 4.284476280212402,
+      "seconds": 9.219000000000051
+    },
+    {
+      "step": 16,
+      "id": "atc-arm-15",
+      "loss": 1.6186304092407227,
+      "gradNorm": 28.08072280883789,
+      "seconds": 8.75,
+      "predictions": [
+        {
+          "id": "feed-servo-19",
+          "expected": [
+            "S3:P4"
+          ],
+          "raw": "{\"selected\":[\"S3:P4\"]}",
+          "prompt_tokens": 877,
+          "generated_tokens": 9,
+          "first_branch": {
+            "token_ids": [
+              1083,
+              138609
+            ],
+            "logits": [
+              22.13672637939453,
+              25.160045623779297
+            ]
+          }
+        },
+        {
+          "id": "atc-arm-15",
+          "expected": [],
+          "raw": "{\"selected\":[\"S3:P1\"]}",
+          "prompt_tokens": 796,
+          "generated_tokens": 9,
+          "first_branch": {
+            "token_ids": [
+              1083,
+              138609
+            ],
+            "logits": [
+              22.7951602935791,
+              23.59856414794922
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "step": 17,
+      "id": "feed-servo-19",
+      "loss": 0.04246830940246582,
+      "gradNorm": 1.402470588684082,
+      "seconds": 9.157000000000153
+    },
+    {
+      "step": 18,
+      "id": "atc-arm-15",
+      "loss": 1.789366364479065,
+      "gradNorm": 32.236568450927734,
+      "seconds": 8.780999999999949,
+      "predictions": [
+        {
+          "id": "feed-servo-19",
+          "expected": [
+            "S3:P4"
+          ],
+          "raw": "{\"selected\":[\"S3:P4\"]}",
+          "prompt_tokens": 877,
+          "generated_tokens": 9,
+          "first_branch": {
+            "token_ids": [
+              1083,
+              138609
+            ],
+            "logits": [
+              20.467853546142578,
+              24.776052474975586
+            ]
+          }
+        },
+        {
+          "id": "atc-arm-15",
+          "expected": [],
+          "raw": "{\"selected\":[\"S3:P1\"]}",
+          "prompt_tokens": 796,
+          "generated_tokens": 9,
+          "first_branch": {
+            "token_ids": [
+              1083,
+              138609
+            ],
+            "logits": [
+              21.788742065429688,
+              22.472108840942383
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "step": 19,
+      "id": "feed-servo-19",
+      "loss": 0.013550559058785439,
+      "gradNorm": 0.5363361835479736,
+      "seconds": 9.235000000000582
+    },
+    {
+      "step": 20,
+      "id": "atc-arm-15",
+      "loss": 0.8936153054237366,
+      "gradNorm": 27.78474235534668,
+      "seconds": 8.764999999999418,
+      "predictions": [
+        {
+          "id": "feed-servo-19",
+          "expected": [
+            "S3:P4"
+          ],
+          "raw": "{\"selected\":[\"S3:P4\"]}",
+          "prompt_tokens": 877,
+          "generated_tokens": 9,
+          "first_branch": {
+            "token_ids": [
+              1083,
+              138609
+            ],
+            "logits": [
+              18.676658630371094,
+              23.30696678161621
+            ]
+          }
+        },
+        {
+          "id": "atc-arm-15",
+          "expected": [],
+          "raw": "{\"selected\":[]}",
+          "prompt_tokens": 796,
+          "generated_tokens": 4,
+          "first_branch": {
+            "token_ids": [
+              1083,
+              138609
+            ],
+            "logits": [
+              20.990297317504883,
+              19.128843307495117
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "step": 21,
+      "id": "feed-servo-19",
+      "loss": 0.008519756607711315,
+      "gradNorm": 0.4322529733181,
+      "seconds": 9.17200000000048
+    },
+    {
+      "step": 22,
+      "id": "atc-arm-15",
+      "loss": 0.02771187201142311,
+      "gradNorm": 2.042086601257324,
+      "seconds": 8.719000000000051,
+      "predictions": [
+        {
+          "id": "feed-servo-19",
+          "expected": [
+            "S3:P4"
+          ],
+          "raw": "{\"selected\":[\"S3:P4\"]}",
+          "prompt_tokens": 877,
+          "generated_tokens": 9,
+          "first_branch": {
+            "token_ids": [
+              1083,
+              138609
+            ],
+            "logits": [
+              16.551239013671875,
+              19.85102653503418
+            ]
+          }
+        },
+        {
+          "id": "atc-arm-15",
+          "expected": [],
+          "raw": "{\"selected\":[]}",
+          "prompt_tokens": 796,
+          "generated_tokens": 4,
+          "first_branch": {
+            "token_ids": [
+              1083,
+              138609
+            ],
+            "logits": [
+              19.99079132080078,
+              11.717799186706543
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "step": 23,
+      "id": "feed-servo-19",
+      "loss": 0.032706040889024734,
+      "gradNorm": 2.3951501846313477,
+      "seconds": 9.17199999999957
+    },
+    {
+      "step": 24,
+      "id": "atc-arm-15",
+      "loss": 1.7523612768854946e-05,
+      "gradNorm": 0.0016361854504793882,
+      "seconds": 8.719000000000051,
+      "predictions": [
+        {
+          "id": "feed-servo-19",
+          "expected": [
+            "S3:P4"
+          ],
+          "raw": "{\"selected\":[\"S3:P4\"]}",
+          "prompt_tokens": 877,
+          "generated_tokens": 9,
+          "first_branch": {
+            "token_ids": [
+              1083,
+              138609
+            ],
+            "logits": [
+              11.981542587280273,
+              17.97154998779297
+            ]
+          }
+        },
+        {
+          "id": "atc-arm-15",
+          "expected": [],
+          "raw": "{\"selected\":[]}",
+          "prompt_tokens": 796,
+          "generated_tokens": 4,
+          "first_branch": {
+            "token_ids": [
+              1083,
+              138609
+            ],
+            "logits": [
+              18.52275848388672,
+              4.802093982696533
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "step": 25,
+      "id": "feed-servo-19",
+      "loss": 0.002780335722491145,
+      "gradNorm": 0.30496931076049805,
+      "seconds": 9.203999999999724
+    },
+    {
+      "step": 26,
+      "id": "atc-arm-15",
+      "loss": 1.1920928244535389e-07,
+      "gradNorm": 1.7065322026610374e-05,
+      "seconds": 8.734000000000378,
+      "predictions": [
+        {
+          "id": "feed-servo-19",
+          "expected": [
+            "S3:P4"
+          ],
+          "raw": "{\"selected\":[\"S3:P4\"]}",
+          "prompt_tokens": 877,
+          "generated_tokens": 9,
+          "first_branch": {
+            "token_ids": [
+              1083,
+              138609
+            ],
+            "logits": [
+              4.099198818206787,
+              17.891206741333008
+            ]
+          }
+        },
+        {
+          "id": "atc-arm-15",
+          "expected": [],
+          "raw": "{\"selected\":[]}",
+          "prompt_tokens": 796,
+          "generated_tokens": 4,
+          "first_branch": {
+            "token_ids": [
+              1083,
+              138609
+            ],
+            "logits": [
+              16.551239013671875,
+              -0.9957278370857239
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "step": 27,
+      "id": "feed-servo-19",
+      "loss": 9.655839676270261e-06,
+      "gradNorm": 0.0006087672663852572,
+      "seconds": 9.265000000000327
+    },
+    {
+      "step": 28,
+      "id": "atc-arm-15",
+      "loss": 0.0,
+      "gradNorm": 7.008733291513636e-07,
+      "seconds": 8.82800000000043,
+      "predictions": [
+        {
+          "id": "feed-servo-19",
+          "expected": [
+            "S3:P4"
+          ],
+          "raw": "{\"selected\":[\"S3:P4\"]}",
+          "prompt_tokens": 877,
+          "generated_tokens": 9,
+          "first_branch": {
+            "token_ids": [
+              1083,
+              138609
+            ],
+            "logits": [
+              -4.649722099304199,
+              18.367263793945312
+            ]
+          }
+        },
+        {
+          "id": "atc-arm-15",
+          "expected": [],
+          "raw": "{\"selected\":[]}",
+          "prompt_tokens": 796,
+          "generated_tokens": 4,
+          "first_branch": {
+            "token_ids": [
+              1083,
+              138609
+            ],
+            "logits": [
+              14.494452476501465,
+              -5.891221046447754
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "step": 29,
+      "id": "feed-servo-19",
+      "loss": 1.3112775377521757e-05,
+      "gradNorm": 0.0009290239540860057,
+      "seconds": 9.17199999999957
+    },
+    {
+      "step": 30,
+      "id": "atc-arm-15",
+      "loss": 0.0,
+      "gradNorm": 1.0993169752282483e-07,
+      "seconds": 8.782000000000153,
+      "predictions": [
+        {
+          "id": "feed-servo-19",
+          "expected": [
+            "S3:P4"
+          ],
+          "raw": "{\"selected\":[\"S3:P4\"]}",
+          "prompt_tokens": 877,
+          "generated_tokens": 9,
+          "first_branch": {
+            "token_ids": [
+              1083,
+              138609
+            ],
+            "logits": [
+              -11.981542587280273,
+              18.753013610839844
+            ]
+          }
+        },
+        {
+          "id": "atc-arm-15",
+          "expected": [],
+          "raw": "{\"selected\":[]}",
+          "prompt_tokens": 796,
+          "generated_tokens": 4,
+          "first_branch": {
+            "token_ids": [
+              1083,
+              138609
+            ],
+            "logits": [
+              12.450750350952148,
+              -9.701383590698242
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "step": 31,
+      "id": "feed-servo-19",
+      "loss": 1.3828006558469497e-05,
+      "gradNorm": 0.0009278936195187271,
+      "seconds": 9.17199999999957
+    },
+    {
+      "step": 32,
+      "id": "atc-arm-15",
+      "loss": 0.0,
+      "gradNorm": 2.8507585625447973e-08,
+      "seconds": 8.639999999999418,
+      "predictions": [
+        {
+          "id": "feed-servo-19",
+          "expected": [
+            "S3:P4"
+          ],
+          "raw": "{\"selected\":[\"S3:P4\"]}",
+          "prompt_tokens": 877,
+          "generated_tokens": 9,
+          "first_branch": {
+            "token_ids": [
+              1083,
+              138609
+            ],
+            "logits": [
+              -16.89584732055664,
+              18.753013610839844
+            ]
+          }
+        },
+        {
+          "id": "atc-arm-15",
+          "expected": [],
+          "raw": "{\"selected\":[]}",
+          "prompt_tokens": 796,
+          "generated_tokens": 4,
+          "first_branch": {
+            "token_ids": [
+              1083,
+              138609
+            ],
+            "logits": [
+              10.53217887878418,
+              -12.502439498901367
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "sourceHash": "95bebfae5c456492faf8b612c26eb2efa6f3b429802c6cedd9d6c0443bbe388c",
+  "checkpoint_sha256": "2db5482b20d746879bb3ef79b5203e9075a2e2b98f54ec7c2f281c1477ddc550",
+  "checkpoint_loading": {
+    "missing_keys": [],
+    "mismatched_keys": [],
+    "unexpected_key_count": 1400
+  },
+  "placement": {
+    "total_layers": 35,
+    "layers_on_gpu": 35,
+    "quantized_linears": 276
+  },
+  "lora": {
+    "rank": 8,
+    "alpha": 16,
+    "target_modules": [
+      "q_proj",
+      "k_proj",
+      "v_proj",
+      "o_proj",
+      "gate_proj",
+      "up_proj",
+      "down_proj"
+    ],
+    "trainable_parameters": 12079104,
+    "lora_wrapped_linears": 205
+  },
+  "initialHash": "af8d236e53fd993bdc870b1bf9d75170fc899ce3a9ffccdfa3c48fdcd5eaefbd",
+  "bothCorrect": true,
+  "diagnosticSource": "import sys,time,json,math\nfrom pathlib import Path\nfrom types import SimpleNamespace\nROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT/'scripts'))\nimport torch\nfrom run_gemma_sft import loadModel,readJson,resolveRows,encodeExample,forwardText,canonicalAnswer,generateConstrained,initializeAdapter,writeJson\nfrom gemma_sft_protocol import grammarAnswers,fileHash\nfrom selection_decisions import decisionPlan,decisionLoss\nfrom check_qlora_feasibility import addLora\nargs=SimpleNamespace(runtime_dir=Path('C:/Users/User/Desktop/ai factory/predictfix-ai-factory/.runtime'),mode='qlora')\ntorch.set_num_threads(6);torch.manual_seed(20261019)\nreport={'scope':'train-only 2-example overfit diagnostic, not formal quality','steps':[],'sourceHash':fileHash(ROOT/'scripts/selection_decisions.py')}\nmodel,tok,_=loadModel(args,report)\nm=readJson(ROOT/'training/gemma-sft-protocol-v1.json');rs=resolveRows(m,'train');rows=[next(r for r in rs if r['selected']),next(r for r in rs if not r['selected'])]\nwrapped,report['lora']=addLora(model,8);report['initialHash']=initializeAdapter(model,20261019)\nparams=[p for p in model.parameters() if p.requires_grad];opt=torch.optim.AdamW(params,lr=0.0002,weight_decay=0.01)\nexamples=[]\nfor row in rows:\n ids,labels=encodeExample(tok,row,1024);promptLength=sum(x==-100 for x in labels)\n answer=tok.encode(canonicalAnswer(row),add_special_tokens=False);choices=[tok.encode(a,add_special_tokens=False) for a in grammarAnswers(row)]\n examples.append((row,ids,promptLength,decisionPlan(choices,answer)))\nfor step in range(32):\n row,ids,promptLength,plan=examples[step%2];model.train();opt.zero_grad(set_to_none=True);start=time.monotonic()\n out=forwardText(model,ids,cache=False);loss=decisionLoss(model,out.last_hidden_state,promptLength,plan)\n loss.backward();grad=torch.nn.utils.clip_grad_norm_(params,1,error_if_nonfinite=True);opt.step();torch.cuda.synchronize()\n record={'step':step+1,'id':row['id'],'loss':float(loss.detach()),'gradNorm':float(grad),'seconds':time.monotonic()-start}\n del out,loss\n if (step+1)%2==0:\n  record['predictions']=[{'id':r['id'],'expected':r['selected'],**generateConstrained(model,tok,r,64)} for r in rows]\n report['steps'].append(record);writeJson(ROOT/'.runtime/collapse-overfit32-diagnostic.json',report);print(json.dumps(record,ensure_ascii=False),flush=True)\nreport['bothCorrect']=all(json.loads(p['raw'])['selected']==p['expected'] for p in report['steps'][-1]['predictions'])\nwriteJson(ROOT/'.runtime/collapse-overfit32-diagnostic.json',report)\n"
+}
