@@ -1,0 +1,23 @@
+{
+  "status": "completed",
+  "max_seconds": 1800,
+  "plan_sha256": "607a3c0ee406847b35f5c2b00db63690fc7a161b8522bda3477d508a5f894a6c",
+  "user_authorization": "OK: base and final504 candidate each100; total30min; no retraining",
+  "stages": {
+    "base_nf4": {
+      "status": "completed",
+      "report": "C:\\Users\\User\\Desktop\\ai factory\\predictfix-wave2-training\\.runtime\\selection-independent-v5-20261020\\base_nf4\\report.json",
+      "exit_code": 0,
+      "timed_out": false,
+      "pid": 43404
+    },
+    "qlora_nf4_504_final": {
+      "status": "completed",
+      "report": "C:\\Users\\User\\Desktop\\ai factory\\predictfix-wave2-training\\.runtime\\selection-independent-v5-20261020\\qlora_nf4_504_final\\report.json",
+      "exit_code": 0,
+      "timed_out": false,
+      "pid": 26920
+    }
+  },
+  "wall_seconds_uncontrolled": 645.2339999999967
+}
