@@ -87,3 +87,20 @@ def test_raw_objective_is_a_separate_frozen_protocol_not_a_v2_rewrite():
   assert raw['objective']['name'] == 'grammar-decision-balanced-raw-v1'
   assert raw['train_ids'] == capped['train_ids'] and raw['learning_rate'] == capped['learning_rate']
   assert validateManifest(raw, dataset, holdout)
+
+def test_full_coverage_preserves_prefix_and_excludes_exposed_holdout():
+  import json
+  from gemma_sft_protocol import buildManifest, validateManifest
+  root = Path(__file__).resolve().parents[1]
+  dataset = root / 'training/selection-dataset-v2.json'
+  holdout = root / 'training/selection-holdout-v4-repair.json'
+  previous = buildManifest(dataset, holdout, decisionObjective='raw')
+  full = buildManifest(dataset, holdout, decisionObjective='raw', fullCoverage=True)
+  trainRows = json.loads(dataset.read_text(encoding='utf-8'))['splits']['train']
+  assert len(full['train_ids']) == len(set(full['train_ids'])) == full['optimizer_steps'] == 504
+  assert set(full['train_ids']) == {r['id'] for r in trainRows}
+  assert full['train_ids'][:126] == previous['train_ids']
+  assert full['objective'] == previous['objective']
+  assert full['evaluation_splits'] == ['validation'] and full['holdout_ids'] == []
+  assert full['validation_ids'] == previous['validation_ids']
+  assert validateManifest(full, dataset, holdout)

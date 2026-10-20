@@ -1,0 +1,9 @@
+{
+  "generationFunctionUnchanged": true,
+  "protocolOnlyChanges": [
+    "version",
+    "objective"
+  ],
+  "dataAndTrainBudgetUnchanged": true,
+  "heldoutCaveat": "Source-group IDs/questions are new and disjoint; some equipment themes relate to prior groups, so not component-disjoint or external expert validation."
+}

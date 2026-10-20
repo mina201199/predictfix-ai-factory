@@ -67,7 +67,7 @@ def sampleRows(rows, seed):
   return [r['id'] for r in result]
 
 
-def buildManifest(datasetPath, holdoutPath, decisionObjective=False):
+def buildManifest(datasetPath, holdoutPath, decisionObjective=False, fullCoverage=False):
   data = json.loads(Path(datasetPath).read_text(encoding='utf-8'))
   holdout = json.loads(Path(holdoutPath).read_text(encoding='utf-8'))
   validateHoldout(holdout, data)
@@ -94,12 +94,20 @@ def buildManifest(datasetPath, holdoutPath, decisionObjective=False):
       manifest['version'] = 'gemma-sft-v3'
       manifest['objective']['name'] = 'grammar-decision-balanced-raw-v1'
       manifest['objective']['logit_transform'] = 'identity'
+  if fullCoverage:
+    if decisionObjective != 'raw':
+      raise ValueError('Full coverage requires the frozen raw objective')
+    remaining = sorted(r['id'] for r in data['splits']['train'] if r['id'] not in set(trainIds))
+    random.Random(20261020).shuffle(remaining)
+    manifest.update(version='gemma-sft-v4-coverage', train_ids=trainIds + remaining,
+      optimizer_steps=len(trainIds) + len(remaining), holdout_ids=[], evaluation_splits=['validation'])
+    manifest['selection_policy'] = 'Final step only; development validation only; exposed holdout excluded.'
   return manifest
 
 
 def validateManifest(manifest, datasetPath, holdoutPath):
-  objective = 'raw' if manifest.get('version') == 'gemma-sft-v3' else manifest.get('version') == 'gemma-sft-v2'
-  if manifest != buildManifest(datasetPath, holdoutPath, decisionObjective=objective):
+  objective = 'raw' if manifest.get('version') in ('gemma-sft-v3', 'gemma-sft-v4-coverage') else manifest.get('version') == 'gemma-sft-v2'
+  if manifest != buildManifest(datasetPath, holdoutPath, decisionObjective=objective, fullCoverage=manifest.get('version') == 'gemma-sft-v4-coverage'):
     raise ValueError('Manifest protocol, row ids, or data hash changed; freeze a new experiment')
   return True
 

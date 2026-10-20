@@ -199,7 +199,7 @@ def initializeAdapter(model, seed):
 
 def evaluate(model, tokenizer, manifest, args, report, save):
   results = []
-  for split in ['validation', 'holdout']:
+  for split in manifest.get('evaluation_splits', ['validation', 'holdout']):
     for row in resolveRows(manifest, split):
       if args.max_seconds and time.monotonic() - args.started > args.max_seconds:
         raise TimeoutError('Budget expired between evaluation rows')
@@ -208,7 +208,7 @@ def evaluate(model, tokenizer, manifest, args, report, save):
         'prompt_tokens': generated['prompt_tokens'], 'generated_tokens': generated['generated_tokens']}
       results.append(result)
       report['results'] = results
-      report['metrics_by_split'] = {s: summarizeRows([r for r in results if r['split'] == s]) for s in ['validation', 'holdout']}
+      report['metrics_by_split'] = {s: summarizeRows([r for r in results if r['split'] == s]) for s in manifest.get('evaluation_splits', ['validation', 'holdout'])}
       report['metrics_by_kind'] = groupedMetrics(results, 'kind')
       report['metrics_by_family'] = groupedMetrics(results, 'family')
       save()
@@ -304,9 +304,7 @@ def checkBaseline(path, mode, manifestHash):
     raise ValueError('A completed matching original-model baseline is required before SFT')
   if baseline.get('adapter_source') is not None:
     raise ValueError('Original-model baseline cannot contain an adapter')
-  if len(baseline.get('results', [])) != 128:
-    raise ValueError('Baseline must include all fixed validation and holdout rows')
-  expected = [(rowId, split) for split in ['validation', 'holdout'] for rowId in baseline['protocol'][f'{split}_ids']]
+  expected = [(rowId, split) for split in baseline['protocol'].get('evaluation_splits', ['validation', 'holdout']) for rowId in baseline['protocol'][f'{split}_ids']]
   actual = [(row['id'], row['split']) for row in baseline['results']]
   if actual != expected:
     raise ValueError('Baseline rows differ from the complete frozen evaluation order')
@@ -432,7 +430,10 @@ def main():
   parser.add_argument('--holdout', type=Path)
   parser.add_argument('--decision-objective', action='store_true', help='Freeze v2 decision-balanced objective')
   parser.add_argument('--raw-decision-objective', action='store_true', help='Freeze v3 non-saturating decision loss')
+  parser.add_argument('--full-coverage', action='store_true')
   args = parser.parse_args()
+  if args.full_coverage and (args.command != 'freeze' or not args.raw_decision_objective):
+    parser.error('--full-coverage requires freeze --raw-decision-objective')
   for argument, name in [(args.protocol, 'protocol'), (args.holdout, 'holdout')]:
     if argument and not argument.resolve().is_relative_to(ROOT / 'training'):
       parser.error(f'--{name} must be inside this worktree training folder')
@@ -447,7 +448,7 @@ def main():
   if args.command == 'freeze':
     with PROTOCOL.open('x', encoding='utf-8', newline='\n') as handle:
       objective = 'raw' if args.raw_decision_objective else args.decision_objective
-      json.dump(buildManifest(DATASET, HOLDOUT, decisionObjective=objective), handle, ensure_ascii=False, indent=2)
+      json.dump(buildManifest(DATASET, HOLDOUT, decisionObjective=objective, fullCoverage=args.full_coverage), handle, ensure_ascii=False, indent=2)
       handle.write('\n')
     print(PROTOCOL)
   else:

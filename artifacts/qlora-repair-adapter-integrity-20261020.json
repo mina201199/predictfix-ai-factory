@@ -1,0 +1,18 @@
+{
+  "status": "passed",
+  "adapterDir": "C:\\Users\\User\\Desktop\\ai factory\\predictfix-wave2-training\\.runtime\\qlora-repair-raw-20261020\\qlora_train\\adapter",
+  "adapterSha256": "6e7ce963f52c9b49fac5d274d9dbb194b14e871993f8662c94fa00b709d52fc0",
+  "configSha256": "98d45fa3058892beca48580f368db28f28b81b695c4d60cb5b765bc983938fb8",
+  "fileBytes": 48370272,
+  "tensors": 410,
+  "parameters": 12079104,
+  "allFinite": true,
+  "loraOnly": true,
+  "reloadVerification": {
+    "passed": true,
+    "atol": 0.0001,
+    "rtol": 0.0001,
+    "max_abs_error": 0.0
+  },
+  "modelReady": false
+}

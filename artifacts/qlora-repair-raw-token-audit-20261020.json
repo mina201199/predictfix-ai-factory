@@ -1,0 +1,1558 @@
+{
+  "protocol_sha256": "da512b364b4d6a50d989e66efd4bec9ae4befeea2ed8b82ba967db01a28ebd4e",
+  "model_revision": "3e22461f65e89153144f8adb70e3b8c2cc9845a7",
+  "scope": "Offline official tokenizer only; no model training or inference",
+  "splits": {
+    "train": {
+      "rows": 126,
+      "sequence_tokens": 101101,
+      "supervised_tokens": 1399,
+      "max_sequence_tokens": 919,
+      "max_grammar_tokens": 21,
+      "records": [
+        {
+          "id": "feed-servo-19",
+          "sequence_tokens": 888,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "spindle-lube-11",
+          "sequence_tokens": 853,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "atc-arm-15",
+          "sequence_tokens": 802,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "spindle-chiller-08",
+          "sequence_tokens": 627,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "hydraulic-17",
+          "sequence_tokens": 656,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "coolant-pump-25",
+          "sequence_tokens": 678,
+          "supervised_tokens": 17,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "rotary-table-14",
+          "sequence_tokens": 853,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "hydraulic-01",
+          "sequence_tokens": 918,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "coolant-pump-18",
+          "sequence_tokens": 854,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "hydraulic-15",
+          "sequence_tokens": 815,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "workpiece-probe-04",
+          "sequence_tokens": 825,
+          "supervised_tokens": 23,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "tool-setter-06",
+          "sequence_tokens": 696,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "feed-servo-20",
+          "sequence_tokens": 808,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "guard-door-12",
+          "sequence_tokens": 908,
+          "supervised_tokens": 17,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "atc-arm-13",
+          "sequence_tokens": 667,
+          "supervised_tokens": 17,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "electrical-cabinet-01",
+          "sequence_tokens": 663,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "spindle-lube-22",
+          "sequence_tokens": 823,
+          "supervised_tokens": 17,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "lathe-chuck-05",
+          "sequence_tokens": 779,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "tool-setter-14",
+          "sequence_tokens": 844,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "ballscrew-24",
+          "sequence_tokens": 682,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "spindle-chiller-22",
+          "sequence_tokens": 811,
+          "supervised_tokens": 17,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "spindle-chiller-01",
+          "sequence_tokens": 837,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "spindle-bearing-00",
+          "sequence_tokens": 852,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "ballscrew-25",
+          "sequence_tokens": 867,
+          "supervised_tokens": 17,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "tool-setter-09",
+          "sequence_tokens": 856,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "feed-servo-09",
+          "sequence_tokens": 859,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "bar-feeder-24",
+          "sequence_tokens": 853,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "ballscrew-04",
+          "sequence_tokens": 839,
+          "supervised_tokens": 23,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "chip-conveyor-02",
+          "sequence_tokens": 782,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "atc-arm-06",
+          "sequence_tokens": 894,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "rotary-table-21",
+          "sequence_tokens": 808,
+          "supervised_tokens": 17,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "spindle-bearing-23",
+          "sequence_tokens": 837,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "spindle-bearing-12",
+          "sequence_tokens": 863,
+          "supervised_tokens": 17,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "pneumatic-24",
+          "sequence_tokens": 715,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "lathe-chuck-19",
+          "sequence_tokens": 838,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "rotary-table-19",
+          "sequence_tokens": 752,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "atc-arm-09",
+          "sequence_tokens": 830,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "electrical-cabinet-23",
+          "sequence_tokens": 845,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "spindle-bearing-25",
+          "sequence_tokens": 728,
+          "supervised_tokens": 17,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "lathe-chuck-16",
+          "sequence_tokens": 759,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "workpiece-probe-19",
+          "sequence_tokens": 722,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "guard-door-16",
+          "sequence_tokens": 857,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "workpiece-probe-14",
+          "sequence_tokens": 896,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "pneumatic-04",
+          "sequence_tokens": 681,
+          "supervised_tokens": 23,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "lathe-chuck-15",
+          "sequence_tokens": 782,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "workpiece-probe-13",
+          "sequence_tokens": 816,
+          "supervised_tokens": 17,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "pneumatic-08",
+          "sequence_tokens": 756,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "feed-servo-00",
+          "sequence_tokens": 916,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "chip-conveyor-01",
+          "sequence_tokens": 881,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "tool-setter-13",
+          "sequence_tokens": 806,
+          "supervised_tokens": 17,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "bar-feeder-21",
+          "sequence_tokens": 760,
+          "supervised_tokens": 17,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "atc-magazine-07",
+          "sequence_tokens": 892,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "guard-door-13",
+          "sequence_tokens": 871,
+          "supervised_tokens": 17,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "atc-magazine-00",
+          "sequence_tokens": 801,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "tool-setter-19",
+          "sequence_tokens": 857,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "ballscrew-11",
+          "sequence_tokens": 682,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "spindle-bearing-06",
+          "sequence_tokens": 821,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "coolant-pump-21",
+          "sequence_tokens": 767,
+          "supervised_tokens": 17,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "spindle-lube-01",
+          "sequence_tokens": 788,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "tool-setter-21",
+          "sequence_tokens": 870,
+          "supervised_tokens": 17,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "rotary-table-20",
+          "sequence_tokens": 714,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "electrical-cabinet-17",
+          "sequence_tokens": 720,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "spindle-lube-16",
+          "sequence_tokens": 684,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "feed-servo-27",
+          "sequence_tokens": 806,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "hydraulic-06",
+          "sequence_tokens": 819,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "atc-magazine-04",
+          "sequence_tokens": 711,
+          "supervised_tokens": 23,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "spindle-bearing-18",
+          "sequence_tokens": 777,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "guard-door-27",
+          "sequence_tokens": 750,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "feed-servo-17",
+          "sequence_tokens": 816,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "ballscrew-19",
+          "sequence_tokens": 795,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "atc-arm-01",
+          "sequence_tokens": 744,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "spindle-chiller-14",
+          "sequence_tokens": 886,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "spindle-chiller-04",
+          "sequence_tokens": 759,
+          "supervised_tokens": 23,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "atc-magazine-19",
+          "sequence_tokens": 814,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "electrical-cabinet-09",
+          "sequence_tokens": 774,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "rotary-table-10",
+          "sequence_tokens": 765,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "atc-arm-25",
+          "sequence_tokens": 809,
+          "supervised_tokens": 17,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "coolant-pump-12",
+          "sequence_tokens": 919,
+          "supervised_tokens": 17,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "electrical-cabinet-05",
+          "sequence_tokens": 898,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "pneumatic-13",
+          "sequence_tokens": 802,
+          "supervised_tokens": 17,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "workpiece-probe-10",
+          "sequence_tokens": 801,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "pneumatic-23",
+          "sequence_tokens": 753,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "atc-magazine-06",
+          "sequence_tokens": 819,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "guard-door-14",
+          "sequence_tokens": 759,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "spindle-chiller-23",
+          "sequence_tokens": 675,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "hydraulic-18",
+          "sequence_tokens": 888,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "spindle-lube-06",
+          "sequence_tokens": 856,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "bar-feeder-09",
+          "sequence_tokens": 715,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "bar-feeder-10",
+          "sequence_tokens": 657,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "bar-feeder-01",
+          "sequence_tokens": 877,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "lathe-chuck-01",
+          "sequence_tokens": 854,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "electrical-cabinet-20",
+          "sequence_tokens": 744,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "pneumatic-03",
+          "sequence_tokens": 751,
+          "supervised_tokens": 17,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "workpiece-probe-05",
+          "sequence_tokens": 782,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "spindle-chiller-12",
+          "sequence_tokens": 918,
+          "supervised_tokens": 17,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "chip-conveyor-11",
+          "sequence_tokens": 832,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "chip-conveyor-27",
+          "sequence_tokens": 738,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "coolant-pump-14",
+          "sequence_tokens": 889,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "chip-conveyor-07",
+          "sequence_tokens": 788,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "ballscrew-12",
+          "sequence_tokens": 810,
+          "supervised_tokens": 17,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "tool-setter-26",
+          "sequence_tokens": 706,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "spindle-lube-09",
+          "sequence_tokens": 909,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "atc-arm-19",
+          "sequence_tokens": 862,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "atc-magazine-22",
+          "sequence_tokens": 908,
+          "supervised_tokens": 17,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "bar-feeder-08",
+          "sequence_tokens": 701,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "electrical-cabinet-13",
+          "sequence_tokens": 890,
+          "supervised_tokens": 17,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "chip-conveyor-10",
+          "sequence_tokens": 857,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "chip-conveyor-14",
+          "sequence_tokens": 902,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "lathe-chuck-21",
+          "sequence_tokens": 751,
+          "supervised_tokens": 17,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "bar-feeder-14",
+          "sequence_tokens": 871,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "guard-door-04",
+          "sequence_tokens": 768,
+          "supervised_tokens": 23,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "coolant-pump-09",
+          "sequence_tokens": 766,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "hydraulic-13",
+          "sequence_tokens": 917,
+          "supervised_tokens": 17,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "feed-servo-14",
+          "sequence_tokens": 814,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "atc-magazine-14",
+          "sequence_tokens": 737,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "hydraulic-19",
+          "sequence_tokens": 848,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "spindle-bearing-10",
+          "sequence_tokens": 836,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "rotary-table-16",
+          "sequence_tokens": 698,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "ballscrew-14",
+          "sequence_tokens": 649,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "guard-door-19",
+          "sequence_tokens": 772,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "rotary-table-05",
+          "sequence_tokens": 808,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "workpiece-probe-07",
+          "sequence_tokens": 703,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "coolant-pump-06",
+          "sequence_tokens": 878,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "spindle-lube-24",
+          "sequence_tokens": 858,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "pneumatic-00",
+          "sequence_tokens": 883,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "lathe-chuck-03",
+          "sequence_tokens": 855,
+          "supervised_tokens": 17,
+          "max_grammar_tokens": 21
+        }
+      ]
+    },
+    "validation": {
+      "rows": 28,
+      "sequence_tokens": 22113,
+      "supervised_tokens": 323,
+      "max_sequence_tokens": 890,
+      "max_grammar_tokens": 21,
+      "records": [
+        {
+          "id": "mist-collector-12",
+          "sequence_tokens": 870,
+          "supervised_tokens": 17,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "mist-collector-04",
+          "sequence_tokens": 790,
+          "supervised_tokens": 23,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "way-lube-09",
+          "sequence_tokens": 856,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "way-lube-10",
+          "sequence_tokens": 811,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "linear-scale-07",
+          "sequence_tokens": 797,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "way-lube-14",
+          "sequence_tokens": 790,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "mist-collector-14",
+          "sequence_tokens": 854,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "lathe-turret-06",
+          "sequence_tokens": 646,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "linear-scale-04",
+          "sequence_tokens": 791,
+          "supervised_tokens": 23,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "mist-collector-25",
+          "sequence_tokens": 842,
+          "supervised_tokens": 17,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "mist-collector-24",
+          "sequence_tokens": 713,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "way-lube-01",
+          "sequence_tokens": 754,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "lathe-turret-25",
+          "sequence_tokens": 802,
+          "supervised_tokens": 17,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "linear-scale-19",
+          "sequence_tokens": 724,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "way-lube-08",
+          "sequence_tokens": 787,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "lathe-turret-09",
+          "sequence_tokens": 709,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "linear-scale-14",
+          "sequence_tokens": 758,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "lathe-turret-01",
+          "sequence_tokens": 890,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "way-lube-24",
+          "sequence_tokens": 872,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "linear-scale-22",
+          "sequence_tokens": 784,
+          "supervised_tokens": 17,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "way-lube-21",
+          "sequence_tokens": 757,
+          "supervised_tokens": 17,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "mist-collector-11",
+          "sequence_tokens": 792,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "lathe-turret-13",
+          "sequence_tokens": 722,
+          "supervised_tokens": 17,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "linear-scale-00",
+          "sequence_tokens": 810,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "linear-scale-06",
+          "sequence_tokens": 855,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "lathe-turret-15",
+          "sequence_tokens": 842,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "lathe-turret-19",
+          "sequence_tokens": 654,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "mist-collector-19",
+          "sequence_tokens": 841,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        }
+      ]
+    },
+    "holdout": {
+      "rows": 100,
+      "sequence_tokens": 60036,
+      "supervised_tokens": 1080,
+      "max_sequence_tokens": 654,
+      "max_grammar_tokens": 22,
+      "records": [
+        {
+          "id": "repair-holdout-mist-collector-link-00",
+          "sequence_tokens": 609,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-mist-collector-link-01",
+          "sequence_tokens": 592,
+          "supervised_tokens": 17,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-mist-collector-link-02",
+          "sequence_tokens": 590,
+          "supervised_tokens": 17,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-mist-collector-link-03",
+          "sequence_tokens": 612,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-mist-collector-link-04",
+          "sequence_tokens": 577,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-mist-collector-link-05",
+          "sequence_tokens": 561,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-mist-collector-link-06",
+          "sequence_tokens": 608,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-mist-collector-link-07",
+          "sequence_tokens": 561,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-mist-collector-link-08",
+          "sequence_tokens": 647,
+          "supervised_tokens": 17,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-mist-collector-link-09",
+          "sequence_tokens": 652,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 22
+        },
+        {
+          "id": "repair-holdout-bar-loader-link-00",
+          "sequence_tokens": 609,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-bar-loader-link-01",
+          "sequence_tokens": 592,
+          "supervised_tokens": 17,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-bar-loader-link-02",
+          "sequence_tokens": 590,
+          "supervised_tokens": 17,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-bar-loader-link-03",
+          "sequence_tokens": 612,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-bar-loader-link-04",
+          "sequence_tokens": 577,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-bar-loader-link-05",
+          "sequence_tokens": 561,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-bar-loader-link-06",
+          "sequence_tokens": 608,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-bar-loader-link-07",
+          "sequence_tokens": 561,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-bar-loader-link-08",
+          "sequence_tokens": 647,
+          "supervised_tokens": 17,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-bar-loader-link-09",
+          "sequence_tokens": 652,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 22
+        },
+        {
+          "id": "repair-holdout-conveyor-scale-00",
+          "sequence_tokens": 609,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-conveyor-scale-01",
+          "sequence_tokens": 592,
+          "supervised_tokens": 17,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-conveyor-scale-02",
+          "sequence_tokens": 590,
+          "supervised_tokens": 17,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-conveyor-scale-03",
+          "sequence_tokens": 612,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-conveyor-scale-04",
+          "sequence_tokens": 577,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-conveyor-scale-05",
+          "sequence_tokens": 561,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-conveyor-scale-06",
+          "sequence_tokens": 608,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-conveyor-scale-07",
+          "sequence_tokens": 561,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-conveyor-scale-08",
+          "sequence_tokens": 647,
+          "supervised_tokens": 17,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-conveyor-scale-09",
+          "sequence_tokens": 652,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 22
+        },
+        {
+          "id": "repair-holdout-pallet-reader-00",
+          "sequence_tokens": 608,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-pallet-reader-01",
+          "sequence_tokens": 591,
+          "supervised_tokens": 17,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-pallet-reader-02",
+          "sequence_tokens": 589,
+          "supervised_tokens": 17,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-pallet-reader-03",
+          "sequence_tokens": 611,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-pallet-reader-04",
+          "sequence_tokens": 576,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-pallet-reader-05",
+          "sequence_tokens": 561,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-pallet-reader-06",
+          "sequence_tokens": 607,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-pallet-reader-07",
+          "sequence_tokens": 561,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-pallet-reader-08",
+          "sequence_tokens": 646,
+          "supervised_tokens": 17,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-pallet-reader-09",
+          "sequence_tokens": 652,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 22
+        },
+        {
+          "id": "repair-holdout-exhaust-damper-00",
+          "sequence_tokens": 610,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-exhaust-damper-01",
+          "sequence_tokens": 593,
+          "supervised_tokens": 17,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-exhaust-damper-02",
+          "sequence_tokens": 591,
+          "supervised_tokens": 17,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-exhaust-damper-03",
+          "sequence_tokens": 613,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-exhaust-damper-04",
+          "sequence_tokens": 578,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-exhaust-damper-05",
+          "sequence_tokens": 562,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-exhaust-damper-06",
+          "sequence_tokens": 609,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-exhaust-damper-07",
+          "sequence_tokens": 562,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-exhaust-damper-08",
+          "sequence_tokens": 648,
+          "supervised_tokens": 17,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-exhaust-damper-09",
+          "sequence_tokens": 653,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 22
+        },
+        {
+          "id": "repair-holdout-cooler-gateway-00",
+          "sequence_tokens": 612,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-cooler-gateway-01",
+          "sequence_tokens": 595,
+          "supervised_tokens": 17,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-cooler-gateway-02",
+          "sequence_tokens": 593,
+          "supervised_tokens": 17,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-cooler-gateway-03",
+          "sequence_tokens": 615,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-cooler-gateway-04",
+          "sequence_tokens": 580,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-cooler-gateway-05",
+          "sequence_tokens": 563,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-cooler-gateway-06",
+          "sequence_tokens": 611,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-cooler-gateway-07",
+          "sequence_tokens": 563,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-cooler-gateway-08",
+          "sequence_tokens": 650,
+          "supervised_tokens": 17,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-cooler-gateway-09",
+          "sequence_tokens": 654,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 22
+        },
+        {
+          "id": "repair-holdout-sump-level-link-00",
+          "sequence_tokens": 611,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-sump-level-link-01",
+          "sequence_tokens": 594,
+          "supervised_tokens": 17,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-sump-level-link-02",
+          "sequence_tokens": 592,
+          "supervised_tokens": 17,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-sump-level-link-03",
+          "sequence_tokens": 614,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-sump-level-link-04",
+          "sequence_tokens": 579,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-sump-level-link-05",
+          "sequence_tokens": 562,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-sump-level-link-06",
+          "sequence_tokens": 610,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-sump-level-link-07",
+          "sequence_tokens": 562,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-sump-level-link-08",
+          "sequence_tokens": 649,
+          "supervised_tokens": 17,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-sump-level-link-09",
+          "sequence_tokens": 653,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 22
+        },
+        {
+          "id": "repair-holdout-magnetic-separator-00",
+          "sequence_tokens": 604,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-magnetic-separator-01",
+          "sequence_tokens": 587,
+          "supervised_tokens": 17,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-magnetic-separator-02",
+          "sequence_tokens": 585,
+          "supervised_tokens": 17,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-magnetic-separator-03",
+          "sequence_tokens": 607,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-magnetic-separator-04",
+          "sequence_tokens": 572,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-magnetic-separator-05",
+          "sequence_tokens": 557,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-magnetic-separator-06",
+          "sequence_tokens": 603,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-magnetic-separator-07",
+          "sequence_tokens": 557,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-magnetic-separator-08",
+          "sequence_tokens": 642,
+          "supervised_tokens": 17,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-magnetic-separator-09",
+          "sequence_tokens": 648,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 22
+        },
+        {
+          "id": "repair-holdout-cabinet-light-link-00",
+          "sequence_tokens": 605,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-cabinet-light-link-01",
+          "sequence_tokens": 588,
+          "supervised_tokens": 17,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-cabinet-light-link-02",
+          "sequence_tokens": 586,
+          "supervised_tokens": 17,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-cabinet-light-link-03",
+          "sequence_tokens": 608,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-cabinet-light-link-04",
+          "sequence_tokens": 573,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-cabinet-light-link-05",
+          "sequence_tokens": 559,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-cabinet-light-link-06",
+          "sequence_tokens": 604,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-cabinet-light-link-07",
+          "sequence_tokens": 559,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-cabinet-light-link-08",
+          "sequence_tokens": 643,
+          "supervised_tokens": 17,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-cabinet-light-link-09",
+          "sequence_tokens": 650,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 22
+        },
+        {
+          "id": "repair-holdout-air-dryer-gateway-00",
+          "sequence_tokens": 607,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-air-dryer-gateway-01",
+          "sequence_tokens": 590,
+          "supervised_tokens": 17,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-air-dryer-gateway-02",
+          "sequence_tokens": 588,
+          "supervised_tokens": 17,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-air-dryer-gateway-03",
+          "sequence_tokens": 610,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-air-dryer-gateway-04",
+          "sequence_tokens": 575,
+          "supervised_tokens": 11,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-air-dryer-gateway-05",
+          "sequence_tokens": 559,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-air-dryer-gateway-06",
+          "sequence_tokens": 606,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-air-dryer-gateway-07",
+          "sequence_tokens": 559,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-air-dryer-gateway-08",
+          "sequence_tokens": 645,
+          "supervised_tokens": 17,
+          "max_grammar_tokens": 21
+        },
+        {
+          "id": "repair-holdout-air-dryer-gateway-09",
+          "sequence_tokens": 650,
+          "supervised_tokens": 6,
+          "max_grammar_tokens": 22
+        }
+      ]
+    }
+  }
+}

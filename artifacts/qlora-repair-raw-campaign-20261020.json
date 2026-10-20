@@ -1,0 +1,144 @@
+{
+  "scope": "qlora",
+  "max_hours": 1.0,
+  "protocol_sha256": "da512b364b4d6a50d989e66efd4bec9ae4befeea2ed8b82ba967db01a28ebd4e",
+  "status": "completed",
+  "stages": {
+    "base_nf4": {
+      "status": "completed",
+      "report": "C:\\Users\\User\\Desktop\\ai factory\\predictfix-wave2-training\\.runtime\\qlora-repair-raw-20261020\\base_nf4\\report.json",
+      "command": [
+        "C:\\Users\\User\\Desktop\\ai factory\\predictfix-ai-factory\\.runtime\\qlora-env\\Scripts\\python.exe",
+        "C:\\Users\\User\\Desktop\\ai factory\\predictfix-wave2-training\\scripts\\run_gemma_sft.py",
+        "baseline",
+        "--mode",
+        "qlora",
+        "--runtime-dir",
+        "C:\\Users\\User\\Desktop\\ai factory\\predictfix-ai-factory\\.runtime",
+        "--run-dir",
+        "C:\\Users\\User\\Desktop\\ai factory\\predictfix-wave2-training\\.runtime\\qlora-repair-raw-20261020\\base_nf4",
+        "--max-seconds",
+        "3599.9840000000004",
+        "--protocol",
+        "C:\\Users\\User\\Desktop\\ai factory\\predictfix-wave2-training\\training\\gemma-sft-protocol-v3.json",
+        "--holdout",
+        "C:\\Users\\User\\Desktop\\ai factory\\predictfix-wave2-training\\training\\selection-holdout-v4-repair.json"
+      ],
+      "pid": 30108,
+      "exit_code": 0
+    },
+    "qlora_train": {
+      "status": "trained_pending_reload",
+      "report": "C:\\Users\\User\\Desktop\\ai factory\\predictfix-wave2-training\\.runtime\\qlora-repair-raw-20261020\\qlora_train\\report.json",
+      "command": [
+        "C:\\Users\\User\\Desktop\\ai factory\\predictfix-ai-factory\\.runtime\\qlora-env\\Scripts\\python.exe",
+        "C:\\Users\\User\\Desktop\\ai factory\\predictfix-wave2-training\\scripts\\run_gemma_sft.py",
+        "train",
+        "--mode",
+        "qlora",
+        "--runtime-dir",
+        "C:\\Users\\User\\Desktop\\ai factory\\predictfix-ai-factory\\.runtime",
+        "--run-dir",
+        "C:\\Users\\User\\Desktop\\ai factory\\predictfix-wave2-training\\.runtime\\qlora-repair-raw-20261020\\qlora_train",
+        "--max-seconds",
+        "3203.4840000000004",
+        "--protocol",
+        "C:\\Users\\User\\Desktop\\ai factory\\predictfix-wave2-training\\training\\gemma-sft-protocol-v3.json",
+        "--holdout",
+        "C:\\Users\\User\\Desktop\\ai factory\\predictfix-wave2-training\\training\\selection-holdout-v4-repair.json",
+        "--baseline-report",
+        "C:\\Users\\User\\Desktop\\ai factory\\predictfix-wave2-training\\.runtime\\qlora-repair-raw-20261020\\base_nf4\\report.json"
+      ],
+      "pid": 41960,
+      "exit_code": 0
+    },
+    "qlora_reload": {
+      "status": "completed",
+      "report": "C:\\Users\\User\\Desktop\\ai factory\\predictfix-wave2-training\\.runtime\\qlora-repair-raw-20261020\\qlora_reload\\report.json",
+      "command": [
+        "C:\\Users\\User\\Desktop\\ai factory\\predictfix-ai-factory\\.runtime\\qlora-env\\Scripts\\python.exe",
+        "C:\\Users\\User\\Desktop\\ai factory\\predictfix-wave2-training\\scripts\\run_gemma_sft.py",
+        "reload",
+        "--mode",
+        "qlora",
+        "--runtime-dir",
+        "C:\\Users\\User\\Desktop\\ai factory\\predictfix-ai-factory\\.runtime",
+        "--run-dir",
+        "C:\\Users\\User\\Desktop\\ai factory\\predictfix-wave2-training\\.runtime\\qlora-repair-raw-20261020\\qlora_reload",
+        "--max-seconds",
+        "2045.0",
+        "--protocol",
+        "C:\\Users\\User\\Desktop\\ai factory\\predictfix-wave2-training\\training\\gemma-sft-protocol-v3.json",
+        "--holdout",
+        "C:\\Users\\User\\Desktop\\ai factory\\predictfix-wave2-training\\training\\selection-holdout-v4-repair.json",
+        "--adapter-run",
+        "C:\\Users\\User\\Desktop\\ai factory\\predictfix-wave2-training\\.runtime\\qlora-repair-raw-20261020\\qlora_train"
+      ],
+      "pid": 41228,
+      "exit_code": 0
+    }
+  },
+  "quality_table": {
+    "base_nf4": {
+      "validation": {
+        "count": 28,
+        "exact_match": 0.03571428571428571,
+        "precision": 0.36,
+        "recall": 0.9310344827586207,
+        "json_valid_rate": 1.0,
+        "schema_valid_rate": 1.0,
+        "insufficient_count": 9,
+        "insufficient_refusal_rate": 0.0,
+        "injection_count": 4,
+        "injection_exact_match": 0.0,
+        "injection_selection_rate": 0.25
+      },
+      "holdout": {
+        "count": 100,
+        "exact_match": 0.13,
+        "precision": 0.31800766283524906,
+        "recall": 0.9222222222222223,
+        "json_valid_rate": 1.0,
+        "schema_valid_rate": 1.0,
+        "insufficient_count": 40,
+        "insufficient_refusal_rate": 0.0,
+        "injection_count": 20,
+        "injection_exact_match": 0.2,
+        "injection_selection_rate": 0.0
+      }
+    },
+    "qlora_reload": {
+      "validation": {
+        "count": 28,
+        "exact_match": 0.32142857142857145,
+        "precision": 0.5483870967741935,
+        "recall": 0.5862068965517241,
+        "json_valid_rate": 1.0,
+        "schema_valid_rate": 1.0,
+        "insufficient_count": 9,
+        "insufficient_refusal_rate": 0.0,
+        "injection_count": 4,
+        "injection_exact_match": 0.5,
+        "injection_selection_rate": 0.0
+      },
+      "holdout": {
+        "count": 100,
+        "exact_match": 0.3,
+        "precision": 0.6,
+        "recall": 0.6666666666666666,
+        "json_valid_rate": 1.0,
+        "schema_valid_rate": 1.0,
+        "insufficient_count": 40,
+        "insufficient_refusal_rate": 0.0,
+        "injection_count": 20,
+        "injection_exact_match": 0.0,
+        "injection_selection_rate": 0.0
+      }
+    }
+  },
+  "limitations": [
+    "Concurrent workloads; wall clock is cost evidence, not controlled performance.",
+    "Missing/failed arms have no quality score; resource probe is not formal training."
+  ],
+  "wall_seconds_uncontrolled": 1939.7969999999987
+}

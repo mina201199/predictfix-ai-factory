@@ -1,0 +1,2146 @@
+{
+  "protocol_sha256": "a56d92d30966582129769d74bfc54e9d41af59655f2bb1fd6be9a0c83f7a85b9",
+  "scope": "offline tokenizer, no truncation",
+  "splits": {
+    "train": {
+      "rows": 504,
+      "max_tokens": 925,
+      "lengths": [
+        {
+          "id": "feed-servo-19",
+          "tokens": 888
+        },
+        {
+          "id": "spindle-lube-11",
+          "tokens": 853
+        },
+        {
+          "id": "atc-arm-15",
+          "tokens": 802
+        },
+        {
+          "id": "spindle-chiller-08",
+          "tokens": 627
+        },
+        {
+          "id": "hydraulic-17",
+          "tokens": 656
+        },
+        {
+          "id": "coolant-pump-25",
+          "tokens": 678
+        },
+        {
+          "id": "rotary-table-14",
+          "tokens": 853
+        },
+        {
+          "id": "hydraulic-01",
+          "tokens": 918
+        },
+        {
+          "id": "coolant-pump-18",
+          "tokens": 854
+        },
+        {
+          "id": "hydraulic-15",
+          "tokens": 815
+        },
+        {
+          "id": "workpiece-probe-04",
+          "tokens": 825
+        },
+        {
+          "id": "tool-setter-06",
+          "tokens": 696
+        },
+        {
+          "id": "feed-servo-20",
+          "tokens": 808
+        },
+        {
+          "id": "guard-door-12",
+          "tokens": 908
+        },
+        {
+          "id": "atc-arm-13",
+          "tokens": 667
+        },
+        {
+          "id": "electrical-cabinet-01",
+          "tokens": 663
+        },
+        {
+          "id": "spindle-lube-22",
+          "tokens": 823
+        },
+        {
+          "id": "lathe-chuck-05",
+          "tokens": 779
+        },
+        {
+          "id": "tool-setter-14",
+          "tokens": 844
+        },
+        {
+          "id": "ballscrew-24",
+          "tokens": 682
+        },
+        {
+          "id": "spindle-chiller-22",
+          "tokens": 811
+        },
+        {
+          "id": "spindle-chiller-01",
+          "tokens": 837
+        },
+        {
+          "id": "spindle-bearing-00",
+          "tokens": 852
+        },
+        {
+          "id": "ballscrew-25",
+          "tokens": 867
+        },
+        {
+          "id": "tool-setter-09",
+          "tokens": 856
+        },
+        {
+          "id": "feed-servo-09",
+          "tokens": 859
+        },
+        {
+          "id": "bar-feeder-24",
+          "tokens": 853
+        },
+        {
+          "id": "ballscrew-04",
+          "tokens": 839
+        },
+        {
+          "id": "chip-conveyor-02",
+          "tokens": 782
+        },
+        {
+          "id": "atc-arm-06",
+          "tokens": 894
+        },
+        {
+          "id": "rotary-table-21",
+          "tokens": 808
+        },
+        {
+          "id": "spindle-bearing-23",
+          "tokens": 837
+        },
+        {
+          "id": "spindle-bearing-12",
+          "tokens": 863
+        },
+        {
+          "id": "pneumatic-24",
+          "tokens": 715
+        },
+        {
+          "id": "lathe-chuck-19",
+          "tokens": 838
+        },
+        {
+          "id": "rotary-table-19",
+          "tokens": 752
+        },
+        {
+          "id": "atc-arm-09",
+          "tokens": 830
+        },
+        {
+          "id": "electrical-cabinet-23",
+          "tokens": 845
+        },
+        {
+          "id": "spindle-bearing-25",
+          "tokens": 728
+        },
+        {
+          "id": "lathe-chuck-16",
+          "tokens": 759
+        },
+        {
+          "id": "workpiece-probe-19",
+          "tokens": 722
+        },
+        {
+          "id": "guard-door-16",
+          "tokens": 857
+        },
+        {
+          "id": "workpiece-probe-14",
+          "tokens": 896
+        },
+        {
+          "id": "pneumatic-04",
+          "tokens": 681
+        },
+        {
+          "id": "lathe-chuck-15",
+          "tokens": 782
+        },
+        {
+          "id": "workpiece-probe-13",
+          "tokens": 816
+        },
+        {
+          "id": "pneumatic-08",
+          "tokens": 756
+        },
+        {
+          "id": "feed-servo-00",
+          "tokens": 916
+        },
+        {
+          "id": "chip-conveyor-01",
+          "tokens": 881
+        },
+        {
+          "id": "tool-setter-13",
+          "tokens": 806
+        },
+        {
+          "id": "bar-feeder-21",
+          "tokens": 760
+        },
+        {
+          "id": "atc-magazine-07",
+          "tokens": 892
+        },
+        {
+          "id": "guard-door-13",
+          "tokens": 871
+        },
+        {
+          "id": "atc-magazine-00",
+          "tokens": 801
+        },
+        {
+          "id": "tool-setter-19",
+          "tokens": 857
+        },
+        {
+          "id": "ballscrew-11",
+          "tokens": 682
+        },
+        {
+          "id": "spindle-bearing-06",
+          "tokens": 821
+        },
+        {
+          "id": "coolant-pump-21",
+          "tokens": 767
+        },
+        {
+          "id": "spindle-lube-01",
+          "tokens": 788
+        },
+        {
+          "id": "tool-setter-21",
+          "tokens": 870
+        },
+        {
+          "id": "rotary-table-20",
+          "tokens": 714
+        },
+        {
+          "id": "electrical-cabinet-17",
+          "tokens": 720
+        },
+        {
+          "id": "spindle-lube-16",
+          "tokens": 684
+        },
+        {
+          "id": "feed-servo-27",
+          "tokens": 806
+        },
+        {
+          "id": "hydraulic-06",
+          "tokens": 819
+        },
+        {
+          "id": "atc-magazine-04",
+          "tokens": 711
+        },
+        {
+          "id": "spindle-bearing-18",
+          "tokens": 777
+        },
+        {
+          "id": "guard-door-27",
+          "tokens": 750
+        },
+        {
+          "id": "feed-servo-17",
+          "tokens": 816
+        },
+        {
+          "id": "ballscrew-19",
+          "tokens": 795
+        },
+        {
+          "id": "atc-arm-01",
+          "tokens": 744
+        },
+        {
+          "id": "spindle-chiller-14",
+          "tokens": 886
+        },
+        {
+          "id": "spindle-chiller-04",
+          "tokens": 759
+        },
+        {
+          "id": "atc-magazine-19",
+          "tokens": 814
+        },
+        {
+          "id": "electrical-cabinet-09",
+          "tokens": 774
+        },
+        {
+          "id": "rotary-table-10",
+          "tokens": 765
+        },
+        {
+          "id": "atc-arm-25",
+          "tokens": 809
+        },
+        {
+          "id": "coolant-pump-12",
+          "tokens": 919
+        },
+        {
+          "id": "electrical-cabinet-05",
+          "tokens": 898
+        },
+        {
+          "id": "pneumatic-13",
+          "tokens": 802
+        },
+        {
+          "id": "workpiece-probe-10",
+          "tokens": 801
+        },
+        {
+          "id": "pneumatic-23",
+          "tokens": 753
+        },
+        {
+          "id": "atc-magazine-06",
+          "tokens": 819
+        },
+        {
+          "id": "guard-door-14",
+          "tokens": 759
+        },
+        {
+          "id": "spindle-chiller-23",
+          "tokens": 675
+        },
+        {
+          "id": "hydraulic-18",
+          "tokens": 888
+        },
+        {
+          "id": "spindle-lube-06",
+          "tokens": 856
+        },
+        {
+          "id": "bar-feeder-09",
+          "tokens": 715
+        },
+        {
+          "id": "bar-feeder-10",
+          "tokens": 657
+        },
+        {
+          "id": "bar-feeder-01",
+          "tokens": 877
+        },
+        {
+          "id": "lathe-chuck-01",
+          "tokens": 854
+        },
+        {
+          "id": "electrical-cabinet-20",
+          "tokens": 744
+        },
+        {
+          "id": "pneumatic-03",
+          "tokens": 751
+        },
+        {
+          "id": "workpiece-probe-05",
+          "tokens": 782
+        },
+        {
+          "id": "spindle-chiller-12",
+          "tokens": 918
+        },
+        {
+          "id": "chip-conveyor-11",
+          "tokens": 832
+        },
+        {
+          "id": "chip-conveyor-27",
+          "tokens": 738
+        },
+        {
+          "id": "coolant-pump-14",
+          "tokens": 889
+        },
+        {
+          "id": "chip-conveyor-07",
+          "tokens": 788
+        },
+        {
+          "id": "ballscrew-12",
+          "tokens": 810
+        },
+        {
+          "id": "tool-setter-26",
+          "tokens": 706
+        },
+        {
+          "id": "spindle-lube-09",
+          "tokens": 909
+        },
+        {
+          "id": "atc-arm-19",
+          "tokens": 862
+        },
+        {
+          "id": "atc-magazine-22",
+          "tokens": 908
+        },
+        {
+          "id": "bar-feeder-08",
+          "tokens": 701
+        },
+        {
+          "id": "electrical-cabinet-13",
+          "tokens": 890
+        },
+        {
+          "id": "chip-conveyor-10",
+          "tokens": 857
+        },
+        {
+          "id": "chip-conveyor-14",
+          "tokens": 902
+        },
+        {
+          "id": "lathe-chuck-21",
+          "tokens": 751
+        },
+        {
+          "id": "bar-feeder-14",
+          "tokens": 871
+        },
+        {
+          "id": "guard-door-04",
+          "tokens": 768
+        },
+        {
+          "id": "coolant-pump-09",
+          "tokens": 766
+        },
+        {
+          "id": "hydraulic-13",
+          "tokens": 917
+        },
+        {
+          "id": "feed-servo-14",
+          "tokens": 814
+        },
+        {
+          "id": "atc-magazine-14",
+          "tokens": 737
+        },
+        {
+          "id": "hydraulic-19",
+          "tokens": 848
+        },
+        {
+          "id": "spindle-bearing-10",
+          "tokens": 836
+        },
+        {
+          "id": "rotary-table-16",
+          "tokens": 698
+        },
+        {
+          "id": "ballscrew-14",
+          "tokens": 649
+        },
+        {
+          "id": "guard-door-19",
+          "tokens": 772
+        },
+        {
+          "id": "rotary-table-05",
+          "tokens": 808
+        },
+        {
+          "id": "workpiece-probe-07",
+          "tokens": 703
+        },
+        {
+          "id": "coolant-pump-06",
+          "tokens": 878
+        },
+        {
+          "id": "spindle-lube-24",
+          "tokens": 858
+        },
+        {
+          "id": "pneumatic-00",
+          "tokens": 883
+        },
+        {
+          "id": "lathe-chuck-03",
+          "tokens": 855
+        },
+        {
+          "id": "pneumatic-25",
+          "tokens": 776
+        },
+        {
+          "id": "ballscrew-23",
+          "tokens": 894
+        },
+        {
+          "id": "coolant-pump-16",
+          "tokens": 800
+        },
+        {
+          "id": "ballscrew-20",
+          "tokens": 703
+        },
+        {
+          "id": "chip-conveyor-09",
+          "tokens": 806
+        },
+        {
+          "id": "chip-conveyor-25",
+          "tokens": 687
+        },
+        {
+          "id": "bar-feeder-00",
+          "tokens": 746
+        },
+        {
+          "id": "feed-servo-12",
+          "tokens": 906
+        },
+        {
+          "id": "spindle-chiller-26",
+          "tokens": 808
+        },
+        {
+          "id": "feed-servo-03",
+          "tokens": 896
+        },
+        {
+          "id": "feed-servo-11",
+          "tokens": 762
+        },
+        {
+          "id": "spindle-bearing-14",
+          "tokens": 882
+        },
+        {
+          "id": "atc-arm-03",
+          "tokens": 890
+        },
+        {
+          "id": "workpiece-probe-25",
+          "tokens": 788
+        },
+        {
+          "id": "tool-setter-04",
+          "tokens": 854
+        },
+        {
+          "id": "lathe-chuck-10",
+          "tokens": 767
+        },
+        {
+          "id": "bar-feeder-12",
+          "tokens": 839
+        },
+        {
+          "id": "bar-feeder-05",
+          "tokens": 858
+        },
+        {
+          "id": "hydraulic-10",
+          "tokens": 762
+        },
+        {
+          "id": "electrical-cabinet-24",
+          "tokens": 858
+        },
+        {
+          "id": "spindle-lube-07",
+          "tokens": 880
+        },
+        {
+          "id": "workpiece-probe-24",
+          "tokens": 877
+        },
+        {
+          "id": "tool-setter-02",
+          "tokens": 902
+        },
+        {
+          "id": "spindle-chiller-09",
+          "tokens": 745
+        },
+        {
+          "id": "atc-magazine-10",
+          "tokens": 823
+        },
+        {
+          "id": "atc-arm-23",
+          "tokens": 906
+        },
+        {
+          "id": "atc-arm-02",
+          "tokens": 814
+        },
+        {
+          "id": "bar-feeder-06",
+          "tokens": 795
+        },
+        {
+          "id": "guard-door-00",
+          "tokens": 837
+        },
+        {
+          "id": "spindle-lube-17",
+          "tokens": 681
+        },
+        {
+          "id": "ballscrew-00",
+          "tokens": 710
+        },
+        {
+          "id": "coolant-pump-01",
+          "tokens": 766
+        },
+        {
+          "id": "spindle-chiller-16",
+          "tokens": 861
+        },
+        {
+          "id": "coolant-pump-26",
+          "tokens": 796
+        },
+        {
+          "id": "feed-servo-06",
+          "tokens": 880
+        },
+        {
+          "id": "spindle-bearing-03",
+          "tokens": 858
+        },
+        {
+          "id": "spindle-lube-18",
+          "tokens": 783
+        },
+        {
+          "id": "guard-door-06",
+          "tokens": 896
+        },
+        {
+          "id": "coolant-pump-20",
+          "tokens": 784
+        },
+        {
+          "id": "hydraulic-02",
+          "tokens": 893
+        },
+        {
+          "id": "electrical-cabinet-21",
+          "tokens": 907
+        },
+        {
+          "id": "workpiece-probe-02",
+          "tokens": 894
+        },
+        {
+          "id": "spindle-lube-15",
+          "tokens": 820
+        },
+        {
+          "id": "tool-setter-20",
+          "tokens": 867
+        },
+        {
+          "id": "atc-arm-27",
+          "tokens": 621
+        },
+        {
+          "id": "spindle-lube-03",
+          "tokens": 799
+        },
+        {
+          "id": "spindle-chiller-15",
+          "tokens": 903
+        },
+        {
+          "id": "electrical-cabinet-11",
+          "tokens": 699
+        },
+        {
+          "id": "atc-arm-08",
+          "tokens": 840
+        },
+        {
+          "id": "pneumatic-26",
+          "tokens": 809
+        },
+        {
+          "id": "workpiece-probe-18",
+          "tokens": 882
+        },
+        {
+          "id": "lathe-chuck-04",
+          "tokens": 799
+        },
+        {
+          "id": "electrical-cabinet-10",
+          "tokens": 627
+        },
+        {
+          "id": "chip-conveyor-16",
+          "tokens": 868
+        },
+        {
+          "id": "guard-door-17",
+          "tokens": 860
+        },
+        {
+          "id": "electrical-cabinet-26",
+          "tokens": 815
+        },
+        {
+          "id": "spindle-bearing-16",
+          "tokens": 701
+        },
+        {
+          "id": "spindle-chiller-25",
+          "tokens": 833
+        },
+        {
+          "id": "lathe-chuck-12",
+          "tokens": 837
+        },
+        {
+          "id": "pneumatic-12",
+          "tokens": 741
+        },
+        {
+          "id": "electrical-cabinet-12",
+          "tokens": 831
+        },
+        {
+          "id": "bar-feeder-27",
+          "tokens": 808
+        },
+        {
+          "id": "ballscrew-15",
+          "tokens": 696
+        },
+        {
+          "id": "workpiece-probe-23",
+          "tokens": 853
+        },
+        {
+          "id": "spindle-bearing-09",
+          "tokens": 845
+        },
+        {
+          "id": "guard-door-11",
+          "tokens": 810
+        },
+        {
+          "id": "ballscrew-26",
+          "tokens": 855
+        },
+        {
+          "id": "workpiece-probe-20",
+          "tokens": 792
+        },
+        {
+          "id": "pneumatic-21",
+          "tokens": 770
+        },
+        {
+          "id": "pneumatic-14",
+          "tokens": 746
+        },
+        {
+          "id": "spindle-bearing-19",
+          "tokens": 734
+        },
+        {
+          "id": "pneumatic-27",
+          "tokens": 854
+        },
+        {
+          "id": "bar-feeder-02",
+          "tokens": 725
+        },
+        {
+          "id": "rotary-table-13",
+          "tokens": 673
+        },
+        {
+          "id": "rotary-table-04",
+          "tokens": 785
+        },
+        {
+          "id": "hydraulic-12",
+          "tokens": 765
+        },
+        {
+          "id": "rotary-table-11",
+          "tokens": 799
+        },
+        {
+          "id": "atc-magazine-25",
+          "tokens": 867
+        },
+        {
+          "id": "rotary-table-17",
+          "tokens": 805
+        },
+        {
+          "id": "spindle-lube-08",
+          "tokens": 774
+        },
+        {
+          "id": "tool-setter-12",
+          "tokens": 857
+        },
+        {
+          "id": "feed-servo-08",
+          "tokens": 868
+        },
+        {
+          "id": "bar-feeder-18",
+          "tokens": 821
+        },
+        {
+          "id": "guard-door-01",
+          "tokens": 825
+        },
+        {
+          "id": "spindle-bearing-02",
+          "tokens": 890
+        },
+        {
+          "id": "guard-door-08",
+          "tokens": 773
+        },
+        {
+          "id": "lathe-chuck-00",
+          "tokens": 792
+        },
+        {
+          "id": "ballscrew-10",
+          "tokens": 747
+        },
+        {
+          "id": "bar-feeder-07",
+          "tokens": 869
+        },
+        {
+          "id": "rotary-table-03",
+          "tokens": 817
+        },
+        {
+          "id": "guard-door-09",
+          "tokens": 834
+        },
+        {
+          "id": "chip-conveyor-00",
+          "tokens": 794
+        },
+        {
+          "id": "hydraulic-25",
+          "tokens": 671
+        },
+        {
+          "id": "atc-magazine-01",
+          "tokens": 895
+        },
+        {
+          "id": "spindle-bearing-01",
+          "tokens": 836
+        },
+        {
+          "id": "atc-magazine-23",
+          "tokens": 897
+        },
+        {
+          "id": "spindle-bearing-22",
+          "tokens": 873
+        },
+        {
+          "id": "spindle-lube-21",
+          "tokens": 913
+        },
+        {
+          "id": "ballscrew-03",
+          "tokens": 753
+        },
+        {
+          "id": "atc-arm-14",
+          "tokens": 765
+        },
+        {
+          "id": "spindle-chiller-02",
+          "tokens": 870
+        },
+        {
+          "id": "spindle-bearing-21",
+          "tokens": 764
+        },
+        {
+          "id": "coolant-pump-24",
+          "tokens": 741
+        },
+        {
+          "id": "chip-conveyor-15",
+          "tokens": 799
+        },
+        {
+          "id": "pneumatic-05",
+          "tokens": 856
+        },
+        {
+          "id": "coolant-pump-15",
+          "tokens": 742
+        },
+        {
+          "id": "guard-door-23",
+          "tokens": 904
+        },
+        {
+          "id": "guard-door-24",
+          "tokens": 662
+        },
+        {
+          "id": "electrical-cabinet-27",
+          "tokens": 825
+        },
+        {
+          "id": "rotary-table-27",
+          "tokens": 717
+        },
+        {
+          "id": "rotary-table-02",
+          "tokens": 859
+        },
+        {
+          "id": "electrical-cabinet-22",
+          "tokens": 694
+        },
+        {
+          "id": "tool-setter-16",
+          "tokens": 832
+        },
+        {
+          "id": "ballscrew-16",
+          "tokens": 680
+        },
+        {
+          "id": "tool-setter-23",
+          "tokens": 691
+        },
+        {
+          "id": "ballscrew-09",
+          "tokens": 793
+        },
+        {
+          "id": "rotary-table-06",
+          "tokens": 809
+        },
+        {
+          "id": "guard-door-03",
+          "tokens": 731
+        },
+        {
+          "id": "hydraulic-14",
+          "tokens": 841
+        },
+        {
+          "id": "spindle-bearing-20",
+          "tokens": 891
+        },
+        {
+          "id": "guard-door-15",
+          "tokens": 837
+        },
+        {
+          "id": "workpiece-probe-08",
+          "tokens": 863
+        },
+        {
+          "id": "feed-servo-21",
+          "tokens": 914
+        },
+        {
+          "id": "chip-conveyor-17",
+          "tokens": 829
+        },
+        {
+          "id": "atc-magazine-18",
+          "tokens": 787
+        },
+        {
+          "id": "spindle-lube-12",
+          "tokens": 855
+        },
+        {
+          "id": "spindle-lube-05",
+          "tokens": 887
+        },
+        {
+          "id": "atc-magazine-13",
+          "tokens": 782
+        },
+        {
+          "id": "atc-arm-05",
+          "tokens": 880
+        },
+        {
+          "id": "spindle-bearing-07",
+          "tokens": 842
+        },
+        {
+          "id": "rotary-table-12",
+          "tokens": 865
+        },
+        {
+          "id": "lathe-chuck-26",
+          "tokens": 738
+        },
+        {
+          "id": "chip-conveyor-24",
+          "tokens": 635
+        },
+        {
+          "id": "rotary-table-15",
+          "tokens": 863
+        },
+        {
+          "id": "atc-arm-24",
+          "tokens": 903
+        },
+        {
+          "id": "bar-feeder-03",
+          "tokens": 748
+        },
+        {
+          "id": "chip-conveyor-23",
+          "tokens": 736
+        },
+        {
+          "id": "spindle-lube-20",
+          "tokens": 919
+        },
+        {
+          "id": "spindle-lube-00",
+          "tokens": 858
+        },
+        {
+          "id": "guard-door-21",
+          "tokens": 850
+        },
+        {
+          "id": "ballscrew-27",
+          "tokens": 766
+        },
+        {
+          "id": "atc-magazine-11",
+          "tokens": 847
+        },
+        {
+          "id": "hydraulic-04",
+          "tokens": 673
+        },
+        {
+          "id": "guard-door-07",
+          "tokens": 829
+        },
+        {
+          "id": "atc-arm-20",
+          "tokens": 720
+        },
+        {
+          "id": "pneumatic-16",
+          "tokens": 673
+        },
+        {
+          "id": "lathe-chuck-13",
+          "tokens": 848
+        },
+        {
+          "id": "ballscrew-02",
+          "tokens": 854
+        },
+        {
+          "id": "feed-servo-26",
+          "tokens": 834
+        },
+        {
+          "id": "spindle-lube-19",
+          "tokens": 774
+        },
+        {
+          "id": "atc-arm-10",
+          "tokens": 693
+        },
+        {
+          "id": "spindle-chiller-21",
+          "tokens": 910
+        },
+        {
+          "id": "atc-magazine-12",
+          "tokens": 920
+        },
+        {
+          "id": "workpiece-probe-22",
+          "tokens": 814
+        },
+        {
+          "id": "lathe-chuck-07",
+          "tokens": 688
+        },
+        {
+          "id": "bar-feeder-15",
+          "tokens": 746
+        },
+        {
+          "id": "feed-servo-02",
+          "tokens": 892
+        },
+        {
+          "id": "feed-servo-04",
+          "tokens": 826
+        },
+        {
+          "id": "spindle-bearing-27",
+          "tokens": 871
+        },
+        {
+          "id": "tool-setter-17",
+          "tokens": 766
+        },
+        {
+          "id": "electrical-cabinet-07",
+          "tokens": 700
+        },
+        {
+          "id": "spindle-bearing-05",
+          "tokens": 762
+        },
+        {
+          "id": "spindle-lube-02",
+          "tokens": 824
+        },
+        {
+          "id": "hydraulic-09",
+          "tokens": 815
+        },
+        {
+          "id": "feed-servo-07",
+          "tokens": 790
+        },
+        {
+          "id": "workpiece-probe-21",
+          "tokens": 848
+        },
+        {
+          "id": "pneumatic-15",
+          "tokens": 801
+        },
+        {
+          "id": "spindle-lube-04",
+          "tokens": 749
+        },
+        {
+          "id": "atc-magazine-21",
+          "tokens": 784
+        },
+        {
+          "id": "lathe-chuck-06",
+          "tokens": 889
+        },
+        {
+          "id": "chip-conveyor-18",
+          "tokens": 863
+        },
+        {
+          "id": "guard-door-22",
+          "tokens": 839
+        },
+        {
+          "id": "workpiece-probe-12",
+          "tokens": 859
+        },
+        {
+          "id": "lathe-chuck-09",
+          "tokens": 780
+        },
+        {
+          "id": "spindle-chiller-07",
+          "tokens": 833
+        },
+        {
+          "id": "tool-setter-24",
+          "tokens": 835
+        },
+        {
+          "id": "guard-door-26",
+          "tokens": 632
+        },
+        {
+          "id": "coolant-pump-17",
+          "tokens": 862
+        },
+        {
+          "id": "hydraulic-00",
+          "tokens": 844
+        },
+        {
+          "id": "spindle-bearing-26",
+          "tokens": 868
+        },
+        {
+          "id": "spindle-lube-14",
+          "tokens": 874
+        },
+        {
+          "id": "hydraulic-03",
+          "tokens": 856
+        },
+        {
+          "id": "atc-magazine-02",
+          "tokens": 897
+        },
+        {
+          "id": "lathe-chuck-02",
+          "tokens": 781
+        },
+        {
+          "id": "spindle-chiller-10",
+          "tokens": 794
+        },
+        {
+          "id": "lathe-chuck-25",
+          "tokens": 742
+        },
+        {
+          "id": "rotary-table-23",
+          "tokens": 825
+        },
+        {
+          "id": "workpiece-probe-06",
+          "tokens": 900
+        },
+        {
+          "id": "spindle-chiller-00",
+          "tokens": 821
+        },
+        {
+          "id": "hydraulic-24",
+          "tokens": 701
+        },
+        {
+          "id": "guard-door-05",
+          "tokens": 846
+        },
+        {
+          "id": "coolant-pump-19",
+          "tokens": 667
+        },
+        {
+          "id": "workpiece-probe-15",
+          "tokens": 729
+        },
+        {
+          "id": "chip-conveyor-04",
+          "tokens": 713
+        },
+        {
+          "id": "hydraulic-20",
+          "tokens": 909
+        },
+        {
+          "id": "workpiece-probe-01",
+          "tokens": 720
+        },
+        {
+          "id": "rotary-table-24",
+          "tokens": 751
+        },
+        {
+          "id": "workpiece-probe-17",
+          "tokens": 795
+        },
+        {
+          "id": "atc-magazine-24",
+          "tokens": 896
+        },
+        {
+          "id": "atc-magazine-05",
+          "tokens": 672
+        },
+        {
+          "id": "bar-feeder-22",
+          "tokens": 776
+        },
+        {
+          "id": "electrical-cabinet-16",
+          "tokens": 703
+        },
+        {
+          "id": "atc-magazine-26",
+          "tokens": 659
+        },
+        {
+          "id": "atc-magazine-09",
+          "tokens": 900
+        },
+        {
+          "id": "spindle-chiller-03",
+          "tokens": 767
+        },
+        {
+          "id": "spindle-chiller-11",
+          "tokens": 847
+        },
+        {
+          "id": "spindle-bearing-17",
+          "tokens": 868
+        },
+        {
+          "id": "tool-setter-05",
+          "tokens": 757
+        },
+        {
+          "id": "guard-door-18",
+          "tokens": 821
+        },
+        {
+          "id": "electrical-cabinet-03",
+          "tokens": 883
+        },
+        {
+          "id": "pneumatic-09",
+          "tokens": 698
+        },
+        {
+          "id": "ballscrew-13",
+          "tokens": 683
+        },
+        {
+          "id": "electrical-cabinet-18",
+          "tokens": 696
+        },
+        {
+          "id": "tool-setter-25",
+          "tokens": 892
+        },
+        {
+          "id": "chip-conveyor-12",
+          "tokens": 789
+        },
+        {
+          "id": "tool-setter-18",
+          "tokens": 814
+        },
+        {
+          "id": "hydraulic-27",
+          "tokens": 726
+        },
+        {
+          "id": "spindle-chiller-13",
+          "tokens": 665
+        },
+        {
+          "id": "ballscrew-17",
+          "tokens": 692
+        },
+        {
+          "id": "lathe-chuck-23",
+          "tokens": 662
+        },
+        {
+          "id": "atc-arm-21",
+          "tokens": 850
+        },
+        {
+          "id": "feed-servo-18",
+          "tokens": 901
+        },
+        {
+          "id": "ballscrew-08",
+          "tokens": 875
+        },
+        {
+          "id": "workpiece-probe-16",
+          "tokens": 654
+        },
+        {
+          "id": "workpiece-probe-09",
+          "tokens": 797
+        },
+        {
+          "id": "feed-servo-10",
+          "tokens": 803
+        },
+        {
+          "id": "lathe-chuck-17",
+          "tokens": 766
+        },
+        {
+          "id": "spindle-chiller-24",
+          "tokens": 764
+        },
+        {
+          "id": "coolant-pump-22",
+          "tokens": 749
+        },
+        {
+          "id": "lathe-chuck-14",
+          "tokens": 719
+        },
+        {
+          "id": "feed-servo-05",
+          "tokens": 693
+        },
+        {
+          "id": "electrical-cabinet-04",
+          "tokens": 873
+        },
+        {
+          "id": "spindle-chiller-17",
+          "tokens": 717
+        },
+        {
+          "id": "bar-feeder-13",
+          "tokens": 688
+        },
+        {
+          "id": "electrical-cabinet-08",
+          "tokens": 790
+        },
+        {
+          "id": "spindle-lube-27",
+          "tokens": 819
+        },
+        {
+          "id": "atc-arm-18",
+          "tokens": 830
+        },
+        {
+          "id": "chip-conveyor-03",
+          "tokens": 862
+        },
+        {
+          "id": "spindle-lube-26",
+          "tokens": 829
+        },
+        {
+          "id": "atc-arm-16",
+          "tokens": 637
+        },
+        {
+          "id": "spindle-chiller-19",
+          "tokens": 851
+        },
+        {
+          "id": "lathe-chuck-18",
+          "tokens": 703
+        },
+        {
+          "id": "chip-conveyor-21",
+          "tokens": 868
+        },
+        {
+          "id": "coolant-pump-27",
+          "tokens": 760
+        },
+        {
+          "id": "feed-servo-25",
+          "tokens": 739
+        },
+        {
+          "id": "spindle-chiller-18",
+          "tokens": 811
+        },
+        {
+          "id": "electrical-cabinet-02",
+          "tokens": 807
+        },
+        {
+          "id": "bar-feeder-19",
+          "tokens": 732
+        },
+        {
+          "id": "coolant-pump-07",
+          "tokens": 877
+        },
+        {
+          "id": "atc-arm-00",
+          "tokens": 759
+        },
+        {
+          "id": "feed-servo-13",
+          "tokens": 776
+        },
+        {
+          "id": "atc-magazine-20",
+          "tokens": 813
+        },
+        {
+          "id": "pneumatic-01",
+          "tokens": 825
+        },
+        {
+          "id": "rotary-table-26",
+          "tokens": 846
+        },
+        {
+          "id": "lathe-chuck-22",
+          "tokens": 784
+        },
+        {
+          "id": "coolant-pump-13",
+          "tokens": 763
+        },
+        {
+          "id": "atc-arm-17",
+          "tokens": 691
+        },
+        {
+          "id": "hydraulic-11",
+          "tokens": 775
+        },
+        {
+          "id": "hydraulic-08",
+          "tokens": 695
+        },
+        {
+          "id": "hydraulic-05",
+          "tokens": 788
+        },
+        {
+          "id": "ballscrew-01",
+          "tokens": 745
+        },
+        {
+          "id": "ballscrew-18",
+          "tokens": 742
+        },
+        {
+          "id": "pneumatic-22",
+          "tokens": 813
+        },
+        {
+          "id": "pneumatic-17",
+          "tokens": 668
+        },
+        {
+          "id": "electrical-cabinet-14",
+          "tokens": 708
+        },
+        {
+          "id": "tool-setter-07",
+          "tokens": 751
+        },
+        {
+          "id": "lathe-chuck-20",
+          "tokens": 719
+        },
+        {
+          "id": "coolant-pump-08",
+          "tokens": 864
+        },
+        {
+          "id": "guard-door-02",
+          "tokens": 882
+        },
+        {
+          "id": "pneumatic-18",
+          "tokens": 783
+        },
+        {
+          "id": "hydraulic-07",
+          "tokens": 824
+        },
+        {
+          "id": "coolant-pump-11",
+          "tokens": 812
+        },
+        {
+          "id": "lathe-chuck-27",
+          "tokens": 727
+        },
+        {
+          "id": "tool-setter-01",
+          "tokens": 761
+        },
+        {
+          "id": "electrical-cabinet-06",
+          "tokens": 857
+        },
+        {
+          "id": "tool-setter-11",
+          "tokens": 888
+        },
+        {
+          "id": "workpiece-probe-00",
+          "tokens": 860
+        },
+        {
+          "id": "atc-arm-07",
+          "tokens": 679
+        },
+        {
+          "id": "feed-servo-01",
+          "tokens": 827
+        },
+        {
+          "id": "bar-feeder-26",
+          "tokens": 637
+        },
+        {
+          "id": "rotary-table-00",
+          "tokens": 871
+        },
+        {
+          "id": "rotary-table-22",
+          "tokens": 775
+        },
+        {
+          "id": "pneumatic-10",
+          "tokens": 844
+        },
+        {
+          "id": "chip-conveyor-08",
+          "tokens": 705
+        },
+        {
+          "id": "ballscrew-22",
+          "tokens": 814
+        },
+        {
+          "id": "tool-setter-00",
+          "tokens": 813
+        },
+        {
+          "id": "chip-conveyor-06",
+          "tokens": 749
+        },
+        {
+          "id": "guard-door-10",
+          "tokens": 743
+        },
+        {
+          "id": "bar-feeder-16",
+          "tokens": 820
+        },
+        {
+          "id": "spindle-bearing-11",
+          "tokens": 888
+        },
+        {
+          "id": "spindle-bearing-08",
+          "tokens": 724
+        },
+        {
+          "id": "atc-magazine-16",
+          "tokens": 828
+        },
+        {
+          "id": "chip-conveyor-22",
+          "tokens": 698
+        },
+        {
+          "id": "rotary-table-18",
+          "tokens": 819
+        },
+        {
+          "id": "atc-arm-12",
+          "tokens": 908
+        },
+        {
+          "id": "atc-arm-11",
+          "tokens": 809
+        },
+        {
+          "id": "spindle-lube-23",
+          "tokens": 884
+        },
+        {
+          "id": "coolant-pump-23",
+          "tokens": 813
+        },
+        {
+          "id": "tool-setter-27",
+          "tokens": 813
+        },
+        {
+          "id": "workpiece-probe-27",
+          "tokens": 915
+        },
+        {
+          "id": "lathe-chuck-08",
+          "tokens": 668
+        },
+        {
+          "id": "pneumatic-02",
+          "tokens": 795
+        },
+        {
+          "id": "guard-door-20",
+          "tokens": 776
+        },
+        {
+          "id": "pneumatic-19",
+          "tokens": 908
+        },
+        {
+          "id": "electrical-cabinet-25",
+          "tokens": 716
+        },
+        {
+          "id": "chip-conveyor-13",
+          "tokens": 718
+        },
+        {
+          "id": "coolant-pump-02",
+          "tokens": 809
+        },
+        {
+          "id": "hydraulic-16",
+          "tokens": 745
+        },
+        {
+          "id": "hydraulic-22",
+          "tokens": 778
+        },
+        {
+          "id": "bar-feeder-23",
+          "tokens": 696
+        },
+        {
+          "id": "bar-feeder-04",
+          "tokens": 762
+        },
+        {
+          "id": "spindle-chiller-27",
+          "tokens": 776
+        },
+        {
+          "id": "rotary-table-07",
+          "tokens": 696
+        },
+        {
+          "id": "spindle-bearing-04",
+          "tokens": 784
+        },
+        {
+          "id": "hydraulic-23",
+          "tokens": 786
+        },
+        {
+          "id": "spindle-bearing-13",
+          "tokens": 865
+        },
+        {
+          "id": "atc-arm-04",
+          "tokens": 696
+        },
+        {
+          "id": "chip-conveyor-19",
+          "tokens": 915
+        },
+        {
+          "id": "hydraulic-21",
+          "tokens": 773
+        },
+        {
+          "id": "spindle-lube-13",
+          "tokens": 817
+        },
+        {
+          "id": "chip-conveyor-20",
+          "tokens": 780
+        },
+        {
+          "id": "ballscrew-07",
+          "tokens": 726
+        },
+        {
+          "id": "guard-door-25",
+          "tokens": 918
+        },
+        {
+          "id": "atc-magazine-03",
+          "tokens": 893
+        },
+        {
+          "id": "tool-setter-03",
+          "tokens": 740
+        },
+        {
+          "id": "bar-feeder-11",
+          "tokens": 724
+        },
+        {
+          "id": "spindle-chiller-20",
+          "tokens": 863
+        },
+        {
+          "id": "spindle-bearing-24",
+          "tokens": 771
+        },
+        {
+          "id": "feed-servo-15",
+          "tokens": 747
+        },
+        {
+          "id": "chip-conveyor-05",
+          "tokens": 736
+        },
+        {
+          "id": "feed-servo-23",
+          "tokens": 757
+        },
+        {
+          "id": "tool-setter-15",
+          "tokens": 745
+        },
+        {
+          "id": "coolant-pump-05",
+          "tokens": 839
+        },
+        {
+          "id": "pneumatic-06",
+          "tokens": 837
+        },
+        {
+          "id": "tool-setter-10",
+          "tokens": 698
+        },
+        {
+          "id": "rotary-table-08",
+          "tokens": 725
+        },
+        {
+          "id": "tool-setter-22",
+          "tokens": 700
+        },
+        {
+          "id": "spindle-chiller-06",
+          "tokens": 818
+        },
+        {
+          "id": "spindle-chiller-05",
+          "tokens": 800
+        },
+        {
+          "id": "ballscrew-06",
+          "tokens": 812
+        },
+        {
+          "id": "workpiece-probe-11",
+          "tokens": 756
+        },
+        {
+          "id": "feed-servo-22",
+          "tokens": 762
+        },
+        {
+          "id": "workpiece-probe-03",
+          "tokens": 925
+        },
+        {
+          "id": "lathe-chuck-24",
+          "tokens": 731
+        },
+        {
+          "id": "coolant-pump-00",
+          "tokens": 825
+        },
+        {
+          "id": "electrical-cabinet-19",
+          "tokens": 679
+        },
+        {
+          "id": "hydraulic-26",
+          "tokens": 808
+        },
+        {
+          "id": "pneumatic-11",
+          "tokens": 805
+        },
+        {
+          "id": "electrical-cabinet-15",
+          "tokens": 707
+        },
+        {
+          "id": "ballscrew-21",
+          "tokens": 790
+        },
+        {
+          "id": "bar-feeder-25",
+          "tokens": 835
+        },
+        {
+          "id": "atc-arm-26",
+          "tokens": 842
+        },
+        {
+          "id": "atc-magazine-08",
+          "tokens": 835
+        },
+        {
+          "id": "bar-feeder-20",
+          "tokens": 708
+        },
+        {
+          "id": "coolant-pump-04",
+          "tokens": 883
+        },
+        {
+          "id": "rotary-table-25",
+          "tokens": 842
+        },
+        {
+          "id": "tool-setter-08",
+          "tokens": 688
+        },
+        {
+          "id": "spindle-lube-10",
+          "tokens": 814
+        },
+        {
+          "id": "coolant-pump-10",
+          "tokens": 840
+        },
+        {
+          "id": "spindle-bearing-15",
+          "tokens": 740
+        },
+        {
+          "id": "ballscrew-05",
+          "tokens": 782
+        },
+        {
+          "id": "lathe-chuck-11",
+          "tokens": 703
+        },
+        {
+          "id": "electrical-cabinet-00",
+          "tokens": 745
+        },
+        {
+          "id": "atc-magazine-17",
+          "tokens": 782
+        },
+        {
+          "id": "chip-conveyor-26",
+          "tokens": 702
+        },
+        {
+          "id": "rotary-table-09",
+          "tokens": 791
+        },
+        {
+          "id": "feed-servo-24",
+          "tokens": 873
+        },
+        {
+          "id": "atc-arm-22",
+          "tokens": 733
+        },
+        {
+          "id": "bar-feeder-17",
+          "tokens": 726
+        },
+        {
+          "id": "atc-magazine-27",
+          "tokens": 746
+        },
+        {
+          "id": "rotary-table-01",
+          "tokens": 762
+        },
+        {
+          "id": "workpiece-probe-26",
+          "tokens": 698
+        },
+        {
+          "id": "atc-magazine-15",
+          "tokens": 808
+        },
+        {
+          "id": "pneumatic-20",
+          "tokens": 668
+        },
+        {
+          "id": "coolant-pump-03",
+          "tokens": 848
+        },
+        {
+          "id": "feed-servo-16",
+          "tokens": 873
+        },
+        {
+          "id": "spindle-lube-25",
+          "tokens": 759
+        },
+        {
+          "id": "pneumatic-07",
+          "tokens": 776
+        }
+      ]
+    },
+    "validation": {
+      "rows": 28,
+      "max_tokens": 890,
+      "lengths": [
+        {
+          "id": "mist-collector-12",
+          "tokens": 870
+        },
+        {
+          "id": "mist-collector-04",
+          "tokens": 790
+        },
+        {
+          "id": "way-lube-09",
+          "tokens": 856
+        },
+        {
+          "id": "way-lube-10",
+          "tokens": 811
+        },
+        {
+          "id": "linear-scale-07",
+          "tokens": 797
+        },
+        {
+          "id": "way-lube-14",
+          "tokens": 790
+        },
+        {
+          "id": "mist-collector-14",
+          "tokens": 854
+        },
+        {
+          "id": "lathe-turret-06",
+          "tokens": 646
+        },
+        {
+          "id": "linear-scale-04",
+          "tokens": 791
+        },
+        {
+          "id": "mist-collector-25",
+          "tokens": 842
+        },
+        {
+          "id": "mist-collector-24",
+          "tokens": 713
+        },
+        {
+          "id": "way-lube-01",
+          "tokens": 754
+        },
+        {
+          "id": "lathe-turret-25",
+          "tokens": 802
+        },
+        {
+          "id": "linear-scale-19",
+          "tokens": 724
+        },
+        {
+          "id": "way-lube-08",
+          "tokens": 787
+        },
+        {
+          "id": "lathe-turret-09",
+          "tokens": 709
+        },
+        {
+          "id": "linear-scale-14",
+          "tokens": 758
+        },
+        {
+          "id": "lathe-turret-01",
+          "tokens": 890
+        },
+        {
+          "id": "way-lube-24",
+          "tokens": 872
+        },
+        {
+          "id": "linear-scale-22",
+          "tokens": 784
+        },
+        {
+          "id": "way-lube-21",
+          "tokens": 757
+        },
+        {
+          "id": "mist-collector-11",
+          "tokens": 792
+        },
+        {
+          "id": "lathe-turret-13",
+          "tokens": 722
+        },
+        {
+          "id": "linear-scale-00",
+          "tokens": 810
+        },
+        {
+          "id": "linear-scale-06",
+          "tokens": 855
+        },
+        {
+          "id": "lathe-turret-15",
+          "tokens": 842
+        },
+        {
+          "id": "lathe-turret-19",
+          "tokens": 654
+        },
+        {
+          "id": "mist-collector-19",
+          "tokens": 841
+        }
+      ]
+    }
+  }
+}

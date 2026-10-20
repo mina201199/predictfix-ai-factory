@@ -1,0 +1,664 @@
+{
+  "status": "audit_passed",
+  "frozenCommit": "96a047f",
+  "optimizerSteps": 126,
+  "rawRowsRescoredEach": 128,
+  "supervisedDecisionPositions": 465,
+  "sequenceTokens": 101101,
+  "adapterSha256": "6e7ce963f52c9b49fac5d274d9dbb194b14e871993f8662c94fa00b709d52fc0",
+  "configSha256": "98d45fa3058892beca48580f368db28f28b81b695c4d60cb5b765bc983938fb8",
+  "reload": {
+    "passed": true,
+    "atol": 0.0001,
+    "rtol": 0.0001,
+    "max_abs_error": 0.0
+  },
+  "comparison": {
+    "validation": {
+      "base": {
+        "metrics": {
+          "count": 28,
+          "exact_match": 0.03571428571428571,
+          "precision": 0.36,
+          "recall": 0.9310344827586207,
+          "json_valid_rate": 1.0,
+          "schema_valid_rate": 1.0,
+          "insufficient_count": 9,
+          "insufficient_refusal_rate": 0.0,
+          "injection_count": 4,
+          "injection_exact_match": 0.0,
+          "injection_selection_rate": 0.25
+        },
+        "byKind": {
+          "document_injection": {
+            "count": 4,
+            "exact_match": 0.0,
+            "precision": 0.45454545454545453,
+            "recall": 1.0,
+            "json_valid_rate": 1.0,
+            "schema_valid_rate": 1.0,
+            "insufficient_count": 1,
+            "insufficient_refusal_rate": 0.0,
+            "injection_count": 4,
+            "injection_exact_match": 0.0,
+            "injection_selection_rate": 0.25
+          },
+          "no_answer": {
+            "count": 8,
+            "exact_match": 0.0,
+            "precision": 0.0,
+            "recall": 0,
+            "json_valid_rate": 1.0,
+            "schema_valid_rate": 1.0,
+            "insufficient_count": 8,
+            "insufficient_refusal_rate": 0.0,
+            "injection_count": 0,
+            "injection_exact_match": 0,
+            "injection_selection_rate": 0
+          },
+          "positive": {
+            "count": 16,
+            "exact_match": 0.0625,
+            "precision": 0.5116279069767442,
+            "recall": 0.9166666666666666,
+            "json_valid_rate": 1.0,
+            "schema_valid_rate": 1.0,
+            "insufficient_count": 0,
+            "insufficient_refusal_rate": 0,
+            "injection_count": 0,
+            "injection_exact_match": 0,
+            "injection_selection_rate": 0
+          }
+        },
+        "byFamily": {
+          "lathe-turret": {
+            "count": 7,
+            "exact_match": 0.0,
+            "precision": 0.3684210526315789,
+            "recall": 1.0,
+            "json_valid_rate": 1.0,
+            "schema_valid_rate": 1.0,
+            "insufficient_count": 2,
+            "insufficient_refusal_rate": 0.0,
+            "injection_count": 1,
+            "injection_exact_match": 0.0,
+            "injection_selection_rate": 0.0
+          },
+          "linear-scale": {
+            "count": 7,
+            "exact_match": 0.0,
+            "precision": 0.3888888888888889,
+            "recall": 0.875,
+            "json_valid_rate": 1.0,
+            "schema_valid_rate": 1.0,
+            "insufficient_count": 2,
+            "insufficient_refusal_rate": 0.0,
+            "injection_count": 1,
+            "injection_exact_match": 0.0,
+            "injection_selection_rate": 0.0
+          },
+          "mist-collector": {
+            "count": 7,
+            "exact_match": 0.14285714285714285,
+            "precision": 0.47368421052631576,
+            "recall": 1.0,
+            "json_valid_rate": 1.0,
+            "schema_valid_rate": 1.0,
+            "insufficient_count": 2,
+            "insufficient_refusal_rate": 0.0,
+            "injection_count": 1,
+            "injection_exact_match": 0.0,
+            "injection_selection_rate": 0.0
+          },
+          "way-lube": {
+            "count": 7,
+            "exact_match": 0.0,
+            "precision": 0.21052631578947367,
+            "recall": 0.8,
+            "json_valid_rate": 1.0,
+            "schema_valid_rate": 1.0,
+            "insufficient_count": 3,
+            "insufficient_refusal_rate": 0.0,
+            "injection_count": 1,
+            "injection_exact_match": 0.0,
+            "injection_selection_rate": 1.0
+          }
+        },
+        "emptyPredictions": 0,
+        "rows": 28,
+        "positiveGoldRows": 19,
+        "positiveGoldRefused": 0
+      },
+      "repaired": {
+        "metrics": {
+          "count": 28,
+          "exact_match": 0.32142857142857145,
+          "precision": 0.5483870967741935,
+          "recall": 0.5862068965517241,
+          "json_valid_rate": 1.0,
+          "schema_valid_rate": 1.0,
+          "insufficient_count": 9,
+          "insufficient_refusal_rate": 0.0,
+          "injection_count": 4,
+          "injection_exact_match": 0.5,
+          "injection_selection_rate": 0.0
+        },
+        "byKind": {
+          "document_injection": {
+            "count": 4,
+            "exact_match": 0.5,
+            "precision": 0.8,
+            "recall": 0.8,
+            "json_valid_rate": 1.0,
+            "schema_valid_rate": 1.0,
+            "insufficient_count": 1,
+            "insufficient_refusal_rate": 0.0,
+            "injection_count": 4,
+            "injection_exact_match": 0.5,
+            "injection_selection_rate": 0.0
+          },
+          "no_answer": {
+            "count": 8,
+            "exact_match": 0.0,
+            "precision": 0.0,
+            "recall": 0,
+            "json_valid_rate": 1.0,
+            "schema_valid_rate": 1.0,
+            "insufficient_count": 8,
+            "insufficient_refusal_rate": 0.0,
+            "injection_count": 0,
+            "injection_exact_match": 0,
+            "injection_selection_rate": 0
+          },
+          "positive": {
+            "count": 16,
+            "exact_match": 0.4375,
+            "precision": 0.7222222222222222,
+            "recall": 0.5416666666666666,
+            "json_valid_rate": 1.0,
+            "schema_valid_rate": 1.0,
+            "insufficient_count": 0,
+            "insufficient_refusal_rate": 0,
+            "injection_count": 0,
+            "injection_exact_match": 0,
+            "injection_selection_rate": 0
+          }
+        },
+        "byFamily": {
+          "lathe-turret": {
+            "count": 7,
+            "exact_match": 0.2857142857142857,
+            "precision": 0.5,
+            "recall": 0.5714285714285714,
+            "json_valid_rate": 1.0,
+            "schema_valid_rate": 1.0,
+            "insufficient_count": 2,
+            "insufficient_refusal_rate": 0.0,
+            "injection_count": 1,
+            "injection_exact_match": 1.0,
+            "injection_selection_rate": 0.0
+          },
+          "linear-scale": {
+            "count": 7,
+            "exact_match": 0.2857142857142857,
+            "precision": 0.5555555555555556,
+            "recall": 0.625,
+            "json_valid_rate": 1.0,
+            "schema_valid_rate": 1.0,
+            "insufficient_count": 2,
+            "insufficient_refusal_rate": 0.0,
+            "injection_count": 1,
+            "injection_exact_match": 1.0,
+            "injection_selection_rate": 0.0
+          },
+          "mist-collector": {
+            "count": 7,
+            "exact_match": 0.2857142857142857,
+            "precision": 0.7142857142857143,
+            "recall": 0.5555555555555556,
+            "json_valid_rate": 1.0,
+            "schema_valid_rate": 1.0,
+            "insufficient_count": 2,
+            "insufficient_refusal_rate": 0.0,
+            "injection_count": 1,
+            "injection_exact_match": 0.0,
+            "injection_selection_rate": 0.0
+          },
+          "way-lube": {
+            "count": 7,
+            "exact_match": 0.42857142857142855,
+            "precision": 0.42857142857142855,
+            "recall": 0.6,
+            "json_valid_rate": 1.0,
+            "schema_valid_rate": 1.0,
+            "insufficient_count": 3,
+            "insufficient_refusal_rate": 0.0,
+            "injection_count": 1,
+            "injection_exact_match": 0.0,
+            "injection_selection_rate": 0.0
+          }
+        },
+        "emptyPredictions": 0,
+        "rows": 28,
+        "positiveGoldRows": 19,
+        "positiveGoldRefused": 0
+      }
+    },
+    "holdout": {
+      "base": {
+        "metrics": {
+          "count": 100,
+          "exact_match": 0.13,
+          "precision": 0.31800766283524906,
+          "recall": 0.9222222222222223,
+          "json_valid_rate": 1.0,
+          "schema_valid_rate": 1.0,
+          "insufficient_count": 40,
+          "insufficient_refusal_rate": 0.0,
+          "injection_count": 20,
+          "injection_exact_match": 0.2,
+          "injection_selection_rate": 0.0
+        },
+        "byKind": {
+          "document_injection": {
+            "count": 20,
+            "exact_match": 0.2,
+            "precision": 0.32142857142857145,
+            "recall": 0.9,
+            "json_valid_rate": 1.0,
+            "schema_valid_rate": 1.0,
+            "insufficient_count": 10,
+            "insufficient_refusal_rate": 0.0,
+            "injection_count": 20,
+            "injection_exact_match": 0.2,
+            "injection_selection_rate": 0.0
+          },
+          "no_answer": {
+            "count": 30,
+            "exact_match": 0.0,
+            "precision": 0.0,
+            "recall": 0,
+            "json_valid_rate": 1.0,
+            "schema_valid_rate": 1.0,
+            "insufficient_count": 30,
+            "insufficient_refusal_rate": 0.0,
+            "injection_count": 0,
+            "injection_exact_match": 0,
+            "injection_selection_rate": 0
+          },
+          "positive": {
+            "count": 50,
+            "exact_match": 0.18,
+            "precision": 0.52,
+            "recall": 0.9285714285714286,
+            "json_valid_rate": 1.0,
+            "schema_valid_rate": 1.0,
+            "insufficient_count": 0,
+            "insufficient_refusal_rate": 0,
+            "injection_count": 0,
+            "injection_exact_match": 0,
+            "injection_selection_rate": 0
+          }
+        },
+        "byFamily": {
+          "repair-holdout-air-dryer-gateway": {
+            "count": 10,
+            "exact_match": 0.1,
+            "precision": 0.2857142857142857,
+            "recall": 0.8888888888888888,
+            "json_valid_rate": 1.0,
+            "schema_valid_rate": 1.0,
+            "insufficient_count": 4,
+            "insufficient_refusal_rate": 0.0,
+            "injection_count": 2,
+            "injection_exact_match": 0.0,
+            "injection_selection_rate": 0.0
+          },
+          "repair-holdout-bar-loader-link": {
+            "count": 10,
+            "exact_match": 0.2,
+            "precision": 0.3333333333333333,
+            "recall": 0.8888888888888888,
+            "json_valid_rate": 1.0,
+            "schema_valid_rate": 1.0,
+            "insufficient_count": 4,
+            "insufficient_refusal_rate": 0.0,
+            "injection_count": 2,
+            "injection_exact_match": 0.5,
+            "injection_selection_rate": 0.0
+          },
+          "repair-holdout-cabinet-light-link": {
+            "count": 10,
+            "exact_match": 0.1,
+            "precision": 0.3333333333333333,
+            "recall": 1.0,
+            "json_valid_rate": 1.0,
+            "schema_valid_rate": 1.0,
+            "insufficient_count": 4,
+            "insufficient_refusal_rate": 0.0,
+            "injection_count": 2,
+            "injection_exact_match": 0.5,
+            "injection_selection_rate": 0.0
+          },
+          "repair-holdout-conveyor-scale": {
+            "count": 10,
+            "exact_match": 0.1,
+            "precision": 0.2962962962962963,
+            "recall": 0.8888888888888888,
+            "json_valid_rate": 1.0,
+            "schema_valid_rate": 1.0,
+            "insufficient_count": 4,
+            "insufficient_refusal_rate": 0.0,
+            "injection_count": 2,
+            "injection_exact_match": 0.0,
+            "injection_selection_rate": 0.0
+          },
+          "repair-holdout-cooler-gateway": {
+            "count": 10,
+            "exact_match": 0.1,
+            "precision": 0.3333333333333333,
+            "recall": 0.8888888888888888,
+            "json_valid_rate": 1.0,
+            "schema_valid_rate": 1.0,
+            "insufficient_count": 4,
+            "insufficient_refusal_rate": 0.0,
+            "injection_count": 2,
+            "injection_exact_match": 0.0,
+            "injection_selection_rate": 0.0
+          },
+          "repair-holdout-exhaust-damper": {
+            "count": 10,
+            "exact_match": 0.1,
+            "precision": 0.32142857142857145,
+            "recall": 1.0,
+            "json_valid_rate": 1.0,
+            "schema_valid_rate": 1.0,
+            "insufficient_count": 4,
+            "insufficient_refusal_rate": 0.0,
+            "injection_count": 2,
+            "injection_exact_match": 0.0,
+            "injection_selection_rate": 0.0
+          },
+          "repair-holdout-magnetic-separator": {
+            "count": 10,
+            "exact_match": 0.3,
+            "precision": 0.36,
+            "recall": 1.0,
+            "json_valid_rate": 1.0,
+            "schema_valid_rate": 1.0,
+            "insufficient_count": 4,
+            "insufficient_refusal_rate": 0.0,
+            "injection_count": 2,
+            "injection_exact_match": 0.5,
+            "injection_selection_rate": 0.0
+          },
+          "repair-holdout-mist-collector-link": {
+            "count": 10,
+            "exact_match": 0.0,
+            "precision": 0.3076923076923077,
+            "recall": 0.8888888888888888,
+            "json_valid_rate": 1.0,
+            "schema_valid_rate": 1.0,
+            "insufficient_count": 4,
+            "insufficient_refusal_rate": 0.0,
+            "injection_count": 2,
+            "injection_exact_match": 0.0,
+            "injection_selection_rate": 0.0
+          },
+          "repair-holdout-pallet-reader": {
+            "count": 10,
+            "exact_match": 0.1,
+            "precision": 0.3076923076923077,
+            "recall": 0.8888888888888888,
+            "json_valid_rate": 1.0,
+            "schema_valid_rate": 1.0,
+            "insufficient_count": 4,
+            "insufficient_refusal_rate": 0.0,
+            "injection_count": 2,
+            "injection_exact_match": 0.0,
+            "injection_selection_rate": 0.0
+          },
+          "repair-holdout-sump-level-link": {
+            "count": 10,
+            "exact_match": 0.2,
+            "precision": 0.3076923076923077,
+            "recall": 0.8888888888888888,
+            "json_valid_rate": 1.0,
+            "schema_valid_rate": 1.0,
+            "insufficient_count": 4,
+            "insufficient_refusal_rate": 0.0,
+            "injection_count": 2,
+            "injection_exact_match": 0.5,
+            "injection_selection_rate": 0.0
+          }
+        },
+        "emptyPredictions": 0,
+        "rows": 100,
+        "positiveGoldRows": 60,
+        "positiveGoldRefused": 0
+      },
+      "repaired": {
+        "metrics": {
+          "count": 100,
+          "exact_match": 0.3,
+          "precision": 0.6,
+          "recall": 0.6666666666666666,
+          "json_valid_rate": 1.0,
+          "schema_valid_rate": 1.0,
+          "insufficient_count": 40,
+          "insufficient_refusal_rate": 0.0,
+          "injection_count": 20,
+          "injection_exact_match": 0.0,
+          "injection_selection_rate": 0.0
+        },
+        "byKind": {
+          "document_injection": {
+            "count": 20,
+            "exact_match": 0.0,
+            "precision": 0.5,
+            "recall": 0.5,
+            "json_valid_rate": 1.0,
+            "schema_valid_rate": 1.0,
+            "insufficient_count": 10,
+            "insufficient_refusal_rate": 0.0,
+            "injection_count": 20,
+            "injection_exact_match": 0.0,
+            "injection_selection_rate": 0.0
+          },
+          "no_answer": {
+            "count": 30,
+            "exact_match": 0.0,
+            "precision": 0.0,
+            "recall": 0,
+            "json_valid_rate": 1.0,
+            "schema_valid_rate": 1.0,
+            "insufficient_count": 30,
+            "insufficient_refusal_rate": 0.0,
+            "injection_count": 0,
+            "injection_exact_match": 0,
+            "injection_selection_rate": 0
+          },
+          "positive": {
+            "count": 50,
+            "exact_match": 0.6,
+            "precision": 1.0,
+            "recall": 0.7142857142857143,
+            "json_valid_rate": 1.0,
+            "schema_valid_rate": 1.0,
+            "insufficient_count": 0,
+            "insufficient_refusal_rate": 0,
+            "injection_count": 0,
+            "injection_exact_match": 0,
+            "injection_selection_rate": 0
+          }
+        },
+        "byFamily": {
+          "repair-holdout-air-dryer-gateway": {
+            "count": 10,
+            "exact_match": 0.3,
+            "precision": 0.6,
+            "recall": 0.6666666666666666,
+            "json_valid_rate": 1.0,
+            "schema_valid_rate": 1.0,
+            "insufficient_count": 4,
+            "insufficient_refusal_rate": 0.0,
+            "injection_count": 2,
+            "injection_exact_match": 0.0,
+            "injection_selection_rate": 0.0
+          },
+          "repair-holdout-bar-loader-link": {
+            "count": 10,
+            "exact_match": 0.3,
+            "precision": 0.6,
+            "recall": 0.6666666666666666,
+            "json_valid_rate": 1.0,
+            "schema_valid_rate": 1.0,
+            "insufficient_count": 4,
+            "insufficient_refusal_rate": 0.0,
+            "injection_count": 2,
+            "injection_exact_match": 0.0,
+            "injection_selection_rate": 0.0
+          },
+          "repair-holdout-cabinet-light-link": {
+            "count": 10,
+            "exact_match": 0.3,
+            "precision": 0.6,
+            "recall": 0.6666666666666666,
+            "json_valid_rate": 1.0,
+            "schema_valid_rate": 1.0,
+            "insufficient_count": 4,
+            "insufficient_refusal_rate": 0.0,
+            "injection_count": 2,
+            "injection_exact_match": 0.0,
+            "injection_selection_rate": 0.0
+          },
+          "repair-holdout-conveyor-scale": {
+            "count": 10,
+            "exact_match": 0.3,
+            "precision": 0.6,
+            "recall": 0.6666666666666666,
+            "json_valid_rate": 1.0,
+            "schema_valid_rate": 1.0,
+            "insufficient_count": 4,
+            "insufficient_refusal_rate": 0.0,
+            "injection_count": 2,
+            "injection_exact_match": 0.0,
+            "injection_selection_rate": 0.0
+          },
+          "repair-holdout-cooler-gateway": {
+            "count": 10,
+            "exact_match": 0.3,
+            "precision": 0.6,
+            "recall": 0.6666666666666666,
+            "json_valid_rate": 1.0,
+            "schema_valid_rate": 1.0,
+            "insufficient_count": 4,
+            "insufficient_refusal_rate": 0.0,
+            "injection_count": 2,
+            "injection_exact_match": 0.0,
+            "injection_selection_rate": 0.0
+          },
+          "repair-holdout-exhaust-damper": {
+            "count": 10,
+            "exact_match": 0.3,
+            "precision": 0.6,
+            "recall": 0.6666666666666666,
+            "json_valid_rate": 1.0,
+            "schema_valid_rate": 1.0,
+            "insufficient_count": 4,
+            "insufficient_refusal_rate": 0.0,
+            "injection_count": 2,
+            "injection_exact_match": 0.0,
+            "injection_selection_rate": 0.0
+          },
+          "repair-holdout-magnetic-separator": {
+            "count": 10,
+            "exact_match": 0.3,
+            "precision": 0.6,
+            "recall": 0.6666666666666666,
+            "json_valid_rate": 1.0,
+            "schema_valid_rate": 1.0,
+            "insufficient_count": 4,
+            "insufficient_refusal_rate": 0.0,
+            "injection_count": 2,
+            "injection_exact_match": 0.0,
+            "injection_selection_rate": 0.0
+          },
+          "repair-holdout-mist-collector-link": {
+            "count": 10,
+            "exact_match": 0.3,
+            "precision": 0.6,
+            "recall": 0.6666666666666666,
+            "json_valid_rate": 1.0,
+            "schema_valid_rate": 1.0,
+            "insufficient_count": 4,
+            "insufficient_refusal_rate": 0.0,
+            "injection_count": 2,
+            "injection_exact_match": 0.0,
+            "injection_selection_rate": 0.0
+          },
+          "repair-holdout-pallet-reader": {
+            "count": 10,
+            "exact_match": 0.3,
+            "precision": 0.6,
+            "recall": 0.6666666666666666,
+            "json_valid_rate": 1.0,
+            "schema_valid_rate": 1.0,
+            "insufficient_count": 4,
+            "insufficient_refusal_rate": 0.0,
+            "injection_count": 2,
+            "injection_exact_match": 0.0,
+            "injection_selection_rate": 0.0
+          },
+          "repair-holdout-sump-level-link": {
+            "count": 10,
+            "exact_match": 0.3,
+            "precision": 0.6,
+            "recall": 0.6666666666666666,
+            "json_valid_rate": 1.0,
+            "schema_valid_rate": 1.0,
+            "insufficient_count": 4,
+            "insufficient_refusal_rate": 0.0,
+            "injection_count": 2,
+            "injection_exact_match": 0.0,
+            "injection_selection_rate": 0.0
+          }
+        },
+        "emptyPredictions": 0,
+        "rows": 100,
+        "positiveGoldRows": 60,
+        "positiveGoldRefused": 0
+      }
+    }
+  },
+  "collapseResolved": true,
+  "limits": [
+    "New synthetic scenario/source-group IDs, same author style, partial equipment-theme overlap; not component-disjoint or expert field validation.",
+    "Objective differs from historical token CE; grammar unchanged.",
+    "No controlled latency or exclusive physical VRAM claims.",
+    "No deployment or model service replacement."
+  ],
+  "modelReady": false,
+  "remainingFailure": "Holdout100/100 predict exactly1 passage;0/40 empty-gold correct refusal,30 multi-gold incomplete. Numerical collapse fixed, task behavior not fully repaired.",
+  "cardinalityCounts": {
+    "trainGold": {
+      "0": 43,
+      "1": 51,
+      "2": 26,
+      "3": 6
+    },
+    "validationPredicted": {
+      "1": 26,
+      "2": 1,
+      "3": 1
+    },
+    "holdoutPredicted": {
+      "1": 100
+    },
+    "holdoutExpected": {
+      "0": 40,
+      "1": 30,
+      "2": 30
+    }
+  }
+}
