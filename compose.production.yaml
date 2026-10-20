@@ -10,6 +10,8 @@ services:
       LLM_PROVIDER: ollama
       OLLAMA_URL: http://ollama:11434
       OLLAMA_MODEL: ${OLLAMA_MODEL:-gemma4:e2b-it-q8_0}
+      # 只採信 Caddy 送來的 X-Forwarded-For，否則所有人的登入節流都會落在 Caddy 的 IP 上
+      FORWARDED_ALLOW_IPS: ${PROXY_IP:-172.31.250.10}
     depends_on:
       db:
         condition: service_healthy
@@ -50,6 +52,10 @@ services:
     ports:
       - "80:80"
       - "443:443"
+    networks:
+      default:
+        # 固定位址才能讓 api 只信任 Caddy，而不是整個網段（含主機連入用的 gateway）
+        ipv4_address: ${PROXY_IP:-172.31.250.10}
     volumes:
       - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
       - caddy-data:/data
@@ -58,6 +64,12 @@ services:
       api:
         condition: service_healthy
     restart: unless-stopped
+networks:
+  default:
+    ipam:
+      config:
+        # 與主機上其他網路衝突時，在 env 檔改 PROXY_SUBNET 與 PROXY_IP
+        - subnet: ${PROXY_SUBNET:-172.31.250.0/24}
 volumes:
   production-db:
   production-models:

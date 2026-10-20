@@ -47,6 +47,17 @@ docker compose --env-file .env.production -f compose.production.yaml ps
 docker compose --env-file .env.production -f compose.production.yaml logs --tail 100 api
 ```
 
+API 只採信 Caddy 送來的 `X-Forwarded-For`，登入節流才會依真實來源 IP 計算，不會因一人打錯密碼而把帳號對所有人鎖住。為此 Compose 預設網路固定為 `172.31.250.0/24`，Caddy 固定為 `172.31.250.10`。同一台主機再起第二個使用 `compose.production.yaml` 的 project 時，會出現 `Pool overlaps with other one on this address space`；這時在 env 檔一併修改 `PROXY_SUBNET` 與 `PROXY_IP`。`PROXY_IP` 必須在子網內，且不可使用第一個位址（Docker gateway）。`deploy/Caddyfile` 不可加入 `trusted_proxies`，否則 Caddy 會轉送客戶端自帶的 `X-Forwarded-For`。
+
+從未固定子網的舊版升級時，先 `down`（不加 `-v`，保留 volume）再 `up`。直接 `up` 時 Compose 會重建網路，但未重建的 db 容器會失去 `db` 名稱，API 連不到資料庫而反覆重啟。
+
+```powershell
+docker compose --env-file .env.production -f compose.production.yaml down
+docker compose --env-file .env.production -f compose.production.yaml up -d --build
+```
+
+Docker Desktop 經公開埠轉入的連線，Caddy 只看得到 Docker 網路的 gateway，所有外部客戶端仍會共用同一組節流計數；Linux Docker Engine 會保留來源 IP。
+
 LLM 尚未下載或不可用時，AI 中心顯示檢索候選來源，不會假稱模型已完成整理。目前的本機模型 Gemma 4 E2B（Q8_0）在 44 題虛構段落選取題全部選對（見 [本機模型基準](local-llm-benchmark.md)），但題目比實際簡單，正式回答能力需以企業問題獨立評估。
 
 PostgreSQL 備份採原生 `pg_dump`；SQLite 腳本不可用於 PostgreSQL。以下先在容器內產生 archive，再複製檔案，避免 Windows PowerShell 重導向 binary 而破壞內容：
