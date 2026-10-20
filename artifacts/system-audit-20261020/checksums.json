@@ -1,0 +1,13 @@
+{
+  "compose-audit.json": "4e948cbe82ddd439614728ddc8dbba3f2f269e43f1da3c372428c8ffa3967e35",
+  "cpu-training.json": "f2d2ddb4eeed92890849c358590ba4049b47049519e0cdcf07efe78be25269a9",
+  "dependency-audit-before-upgrade.json": "12e438a61d5e7ecae95351b97d701b38f7465e8b39e1312da9507e0b0da69c49",
+  "dependency-audit.json": "0e2d3829a74fe6e28862d842890ea0ad1156e26e73492c5884591eb5d81f3341",
+  "fixture-audit.json": "3cd42bc22fe9366a996e094ef526c83c254ccbab283ae7c4e59ca27ab6c6790f",
+  "full-pytest-summary.json": "74eedd7f6d110d421cc8190770e076342e4f897388dd661b6c95813896fb5b87",
+  "gemma-cpu-buildtools.json": "444e3e106ba5a2eedaa703feb42cf541eea55d94ffd5b05a775e382fe74b1449",
+  "postgres-integration-summary.json": "b1ed89ab9913e8746dbdd51be906fa3eb61f36b8c2ef074669ea4d6967ed32ec",
+  "sqlite-integration-summary.json": "0799d7f27ff25c2e291571136a3c88511bcdbd84fd9f484b7b0ea48a3c2ce253",
+  "static-audit.json": "53acb60c2ddb6feefe6c21b8105b9dc4d81d88de5eebc571f785d5a0c004c918",
+  "summary.json": "004415256e0ea2a4038bb1694e4f736bf786b14a9c5a9893c0e91ba446ca94b4"
+}

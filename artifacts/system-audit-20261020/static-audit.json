@@ -1,0 +1,130 @@
+[
+  {
+    "project": "predictfix-access-control",
+    "pythonFiles": 68,
+    "javascriptFiles": 14,
+    "errors": [],
+    "secretCandidates": [],
+    "trackedSensitiveFiles": []
+  },
+  {
+    "project": "predictfix-ai-factory",
+    "pythonFiles": 92,
+    "javascriptFiles": 15,
+    "errors": [],
+    "secretCandidates": [],
+    "scanRaceExitCode": 0,
+    "trackedSensitiveFiles": []
+  },
+  {
+    "project": "predictfix-compose-integration",
+    "pythonFiles": 113,
+    "javascriptFiles": 18,
+    "errors": [],
+    "secretCandidates": [],
+    "scanRaceExitCode": 0,
+    "trackedSensitiveFiles": []
+  },
+  {
+    "project": "predictfix-gemma-test-budget",
+    "pythonFiles": 113,
+    "javascriptFiles": 18,
+    "errors": [],
+    "secretCandidates": [],
+    "scanRaceExitCode": 0,
+    "trackedSensitiveFiles": []
+  },
+  {
+    "project": "predictfix-model-selection",
+    "pythonFiles": 65,
+    "javascriptFiles": 13,
+    "errors": [],
+    "secretCandidates": [],
+    "trackedSensitiveFiles": []
+  },
+  {
+    "project": "predictfix-pg-verify",
+    "pythonFiles": 113,
+    "javascriptFiles": 18,
+    "errors": [],
+    "secretCandidates": [],
+    "scanRaceExitCode": 0,
+    "trackedSensitiveFiles": []
+  },
+  {
+    "project": "predictfix-proxy-client-ip",
+    "pythonFiles": 113,
+    "javascriptFiles": 18,
+    "errors": [],
+    "secretCandidates": [],
+    "scanRaceExitCode": 0,
+    "trackedSensitiveFiles": []
+  },
+  {
+    "project": "predictfix-qlora-dataset",
+    "pythonFiles": 70,
+    "javascriptFiles": 13,
+    "errors": [],
+    "secretCandidates": [],
+    "trackedSensitiveFiles": []
+  },
+  {
+    "project": "predictfix-verify-caddy-tls",
+    "pythonFiles": 113,
+    "javascriptFiles": 18,
+    "errors": [],
+    "secretCandidates": [],
+    "scanRaceExitCode": 0,
+    "trackedSensitiveFiles": []
+  },
+  {
+    "project": "predictfix-wave2-integration",
+    "pythonFiles": 113,
+    "javascriptFiles": 18,
+    "errors": [],
+    "secretCandidates": [],
+    "scanRaceExitCode": 0,
+    "trackedSensitiveFiles": []
+  },
+  {
+    "project": "predictfix-wave2-knowledge-graph",
+    "pythonFiles": 76,
+    "javascriptFiles": 15,
+    "errors": [],
+    "secretCandidates": [],
+    "trackedSensitiveFiles": []
+  },
+  {
+    "project": "predictfix-wave2-main",
+    "pythonFiles": 113,
+    "javascriptFiles": 18,
+    "errors": [],
+    "secretCandidates": [],
+    "scanRaceExitCode": 0,
+    "trackedSensitiveFiles": []
+  },
+  {
+    "project": "predictfix-wave2-ticket-integration",
+    "pythonFiles": 77,
+    "javascriptFiles": 15,
+    "errors": [],
+    "secretCandidates": [],
+    "trackedSensitiveFiles": []
+  },
+  {
+    "project": "predictfix-wave2-training",
+    "pythonFiles": 121,
+    "javascriptFiles": 18,
+    "errors": [],
+    "secretCandidates": [],
+    "scanRaceExitCode": 0,
+    "trackedSensitiveFiles": []
+  },
+  {
+    "project": "demo-video",
+    "pythonFiles": 5,
+    "javascriptFiles": 1,
+    "errors": [],
+    "secretCandidates": []
+  }
+]

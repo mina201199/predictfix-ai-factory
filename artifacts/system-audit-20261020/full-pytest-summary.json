@@ -1,0 +1,137 @@
+[
+  {
+    "project": "predictfix-access-control",
+    "exitCode": 0,
+    "seconds": 194.5,
+    "tests": 76,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "project": "predictfix-ai-factory",
+    "exitCode": 0,
+    "seconds": 208.1,
+    "tests": 277,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "project": "predictfix-compose-integration",
+    "exitCode": 0,
+    "seconds": 292.8,
+    "tests": 157,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "project": "predictfix-gemma-test-budget",
+    "exitCode": 0,
+    "seconds": 288.4,
+    "tests": 157,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "project": "predictfix-model-selection",
+    "exitCode": 0,
+    "seconds": 135.5,
+    "tests": 71,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "project": "predictfix-pg-verify",
+    "exitCode": 0,
+    "seconds": 352.2,
+    "tests": 162,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "project": "predictfix-proxy-client-ip",
+    "exitCode": 0,
+    "seconds": 340.8,
+    "tests": 157,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "project": "predictfix-qlora-dataset",
+    "exitCode": 0,
+    "seconds": 191.8,
+    "tests": 83,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "project": "predictfix-verify-caddy-tls",
+    "exitCode": 0,
+    "seconds": 280.2,
+    "tests": 157,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "project": "predictfix-wave2-integration",
+    "exitCode": 0,
+    "seconds": 269.0,
+    "tests": 157,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "project": "predictfix-wave2-knowledge-graph",
+    "exitCode": 0,
+    "seconds": 194.6,
+    "tests": 79,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "project": "predictfix-wave2-main",
+    "exitCode": 0,
+    "seconds": 290.3,
+    "tests": 157,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "project": "predictfix-wave2-ticket-integration",
+    "exitCode": 0,
+    "seconds": 200.2,
+    "tests": 79,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "project": "predictfix-wave2-training",
+    "exitCode": 0,
+    "seconds": 298.4,
+    "tests": 175,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "project": "demo-video",
+    "exitCode": 0,
+    "seconds": 1.0,
+    "tests": 2,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  }
+]

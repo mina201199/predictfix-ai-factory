@@ -1,0 +1,22 @@
+:root{
+  --bg:#06121b;--panel:#0d2130;--line:#1d3b4d;--cyan:#22d3ee;--teal:#14b8a6;
+  --amber:#fbbf24;--red:#f87171;--text:#e8f3f7;--muted:#8fb0bd;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1440px;height:810px;overflow:hidden;background:var(--bg);color:var(--text);
+  font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif}
+.stage{position:relative;width:100%;height:100%;overflow:hidden;
+  background:radial-gradient(1100px 600px at 70% 20%,#0f3346 0%,transparent 60%),
+             radial-gradient(900px 500px at 10% 100%,#0a2a2c 0%,transparent 60%),var(--bg)}
+.grid{position:absolute;inset:-40px;opacity:0;animation:fade 1s .1s forwards;
+  background-image:linear-gradient(#123245 1px,transparent 1px),linear-gradient(90deg,#123245 1px,transparent 1px);
+  background-size:48px 48px;mask-image:radial-gradient(800px 500px at 50% 45%,#000 30%,transparent 75%)}
+.scan{position:absolute;left:0;right:0;height:120px;top:-120px;
+  background:linear-gradient(180deg,transparent,rgba(34,211,238,.07),transparent);animation:scan 3.2s .4s linear infinite}
+.wordmark{font-weight:800;letter-spacing:-1px}
+.wordmark b{color:var(--cyan);text-shadow:0 0 28px rgba(34,211,238,.55)}
+.in{opacity:0;transform:translateY(18px);animation:up .7s cubic-bezier(.2,.8,.2,1) forwards}
+@keyframes up{to{opacity:1;transform:none}}
+@keyframes fade{to{opacity:1}}
+@keyframes scan{to{top:830px}}
+@keyframes blink{50%{opacity:.25}}

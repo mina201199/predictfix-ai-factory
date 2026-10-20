@@ -1,0 +1,58 @@
+[
+  {
+    "project": "predictfix-access-control",
+    "exitCode": 0
+  },
+  {
+    "project": "predictfix-ai-factory",
+    "exitCode": 0
+  },
+  {
+    "project": "predictfix-compose-integration",
+    "exitCode": 0
+  },
+  {
+    "project": "predictfix-gemma-test-budget",
+    "exitCode": 0
+  },
+  {
+    "project": "predictfix-model-selection",
+    "exitCode": 0
+  },
+  {
+    "project": "predictfix-pg-verify",
+    "exitCode": 0
+  },
+  {
+    "project": "predictfix-proxy-client-ip",
+    "exitCode": 0
+  },
+  {
+    "project": "predictfix-qlora-dataset",
+    "exitCode": 0
+  },
+  {
+    "project": "predictfix-verify-caddy-tls",
+    "exitCode": 0
+  },
+  {
+    "project": "predictfix-wave2-integration",
+    "exitCode": 0
+  },
+  {
+    "project": "predictfix-wave2-knowledge-graph",
+    "exitCode": 0
+  },
+  {
+    "project": "predictfix-wave2-main",
+    "exitCode": 0
+  },
+  {
+    "project": "predictfix-wave2-ticket-integration",
+    "exitCode": 0
+  },
+  {
+    "project": "predictfix-wave2-training",
+    "exitCode": 0
+  }
+]

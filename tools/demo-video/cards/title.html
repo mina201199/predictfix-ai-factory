@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8"><title>PredictFix AI Title</title>
+<link rel="stylesheet" href="card.css">
+<style>
+.wrap{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:0 120px}
+.eyebrow{font-size:20px;letter-spacing:6px;color:var(--teal);font-weight:700;animation-delay:.25s}
+.wordmark{font-size:104px;line-height:1.05;margin:14px 0 6px;animation-delay:.45s}
+.sub{font-size:30px;color:var(--muted);animation-delay:.75s}
+.alarm{display:inline-flex;align-items:center;gap:16px;margin-top:54px;padding:16px 26px;border:1.5px solid rgba(251,191,36,.55);
+  border-radius:14px;background:rgba(251,191,36,.08);font-size:34px;font-weight:700;color:var(--amber);width:fit-content;animation-delay:1.2s}
+.alarm i{width:16px;height:16px;border-radius:50%;background:var(--amber);box-shadow:0 0 18px var(--amber);animation:blink 1s infinite}
+.alarm small{font-size:20px;font-weight:500;color:#d9c48f;margin-left:6px}
+.qs{display:flex;gap:18px;margin-top:26px}
+.q{padding:14px 24px;border-radius:999px;border:1.5px solid var(--line);background:var(--panel);font-size:28px;font-weight:600}
+.q:nth-child(1){animation-delay:2.1s}.q:nth-child(2){animation-delay:3.1s}.q:nth-child(3){animation-delay:4.0s}
+.q span{color:var(--cyan)}
+.foot{position:absolute;left:120px;bottom:48px;font-size:19px;color:var(--muted);letter-spacing:1px;animation-delay:1.6s}
+.foot b{color:var(--text);font-weight:600}
+</style></head>
+<body><div class="stage"><div class="grid"></div><div class="scan"></div>
+<div class="wrap">
+  <div class="eyebrow in">智慧工廠維修 COPILOT</div>
+  <div class="wordmark in">PredictFix <b>AI</b></div>
+  <div class="sub in">把排查依據、派工與驗收，接在同一張工單上</div>
+  <div class="alarm in"><i></i>CNC-03 換刀卡住<small>只發生在特定刀位</small></div>
+  <div class="qs"><div class="q in"><span>①</span> 該先查什麼？</div><div class="q in"><span>②</span> 派誰處理？</div><div class="q in"><span>③</span> 怎麼確認真的修好了？</div></div>
+</div>
+<div class="foot in"><b>本機 AI</b> · FastAPI · 有來源的排查依據 · 資格與容量派工 · 驗收把關</div>
+</div></body></html>

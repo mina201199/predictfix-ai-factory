@@ -1,0 +1,47 @@
+[
+  {
+    "project": "predictfix-compose-integration",
+    "phase": "green-csv",
+    "exitCode": 0
+  },
+  {
+    "project": "predictfix-gemma-test-budget",
+    "phase": "green-csv",
+    "exitCode": 0
+  },
+  {
+    "project": "predictfix-pg-verify",
+    "phase": "green-csv",
+    "exitCode": 0
+  },
+  {
+    "project": "predictfix-proxy-client-ip",
+    "phase": "green-csv",
+    "exitCode": 0
+  },
+  {
+    "project": "predictfix-verify-caddy-tls",
+    "phase": "green-csv",
+    "exitCode": 0
+  },
+  {
+    "project": "predictfix-wave2-integration",
+    "phase": "green-csv",
+    "exitCode": 0
+  },
+  {
+    "project": "predictfix-wave2-main",
+    "phase": "green-csv",
+    "exitCode": 0
+  },
+  {
+    "project": "predictfix-wave2-ticket-integration",
+    "phase": "green-csv",
+    "exitCode": 0
+  },
+  {
+    "project": "predictfix-wave2-training",
+    "phase": "green-csv",
+    "exitCode": 0
+  }
+]

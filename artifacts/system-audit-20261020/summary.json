@@ -1,0 +1,67 @@
+{
+  "date": "2026-10-20",
+  "timezone": "Asia/Taipei",
+  "scope": {
+    "predictfixWorktrees": 14,
+    "demoVideoTools": true,
+    "sqliteFixtureDatabases": 5
+  },
+  "fixes": [
+    "登入失敗計數採原子保留額度，防止並行登入繞過節流",
+    "異常 Origin 與非 ASCII CSRF 標頭回傳 403；Origin 同時核對 scheme 與 host/port",
+    "設備履歷 PATCH 保留未提供的欄位，避免清空既有日期與零件資料",
+    "正式 Compose 僅信任固定 Caddy 位址，避免使用者共用代理 IP 節流",
+    "工單介接的正式部署傳入 INTEGRATION_SOURCES 並啟動背景 worker",
+    "PostgreSQL 同外部工單事件序列化，重送保持冪等",
+    "CSV 整批依固定順序預鎖外部工單，避免相反順序並行匯入死結",
+    "展示影片工具略過不排班設定，過期班次不再阻擋新排班",
+    "CPU 訓練升級 PyTorch/Transformers/Accelerate/setuptools，更新相容 PEFT 與版本固定清單"
+  ],
+  "snapshotScope": "稽核當時的所有工作目錄，包含既有未提交修改；提交快照另行驗證，不將其他修改一起納入。",
+  "validation": {
+    "fullPytest": {
+      "projects": 15,
+      "tests": 1946,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "sqliteFinalIntegration": {
+      "runs": 18,
+      "tests": 972,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "postgresFinalIntegration": {
+      "runs": 9,
+      "tests": 486,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "compose": {
+      "projects": 14,
+      "passed": 14
+    },
+    "dependencyAudit": {
+      "source": "https://osv.dev/",
+      "packageVersions": 84,
+      "knownVulnerableVersions": 0
+    },
+    "static": {
+      "pythonFiles": 1365,
+      "javascriptFiles": 230,
+      "errors": 0,
+      "secretPatternMatches": 0,
+      "trackedEnvOrPrivateKeyFiles": 0
+    },
+    "independentReview": "CSV 死結與訓練依賴複查後，沒有剩餘 Critical 或 Important findings"
+  },
+  "limits": [
+    "測試無法證明不存在其他漏洞",
+    "尚未重跑手機 HTTPS、真實企業端點或正式模型的完整 GPU 訓練與品質評估",
+    "pytest 的 Starlette/httpx deprecation warning 保留，未當作測試失敗或隱藏"
+  ],
+  "deploymentStatus": "此報告不代表服務已部署或既有 Python 環境已升級。"
+}

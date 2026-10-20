@@ -1,0 +1,15 @@
+{
+  "device": "cpu",
+  "scope": "Random tiny Qwen3 CPU fixture; no pretrained weights or model quality claim",
+  "optimizerSteps": 1,
+  "finiteLoss": 4.090493679046631,
+  "finiteGradients": true,
+  "adapterReloadMatches": true,
+  "versions": {
+    "torch": "2.14.1+cpu",
+    "transformers": "5.20.0",
+    "peft": "0.21.2",
+    "accelerate": "1.15.0",
+    "setuptools": "83.0.0"
+  }
+}

@@ -1,0 +1,22 @@
+[
+  {
+    "path": "integration-review-fixture/date-probe.db",
+    "quickCheck": "ok"
+  },
+  {
+    "path": "integration-review-fixture/test_isolated_integration_cont0/integration.db",
+    "quickCheck": "ok"
+  },
+  {
+    "path": "integration-review-fixture/test_isolated_integration_cont1/integration.db",
+    "quickCheck": "ok"
+  },
+  {
+    "path": "integration-review-fixture/test_isolated_integration_cont0/child/test_simulator_receiver_dedupl0/receiver.db",
+    "quickCheck": "ok"
+  },
+  {
+    "path": "integration-review-fixture/test_isolated_integration_cont1/child/test_simulator_receiver_dedupl0/receiver.db",
+    "quickCheck": "ok"
+  }
+]

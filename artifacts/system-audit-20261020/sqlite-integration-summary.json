@@ -1,0 +1,164 @@
+[
+  {
+    "project": "predictfix-compose-integration",
+    "mode": "production",
+    "exitCode": 0,
+    "tests": 54,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "project": "predictfix-compose-integration",
+    "mode": "demo",
+    "exitCode": 0,
+    "tests": 54,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "project": "predictfix-gemma-test-budget",
+    "mode": "production",
+    "exitCode": 0,
+    "tests": 54,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "project": "predictfix-gemma-test-budget",
+    "mode": "demo",
+    "exitCode": 0,
+    "tests": 54,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "project": "predictfix-pg-verify",
+    "mode": "production",
+    "exitCode": 0,
+    "tests": 54,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "project": "predictfix-pg-verify",
+    "mode": "demo",
+    "exitCode": 0,
+    "tests": 54,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "project": "predictfix-proxy-client-ip",
+    "mode": "production",
+    "exitCode": 0,
+    "tests": 54,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "project": "predictfix-proxy-client-ip",
+    "mode": "demo",
+    "exitCode": 0,
+    "tests": 54,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "project": "predictfix-verify-caddy-tls",
+    "mode": "production",
+    "exitCode": 0,
+    "tests": 54,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "project": "predictfix-verify-caddy-tls",
+    "mode": "demo",
+    "exitCode": 0,
+    "tests": 54,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "project": "predictfix-wave2-integration",
+    "mode": "production",
+    "exitCode": 0,
+    "tests": 54,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "project": "predictfix-wave2-integration",
+    "mode": "demo",
+    "exitCode": 0,
+    "tests": 54,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "project": "predictfix-wave2-main",
+    "mode": "production",
+    "exitCode": 0,
+    "tests": 54,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "project": "predictfix-wave2-main",
+    "mode": "demo",
+    "exitCode": 0,
+    "tests": 54,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "project": "predictfix-wave2-ticket-integration",
+    "mode": "production",
+    "exitCode": 0,
+    "tests": 54,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "project": "predictfix-wave2-ticket-integration",
+    "mode": "demo",
+    "exitCode": 0,
+    "tests": 54,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "project": "predictfix-wave2-training",
+    "mode": "production",
+    "exitCode": 0,
+    "tests": 54,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "project": "predictfix-wave2-training",
+    "mode": "demo",
+    "exitCode": 0,
+    "tests": 54,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  }
+]
