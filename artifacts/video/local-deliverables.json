@@ -1,0 +1,17 @@
+{
+  "recorded_on": "2026-10-20",
+  "files": [
+    {
+      "path": "artifacts/video/AI-Factory-60s-zh-TW.mp4",
+      "bytes": 8632317,
+      "sha256": "064d8bb3a3bf31cef6bae83debdb53893d3a84fbfb9a5b65f4b99e26af3e566f",
+      "location": "local-only; excluded from repository checkout"
+    },
+    {
+      "path": "artifacts/video/poster.jpg",
+      "bytes": 340305,
+      "sha256": "e84a9509dcaa5a552fede3037459cf0f7445d5ff1278dfc21210fe915fec0a7c",
+      "location": "local-only; excluded from repository checkout"
+    }
+  ]
+}

@@ -30,3 +30,14 @@ artifacts/*proof.jpg
 
 # Isolated local verification databases and scratch files.
 .test-*/
+
+# Rebuildable product-video intermediates and static-site package.
+artifacts/video/*.wav
+artifacts/video/scene-*.jpg
+artifacts/video/decoded-check.jpg
+artifacts/video/encode.log
+artifacts/video/storyboard.jpg
+artifacts/predictfix-mobile-site.tar.gz
+# Supplemental local screenshot video; the primary demo is in docs/media/.
+artifacts/video/AI-Factory-60s-zh-TW.mp4
+artifacts/video/poster.jpg

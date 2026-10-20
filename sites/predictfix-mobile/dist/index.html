@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#101a22">
+  <meta name="description" content="PredictFix AI 手機互動展示：報修、核對來源、資格派工、排查驗收與案例累積。">
+  <title>PredictFix AI · 隨身維修工作台</title>
+  <link rel="stylesheet" href="app.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="#overview" aria-label="PredictFix 首頁"><span class="brand-mark">P<span>↗</span></span><span>PredictFix<span class="brand-ai">AI</span><small>MAINTENANCE COPILOT</small></span></a>
+    <div class="nav-label">工作空間</div>
+    <nav id="desktop-nav" aria-label="主要導覽"></nav>
+    <div class="sidebar-bottom"><span class="live-dot"></span>互動展示環境<p>資料保存在此瀏覽器<br>未連接現場設備或即時 AI</p><a href="https://github.com/mina201199/predictfix-ai-factory" target="_blank" rel="noopener">查看 GitHub 專案 ↗</a></div>
+  </aside>
+  <div class="workspace">
+    <header class="topbar"><a class="mobile-brand" href="#overview">P<span>↗</span> <b>PredictFix AI</b></a><div class="breadcrumb">展示工廠 <span>/</span> <b id="breadcrumb">維修總覽</b></div><div class="header-right"><span class="demo-badge">DEMO</span><label class="role-switch"><span id="role-avatar" class="avatar">主</span><select id="role" aria-label="切換操作角色"><option value="supervisor">主管 · 林組長</option><option value="engineer">工程師 · 陳怡安</option><option value="engineer-wang">工程師 · 王志明</option></select></label></div></header>
+    <main id="main" tabindex="-1"></main>
+    <footer class="page-footer">PredictFix AI <span>原創虛構資料 · 不作為現場維修依據</span><button class="text-button" id="reset">重設展示</button></footer>
+  </div>
+  <nav id="mobile-nav" class="mobile-nav" aria-label="手機導覽"></nav>
+  <dialog id="new-dialog" aria-labelledby="new-title"><form id="new-form"><div class="dialog-head"><div><span class="eyebrow">NEW WORK ORDER</span><h2 id="new-title">建立報修工單</h2></div><button type="button" class="icon-button" data-close="new-dialog" aria-label="關閉">×</button></div><p class="muted">填寫異常，開始一段有依據的維修流程。</p><label>設備<select name="machine"><option>CNC-03</option><option>CNC-01</option><option>CNC-02</option></select></label><div class="form-grid"><label>警報代碼<input name="alarm" value="ATC-07" maxlength="40" required></label><label>預估工時（小時）<input name="hours" type="number" value="2" min="0.5" max="8" step="0.5" required></label></div><label>異常描述<textarea name="issue" maxlength="600" minlength="5" required rows="3">換刀卡住，只發生在 12 號刀位；其他刀位正常。</textarea></label><label>已確認的條件<textarea name="conditions" maxlength="600" required rows="2">氣壓錶顯示 0.48 MPa，重置後仍會發生。</textarea></label><div class="info-note">此 demo 以固定情境示範來源檢索；建立工單後會顯示適用範圍供主管核對。</div><button class="button primary full" type="submit">建立工單，核對來源 <span>→</span></button></form></dialog>
+  <dialog id="source-dialog" aria-labelledby="source-title"><div class="dialog-head"><div><span class="eyebrow">VERIFIABLE SOURCE</span><h2 id="source-title"></h2></div><button type="button" class="icon-button" data-close="source-dialog" aria-label="關閉來源">×</button></div><div id="source-content"></div></dialog>
+  <dialog id="reset-dialog" aria-labelledby="reset-title"><div class="dialog-head"><h2 id="reset-title">重新開始展示？</h2></div><p>會清除這個瀏覽器中的 demo 工單與案例，恢復原始虛構資料。</p><div class="button-row"><button class="button secondary" data-close="reset-dialog">保留資料</button><button class="button danger" id="confirm-reset">重設展示</button></div></dialog>
+  <div id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

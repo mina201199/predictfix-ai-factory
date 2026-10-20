@@ -7,6 +7,7 @@ COPY backend backend
 RUN python -c "from backend.nameplate import warmup; result=warmup(); print(result); assert result['ready']"
 COPY docs/manuals docs/manuals
 COPY artifacts artifacts
+COPY sites/predictfix-mobile/dist sites/predictfix-mobile/dist
 # 前端檔案用萬用字元複製，避免與 backend/app.py 的 STATIC 清單分兩處維護而漏檔
 COPY *.html *.js *.css demo-measurements.csv ./
 RUN mkdir -p data

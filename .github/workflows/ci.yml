@@ -26,7 +26,10 @@ jobs:
         with:
           node-version: '22'
       - name: Check scan request ordering
-        run: node tests/scan_race.cjs
+        run: |
+          node tests/scan_race.cjs
+          node --check sites/predictfix-mobile/dist/app.js
+          node --check scripts/serve_mobile_demo.cjs
       - name: Run all tests with no skips
         run: |
           mkdir -p .runtime
@@ -48,6 +51,11 @@ jobs:
         run: |
           docker run -d --name predictfix-ci -p 127.0.0.1:18083:8080 -e APP_MODE=production -e DEMO_MODE=0 -e BOOTSTRAP_PASSWORD=CI-Isolated-Bootstrap-123456 predictfix-ci
           python3 scripts/check_container.py --url http://127.0.0.1:18083
+      - name: Verify demo-mode container and mobile assets
+        run: |
+          docker rm -f predictfix-ci
+          docker run -d --name predictfix-ci -p 127.0.0.1:18083:8080 -e APP_MODE=demo -e DEMO_MODE=0 -e BOOTSTRAP_PASSWORD=CI-Isolated-Bootstrap-123456 predictfix-ci
+          python3 scripts/check_container.py --url http://127.0.0.1:18083 --mode demo
       - name: Container diagnostics
         if: failure()
         run: docker logs predictfix-ci

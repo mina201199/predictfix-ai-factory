@@ -6,7 +6,7 @@ import sys
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[1]
-PAGES=['/','/console.html','/knowledge.html','/workflow.html','/scan.html']
+PAGES=['/','/console.html','/knowledge.html','/workflow.html','/scan.html','/mobile.html']
 
 
 def runApp(tmpPath,mode,code):
@@ -41,7 +41,7 @@ def test_demo_pages_send_strict_csp_and_docs_use_their_own_policy(tmp_path):
 
 
 def test_production_hides_api_docs_and_sends_strict_csp(tmp_path):
-  code=('    statuses={p:client.get(p).status_code for p in ["/docs","/redoc","/openapi.json","/docs/oauth2-redirect"]}\n'
+  code=('    statuses={p:client.get(p).status_code for p in ["/docs","/redoc","/openapi.json","/docs/oauth2-redirect","/mobile.html","/app.js","/app.css"]}\n'
         '    print(json.dumps({"statuses":statuses,"csp":client.get("/").headers.get("content-security-policy")}))\n')
   report=runApp(tmp_path,'production',code)
   # 正式模式不需登入就能看到完整 API 結構，且 Swagger 需要外部 CDN；只在展示模式提供
@@ -50,7 +50,8 @@ def test_production_hides_api_docs_and_sends_strict_csp(tmp_path):
 
 
 def test_served_files_have_no_inline_code_or_style_attributes():
-  for path in sorted(ROOT.glob('*.html'))+sorted(ROOT.glob('*.js')):
+  mobile=ROOT/'sites/predictfix-mobile/dist'
+  for path in sorted(ROOT.glob('*.html'))+sorted(ROOT.glob('*.js'))+sorted(mobile.glob('*.html'))+sorted(mobile.glob('*.js')):
     text=path.read_text(encoding='utf-8')
     # 嚴格 CSP 會直接擋掉這些寫法，畫面會在不報錯的情況下少掉樣式或功能
     assert not re.search(r'\sstyle\s*=',text),path.name
@@ -59,6 +60,15 @@ def test_served_files_have_no_inline_code_or_style_attributes():
     if path.suffix=='.html':
       assert '<style' not in text,path.name
       assert not re.search(r'<script(?![^>]*\ssrc=)[^>]*>',text),path.name
+
+
+def test_mobile_demo_assets_load_with_strict_csp(tmp_path):
+  code=('    paths=["/mobile.html","/app.js","/app.css"]\n'
+        '    print(json.dumps({p:{"status":client.get(p).status_code,"csp":client.get(p).headers.get("content-security-policy")} for p in paths}))\n')
+  report=runApp(tmp_path,'demo',code)
+  for path,result in report.items():
+    assert result['status']==200,path
+    assertStrict(result['csp'])
 
 
 def test_scan_page_is_served_and_linked_in_both_modes(tmp_path):
