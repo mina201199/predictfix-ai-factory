@@ -1,0 +1,81 @@
+{
+  "version": "selection-independent-v5-evaluation-plan-1",
+  "status": "prepared_awaiting_user_approval",
+  "model_inference_performed": false,
+  "training_performed": false,
+  "dataset": "training/selection-holdout-v5-independent.json",
+  "dataset_sha256_lf": "fdacde65fbd1612048e054ca9c9bf32e69c0b80e0fb209abdb5bc735a915bd1c",
+  "rows": 100,
+  "model_id": "google/gemma-4-E2B-it",
+  "revision": "3e22461f65e89153144f8adb70e3b8c2cc9845a7",
+  "checkpoint_sha256": "2db5482b20d746879bb3ef79b5203e9075a2e2b98f54ec7c2f281c1477ddc550",
+  "candidate_adapter_dir": ".runtime\\qlora-coverage-504-20261020\\qlora_train\\adapter",
+  "adapter_sha256": "ca0915324cee4b32a10ad158fe7867cf17e7c49df275d70a07f31977d732262c",
+  "adapter_config_sha256": "11ebd8897defbbbc2fd1e700abb02ecc7ee07fad56acbaa4eaa89fbac4b2e2ed",
+  "training_protocol": "training/gemma-sft-protocol-v4-coverage.json",
+  "training_protocol_sha256": "a56d92d30966582129769d74bfc54e9d41af59655f2bb1fd6be9a0c83f7a85b9",
+  "proposed_arms": [
+    "base_nf4",
+    "qlora_nf4_504_final"
+  ],
+  "grammar": "canonical-candidate-order-subsets-0-to-3-json-token-trie-v1",
+  "decoding": "greedy",
+  "max_new_tokens": 64,
+  "sequence_cap": 1024,
+  "prompt_sha256": "89efe8900381567da649264f491aa4c5038943258e9a0a520c817fb0be28d972",
+  "input_fields": [
+    "question",
+    "paragraphs"
+  ],
+  "excluded_input_fields": [
+    "selected",
+    "paragraph_roles",
+    "label_rationale",
+    "kind",
+    "equipment_theme",
+    "variant",
+    "scope",
+    "source_group"
+  ],
+  "policy": [
+    "No retraining, checkpoint selection or hyperparameter tuning on this holdout.",
+    "Run each approved arm once, preserve every raw output and failure; report groups and all errors.",
+    "New evaluation-only protocol must bind this dataset and existing training provenance separately; do not rewrite old manifests or bypass adapter guards.",
+    "This preparation does not authorize inference. Budget begins only after approval and must terminate owned process tree at limit.",
+    "No deployment, service replacement, downloads, push or merge."
+  ],
+  "reporting": [
+    "exact_match",
+    "precision",
+    "recall",
+    "empty_gold_refusal",
+    "positive_gold_false_refusal",
+    "predicted_cardinality_by_gold_cardinality",
+    "injection_selection_and_exact_match",
+    "json_schema_validity",
+    "by_equipment_family",
+    "all_raw_outputs_and_errors"
+  ],
+  "estimated_minutes": {
+    "candidate_only": [
+      8,
+      12
+    ],
+    "base_only": [
+      10,
+      15
+    ],
+    "both_sequential": [
+      18,
+      27
+    ]
+  },
+  "proposed_total_budget_minutes": 30,
+  "estimate_basis": "Historical 28-row candidate114.922s and base168.297s including load, linear100 projections410.44s/601.06s; add buffer for 3-selection cases, reload checks and background workload. New inputs mean708.8 max752tokens; no new inference measured.",
+  "limitations": [
+    "Same author and selection task; new source groups and primary equipment themes, not external expert labels.",
+    "Synthetic simplified conditions and version rules; no field/OEM generalization claim.",
+    "100 questions nested in 10 equipment groups; per-group and three-selection samples small.",
+    "Future evaluator implementation and CPU guard verification required before approved GPU launch."
+  ]
+}

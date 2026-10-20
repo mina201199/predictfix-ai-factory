@@ -1,0 +1,548 @@
+{
+  "passed": true,
+  "rows": 100,
+  "sourceGroups": 10,
+  "cardinality": {
+    "0": 30,
+    "1": 30,
+    "2": 20,
+    "3": 20
+  },
+  "kinds": {
+    "positive": 60,
+    "no_answer": 20,
+    "document_injection": 20
+  },
+  "oldFiles": [
+    "selection-dataset-v2.json",
+    "selection-dataset.json",
+    "selection-holdout-v3.json",
+    "selection-holdout-v4-repair.json"
+  ],
+  "exactOverlap": {
+    "ids": 0,
+    "sourceGroups": 0,
+    "questions": 0,
+    "paragraphs": 0
+  },
+  "semanticReview": "10種主要設備不同於舊資料設備家族；共享一般維修語彙與任務格式，不宣稱語意完全獨立。",
+  "externalExpertReview": false,
+  "modelInferencePerformed": false,
+  "datasetSha256": "fdacde65fbd1612048e054ca9c9bf32e69c0b80e0fb209abdb5bc735a915bd1c",
+  "tokenizerOnly": true,
+  "tokenLengths": [
+    {
+      "id": "independent-ultrasonic-cleaner-00",
+      "sequenceTokens": 701,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-ultrasonic-cleaner-01",
+      "sequenceTokens": 711,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-ultrasonic-cleaner-02",
+      "sequenceTokens": 724,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-ultrasonic-cleaner-03",
+      "sequenceTokens": 706,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-ultrasonic-cleaner-04",
+      "sequenceTokens": 715,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-ultrasonic-cleaner-05",
+      "sequenceTokens": 721,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-ultrasonic-cleaner-06",
+      "sequenceTokens": 681,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-ultrasonic-cleaner-07",
+      "sequenceTokens": 700,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-ultrasonic-cleaner-08",
+      "sequenceTokens": 752,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-ultrasonic-cleaner-09",
+      "sequenceTokens": 732,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-laser-marker-00",
+      "sequenceTokens": 700,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-laser-marker-01",
+      "sequenceTokens": 710,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-laser-marker-02",
+      "sequenceTokens": 723,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-laser-marker-03",
+      "sequenceTokens": 705,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-laser-marker-04",
+      "sequenceTokens": 714,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-laser-marker-05",
+      "sequenceTokens": 720,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-laser-marker-06",
+      "sequenceTokens": 680,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-laser-marker-07",
+      "sequenceTokens": 699,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-laser-marker-08",
+      "sequenceTokens": 751,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-laser-marker-09",
+      "sequenceTokens": 731,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-reflow-oven-00",
+      "sequenceTokens": 685,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-reflow-oven-01",
+      "sequenceTokens": 695,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-reflow-oven-02",
+      "sequenceTokens": 708,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-reflow-oven-03",
+      "sequenceTokens": 690,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-reflow-oven-04",
+      "sequenceTokens": 699,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-reflow-oven-05",
+      "sequenceTokens": 705,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-reflow-oven-06",
+      "sequenceTokens": 665,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-reflow-oven-07",
+      "sequenceTokens": 684,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-reflow-oven-08",
+      "sequenceTokens": 736,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-reflow-oven-09",
+      "sequenceTokens": 716,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-adhesive-dispenser-00",
+      "sequenceTokens": 689,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-adhesive-dispenser-01",
+      "sequenceTokens": 699,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-adhesive-dispenser-02",
+      "sequenceTokens": 712,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-adhesive-dispenser-03",
+      "sequenceTokens": 694,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-adhesive-dispenser-04",
+      "sequenceTokens": 703,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-adhesive-dispenser-05",
+      "sequenceTokens": 709,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-adhesive-dispenser-06",
+      "sequenceTokens": 669,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-adhesive-dispenser-07",
+      "sequenceTokens": 688,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-adhesive-dispenser-08",
+      "sequenceTokens": 740,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-adhesive-dispenser-09",
+      "sequenceTokens": 720,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-torque-station-00",
+      "sequenceTokens": 701,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-torque-station-01",
+      "sequenceTokens": 711,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-torque-station-02",
+      "sequenceTokens": 724,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-torque-station-03",
+      "sequenceTokens": 706,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-torque-station-04",
+      "sequenceTokens": 715,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-torque-station-05",
+      "sequenceTokens": 721,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-torque-station-06",
+      "sequenceTokens": 681,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-torque-station-07",
+      "sequenceTokens": 700,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-torque-station-08",
+      "sequenceTokens": 752,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-torque-station-09",
+      "sequenceTokens": 732,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-dynamic-balancer-00",
+      "sequenceTokens": 698,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-dynamic-balancer-01",
+      "sequenceTokens": 708,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-dynamic-balancer-02",
+      "sequenceTokens": 721,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-dynamic-balancer-03",
+      "sequenceTokens": 703,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-dynamic-balancer-04",
+      "sequenceTokens": 712,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-dynamic-balancer-05",
+      "sequenceTokens": 718,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-dynamic-balancer-06",
+      "sequenceTokens": 678,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-dynamic-balancer-07",
+      "sequenceTokens": 697,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-dynamic-balancer-08",
+      "sequenceTokens": 749,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-dynamic-balancer-09",
+      "sequenceTokens": 729,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-hardness-tester-00",
+      "sequenceTokens": 699,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-hardness-tester-01",
+      "sequenceTokens": 709,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-hardness-tester-02",
+      "sequenceTokens": 722,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-hardness-tester-03",
+      "sequenceTokens": 704,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-hardness-tester-04",
+      "sequenceTokens": 713,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-hardness-tester-05",
+      "sequenceTokens": 719,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-hardness-tester-06",
+      "sequenceTokens": 679,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-hardness-tester-07",
+      "sequenceTokens": 698,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-hardness-tester-08",
+      "sequenceTokens": 750,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-hardness-tester-09",
+      "sequenceTokens": 730,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-label-applicator-00",
+      "sequenceTokens": 700,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-label-applicator-01",
+      "sequenceTokens": 710,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-label-applicator-02",
+      "sequenceTokens": 723,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-label-applicator-03",
+      "sequenceTokens": 705,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-label-applicator-04",
+      "sequenceTokens": 714,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-label-applicator-05",
+      "sequenceTokens": 720,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-label-applicator-06",
+      "sequenceTokens": 680,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-label-applicator-07",
+      "sequenceTokens": 699,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-label-applicator-08",
+      "sequenceTokens": 751,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-label-applicator-09",
+      "sequenceTokens": 731,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-xray-inspection-00",
+      "sequenceTokens": 700,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-xray-inspection-01",
+      "sequenceTokens": 710,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-xray-inspection-02",
+      "sequenceTokens": 723,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-xray-inspection-03",
+      "sequenceTokens": 705,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-xray-inspection-04",
+      "sequenceTokens": 714,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-xray-inspection-05",
+      "sequenceTokens": 720,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-xray-inspection-06",
+      "sequenceTokens": 680,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-xray-inspection-07",
+      "sequenceTokens": 699,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-xray-inspection-08",
+      "sequenceTokens": 751,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-xray-inspection-09",
+      "sequenceTokens": 731,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-weaving-loom-00",
+      "sequenceTokens": 682,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-weaving-loom-01",
+      "sequenceTokens": 692,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-weaving-loom-02",
+      "sequenceTokens": 705,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-weaving-loom-03",
+      "sequenceTokens": 687,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-weaving-loom-04",
+      "sequenceTokens": 696,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-weaving-loom-05",
+      "sequenceTokens": 702,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-weaving-loom-06",
+      "sequenceTokens": 662,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-weaving-loom-07",
+      "sequenceTokens": 681,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-weaving-loom-08",
+      "sequenceTokens": 733,
+      "maxGrammarTokens": 21
+    },
+    {
+      "id": "independent-weaving-loom-09",
+      "sequenceTokens": 713,
+      "maxGrammarTokens": 21
+    }
+  ],
+  "maxSequenceTokens": 752,
+  "meanSequenceTokens": 708.8,
+  "maxGrammarTokens": 21,
+  "historicalTiming": {
+    "rowsPerArm": 28,
+    "candidateWallSeconds": 114.92200000000048,
+    "baseWallSeconds": 168.29700000000048,
+    "candidateMeanPromptTokens": 778.2142857142857,
+    "candidateMeanGeneratedTokens": 9.392857142857142,
+    "candidateLinear100Seconds": 410.435714285716,
+    "baseLinear100Seconds": 601.060714285716,
+    "limits": "Includes loading and reload probe; non-linear extrapolation, uncontrolled background workloads; not measured new inference."
+  }
+}
