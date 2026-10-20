@@ -1,5 +1,9 @@
 # 展示影片與來源
 
+面試官可在 [公開展示首頁](https://predictfix-mobile-demo.ruru0109lee.chatgpt.site) 直接播放實機影片、展開中文逐字稿，再依同頁指南操作互動展示；也可 [單獨開啟 MP4](https://predictfix-mobile-demo.ruru0109lee.chatgpt.site/media/predictfix-demo.mp4)，不需登入。
+
+公開成品使用下表第一支實機影片：60.7 秒、1920×1080、H.264／AAC，含中文旁白與內嵌字幕。2026-10-21 已完成整支影音解碼檢查及瀏覽器播放驗證。影片逐字稿來自 `tools/demo-video/narration.json`；第二支影片的 SRT 不適用於這支實機影片。
+
 目前保留兩種 60 秒影片，皆使用虛構展示資料：
 
 | 成品 | 用途 | 來源 |

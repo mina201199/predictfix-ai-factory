@@ -4,7 +4,7 @@
 
 PredictFix AI 將維修知識查找、資格與容量派工、排查驗收及案例累積接成一套可操作的維修管理系統，面向 CNC 工廠的主管與維修工程師。
 
-**[本機體驗](#快速開始) · [手機互動 Demo](#手機互動-demo) · [操作手冊](docs/repair-flow.md) · [系統架構](docs/system-architecture.md) · [安全測試](docs/security-testing.md)**
+**[直接開啟面試展示](https://predictfix-mobile-demo.ruru0109lee.chatgpt.site) · [三分鐘操作指南](docs/interview-demo.md) · [本機體驗](#快速開始) · [操作手冊](docs/repair-flow.md) · [系統架構](docs/system-architecture.md) · [安全測試](docs/security-testing.md)**
 
 **已驗證成果：161 項自動化測試通過，零跳過（2026-10-20 乾淨環境實跑）；完整展示流程已跑通。** 2026-10-07 已完成獨立本機部署與備份還原檢查；2026-10-15 本機模型改用 Gemma 4 E2B 後重跑 45 個安全檢查全數通過，包含 8 個本機模型攻擊情境。詳見下方測試與限制。
 
@@ -22,7 +22,8 @@ PredictFix AI 將維修知識查找、資格與容量派工、排查驗收及案
 | 可重複展示 | 已提供準備工具與展示腳本 | 專用設備、工程師、資格與出勤；驗收阻擋、主管審核、案例發布與檢索已跑通。 |
 | CI | 本次整合三個 job 全數通過（2026-10-20） | 全套 161 項測試、正式／展示容器與 PostgreSQL 驗證成功。[執行紀錄](https://github.com/mina201199/predictfix-ai-factory/actions/runs/39452377590)；逐項結果見 [交付驗證](docs/release-validation-20261020.md)，後續提交見 [PR checks](https://github.com/mina201199/predictfix-ai-factory/pull/10/checks)。 |
 | Docker／PostgreSQL／HTTPS | Docker 與 PostgreSQL 17 已實測（2026-10-16）；HTTPS 尚未實測 | 並發派工、正式模式、維修流程三個情境在 PostgreSQL 上通過；Compose 正式模式「API＋PostgreSQL」通過健康檢查、重啟後資料保存，`pg_dump` 備份可還原到新資料庫並撤銷工作階段。CI 每次重跑。Caddy TLS 仍待驗收。 |
-| 公開網站／企業上線 | 尚未完成 | 正式後端尚無外部可用網址；靜態手機展示已有私人網址。未接真實感測器，未完成工廠現場驗收。 |
+| 公開面試展示 | 已公開（2026-10-21） | 免登入觀看實機影片與三分鐘操作指南，可用手機或電腦體驗虛構維修流程。[交付驗證](docs/showcase-delivery-20261021.md)。 |
+| 正式後端／企業上線 | 尚未完成 | 正式後端尚無外部可用網址，未接真實感測器，未完成工廠現場驗收。 |
 
 **目前定位是具備資料保存與權限流程的本機 MVP。** 「正式資料模式」是應用程式的運行模式，不代表已部署到正式伺服器。
 
@@ -268,7 +269,7 @@ Exact match 變化：**+75.0 個百分點**。這是小規模流程實驗，不�
 
 另有適合手機與桌面的獨立展示介面，無須安裝 Python 或模型。包含報修、核對來源、清單核准、資格／出勤／容量派工、逐項排查與驗收、主管審核／退回重修及案例發布。
 
-[開啟手機互動 Demo](https://predictfix-mobile-demo.ruru0109lee.chatgpt.site)（目前為擁有者私人展示，需使用建立網站的 ChatGPT 帳號登入）。這是靜態模擬介面，不代表原 FastAPI 系統已完成公網部署。
+[開啟公開面試展示](https://predictfix-mobile-demo.ruru0109lee.chatgpt.site)，免登入。首頁有實機影片、逐字稿、三分鐘導覽及操作協助；按「開始互動展示」即可體驗。這是靜態模擬介面，不代表原 FastAPI 系統已完成公網部署。
 
 - 在既有本機服務開啟 `/mobile.html`，或以 `node scripts/serve_mobile_demo.cjs` 啟動獨立預覽，再開啟 `http://127.0.0.1:8096`。
 - 點「開始換刀卡住情境」，依畫面引導操作；右上角可切換主管／工程師。
@@ -276,7 +277,7 @@ Exact match 變化：**+75.0 個百分點**。這是小規模流程實驗，不�
 - 所有設備、手冊摘要、量測與人員均為虛構資料。資料只保存在當前瀏覽器，可用「重設展示」清除；不同手機與電腦不會同步。
 - 此介面未連接 FastAPI、現場設備、即時 LLM 或正式資料庫；角色切換僅模擬流程，不是正式登入權限。
 
-原始檔位於 `sites/predictfix-mobile/dist/`，可由靜態網站服務託管。本機 `127.0.0.1` 網址仍只供該電腦使用；手機遠端體驗需開啟已部署的 HTTPS 網址。
+內嵌工作台原始檔位於 `sites/predictfix-mobile/dist/`；公開網站另在 Sites 正式原始碼庫維護面試導覽與影片，版本與提交識別見 [交付紀錄](docs/showcase-delivery-20261021.md)。本機 `127.0.0.1` 網址只供該電腦使用；手機遠端體驗請開啟已部署的 HTTPS 網址。
 
 另有本機保存的 60 秒截圖產品介紹；版本內附 [字幕](artifacts/video/AI-Factory-60s-zh-TW.srt)與分鏡。成品位置、雜湊及重製條件見 [影片資產說明](docs/product-video.md)。
 
