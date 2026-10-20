@@ -36,17 +36,29 @@ Node 語法檢查及掃描請求順序檢查通過，pip check 無依賴衝突�
 受限執行環境的首次安全子程序逾時，首次全套測試已中止，未算作成功；
 以上結果來自一般本機權限的完整重跑。
 
-## GitHub CI：尚未觸發
+## GitHub CI：三組通過
 
-目的地是既有 `origin`：`https://github.com/mina201199/predictfix-ai-factory.git`，
-且連接器已確認登入者 `mina201199` 為該公開儲存庫擁有者並有推送權限。
-Git 命令列未配置推送認證，因此準備透過既有 GitHub 連接器提交。
+[PR #10](https://github.com/mina201199/predictfix-ai-factory/pull/10)
+將這 23 個檔案發布至既有公開儲存庫的 `codex/release-regression-20261020` 分支。
+程式提交 `8c9559f079dab4fa45bc8f5cd877c0563b5fa1b5` 的 Git tree
+與本機已驗證提交 `d73c4a0` 完全一致（`ba5942763d5e2c7a9e8d777eb95836050dca4f62`）。
 
-自動核准審查拒絕建立本次 Git tree；補查目的地與帳號權限後仍拒絕，
-理由為使用者未明確同意將這批具體原始碼與測試資料發布到公開儲存庫。
-因此本次沒有新增遠端分支、PR 或 CI run，不能宣稱 GitHub CI 通過。
-等待使用者確認將本次 23 個檔案推送至上述儲存庫的新分支後，才繼續。
-範圍不含 `.env`、憑證、正式／展示資料庫、本機 MP4 與封面。
+2026-10-20 的 [GitHub Actions 執行 #55](https://github.com/mina201199/predictfix-ai-factory/actions/runs/39452377590)
+已完成且結論為 `success`：
+
+| Job | 結果 | 實際驗證 |
+| --- | --- | --- |
+| tests | success | Ubuntu／Python 3.12：161 passed，151.62 秒；JUnit 確認 failures、errors、skipped 皆為 0；既有棄用警告 1 個。 |
+| container | success | 建置映像；正式及展示兩模式頁面與資產、嚴格 CSP、匿名 API 阻擋；正式模式隱藏手機展示及 API 文件。 |
+| postgres | success | PostgreSQL 17 三個維修情境、Compose 正式服務、重啟保存、pg_dump 備份及新資料庫還原。 |
+
+此後文件紀錄更新也會觸發相同三個 job，最新提交狀態以
+[PR checks](https://github.com/mina201199/predictfix-ai-factory/pull/10/checks) 為準。
+僅在失敗時執行的容器診斷步驟被略過是正常流程，不是 pytest 跳過測試。
+本次未合併 main，也未部署正式服務；發布範圍不含 `.env`、憑證、
+正式／展示資料庫、本機 MP4 與封面。
+
+## 本機重現
 
 ```powershell
 .\.venv\Scripts\python.exe scripts/check_runtime.py

@@ -20,7 +20,7 @@ PredictFix AI 將維修知識查找、資格與容量派工、排查驗收及案
 | 獨立本機部署 | 已運行於 8084 | 檔案雜湊快照、隔離 SQLite、正式登入、重啟及備份還原通過；不是公開網站。 |
 | LoRA 小規模訓練 | 已完成並部署獨立實驗 API | Qwen3-0.6B，12 步 CPU 訓練；保留測試 9／12 題符合，資料不足 3 題皆失敗，未替換正式模型。 |
 | 可重複展示 | 已提供準備工具與展示腳本 | 專用設備、工程師、資格與出勤；驗收阻擋、主管審核、案例發布與檢索已跑通。 |
-| CI | 歷史 GitHub Actions 通過；本次整合尚未觸發 | 包含全套測試、容器與 PostgreSQL 三個 job。[歷史執行紀錄](https://github.com/mina201199/predictfix-ai-factory/actions/runs/38715442505)。本次推送被自動核准審查阻擋，狀態見 [交付驗證](docs/release-validation-20261020.md)。 |
+| CI | 本次整合三個 job 全數通過（2026-10-20） | 全套 161 項測試、正式／展示容器與 PostgreSQL 驗證成功。[執行紀錄](https://github.com/mina201199/predictfix-ai-factory/actions/runs/39452377590)；逐項結果見 [交付驗證](docs/release-validation-20261020.md)，後續提交見 [PR checks](https://github.com/mina201199/predictfix-ai-factory/pull/10/checks)。 |
 | Docker／PostgreSQL／HTTPS | Docker 與 PostgreSQL 17 已實測（2026-10-16）；HTTPS 尚未實測 | 並發派工、正式模式、維修流程三個情境在 PostgreSQL 上通過；Compose 正式模式「API＋PostgreSQL」通過健康檢查、重啟後資料保存，`pg_dump` 備份可還原到新資料庫並撤銷工作階段。CI 每次重跑。Caddy TLS 仍待驗收。 |
 | 公開網站／企業上線 | 尚未完成 | 正式後端尚無外部可用網址；靜態手機展示已有私人網址。未接真實感測器，未完成工廠現場驗收。 |
 
@@ -210,7 +210,7 @@ flowchart TD
 | 驗證項目 | 現有結果 | 能證明什麼／不能證明什麼 |
 |---|---|---|
 | **功能與整合測試** | 161 項 pytest 通過、零跳過，2026-10-20 乾淨環境實跑 | 涵蓋權限、派工、驗收、重修、保養、庫存、備份、持久化、展示、LoRA 分組／評分器、引用截斷、檢索快取與工單分頁；不能代表工廠現場驗收。 |
-| **重新安裝驗證** | GitHub Actions 從乾淨 Git checkout 安裝固定依賴，通過 60 項測試 | 驗證依賴安裝可在另一台機器重現；CI 為 Ubuntu，尚未驗證 Windows 的 `setup.ps1` 安裝流程。 |
+| **重新安裝驗證** | 2026-10-20 GitHub Actions 從乾淨 Git checkout 安裝固定依賴，通過 161 項測試 | 驗證依賴安裝可在另一台機器重現；CI 為 Ubuntu，本次 Windows 另建乾淨虛擬環境安裝，但未透過 `setup.ps1`。 |
 | **AI／API 安全** | 45／45 個檢查通過（2026-10-15，Gemma 4 E2B），其中含 8 個真實本機模型攻擊情境 | 測提示詞注入、越權、敏感資料暴露與捏造引用；是有限情境驗證，未完成全面滲透測試。 |
 | **檢索方法比較** | 16 題正例 Top-3 命中 15 題（93.75%）；4 題負例均無結果 | TF-IDF、BM25、融合方法同分；開發用合成題，不是獨立保留集，也不是 AI 回答正確率。 |
 | **完整展示流程** | 驗收失敗阻擋、復測提交、主管審核、案例發布及再檢索通過 | [流程報告](artifacts/interview-walkthrough-report.json) 是 API 操作證據；[60 秒操作影片](docs/media/predictfix-demo.mp4)為本機展示模式錄影。 |
@@ -350,7 +350,7 @@ docker stop pf-verify-pg
 
 | 優先序 | 要補的工作 | 完成判準 |
 |---|---|---|
-| **1．交付紀錄** | 已完成：GitHub Actions 測試與容器檢查通過，見 [執行紀錄](https://github.com/mina201199/predictfix-ai-factory/actions/runs/38553389662)。 | GitHub 確實跑完測試與容器檢查。 |
+| **1．交付紀錄** | 已完成：GitHub Actions 全套測試、雙模式容器及 PostgreSQL 通過，見 [執行紀錄](https://github.com/mina201199/predictfix-ai-factory/actions/runs/39452377590)。 | 已保存原始測試報告、版本來源與 CI 連結。 |
 | **2．展示影片** | 已完成：[60 秒操作影片](docs/media/predictfix-demo.mp4)涵蓋報修、派工、驗收阻擋、審核與案例發布。 | 面試官能快速看完操作，現場也可重新準備工單。 |
 | **3．外部可用** | Docker／PostgreSQL 已有驗證；接續驗收 HTTPS 並建立獨立的公開後端展示環境。 | 外部可開啟、資料可持久化、重啟與備份還原通過；展示與正式資料隔離。 |
 | **4．效果評估** | 建立獨立手冊題集與相關性標註；由領域人員評估引用適用性和流程成效。 | 有獨立測試集、逐題錯誤分析與清楚的成效指標。 |
