@@ -486,3 +486,33 @@ def test_simulator_unknown_uses_order_specific_machine_code(c):
   with patch('httpx.Client', return_value=client):
     runSend(args)
   assert deliveries[0]['machineCode'] == 'UNKNOWN-' + hashlib.sha256(args.external_id.encode()).hexdigest()[:16]
+
+
+def test_concurrent_csv_reverse_order_does_not_deadlock(c, monkeypatch):
+  import threading
+  from backend import integration_service
+  mapping(c)
+  rows = [body(externalId='CSV-A', eventId='CSV-EVENT-A'), body(externalId='CSV-B', eventId='CSV-EVENT-B')]
+  originalLock = integration_service.lockExternalOrder
+  state = threading.local()
+  def interleavedLock(*args):
+    originalLock(*args)
+    if not getattr(state, 'paused', False):
+      state.paused = True
+      # 放大首列已持鎖的交錯時間，才能驗證整批鎖順序。
+      time.sleep(0.2)
+  monkeypatch.setattr(integration_service, 'lockExternalOrder', interleavedLock)
+  with TestClient(app, raise_server_exceptions=False) as first, TestClient(app, raise_server_exceptions=False) as second:
+    for client in [first, second]:
+      client.cookies.update(c.cookies)
+      client.headers['X-CSRF-Token'] = c.headers['X-CSRF-Token']
+    def importRows(arguments):
+      client, items = arguments
+      return client.post('/api/integrations/csv?source=fixture&dryRun=false', content=csvBytes(items))
+    with ThreadPoolExecutor(max_workers=2) as pool:
+      responses = list(pool.map(importRows, [(first, rows), (second, list(reversed(rows)))]))
+    for response in responses:
+      assert response.status_code == 200, (response.status_code, response.text)
+      assert all(row['ok'] for row in response.json()['rows']), response.text
+  assert len(records(c)['orders']) == 2
+  assert len(records(c)['events']) == 2

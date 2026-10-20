@@ -2,6 +2,7 @@
 import csv
 import io
 import json
+import re
 
 from fastapi import HTTPException, Query, Request
 from pydantic import BaseModel, ConfigDict, Field
@@ -11,7 +12,7 @@ from sqlalchemy.exc import IntegrityError
 from . import auth, repair_flow, store
 from .integration_models import ExternalOrder, InboundEvent, MachineMapping, Outbox
 from .integration_service import (IDENTIFIER, audit, boundedBody, installOutboxHook, jsonText,
-  lockTransaction, orderResult, receiveEvent, resolveOrder, sourceConfig)
+  lockExternalOrder, lockTransaction, orderResult, receiveEvent, resolveOrder, sourceConfig)
 
 
 class MappingInput(BaseModel):
@@ -137,6 +138,11 @@ def register(app):
     results = []
     with store.Session() as db:
       lockTransaction(db)
+      # 整批依固定順序先取得鎖，避免相反列順序的 CSV 各自持鎖後互等。
+      externalIds = sorted({row['externalId'] for row in rows
+        if isinstance(row.get('externalId'), str) and re.fullmatch(IDENTIFIER, row['externalId'], flags=re.ASCII)})
+      for externalId in externalIds:
+        lockExternalOrder(db, source, externalId)
       for index, row in enumerate(rows, start=2):
         try:
           with db.begin_nested():
