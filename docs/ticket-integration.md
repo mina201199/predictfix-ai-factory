@@ -10,6 +10,8 @@
 INTEGRATION_SOURCES={"mes-demo":{"keys":{"v1":"REPLACE_WITH_GENERATED_SECRET"},"outboundKeyId":"v1","outboundUrl":"http://127.0.0.1:8097/events","allowHttp":true}}
 ```
 
+以 Docker 正式部署時，把同一行放進 `.env.production`，並用單引號包住整個值；`compose.production.yaml` 會傳給 api 與 `integration-worker` 服務，啟用方式見 [正式資料環境與部署](production-setup.md#伺服器部署設定)。
+
 每個來源只接受其 `keys` 列出的 key ID，secret 至少 32 字元。新增 key 後讓來源切換，再移除舊 key 即完成撤銷；驗證每次讀取環境設定，已執行的服務需重新載入部署環境才能套用檔案修改。若環境變數已設定，launcher 保留環境值。`.env` loader 只接受明確的 KEY=VALUE，可使用單／雙引號包住整個值，不做 shell 展開或執行，不支援多行及行尾註解。
 
 以下指令在本專案根目錄執行。worktree 沒有 `.venv` 時，可把 `$python` 換成既有主 repo 的 Python 絕對路徑。先用獨立展示資料庫，避免將展示資料寫入正式資料庫：

@@ -10,6 +10,8 @@ services:
       LLM_PROVIDER: ollama
       OLLAMA_URL: http://ollama:11434
       OLLAMA_MODEL: ${OLLAMA_MODEL:-gemma4:e2b-it-q8_0}
+      # 選填：不使用工單介接的部署不必設定，未設定時介接入口一律回 401
+      INTEGRATION_SOURCES: ${INTEGRATION_SOURCES:-}
     depends_on:
       db:
         condition: service_healthy
@@ -19,6 +21,30 @@ services:
       interval: 30s
       timeout: 5s
       retries: 3
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+  integration-worker:
+    build: .
+    command: ["python", "-m", "backend.integration_worker"]
+    environment:
+      APP_MODE: production
+      DEMO_MODE: "0"
+      DATABASE_URL: ${DATABASE_URL:?Set a PostgreSQL connection URL in the deployment env file}
+      INTEGRATION_SOURCES: ${INTEGRATION_SOURCES:-}
+    depends_on:
+      db:
+        condition: service_healthy
+      # 等 api 完成建表再啟動，避免兩個程序同時對空資料庫執行 create_all
+      api:
+        condition: service_healthy
+    # 沒有 HTTP port 可做 healthcheck；資料庫斷線時程序會結束，由 restart 重新啟動。
+    # 送達失敗不會結束程序，而是記在 outbox 的 state／lastError 供主管查看。
+    restart: unless-stopped
+    # Python 是容器的 PID 1，會忽略 SIGTERM；改送 SIGINT 走程式既有的 KeyboardInterrupt 結束流程
+    stop_signal: SIGINT
     logging:
       driver: json-file
       options:

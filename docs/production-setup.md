@@ -47,6 +47,12 @@ docker compose --env-file .env.production -f compose.production.yaml ps
 docker compose --env-file .env.production -f compose.production.yaml logs --tail 100 api
 ```
 
+工單介接是選用功能：在 `.env.production` 填 `INTEGRATION_SOURCES`（格式見 [外部工單介接](ticket-integration.md)），api 與 `integration-worker` 服務讀同一個值。未設定時介接入口一律回 401，worker 只會閒置輪詢。`integration-worker` 執行 `python -m backend.integration_worker`，持續送出 outbox 的狀態回寫；`outboundUrl` 必須是 worker 容器連得到的位址，容器內的 127.0.0.1 是容器自己。修改金鑰或目的地後重新執行 `up -d`，compose 會重建設定有變更的容器。worker 沒有 healthcheck：資料庫斷線時程序結束並由 Docker 重啟；送達失敗不會結束程序，會記在 outbox，由主管在介接管理頁查看，或重試已進 dead 的事件。
+
+```powershell
+docker compose --env-file .env.production -f compose.production.yaml logs --tail 100 integration-worker
+```
+
 LLM 尚未下載或不可用時，AI 中心顯示檢索候選來源，不會假稱模型已完成整理。目前的本機模型 Gemma 4 E2B（Q8_0）在 44 題虛構段落選取題全部選對（見 [本機模型基準](local-llm-benchmark.md)），但題目比實際簡單，正式回答能力需以企業問題獨立評估。
 
 PostgreSQL 備份採原生 `pg_dump`；SQLite 腳本不可用於 PostgreSQL。以下先在容器內產生 archive，再複製檔案，避免 Windows PowerShell 重導向 binary 而破壞內容：
