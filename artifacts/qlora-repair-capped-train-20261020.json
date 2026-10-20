@@ -1,0 +1,3718 @@
+{
+  "status": "trained_pending_reload",
+  "command": "train",
+  "mode": "qlora",
+  "started_at": "2026-10-20T01:29:39.524662+00:00",
+  "model_id": "google/gemma-4-E2B-it",
+  "revision": "3e22461f65e89153144f8adb70e3b8c2cc9845a7",
+  "protocol_sha256": "ca273f2e7fbdee14a82ae4d212deecf1729527fea961d4a33d7d58a3a103e4af",
+  "dataset_sha256": "29233af3e7592ae6c6610fffd7276c6072889705c3f7dd1bd56c5797d8b574c1",
+  "holdout_sha256": "1ab3e297a60fd5f9b9b89fc3111b85345a5863f778b2015062507adf85292a8b",
+  "protocol": {
+    "version": "gemma-sft-v2",
+    "model_id": "google/gemma-4-E2B-it",
+    "revision": "3e22461f65e89153144f8adb70e3b8c2cc9845a7",
+    "seed": 20261019,
+    "dataset_sha256": "29233af3e7592ae6c6610fffd7276c6072889705c3f7dd1bd56c5797d8b574c1",
+    "holdout_sha256": "1ab3e297a60fd5f9b9b89fc3111b85345a5863f778b2015062507adf85292a8b",
+    "sha256_encoding": "UTF-8 text with LF line endings",
+    "prompt_sha256": "89efe8900381567da649264f491aa4c5038943258e9a0a520c817fb0be28d972",
+    "train_ids": [
+      "feed-servo-19",
+      "spindle-lube-11",
+      "atc-arm-15",
+      "spindle-chiller-08",
+      "hydraulic-17",
+      "coolant-pump-25",
+      "rotary-table-14",
+      "hydraulic-01",
+      "coolant-pump-18",
+      "hydraulic-15",
+      "workpiece-probe-04",
+      "tool-setter-06",
+      "feed-servo-20",
+      "guard-door-12",
+      "atc-arm-13",
+      "electrical-cabinet-01",
+      "spindle-lube-22",
+      "lathe-chuck-05",
+      "tool-setter-14",
+      "ballscrew-24",
+      "spindle-chiller-22",
+      "spindle-chiller-01",
+      "spindle-bearing-00",
+      "ballscrew-25",
+      "tool-setter-09",
+      "feed-servo-09",
+      "bar-feeder-24",
+      "ballscrew-04",
+      "chip-conveyor-02",
+      "atc-arm-06",
+      "rotary-table-21",
+      "spindle-bearing-23",
+      "spindle-bearing-12",
+      "pneumatic-24",
+      "lathe-chuck-19",
+      "rotary-table-19",
+      "atc-arm-09",
+      "electrical-cabinet-23",
+      "spindle-bearing-25",
+      "lathe-chuck-16",
+      "workpiece-probe-19",
+      "guard-door-16",
+      "workpiece-probe-14",
+      "pneumatic-04",
+      "lathe-chuck-15",
+      "workpiece-probe-13",
+      "pneumatic-08",
+      "feed-servo-00",
+      "chip-conveyor-01",
+      "tool-setter-13",
+      "bar-feeder-21",
+      "atc-magazine-07",
+      "guard-door-13",
+      "atc-magazine-00",
+      "tool-setter-19",
+      "ballscrew-11",
+      "spindle-bearing-06",
+      "coolant-pump-21",
+      "spindle-lube-01",
+      "tool-setter-21",
+      "rotary-table-20",
+      "electrical-cabinet-17",
+      "spindle-lube-16",
+      "feed-servo-27",
+      "hydraulic-06",
+      "atc-magazine-04",
+      "spindle-bearing-18",
+      "guard-door-27",
+      "feed-servo-17",
+      "ballscrew-19",
+      "atc-arm-01",
+      "spindle-chiller-14",
+      "spindle-chiller-04",
+      "atc-magazine-19",
+      "electrical-cabinet-09",
+      "rotary-table-10",
+      "atc-arm-25",
+      "coolant-pump-12",
+      "electrical-cabinet-05",
+      "pneumatic-13",
+      "workpiece-probe-10",
+      "pneumatic-23",
+      "atc-magazine-06",
+      "guard-door-14",
+      "spindle-chiller-23",
+      "hydraulic-18",
+      "spindle-lube-06",
+      "bar-feeder-09",
+      "bar-feeder-10",
+      "bar-feeder-01",
+      "lathe-chuck-01",
+      "electrical-cabinet-20",
+      "pneumatic-03",
+      "workpiece-probe-05",
+      "spindle-chiller-12",
+      "chip-conveyor-11",
+      "chip-conveyor-27",
+      "coolant-pump-14",
+      "chip-conveyor-07",
+      "ballscrew-12",
+      "tool-setter-26",
+      "spindle-lube-09",
+      "atc-arm-19",
+      "atc-magazine-22",
+      "bar-feeder-08",
+      "electrical-cabinet-13",
+      "chip-conveyor-10",
+      "chip-conveyor-14",
+      "lathe-chuck-21",
+      "bar-feeder-14",
+      "guard-door-04",
+      "coolant-pump-09",
+      "hydraulic-13",
+      "feed-servo-14",
+      "atc-magazine-14",
+      "hydraulic-19",
+      "spindle-bearing-10",
+      "rotary-table-16",
+      "ballscrew-14",
+      "guard-door-19",
+      "rotary-table-05",
+      "workpiece-probe-07",
+      "coolant-pump-06",
+      "spindle-lube-24",
+      "pneumatic-00",
+      "lathe-chuck-03"
+    ],
+    "validation_ids": [
+      "mist-collector-12",
+      "mist-collector-04",
+      "way-lube-09",
+      "way-lube-10",
+      "linear-scale-07",
+      "way-lube-14",
+      "mist-collector-14",
+      "lathe-turret-06",
+      "linear-scale-04",
+      "mist-collector-25",
+      "mist-collector-24",
+      "way-lube-01",
+      "lathe-turret-25",
+      "linear-scale-19",
+      "way-lube-08",
+      "lathe-turret-09",
+      "linear-scale-14",
+      "lathe-turret-01",
+      "way-lube-24",
+      "linear-scale-22",
+      "way-lube-21",
+      "mist-collector-11",
+      "lathe-turret-13",
+      "linear-scale-00",
+      "linear-scale-06",
+      "lathe-turret-15",
+      "lathe-turret-19",
+      "mist-collector-19"
+    ],
+    "holdout_ids": [
+      "repair-holdout-mist-collector-link-00",
+      "repair-holdout-mist-collector-link-01",
+      "repair-holdout-mist-collector-link-02",
+      "repair-holdout-mist-collector-link-03",
+      "repair-holdout-mist-collector-link-04",
+      "repair-holdout-mist-collector-link-05",
+      "repair-holdout-mist-collector-link-06",
+      "repair-holdout-mist-collector-link-07",
+      "repair-holdout-mist-collector-link-08",
+      "repair-holdout-mist-collector-link-09",
+      "repair-holdout-bar-loader-link-00",
+      "repair-holdout-bar-loader-link-01",
+      "repair-holdout-bar-loader-link-02",
+      "repair-holdout-bar-loader-link-03",
+      "repair-holdout-bar-loader-link-04",
+      "repair-holdout-bar-loader-link-05",
+      "repair-holdout-bar-loader-link-06",
+      "repair-holdout-bar-loader-link-07",
+      "repair-holdout-bar-loader-link-08",
+      "repair-holdout-bar-loader-link-09",
+      "repair-holdout-conveyor-scale-00",
+      "repair-holdout-conveyor-scale-01",
+      "repair-holdout-conveyor-scale-02",
+      "repair-holdout-conveyor-scale-03",
+      "repair-holdout-conveyor-scale-04",
+      "repair-holdout-conveyor-scale-05",
+      "repair-holdout-conveyor-scale-06",
+      "repair-holdout-conveyor-scale-07",
+      "repair-holdout-conveyor-scale-08",
+      "repair-holdout-conveyor-scale-09",
+      "repair-holdout-pallet-reader-00",
+      "repair-holdout-pallet-reader-01",
+      "repair-holdout-pallet-reader-02",
+      "repair-holdout-pallet-reader-03",
+      "repair-holdout-pallet-reader-04",
+      "repair-holdout-pallet-reader-05",
+      "repair-holdout-pallet-reader-06",
+      "repair-holdout-pallet-reader-07",
+      "repair-holdout-pallet-reader-08",
+      "repair-holdout-pallet-reader-09",
+      "repair-holdout-exhaust-damper-00",
+      "repair-holdout-exhaust-damper-01",
+      "repair-holdout-exhaust-damper-02",
+      "repair-holdout-exhaust-damper-03",
+      "repair-holdout-exhaust-damper-04",
+      "repair-holdout-exhaust-damper-05",
+      "repair-holdout-exhaust-damper-06",
+      "repair-holdout-exhaust-damper-07",
+      "repair-holdout-exhaust-damper-08",
+      "repair-holdout-exhaust-damper-09",
+      "repair-holdout-cooler-gateway-00",
+      "repair-holdout-cooler-gateway-01",
+      "repair-holdout-cooler-gateway-02",
+      "repair-holdout-cooler-gateway-03",
+      "repair-holdout-cooler-gateway-04",
+      "repair-holdout-cooler-gateway-05",
+      "repair-holdout-cooler-gateway-06",
+      "repair-holdout-cooler-gateway-07",
+      "repair-holdout-cooler-gateway-08",
+      "repair-holdout-cooler-gateway-09",
+      "repair-holdout-sump-level-link-00",
+      "repair-holdout-sump-level-link-01",
+      "repair-holdout-sump-level-link-02",
+      "repair-holdout-sump-level-link-03",
+      "repair-holdout-sump-level-link-04",
+      "repair-holdout-sump-level-link-05",
+      "repair-holdout-sump-level-link-06",
+      "repair-holdout-sump-level-link-07",
+      "repair-holdout-sump-level-link-08",
+      "repair-holdout-sump-level-link-09",
+      "repair-holdout-magnetic-separator-00",
+      "repair-holdout-magnetic-separator-01",
+      "repair-holdout-magnetic-separator-02",
+      "repair-holdout-magnetic-separator-03",
+      "repair-holdout-magnetic-separator-04",
+      "repair-holdout-magnetic-separator-05",
+      "repair-holdout-magnetic-separator-06",
+      "repair-holdout-magnetic-separator-07",
+      "repair-holdout-magnetic-separator-08",
+      "repair-holdout-magnetic-separator-09",
+      "repair-holdout-cabinet-light-link-00",
+      "repair-holdout-cabinet-light-link-01",
+      "repair-holdout-cabinet-light-link-02",
+      "repair-holdout-cabinet-light-link-03",
+      "repair-holdout-cabinet-light-link-04",
+      "repair-holdout-cabinet-light-link-05",
+      "repair-holdout-cabinet-light-link-06",
+      "repair-holdout-cabinet-light-link-07",
+      "repair-holdout-cabinet-light-link-08",
+      "repair-holdout-cabinet-light-link-09",
+      "repair-holdout-air-dryer-gateway-00",
+      "repair-holdout-air-dryer-gateway-01",
+      "repair-holdout-air-dryer-gateway-02",
+      "repair-holdout-air-dryer-gateway-03",
+      "repair-holdout-air-dryer-gateway-04",
+      "repair-holdout-air-dryer-gateway-05",
+      "repair-holdout-air-dryer-gateway-06",
+      "repair-holdout-air-dryer-gateway-07",
+      "repair-holdout-air-dryer-gateway-08",
+      "repair-holdout-air-dryer-gateway-09"
+    ],
+    "optimizer_steps": 126,
+    "epochs": 1,
+    "batch_size": 1,
+    "gradient_accumulation": 1,
+    "rank": 8,
+    "alpha": 16,
+    "dropout": 0.05,
+    "targets": [
+      "q_proj",
+      "k_proj",
+      "v_proj",
+      "o_proj",
+      "gate_proj",
+      "up_proj",
+      "down_proj"
+    ],
+    "learning_rate": 0.0002,
+    "optimizer": "AdamW",
+    "weight_decay": 0.01,
+    "grad_clip": 1.0,
+    "sequence_cap": 1024,
+    "grammar": "canonical-candidate-order-subsets-0-to-3-json-token-trie-v1",
+    "decoding": "greedy",
+    "max_new_tokens": 64,
+    "reload_atol": 0.0001,
+    "reload_rtol": 0.0001,
+    "arms": [
+      "base_fp16",
+      "base_nf4",
+      "lora_fp16",
+      "qlora_nf4"
+    ],
+    "selection_policy": "Final step only; no early stopping or tuning using holdout.",
+    "objective": {
+      "name": "grammar-decision-balanced-v1",
+      "first_branch_weight": 1.0,
+      "remaining_branches_total_weight": 1.0,
+      "forced_tokens_weight": 0.0,
+      "normalization": "first branch plus mean remaining decision losses"
+    }
+  },
+  "python": "3.12.13 (main, Jun 23 2026, 15:23:43) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "Windows-10-10.0.19045-SP0",
+  "source_sha256": {
+    "run_gemma_sft.py": "ac4f359f3f762869a3f7934e15e9c1b71f53b33555312c2ca710238e1505ec0a",
+    "gemma_sft_protocol.py": "99a307fb21760a16f057fcf6924b7a51cc37abfb567e83030ce58609ae6b7f4a",
+    "selection_decisions.py": "95bebfae5c456492faf8b612c26eb2efa6f3b429802c6cedd9d6c0443bbe388c",
+    "check_qlora_feasibility.py": "8b3619c27a0789d1c33b047d60fdea8c2427dd9fe53b98b8b3c16c60e012d336",
+    "prepare_lora_data.py": "9f5016e0118043e813029ae71116056049f80ad8a20849502b935bd8f124e8c2"
+  },
+  "adapter_source": null,
+  "clock_context": "Uncontrolled concurrent workloads; wall time is budget evidence, not performance comparison.",
+  "wall_seconds_uncontrolled": 1159.5,
+  "nvidia_smi_before_cuda_init": {
+    "name": "NVIDIA GeForce GTX 1050 Ti",
+    "driver": "582.66",
+    "total_mib": 4096,
+    "used_by_others_mib": 997,
+    "compute_cap": "6.1"
+  },
+  "packages": {
+    "torch": "2.14.1+cu126",
+    "transformers": "5.20.0",
+    "peft": "0.21.2",
+    "bitsandbytes": "0.50.2",
+    "accelerate": "1.15.0",
+    "psutil": "7.2.2",
+    "safetensors": "0.8.0"
+  },
+  "cpu_threads": 6,
+  "seed": 20261019,
+  "checkpoint_sha256": "2db5482b20d746879bb3ef79b5203e9075a2e2b98f54ec7c2f281c1477ddc550",
+  "checkpoint_loading": {
+    "missing_keys": [],
+    "mismatched_keys": [],
+    "unexpected_key_count": 1400
+  },
+  "placement": {
+    "total_layers": 35,
+    "layers_on_gpu": 35,
+    "quantized_linears": 276
+  },
+  "resources_after_load": {
+    "cpu_rss_mib": 6411.87,
+    "cpu_peak_working_set_mib": 11349.82,
+    "torch_cuda": {
+      "device_used_mib": 1796,
+      "device_free_mib": 2299,
+      "peak_allocated_mib": 1010,
+      "peak_reserved_mib": 1052
+    },
+    "nvidia_smi_whole_device": {
+      "name": "NVIDIA GeForce GTX 1050 Ti",
+      "driver": "582.66",
+      "total_mib": 4096,
+      "compute_cap": "6.1",
+      "device_used_mib": 2129
+    }
+  },
+  "lora": {
+    "rank": 8,
+    "alpha": 16,
+    "target_modules": [
+      "q_proj",
+      "k_proj",
+      "v_proj",
+      "o_proj",
+      "gate_proj",
+      "up_proj",
+      "down_proj"
+    ],
+    "trainable_parameters": 12079104,
+    "lora_wrapped_linears": 205
+  },
+  "initial_adapter_sha256": "af8d236e53fd993bdc870b1bf9d75170fc899ce3a9ffccdfa3c48fdcd5eaefbd",
+  "steps": [
+    {
+      "step": 1,
+      "id": "feed-servo-19",
+      "loss": 1.482554316520691,
+      "grad_norm": 143.5792999267578,
+      "sequence_tokens": 888,
+      "supervised_tokens": 4,
+      "wall_seconds_uncontrolled": 9.438000000000102,
+      "resources": {
+        "cpu_rss_mib": 6812.3,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 2684,
+          "device_free_mib": 1411,
+          "peak_allocated_mib": 1667,
+          "peak_reserved_mib": 1922
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3006
+        }
+      }
+    },
+    {
+      "step": 2,
+      "id": "spindle-lube-11",
+      "loss": 1.9115393161773682,
+      "grad_norm": 54.25911331176758,
+      "sequence_tokens": 853,
+      "supervised_tokens": 4,
+      "wall_seconds_uncontrolled": 8.82800000000043,
+      "resources": {
+        "cpu_rss_mib": 6804.67,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 2684,
+          "device_free_mib": 1411,
+          "peak_allocated_mib": 1736,
+          "peak_reserved_mib": 1922
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 2973
+        }
+      }
+    },
+    {
+      "step": 3,
+      "id": "atc-arm-15",
+      "loss": 11.767266273498535,
+      "grad_norm": 110.19731140136719,
+      "sequence_tokens": 802,
+      "supervised_tokens": 1,
+      "wall_seconds_uncontrolled": 8.561999999999898,
+      "resources": {
+        "cpu_rss_mib": 6802.3,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 2684,
+          "device_free_mib": 1411,
+          "peak_allocated_mib": 1736,
+          "peak_reserved_mib": 1922
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 2989
+        }
+      }
+    },
+    {
+      "step": 4,
+      "id": "spindle-chiller-08",
+      "loss": 0.7821361422538757,
+      "grad_norm": 64.51339721679688,
+      "sequence_tokens": 627,
+      "supervised_tokens": 1,
+      "wall_seconds_uncontrolled": 6.280999999999949,
+      "resources": {
+        "cpu_rss_mib": 6784.83,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 2684,
+          "device_free_mib": 1411,
+          "peak_allocated_mib": 1736,
+          "peak_reserved_mib": 1922
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3123
+        }
+      }
+    },
+    {
+      "step": 5,
+      "id": "hydraulic-17",
+      "loss": 1.1920928244535389e-07,
+      "grad_norm": 2.124434831785038e-05,
+      "sequence_tokens": 656,
+      "supervised_tokens": 1,
+      "wall_seconds_uncontrolled": 7.109999999999673,
+      "resources": {
+        "cpu_rss_mib": 6832.26,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 2684,
+          "device_free_mib": 1411,
+          "peak_allocated_mib": 1736,
+          "peak_reserved_mib": 1922
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3124
+        }
+      }
+    },
+    {
+      "step": 6,
+      "id": "coolant-pump-25",
+      "loss": 32.13813400268555,
+      "grad_norm": 160.93092346191406,
+      "sequence_tokens": 678,
+      "supervised_tokens": 6,
+      "wall_seconds_uncontrolled": 7.07799999999952,
+      "resources": {
+        "cpu_rss_mib": 6791.56,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 2684,
+          "device_free_mib": 1411,
+          "peak_allocated_mib": 1736,
+          "peak_reserved_mib": 1922
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3034
+        }
+      }
+    },
+    {
+      "step": 7,
+      "id": "rotary-table-14",
+      "loss": 0.0,
+      "grad_norm": 1.46510302556635e-07,
+      "sequence_tokens": 853,
+      "supervised_tokens": 1,
+      "wall_seconds_uncontrolled": 8.82799999999952,
+      "resources": {
+        "cpu_rss_mib": 6830.45,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 2684,
+          "device_free_mib": 1411,
+          "peak_allocated_mib": 1736,
+          "peak_reserved_mib": 1922
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 2983
+        }
+      }
+    },
+    {
+      "step": 8,
+      "id": "hydraulic-01",
+      "loss": 18.3963565826416,
+      "grad_norm": 94.51848602294922,
+      "sequence_tokens": 918,
+      "supervised_tokens": 4,
+      "wall_seconds_uncontrolled": 10.20299999999952,
+      "resources": {
+        "cpu_rss_mib": 6802.98,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 3302,
+          "device_free_mib": 793,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3164
+        }
+      }
+    },
+    {
+      "step": 9,
+      "id": "coolant-pump-18",
+      "loss": 10.85327434539795,
+      "grad_norm": 72.29753875732422,
+      "sequence_tokens": 854,
+      "supervised_tokens": 4,
+      "wall_seconds_uncontrolled": 9.280999999999949,
+      "resources": {
+        "cpu_rss_mib": 6810.59,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 3299,
+          "device_free_mib": 795,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3196
+        }
+      }
+    },
+    {
+      "step": 10,
+      "id": "hydraulic-15",
+      "loss": 0.004722513258457184,
+      "grad_norm": 0.2710486054420471,
+      "sequence_tokens": 815,
+      "supervised_tokens": 1,
+      "wall_seconds_uncontrolled": 8.936999999999898,
+      "resources": {
+        "cpu_rss_mib": 6802.64,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 3315,
+          "device_free_mib": 780,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3163
+        }
+      }
+    },
+    {
+      "step": 11,
+      "id": "workpiece-probe-04",
+      "loss": 6.016900539398193,
+      "grad_norm": 52.060821533203125,
+      "sequence_tokens": 825,
+      "supervised_tokens": 9,
+      "wall_seconds_uncontrolled": 9.015999999999622,
+      "resources": {
+        "cpu_rss_mib": 6802.71,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 3298,
+          "device_free_mib": 797,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3145
+        }
+      }
+    },
+    {
+      "step": 12,
+      "id": "tool-setter-06",
+      "loss": 1.1024194955825806,
+      "grad_norm": 28.501279830932617,
+      "sequence_tokens": 696,
+      "supervised_tokens": 1,
+      "wall_seconds_uncontrolled": 7.421999999999571,
+      "resources": {
+        "cpu_rss_mib": 6792.89,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 3315,
+          "device_free_mib": 780,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3123
+        }
+      }
+    },
+    {
+      "step": 13,
+      "id": "feed-servo-20",
+      "loss": 3.7479774951934814,
+      "grad_norm": 40.03609848022461,
+      "sequence_tokens": 808,
+      "supervised_tokens": 4,
+      "wall_seconds_uncontrolled": 8.92199999999957,
+      "resources": {
+        "cpu_rss_mib": 6828.69,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 3315,
+          "device_free_mib": 780,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3122
+        }
+      }
+    },
+    {
+      "step": 14,
+      "id": "guard-door-12",
+      "loss": 2.3829355239868164,
+      "grad_norm": 47.26390075683594,
+      "sequence_tokens": 908,
+      "supervised_tokens": 7,
+      "wall_seconds_uncontrolled": 10.20299999999952,
+      "resources": {
+        "cpu_rss_mib": 6811.26,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 3315,
+          "device_free_mib": 780,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3122
+        }
+      }
+    },
+    {
+      "step": 15,
+      "id": "atc-arm-13",
+      "loss": 1.8808743953704834,
+      "grad_norm": 19.53141975402832,
+      "sequence_tokens": 667,
+      "supervised_tokens": 7,
+      "wall_seconds_uncontrolled": 7.32799999999952,
+      "resources": {
+        "cpu_rss_mib": 6787.0,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 3315,
+          "device_free_mib": 780,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3122
+        }
+      }
+    },
+    {
+      "step": 16,
+      "id": "electrical-cabinet-01",
+      "loss": 1.2525795698165894,
+      "grad_norm": 41.042259216308594,
+      "sequence_tokens": 663,
+      "supervised_tokens": 4,
+      "wall_seconds_uncontrolled": 7.311999999999898,
+      "resources": {
+        "cpu_rss_mib": 6810.1,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 3289,
+          "device_free_mib": 805,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3122
+        }
+      }
+    },
+    {
+      "step": 17,
+      "id": "spindle-lube-22",
+      "loss": 0.38580241799354553,
+      "grad_norm": 15.58788776397705,
+      "sequence_tokens": 823,
+      "supervised_tokens": 5,
+      "wall_seconds_uncontrolled": 8.969000000000051,
+      "resources": {
+        "cpu_rss_mib": 6817.85,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 3300,
+          "device_free_mib": 794,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3124
+        }
+      }
+    },
+    {
+      "step": 18,
+      "id": "lathe-chuck-05",
+      "loss": 4.144992828369141,
+      "grad_norm": 46.184059143066406,
+      "sequence_tokens": 779,
+      "supervised_tokens": 1,
+      "wall_seconds_uncontrolled": 8.859000000000378,
+      "resources": {
+        "cpu_rss_mib": 6810.73,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 3298,
+          "device_free_mib": 796,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3122
+        }
+      }
+    },
+    {
+      "step": 19,
+      "id": "tool-setter-14",
+      "loss": 3.0465307235717773,
+      "grad_norm": 32.39091491699219,
+      "sequence_tokens": 844,
+      "supervised_tokens": 1,
+      "wall_seconds_uncontrolled": 9.234000000000378,
+      "resources": {
+        "cpu_rss_mib": 6789.82,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 2844,
+          "device_free_mib": 1251,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3134
+        }
+      }
+    },
+    {
+      "step": 20,
+      "id": "ballscrew-24",
+      "loss": 1.8646024465560913,
+      "grad_norm": 22.98834800720215,
+      "sequence_tokens": 682,
+      "supervised_tokens": 1,
+      "wall_seconds_uncontrolled": 7.438000000000102,
+      "resources": {
+        "cpu_rss_mib": 6835.91,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 2844,
+          "device_free_mib": 1251,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3137
+        }
+      }
+    },
+    {
+      "step": 21,
+      "id": "spindle-chiller-22",
+      "loss": 1.0784835815429688,
+      "grad_norm": 18.01145362854004,
+      "sequence_tokens": 811,
+      "supervised_tokens": 7,
+      "wall_seconds_uncontrolled": 9.016000000000531,
+      "resources": {
+        "cpu_rss_mib": 6789.52,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 2844,
+          "device_free_mib": 1251,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3159
+        }
+      }
+    },
+    {
+      "step": 22,
+      "id": "spindle-chiller-01",
+      "loss": 3.604496479034424,
+      "grad_norm": 31.774803161621094,
+      "sequence_tokens": 837,
+      "supervised_tokens": 3,
+      "wall_seconds_uncontrolled": 9.20300000000043,
+      "resources": {
+        "cpu_rss_mib": 6818.29,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 2844,
+          "device_free_mib": 1251,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3144
+        }
+      }
+    },
+    {
+      "step": 23,
+      "id": "spindle-bearing-00",
+      "loss": 1.230417013168335,
+      "grad_norm": 58.976444244384766,
+      "sequence_tokens": 852,
+      "supervised_tokens": 4,
+      "wall_seconds_uncontrolled": 9.25,
+      "resources": {
+        "cpu_rss_mib": 6841.02,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 2844,
+          "device_free_mib": 1251,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3140
+        }
+      }
+    },
+    {
+      "step": 24,
+      "id": "ballscrew-25",
+      "loss": 1.2848423719406128,
+      "grad_norm": 14.903990745544434,
+      "sequence_tokens": 867,
+      "supervised_tokens": 7,
+      "wall_seconds_uncontrolled": 9.29699999999957,
+      "resources": {
+        "cpu_rss_mib": 6804.79,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 3269,
+          "device_free_mib": 826,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3133
+        }
+      }
+    },
+    {
+      "step": 25,
+      "id": "tool-setter-09",
+      "loss": 1.1901198625564575,
+      "grad_norm": 34.64691162109375,
+      "sequence_tokens": 856,
+      "supervised_tokens": 3,
+      "wall_seconds_uncontrolled": 9.141000000000531,
+      "resources": {
+        "cpu_rss_mib": 6804.8,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 2844,
+          "device_free_mib": 1251,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3138
+        }
+      }
+    },
+    {
+      "step": 26,
+      "id": "feed-servo-09",
+      "loss": 0.4219909906387329,
+      "grad_norm": 18.471256256103516,
+      "sequence_tokens": 859,
+      "supervised_tokens": 4,
+      "wall_seconds_uncontrolled": 9.313000000000102,
+      "resources": {
+        "cpu_rss_mib": 6812.26,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 2844,
+          "device_free_mib": 1251,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3154
+        }
+      }
+    },
+    {
+      "step": 27,
+      "id": "bar-feeder-24",
+      "loss": 1.6598353385925293,
+      "grad_norm": 10.715234756469727,
+      "sequence_tokens": 853,
+      "supervised_tokens": 1,
+      "wall_seconds_uncontrolled": 9.265999999999622,
+      "resources": {
+        "cpu_rss_mib": 6809.93,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 2844,
+          "device_free_mib": 1251,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3137
+        }
+      }
+    },
+    {
+      "step": 28,
+      "id": "ballscrew-04",
+      "loss": 0.8018362522125244,
+      "grad_norm": 9.80935001373291,
+      "sequence_tokens": 839,
+      "supervised_tokens": 9,
+      "wall_seconds_uncontrolled": 9.25,
+      "resources": {
+        "cpu_rss_mib": 6807.5,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 2844,
+          "device_free_mib": 1251,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3134
+        }
+      }
+    },
+    {
+      "step": 29,
+      "id": "chip-conveyor-02",
+      "loss": 2.1160097122192383,
+      "grad_norm": 21.557579040527344,
+      "sequence_tokens": 782,
+      "supervised_tokens": 4,
+      "wall_seconds_uncontrolled": 8.907000000000153,
+      "resources": {
+        "cpu_rss_mib": 6805.08,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 2844,
+          "device_free_mib": 1251,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3110
+        }
+      }
+    },
+    {
+      "step": 30,
+      "id": "atc-arm-06",
+      "loss": 1.552628755569458,
+      "grad_norm": 8.107850074768066,
+      "sequence_tokens": 894,
+      "supervised_tokens": 1,
+      "wall_seconds_uncontrolled": 9.405999999999949,
+      "resources": {
+        "cpu_rss_mib": 6806.11,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 2844,
+          "device_free_mib": 1251,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3106
+        }
+      }
+    },
+    {
+      "step": 31,
+      "id": "rotary-table-21",
+      "loss": 1.6574432849884033,
+      "grad_norm": 34.9100227355957,
+      "sequence_tokens": 808,
+      "supervised_tokens": 4,
+      "wall_seconds_uncontrolled": 8.936999999999898,
+      "resources": {
+        "cpu_rss_mib": 6812.99,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 2844,
+          "device_free_mib": 1251,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3093
+        }
+      }
+    },
+    {
+      "step": 32,
+      "id": "spindle-bearing-23",
+      "loss": 1.2071377038955688,
+      "grad_norm": 5.734303951263428,
+      "sequence_tokens": 837,
+      "supervised_tokens": 1,
+      "wall_seconds_uncontrolled": 9.217999999999847,
+      "resources": {
+        "cpu_rss_mib": 6805.91,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 2844,
+          "device_free_mib": 1251,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3103
+        }
+      }
+    },
+    {
+      "step": 33,
+      "id": "spindle-bearing-12",
+      "loss": 1.327221155166626,
+      "grad_norm": 8.320168495178223,
+      "sequence_tokens": 863,
+      "supervised_tokens": 7,
+      "wall_seconds_uncontrolled": 9.328999999999724,
+      "resources": {
+        "cpu_rss_mib": 6806.01,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 2844,
+          "device_free_mib": 1251,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3093
+        }
+      }
+    },
+    {
+      "step": 34,
+      "id": "pneumatic-24",
+      "loss": 0.8359275460243225,
+      "grad_norm": 3.7708914279937744,
+      "sequence_tokens": 715,
+      "supervised_tokens": 1,
+      "wall_seconds_uncontrolled": 7.688000000000102,
+      "resources": {
+        "cpu_rss_mib": 6812.09,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 3269,
+          "device_free_mib": 826,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3106
+        }
+      }
+    },
+    {
+      "step": 35,
+      "id": "lathe-chuck-19",
+      "loss": 0.760999858379364,
+      "grad_norm": 4.071454048156738,
+      "sequence_tokens": 838,
+      "supervised_tokens": 4,
+      "wall_seconds_uncontrolled": 9.25,
+      "resources": {
+        "cpu_rss_mib": 6805.82,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 2844,
+          "device_free_mib": 1251,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3108
+        }
+      }
+    },
+    {
+      "step": 36,
+      "id": "rotary-table-19",
+      "loss": 0.850904643535614,
+      "grad_norm": 4.744820594787598,
+      "sequence_tokens": 752,
+      "supervised_tokens": 4,
+      "wall_seconds_uncontrolled": 7.780999999999949,
+      "resources": {
+        "cpu_rss_mib": 6805.6,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 3263,
+          "device_free_mib": 832,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3096
+        }
+      }
+    },
+    {
+      "step": 37,
+      "id": "atc-arm-09",
+      "loss": 1.3457461595535278,
+      "grad_norm": 14.442892074584961,
+      "sequence_tokens": 830,
+      "supervised_tokens": 4,
+      "wall_seconds_uncontrolled": 9.04700000000048,
+      "resources": {
+        "cpu_rss_mib": 6798.54,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 2844,
+          "device_free_mib": 1251,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3096
+        }
+      }
+    },
+    {
+      "step": 38,
+      "id": "electrical-cabinet-23",
+      "loss": 0.6729916334152222,
+      "grad_norm": 2.3333563804626465,
+      "sequence_tokens": 845,
+      "supervised_tokens": 1,
+      "wall_seconds_uncontrolled": 9.234000000000378,
+      "resources": {
+        "cpu_rss_mib": 6839.64,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 2844,
+          "device_free_mib": 1251,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3096
+        }
+      }
+    },
+    {
+      "step": 39,
+      "id": "spindle-bearing-25",
+      "loss": 0.9109777212142944,
+      "grad_norm": 4.612320899963379,
+      "sequence_tokens": 728,
+      "supervised_tokens": 7,
+      "wall_seconds_uncontrolled": 7.719000000000051,
+      "resources": {
+        "cpu_rss_mib": 6797.31,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 2844,
+          "device_free_mib": 1251,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3096
+        }
+      }
+    },
+    {
+      "step": 40,
+      "id": "lathe-chuck-16",
+      "loss": 1.175163745880127,
+      "grad_norm": 9.13483715057373,
+      "sequence_tokens": 759,
+      "supervised_tokens": 4,
+      "wall_seconds_uncontrolled": 7.796999999999571,
+      "resources": {
+        "cpu_rss_mib": 6834.41,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 2844,
+          "device_free_mib": 1251,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3111
+        }
+      }
+    },
+    {
+      "step": 41,
+      "id": "workpiece-probe-19",
+      "loss": 0.7352896332740784,
+      "grad_norm": 1.9116555452346802,
+      "sequence_tokens": 722,
+      "supervised_tokens": 4,
+      "wall_seconds_uncontrolled": 7.719000000000051,
+      "resources": {
+        "cpu_rss_mib": 6790.8,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 3290,
+          "device_free_mib": 805,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3138
+        }
+      }
+    },
+    {
+      "step": 42,
+      "id": "guard-door-16",
+      "loss": 1.4455527067184448,
+      "grad_norm": 15.810691833496094,
+      "sequence_tokens": 857,
+      "supervised_tokens": 4,
+      "wall_seconds_uncontrolled": 9.109000000000378,
+      "resources": {
+        "cpu_rss_mib": 6847.71,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 2844,
+          "device_free_mib": 1251,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3128
+        }
+      }
+    },
+    {
+      "step": 43,
+      "id": "workpiece-probe-14",
+      "loss": 0.7251076698303223,
+      "grad_norm": 1.0845420360565186,
+      "sequence_tokens": 896,
+      "supervised_tokens": 1,
+      "wall_seconds_uncontrolled": 9.140999999999622,
+      "resources": {
+        "cpu_rss_mib": 6810.34,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 2844,
+          "device_free_mib": 1251,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3113
+        }
+      }
+    },
+    {
+      "step": 44,
+      "id": "pneumatic-04",
+      "loss": 1.6721816062927246,
+      "grad_norm": 12.311691284179688,
+      "sequence_tokens": 681,
+      "supervised_tokens": 7,
+      "wall_seconds_uncontrolled": 7.186999999999898,
+      "resources": {
+        "cpu_rss_mib": 6814.38,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 2844,
+          "device_free_mib": 1251,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3114
+        }
+      }
+    },
+    {
+      "step": 45,
+      "id": "lathe-chuck-15",
+      "loss": 0.7145710587501526,
+      "grad_norm": 0.7124640941619873,
+      "sequence_tokens": 782,
+      "supervised_tokens": 1,
+      "wall_seconds_uncontrolled": 8.891000000000531,
+      "resources": {
+        "cpu_rss_mib": 6814.01,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 2844,
+          "device_free_mib": 1251,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3141
+        }
+      }
+    },
+    {
+      "step": 46,
+      "id": "workpiece-probe-13",
+      "loss": 0.8158742785453796,
+      "grad_norm": 2.436344861984253,
+      "sequence_tokens": 816,
+      "supervised_tokens": 7,
+      "wall_seconds_uncontrolled": 8.92199999999957,
+      "resources": {
+        "cpu_rss_mib": 6819.45,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 2844,
+          "device_free_mib": 1251,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3134
+        }
+      }
+    },
+    {
+      "step": 47,
+      "id": "pneumatic-08",
+      "loss": 0.6985930800437927,
+      "grad_norm": 0.4759523272514343,
+      "sequence_tokens": 756,
+      "supervised_tokens": 1,
+      "wall_seconds_uncontrolled": 7.780999999999949,
+      "resources": {
+        "cpu_rss_mib": 6804.31,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 3267,
+          "device_free_mib": 828,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3168
+        }
+      }
+    },
+    {
+      "step": 48,
+      "id": "feed-servo-00",
+      "loss": 0.7136238813400269,
+      "grad_norm": 1.12599778175354,
+      "sequence_tokens": 916,
+      "supervised_tokens": 4,
+      "wall_seconds_uncontrolled": 10.359000000000378,
+      "resources": {
+        "cpu_rss_mib": 6846.87,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 3274,
+          "device_free_mib": 821,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3156
+        }
+      }
+    },
+    {
+      "step": 49,
+      "id": "chip-conveyor-01",
+      "loss": 2.2614102363586426,
+      "grad_norm": 18.21974754333496,
+      "sequence_tokens": 881,
+      "supervised_tokens": 3,
+      "wall_seconds_uncontrolled": 9.405999999999949,
+      "resources": {
+        "cpu_rss_mib": 6807.52,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 3278,
+          "device_free_mib": 816,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3152
+        }
+      }
+    },
+    {
+      "step": 50,
+      "id": "tool-setter-13",
+      "loss": 0.9403480291366577,
+      "grad_norm": 8.858977317810059,
+      "sequence_tokens": 806,
+      "supervised_tokens": 7,
+      "wall_seconds_uncontrolled": 8.969000000000051,
+      "resources": {
+        "cpu_rss_mib": 6807.11,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 3256,
+          "device_free_mib": 839,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3146
+        }
+      }
+    },
+    {
+      "step": 51,
+      "id": "bar-feeder-21",
+      "loss": 0.9574213624000549,
+      "grad_norm": 6.825769901275635,
+      "sequence_tokens": 760,
+      "supervised_tokens": 7,
+      "wall_seconds_uncontrolled": 7.82799999999952,
+      "resources": {
+        "cpu_rss_mib": 6813.77,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 2844,
+          "device_free_mib": 1251,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3165
+        }
+      }
+    },
+    {
+      "step": 52,
+      "id": "atc-magazine-07",
+      "loss": 0.8508488535881042,
+      "grad_norm": 8.138494491577148,
+      "sequence_tokens": 892,
+      "supervised_tokens": 4,
+      "wall_seconds_uncontrolled": 9.42200000000048,
+      "resources": {
+        "cpu_rss_mib": 6812.84,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 2844,
+          "device_free_mib": 1251,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3164
+        }
+      }
+    },
+    {
+      "step": 53,
+      "id": "guard-door-13",
+      "loss": 1.5021170377731323,
+      "grad_norm": 12.982544898986816,
+      "sequence_tokens": 871,
+      "supervised_tokens": 7,
+      "wall_seconds_uncontrolled": 9.375,
+      "resources": {
+        "cpu_rss_mib": 6810.66,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 3263,
+          "device_free_mib": 832,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3180
+        }
+      }
+    },
+    {
+      "step": 54,
+      "id": "atc-magazine-00",
+      "loss": 1.509429693222046,
+      "grad_norm": 49.865875244140625,
+      "sequence_tokens": 801,
+      "supervised_tokens": 4,
+      "wall_seconds_uncontrolled": 9.109000000000378,
+      "resources": {
+        "cpu_rss_mib": 6807.3,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 3257,
+          "device_free_mib": 838,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3148
+        }
+      }
+    },
+    {
+      "step": 55,
+      "id": "tool-setter-19",
+      "loss": 0.7063345313072205,
+      "grad_norm": 0.9517892599105835,
+      "sequence_tokens": 857,
+      "supervised_tokens": 4,
+      "wall_seconds_uncontrolled": 9.280999999999949,
+      "resources": {
+        "cpu_rss_mib": 6793.13,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 2844,
+          "device_free_mib": 1251,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3146
+        }
+      }
+    },
+    {
+      "step": 56,
+      "id": "ballscrew-11",
+      "loss": 1.941693663597107,
+      "grad_norm": 42.01394271850586,
+      "sequence_tokens": 682,
+      "supervised_tokens": 4,
+      "wall_seconds_uncontrolled": 7.390000000000327,
+      "resources": {
+        "cpu_rss_mib": 6797.84,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 2844,
+          "device_free_mib": 1251,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3147
+        }
+      }
+    },
+    {
+      "step": 57,
+      "id": "spindle-bearing-06",
+      "loss": 0.6915720105171204,
+      "grad_norm": 0.08510449528694153,
+      "sequence_tokens": 821,
+      "supervised_tokens": 1,
+      "wall_seconds_uncontrolled": 8.79700000000048,
+      "resources": {
+        "cpu_rss_mib": 6834.45,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 2844,
+          "device_free_mib": 1251,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3131
+        }
+      }
+    },
+    {
+      "step": 58,
+      "id": "coolant-pump-21",
+      "loss": 1.089625597000122,
+      "grad_norm": 10.64766788482666,
+      "sequence_tokens": 767,
+      "supervised_tokens": 7,
+      "wall_seconds_uncontrolled": 7.891000000000531,
+      "resources": {
+        "cpu_rss_mib": 6806.15,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 2844,
+          "device_free_mib": 1251,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3146
+        }
+      }
+    },
+    {
+      "step": 59,
+      "id": "spindle-lube-01",
+      "loss": 0.8199587464332581,
+      "grad_norm": 21.4916934967041,
+      "sequence_tokens": 788,
+      "supervised_tokens": 4,
+      "wall_seconds_uncontrolled": 8.938000000000102,
+      "resources": {
+        "cpu_rss_mib": 6813.17,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 2844,
+          "device_free_mib": 1251,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3142
+        }
+      }
+    },
+    {
+      "step": 60,
+      "id": "tool-setter-21",
+      "loss": 1.606885313987732,
+      "grad_norm": 52.51249313354492,
+      "sequence_tokens": 870,
+      "supervised_tokens": 7,
+      "wall_seconds_uncontrolled": 9.311999999999898,
+      "resources": {
+        "cpu_rss_mib": 6807.43,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 3278,
+          "device_free_mib": 817,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3186
+        }
+      }
+    },
+    {
+      "step": 61,
+      "id": "rotary-table-20",
+      "loss": 0.700886070728302,
+      "grad_norm": 0.7170397043228149,
+      "sequence_tokens": 714,
+      "supervised_tokens": 4,
+      "wall_seconds_uncontrolled": 7.5,
+      "resources": {
+        "cpu_rss_mib": 6807.02,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 3263,
+          "device_free_mib": 831,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3134
+        }
+      }
+    },
+    {
+      "step": 62,
+      "id": "electrical-cabinet-17",
+      "loss": 0.69248366355896,
+      "grad_norm": 0.03956685960292816,
+      "sequence_tokens": 720,
+      "supervised_tokens": 1,
+      "wall_seconds_uncontrolled": 7.5,
+      "resources": {
+        "cpu_rss_mib": 6813.17,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 3276,
+          "device_free_mib": 819,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3142
+        }
+      }
+    },
+    {
+      "step": 63,
+      "id": "spindle-lube-16",
+      "loss": 0.7000888586044312,
+      "grad_norm": 0.37655508518218994,
+      "sequence_tokens": 684,
+      "supervised_tokens": 4,
+      "wall_seconds_uncontrolled": 7.29700000000048,
+      "resources": {
+        "cpu_rss_mib": 6792.04,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 3268,
+          "device_free_mib": 827,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3137
+        }
+      }
+    },
+    {
+      "step": 64,
+      "id": "feed-servo-27",
+      "loss": 0.6926208734512329,
+      "grad_norm": 0.030999312177300453,
+      "sequence_tokens": 806,
+      "supervised_tokens": 1,
+      "wall_seconds_uncontrolled": 8.858999999999469,
+      "resources": {
+        "cpu_rss_mib": 6840.82,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 3270,
+          "device_free_mib": 825,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3160
+        }
+      }
+    },
+    {
+      "step": 65,
+      "id": "hydraulic-06",
+      "loss": 0.6926542520523071,
+      "grad_norm": 0.029283128678798676,
+      "sequence_tokens": 819,
+      "supervised_tokens": 1,
+      "wall_seconds_uncontrolled": 9.155999999999949,
+      "resources": {
+        "cpu_rss_mib": 6806.49,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 3270,
+          "device_free_mib": 825,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3139
+        }
+      }
+    },
+    {
+      "step": 66,
+      "id": "atc-magazine-04",
+      "loss": 1.8185551166534424,
+      "grad_norm": 44.737327575683594,
+      "sequence_tokens": 711,
+      "supervised_tokens": 9,
+      "wall_seconds_uncontrolled": 7.546999999999571,
+      "resources": {
+        "cpu_rss_mib": 6806.11,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 3271,
+          "device_free_mib": 824,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3139
+        }
+      }
+    },
+    {
+      "step": 67,
+      "id": "spindle-bearing-18",
+      "loss": 0.8947421908378601,
+      "grad_norm": 27.16971206665039,
+      "sequence_tokens": 777,
+      "supervised_tokens": 4,
+      "wall_seconds_uncontrolled": 8.719000000000051,
+      "resources": {
+        "cpu_rss_mib": 6813.14,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 3271,
+          "device_free_mib": 824,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3142
+        }
+      }
+    },
+    {
+      "step": 68,
+      "id": "guard-door-27",
+      "loss": 0.692639946937561,
+      "grad_norm": 0.02758474461734295,
+      "sequence_tokens": 750,
+      "supervised_tokens": 1,
+      "wall_seconds_uncontrolled": 7.765999999999622,
+      "resources": {
+        "cpu_rss_mib": 6806.16,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 3275,
+          "device_free_mib": 820,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3130
+        }
+      }
+    },
+    {
+      "step": 69,
+      "id": "feed-servo-17",
+      "loss": 0.692639946937561,
+      "grad_norm": 0.027636175975203514,
+      "sequence_tokens": 816,
+      "supervised_tokens": 1,
+      "wall_seconds_uncontrolled": 8.858999999999469,
+      "resources": {
+        "cpu_rss_mib": 6806.43,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 3267,
+          "device_free_mib": 828,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3118
+        }
+      }
+    },
+    {
+      "step": 70,
+      "id": "ballscrew-19",
+      "loss": 0.693719208240509,
+      "grad_norm": 0.027109775692224503,
+      "sequence_tokens": 795,
+      "supervised_tokens": 4,
+      "wall_seconds_uncontrolled": 8.75,
+      "resources": {
+        "cpu_rss_mib": 6813.35,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 3264,
+          "device_free_mib": 831,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3115
+        }
+      }
+    },
+    {
+      "step": 71,
+      "id": "atc-arm-01",
+      "loss": 0.6939944624900818,
+      "grad_norm": 0.03660891205072403,
+      "sequence_tokens": 744,
+      "supervised_tokens": 4,
+      "wall_seconds_uncontrolled": 7.610000000000582,
+      "resources": {
+        "cpu_rss_mib": 6806.3,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 3267,
+          "device_free_mib": 828,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3116
+        }
+      }
+    },
+    {
+      "step": 72,
+      "id": "spindle-chiller-14",
+      "loss": 0.692731499671936,
+      "grad_norm": 0.023129642009735107,
+      "sequence_tokens": 886,
+      "supervised_tokens": 1,
+      "wall_seconds_uncontrolled": 9.20300000000043,
+      "resources": {
+        "cpu_rss_mib": 6807.95,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 3267,
+          "device_free_mib": 828,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3116
+        }
+      }
+    },
+    {
+      "step": 73,
+      "id": "spindle-chiller-04",
+      "loss": 1.6067739725112915,
+      "grad_norm": 61.32405471801758,
+      "sequence_tokens": 759,
+      "supervised_tokens": 8,
+      "wall_seconds_uncontrolled": 7.657000000000153,
+      "resources": {
+        "cpu_rss_mib": 6799.66,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 3265,
+          "device_free_mib": 829,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3118
+        }
+      }
+    },
+    {
+      "step": 74,
+      "id": "atc-magazine-19",
+      "loss": 0.6936542391777039,
+      "grad_norm": 0.025942383334040642,
+      "sequence_tokens": 814,
+      "supervised_tokens": 4,
+      "wall_seconds_uncontrolled": 8.79699999999957,
+      "resources": {
+        "cpu_rss_mib": 6820.71,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 3265,
+          "device_free_mib": 829,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3118
+        }
+      }
+    },
+    {
+      "step": 75,
+      "id": "electrical-cabinet-09",
+      "loss": 3.887913465499878,
+      "grad_norm": 73.34529113769531,
+      "sequence_tokens": 774,
+      "supervised_tokens": 4,
+      "wall_seconds_uncontrolled": 8.67199999999957,
+      "resources": {
+        "cpu_rss_mib": 6810.46,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 3265,
+          "device_free_mib": 829,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3130
+        }
+      }
+    },
+    {
+      "step": 76,
+      "id": "rotary-table-10",
+      "loss": 0.6941841244697571,
+      "grad_norm": 0.03741586580872536,
+      "sequence_tokens": 765,
+      "supervised_tokens": 3,
+      "wall_seconds_uncontrolled": 7.686999999999898,
+      "resources": {
+        "cpu_rss_mib": 6840.78,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 3265,
+          "device_free_mib": 829,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3118
+        }
+      }
+    },
+    {
+      "step": 77,
+      "id": "atc-arm-25",
+      "loss": 1.6728472709655762,
+      "grad_norm": 14.986174583435059,
+      "sequence_tokens": 809,
+      "supervised_tokens": 7,
+      "wall_seconds_uncontrolled": 9.219000000000051,
+      "resources": {
+        "cpu_rss_mib": 6797.36,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 3257,
+          "device_free_mib": 838,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3140
+        }
+      }
+    },
+    {
+      "step": 78,
+      "id": "coolant-pump-12",
+      "loss": 2.074030876159668,
+      "grad_norm": 105.36811065673828,
+      "sequence_tokens": 919,
+      "supervised_tokens": 7,
+      "wall_seconds_uncontrolled": 10.17199999999957,
+      "resources": {
+        "cpu_rss_mib": 6828.45,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 3285,
+          "device_free_mib": 810,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3124
+        }
+      }
+    },
+    {
+      "step": 79,
+      "id": "electrical-cabinet-05",
+      "loss": 0.6928296685218811,
+      "grad_norm": 0.01759452372789383,
+      "sequence_tokens": 898,
+      "supervised_tokens": 1,
+      "wall_seconds_uncontrolled": 10.125,
+      "resources": {
+        "cpu_rss_mib": 6813.09,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 3270,
+          "device_free_mib": 825,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3144
+        }
+      }
+    },
+    {
+      "step": 80,
+      "id": "pneumatic-13",
+      "loss": 1.7816321849822998,
+      "grad_norm": 53.70418930053711,
+      "sequence_tokens": 802,
+      "supervised_tokens": 6,
+      "wall_seconds_uncontrolled": 8.875,
+      "resources": {
+        "cpu_rss_mib": 6821.52,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 3253,
+          "device_free_mib": 841,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3146
+        }
+      }
+    },
+    {
+      "step": 81,
+      "id": "workpiece-probe-10",
+      "loss": 0.6993646025657654,
+      "grad_norm": 0.4061572849750519,
+      "sequence_tokens": 801,
+      "supervised_tokens": 4,
+      "wall_seconds_uncontrolled": 8.82799999999952,
+      "resources": {
+        "cpu_rss_mib": 6801.12,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 2844,
+          "device_free_mib": 1251,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3121
+        }
+      }
+    },
+    {
+      "step": 82,
+      "id": "pneumatic-23",
+      "loss": 0.6929345726966858,
+      "grad_norm": 0.012539632618427277,
+      "sequence_tokens": 753,
+      "supervised_tokens": 1,
+      "wall_seconds_uncontrolled": 7.655999999999949,
+      "resources": {
+        "cpu_rss_mib": 6819.98,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 2844,
+          "device_free_mib": 1251,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3117
+        }
+      }
+    },
+    {
+      "step": 83,
+      "id": "atc-magazine-06",
+      "loss": 0.6928896903991699,
+      "grad_norm": 0.014115089550614357,
+      "sequence_tokens": 819,
+      "supervised_tokens": 1,
+      "wall_seconds_uncontrolled": 8.844000000000051,
+      "resources": {
+        "cpu_rss_mib": 6794.28,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 2844,
+          "device_free_mib": 1251,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3117
+        }
+      }
+    },
+    {
+      "step": 84,
+      "id": "guard-door-14",
+      "loss": 0.692903995513916,
+      "grad_norm": 0.013824439607560635,
+      "sequence_tokens": 759,
+      "supervised_tokens": 1,
+      "wall_seconds_uncontrolled": 7.7039999999997235,
+      "resources": {
+        "cpu_rss_mib": 6839.82,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 2844,
+          "device_free_mib": 1251,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3117
+        }
+      }
+    },
+    {
+      "step": 85,
+      "id": "spindle-chiller-23",
+      "loss": 0.6929202675819397,
+      "grad_norm": 0.012910447083413601,
+      "sequence_tokens": 675,
+      "supervised_tokens": 1,
+      "wall_seconds_uncontrolled": 7.313000000000102,
+      "resources": {
+        "cpu_rss_mib": 6793.28,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 2844,
+          "device_free_mib": 1251,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3126
+        }
+      }
+    },
+    {
+      "step": 86,
+      "id": "hydraulic-18",
+      "loss": 0.7742875814437866,
+      "grad_norm": 10.113200187683105,
+      "sequence_tokens": 888,
+      "supervised_tokens": 4,
+      "wall_seconds_uncontrolled": 9.342999999999847,
+      "resources": {
+        "cpu_rss_mib": 6840.04,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 3264,
+          "device_free_mib": 831,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3122
+        }
+      }
+    },
+    {
+      "step": 87,
+      "id": "spindle-lube-06",
+      "loss": 0.6928516030311584,
+      "grad_norm": 0.01666969619691372,
+      "sequence_tokens": 856,
+      "supervised_tokens": 1,
+      "wall_seconds_uncontrolled": 9.155999999999949,
+      "resources": {
+        "cpu_rss_mib": 6817.2,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 3280,
+          "device_free_mib": 815,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3148
+        }
+      }
+    },
+    {
+      "step": 88,
+      "id": "bar-feeder-09",
+      "loss": 0.6943753361701965,
+      "grad_norm": 0.05133829638361931,
+      "sequence_tokens": 715,
+      "supervised_tokens": 4,
+      "wall_seconds_uncontrolled": 7.655999999999949,
+      "resources": {
+        "cpu_rss_mib": 6809.44,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 3259,
+          "device_free_mib": 836,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3172
+        }
+      }
+    },
+    {
+      "step": 89,
+      "id": "bar-feeder-10",
+      "loss": 0.7074247002601624,
+      "grad_norm": 0.8788195252418518,
+      "sequence_tokens": 657,
+      "supervised_tokens": 4,
+      "wall_seconds_uncontrolled": 7.280999999999949,
+      "resources": {
+        "cpu_rss_mib": 6799.71,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 2844,
+          "device_free_mib": 1251,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3152
+        }
+      }
+    },
+    {
+      "step": 90,
+      "id": "bar-feeder-01",
+      "loss": 0.7058359384536743,
+      "grad_norm": 0.6116836667060852,
+      "sequence_tokens": 877,
+      "supervised_tokens": 4,
+      "wall_seconds_uncontrolled": 9.469000000000051,
+      "resources": {
+        "cpu_rss_mib": 6839.72,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 3274,
+          "device_free_mib": 821,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3194
+        }
+      }
+    },
+    {
+      "step": 91,
+      "id": "lathe-chuck-01",
+      "loss": 0.6957948207855225,
+      "grad_norm": 0.07825352996587753,
+      "sequence_tokens": 854,
+      "supervised_tokens": 3,
+      "wall_seconds_uncontrolled": 9.29699999999957,
+      "resources": {
+        "cpu_rss_mib": 6795.27,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 3298,
+          "device_free_mib": 797,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3134
+        }
+      }
+    },
+    {
+      "step": 92,
+      "id": "electrical-cabinet-20",
+      "loss": 0.6945626735687256,
+      "grad_norm": 0.19299274682998657,
+      "sequence_tokens": 744,
+      "supervised_tokens": 4,
+      "wall_seconds_uncontrolled": 7.813000000000102,
+      "resources": {
+        "cpu_rss_mib": 6813.88,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 3299,
+          "device_free_mib": 796,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3124
+        }
+      }
+    },
+    {
+      "step": 93,
+      "id": "pneumatic-03",
+      "loss": 1.4563237428665161,
+      "grad_norm": 33.14242935180664,
+      "sequence_tokens": 751,
+      "supervised_tokens": 7,
+      "wall_seconds_uncontrolled": 7.813000000000102,
+      "resources": {
+        "cpu_rss_mib": 6794.22,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 3292,
+          "device_free_mib": 803,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3149
+        }
+      }
+    },
+    {
+      "step": 94,
+      "id": "workpiece-probe-05",
+      "loss": 0.692871630191803,
+      "grad_norm": 0.014971913769841194,
+      "sequence_tokens": 782,
+      "supervised_tokens": 1,
+      "wall_seconds_uncontrolled": 8.890999999999622,
+      "resources": {
+        "cpu_rss_mib": 6834.45,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 3290,
+          "device_free_mib": 804,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3124
+        }
+      }
+    },
+    {
+      "step": 95,
+      "id": "spindle-chiller-12",
+      "loss": 0.6984177231788635,
+      "grad_norm": 0.4513465464115143,
+      "sequence_tokens": 918,
+      "supervised_tokens": 6,
+      "wall_seconds_uncontrolled": 10.342999999999847,
+      "resources": {
+        "cpu_rss_mib": 6818.97,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 3290,
+          "device_free_mib": 804,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3134
+        }
+      }
+    },
+    {
+      "step": 96,
+      "id": "chip-conveyor-11",
+      "loss": 0.6935008764266968,
+      "grad_norm": 0.014869118109345436,
+      "sequence_tokens": 832,
+      "supervised_tokens": 4,
+      "wall_seconds_uncontrolled": 9.061999999999898,
+      "resources": {
+        "cpu_rss_mib": 6810.79,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 3291,
+          "device_free_mib": 804,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3134
+        }
+      }
+    },
+    {
+      "step": 97,
+      "id": "chip-conveyor-27",
+      "loss": 0.692960262298584,
+      "grad_norm": 0.011071606539189816,
+      "sequence_tokens": 738,
+      "supervised_tokens": 1,
+      "wall_seconds_uncontrolled": 7.813000000000102,
+      "resources": {
+        "cpu_rss_mib": 6810.55,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 3291,
+          "device_free_mib": 804,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3143
+        }
+      }
+    },
+    {
+      "step": 98,
+      "id": "coolant-pump-14",
+      "loss": 0.6929202675819397,
+      "grad_norm": 0.012915377505123615,
+      "sequence_tokens": 889,
+      "supervised_tokens": 1,
+      "wall_seconds_uncontrolled": 9.5,
+      "resources": {
+        "cpu_rss_mib": 6818.76,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 3291,
+          "device_free_mib": 804,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3124
+        }
+      }
+    },
+    {
+      "step": 99,
+      "id": "chip-conveyor-07",
+      "loss": 1.9125820398330688,
+      "grad_norm": 54.757972717285156,
+      "sequence_tokens": 788,
+      "supervised_tokens": 4,
+      "wall_seconds_uncontrolled": 8.938000000000102,
+      "resources": {
+        "cpu_rss_mib": 6810.69,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 3274,
+          "device_free_mib": 821,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3136
+        }
+      }
+    },
+    {
+      "step": 100,
+      "id": "ballscrew-12",
+      "loss": 0.7033356428146362,
+      "grad_norm": 1.6525678634643555,
+      "sequence_tokens": 810,
+      "supervised_tokens": 7,
+      "wall_seconds_uncontrolled": 9.07799999999952,
+      "resources": {
+        "cpu_rss_mib": 6810.62,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 3274,
+          "device_free_mib": 821,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3123
+        }
+      }
+    },
+    {
+      "step": 101,
+      "id": "tool-setter-26",
+      "loss": 0.6928687691688538,
+      "grad_norm": 0.015557119622826576,
+      "sequence_tokens": 706,
+      "supervised_tokens": 1,
+      "wall_seconds_uncontrolled": 8.015000000000327,
+      "resources": {
+        "cpu_rss_mib": 6816.37,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 3274,
+          "device_free_mib": 821,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3123
+        }
+      }
+    },
+    {
+      "step": 102,
+      "id": "spindle-lube-09",
+      "loss": 0.6934469938278198,
+      "grad_norm": 0.015729116275906563,
+      "sequence_tokens": 909,
+      "supervised_tokens": 4,
+      "wall_seconds_uncontrolled": 10.405999999999949,
+      "resources": {
+        "cpu_rss_mib": 6811.5,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 2844,
+          "device_free_mib": 1251,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3157
+        }
+      }
+    },
+    {
+      "step": 103,
+      "id": "atc-arm-19",
+      "loss": 0.6933613419532776,
+      "grad_norm": 0.012273229658603668,
+      "sequence_tokens": 862,
+      "supervised_tokens": 4,
+      "wall_seconds_uncontrolled": 9.32799999999952,
+      "resources": {
+        "cpu_rss_mib": 6818.96,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 2844,
+          "device_free_mib": 1251,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3139
+        }
+      }
+    },
+    {
+      "step": 104,
+      "id": "atc-magazine-22",
+      "loss": 0.7015590071678162,
+      "grad_norm": 0.7710742354393005,
+      "sequence_tokens": 908,
+      "supervised_tokens": 6,
+      "wall_seconds_uncontrolled": 10.344000000000051,
+      "resources": {
+        "cpu_rss_mib": 6811.44,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 2844,
+          "device_free_mib": 1251,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3131
+        }
+      }
+    },
+    {
+      "step": 105,
+      "id": "bar-feeder-08",
+      "loss": 0.6929345726966858,
+      "grad_norm": 0.012568417005240917,
+      "sequence_tokens": 701,
+      "supervised_tokens": 1,
+      "wall_seconds_uncontrolled": 7.594000000000051,
+      "resources": {
+        "cpu_rss_mib": 6794.52,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 2844,
+          "device_free_mib": 1251,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3145
+        }
+      }
+    },
+    {
+      "step": 106,
+      "id": "electrical-cabinet-13",
+      "loss": 0.6935271620750427,
+      "grad_norm": 0.015973862260580063,
+      "sequence_tokens": 890,
+      "supervised_tokens": 7,
+      "wall_seconds_uncontrolled": 9.516000000000531,
+      "resources": {
+        "cpu_rss_mib": 6848.77,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 2844,
+          "device_free_mib": 1251,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3135
+        }
+      }
+    },
+    {
+      "step": 107,
+      "id": "chip-conveyor-10",
+      "loss": 0.6955803036689758,
+      "grad_norm": 0.3282817006111145,
+      "sequence_tokens": 857,
+      "supervised_tokens": 4,
+      "wall_seconds_uncontrolled": 9.344000000000051,
+      "resources": {
+        "cpu_rss_mib": 6810.21,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 2844,
+          "device_free_mib": 1251,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3131
+        }
+      }
+    },
+    {
+      "step": 108,
+      "id": "chip-conveyor-14",
+      "loss": 0.6929888725280762,
+      "grad_norm": 0.01028685737401247,
+      "sequence_tokens": 902,
+      "supervised_tokens": 1,
+      "wall_seconds_uncontrolled": 10.375,
+      "resources": {
+        "cpu_rss_mib": 6811.16,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 2844,
+          "device_free_mib": 1251,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3116
+        }
+      }
+    },
+    {
+      "step": 109,
+      "id": "lathe-chuck-21",
+      "loss": 1.0290579795837402,
+      "grad_norm": 55.01395034790039,
+      "sequence_tokens": 751,
+      "supervised_tokens": 7,
+      "wall_seconds_uncontrolled": 7.875,
+      "resources": {
+        "cpu_rss_mib": 6801.57,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 2844,
+          "device_free_mib": 1251,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3115
+        }
+      }
+    },
+    {
+      "step": 110,
+      "id": "bar-feeder-14",
+      "loss": 0.6929984092712402,
+      "grad_norm": 0.009783593006432056,
+      "sequence_tokens": 871,
+      "supervised_tokens": 1,
+      "wall_seconds_uncontrolled": 9.469000000000051,
+      "resources": {
+        "cpu_rss_mib": 6825.02,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 2844,
+          "device_free_mib": 1251,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3113
+        }
+      }
+    },
+    {
+      "step": 111,
+      "id": "guard-door-04",
+      "loss": 0.7152303457260132,
+      "grad_norm": 6.285900115966797,
+      "sequence_tokens": 768,
+      "supervised_tokens": 9,
+      "wall_seconds_uncontrolled": 7.921999999999571,
+      "resources": {
+        "cpu_rss_mib": 6834.18,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 2844,
+          "device_free_mib": 1251,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3113
+        }
+      }
+    },
+    {
+      "step": 112,
+      "id": "coolant-pump-09",
+      "loss": 2.7463245391845703,
+      "grad_norm": 321.4358825683594,
+      "sequence_tokens": 766,
+      "supervised_tokens": 4,
+      "wall_seconds_uncontrolled": 7.907000000000153,
+      "resources": {
+        "cpu_rss_mib": 6814.62,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 2844,
+          "device_free_mib": 1251,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3113
+        }
+      }
+    },
+    {
+      "step": 113,
+      "id": "hydraulic-13",
+      "loss": 2.190934181213379,
+      "grad_norm": 66.0875473022461,
+      "sequence_tokens": 917,
+      "supervised_tokens": 7,
+      "wall_seconds_uncontrolled": 10.405999999999949,
+      "resources": {
+        "cpu_rss_mib": 6811.14,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 3255,
+          "device_free_mib": 840,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3114
+        }
+      }
+    },
+    {
+      "step": 114,
+      "id": "feed-servo-14",
+      "loss": 0.6929745674133301,
+      "grad_norm": 0.010758724063634872,
+      "sequence_tokens": 814,
+      "supervised_tokens": 1,
+      "wall_seconds_uncontrolled": 9.0,
+      "resources": {
+        "cpu_rss_mib": 6818.12,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 2844,
+          "device_free_mib": 1251,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3114
+        }
+      }
+    },
+    {
+      "step": 115,
+      "id": "atc-magazine-14",
+      "loss": 0.6929774284362793,
+      "grad_norm": 0.011139891110360622,
+      "sequence_tokens": 737,
+      "supervised_tokens": 1,
+      "wall_seconds_uncontrolled": 7.875,
+      "resources": {
+        "cpu_rss_mib": 6810.73,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 2844,
+          "device_free_mib": 1251,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3114
+        }
+      }
+    },
+    {
+      "step": 116,
+      "id": "hydraulic-19",
+      "loss": 0.6933087706565857,
+      "grad_norm": 0.010438097640872002,
+      "sequence_tokens": 848,
+      "supervised_tokens": 4,
+      "wall_seconds_uncontrolled": 9.313000000000102,
+      "resources": {
+        "cpu_rss_mib": 6810.88,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 2844,
+          "device_free_mib": 1251,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3114
+        }
+      }
+    },
+    {
+      "step": 117,
+      "id": "spindle-bearing-10",
+      "loss": 0.6933078765869141,
+      "grad_norm": 0.010326744988560677,
+      "sequence_tokens": 836,
+      "supervised_tokens": 4,
+      "wall_seconds_uncontrolled": 9.280999999999949,
+      "resources": {
+        "cpu_rss_mib": 6818.16,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 2844,
+          "device_free_mib": 1251,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3114
+        }
+      }
+    },
+    {
+      "step": 118,
+      "id": "rotary-table-16",
+      "loss": 0.6933523416519165,
+      "grad_norm": 0.012313766404986382,
+      "sequence_tokens": 698,
+      "supervised_tokens": 4,
+      "wall_seconds_uncontrolled": 7.578000000000429,
+      "resources": {
+        "cpu_rss_mib": 6810.19,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 2844,
+          "device_free_mib": 1251,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3114
+        }
+      }
+    },
+    {
+      "step": 119,
+      "id": "ballscrew-14",
+      "loss": 0.6929497718811035,
+      "grad_norm": 0.012256412766873837,
+      "sequence_tokens": 649,
+      "supervised_tokens": 1,
+      "wall_seconds_uncontrolled": 7.390000000000327,
+      "resources": {
+        "cpu_rss_mib": 6793.88,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 2844,
+          "device_free_mib": 1251,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3114
+        }
+      }
+    },
+    {
+      "step": 120,
+      "id": "guard-door-19",
+      "loss": 0.6933568120002747,
+      "grad_norm": 0.012170357629656792,
+      "sequence_tokens": 772,
+      "supervised_tokens": 3,
+      "wall_seconds_uncontrolled": 8.936999999999898,
+      "resources": {
+        "cpu_rss_mib": 6840.55,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 3267,
+          "device_free_mib": 828,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3117
+        }
+      }
+    },
+    {
+      "step": 121,
+      "id": "rotary-table-05",
+      "loss": 0.6929745674133301,
+      "grad_norm": 0.01070252712816,
+      "sequence_tokens": 808,
+      "supervised_tokens": 1,
+      "wall_seconds_uncontrolled": 9.094000000000051,
+      "resources": {
+        "cpu_rss_mib": 6808.68,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 2844,
+          "device_free_mib": 1251,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3117
+        }
+      }
+    },
+    {
+      "step": 122,
+      "id": "workpiece-probe-07",
+      "loss": 0.6934091448783875,
+      "grad_norm": 0.012387611903250217,
+      "sequence_tokens": 703,
+      "supervised_tokens": 4,
+      "wall_seconds_uncontrolled": 7.609000000000378,
+      "resources": {
+        "cpu_rss_mib": 6808.25,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 2844,
+          "device_free_mib": 1251,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3117
+        }
+      }
+    },
+    {
+      "step": 123,
+      "id": "coolant-pump-06",
+      "loss": 0.6929621696472168,
+      "grad_norm": 0.011403298005461693,
+      "sequence_tokens": 878,
+      "supervised_tokens": 1,
+      "wall_seconds_uncontrolled": 9.467999999999847,
+      "resources": {
+        "cpu_rss_mib": 6817.8,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 2844,
+          "device_free_mib": 1251,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3117
+        }
+      }
+    },
+    {
+      "step": 124,
+      "id": "spindle-lube-24",
+      "loss": 0.6929888725280762,
+      "grad_norm": 0.010355609469115734,
+      "sequence_tokens": 858,
+      "supervised_tokens": 1,
+      "wall_seconds_uncontrolled": 9.390999999999622,
+      "resources": {
+        "cpu_rss_mib": 6810.02,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 2844,
+          "device_free_mib": 1251,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3102
+        }
+      }
+    },
+    {
+      "step": 125,
+      "id": "pneumatic-00",
+      "loss": 2.832909107208252,
+      "grad_norm": 152.17640686035156,
+      "sequence_tokens": 883,
+      "supervised_tokens": 4,
+      "wall_seconds_uncontrolled": 9.514999999999418,
+      "resources": {
+        "cpu_rss_mib": 6810.59,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 2844,
+          "device_free_mib": 1251,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3098
+        }
+      }
+    },
+    {
+      "step": 126,
+      "id": "lathe-chuck-03",
+      "loss": 0.7312611937522888,
+      "grad_norm": 28.16787338256836,
+      "sequence_tokens": 855,
+      "supervised_tokens": 7,
+      "wall_seconds_uncontrolled": 9.344000000000051,
+      "resources": {
+        "cpu_rss_mib": 6817.77,
+        "cpu_peak_working_set_mib": 11349.82,
+        "torch_cuda": {
+          "device_used_mib": 2844,
+          "device_free_mib": 1251,
+          "peak_allocated_mib": 1782,
+          "peak_reserved_mib": 2082
+        },
+        "nvidia_smi_whole_device": {
+          "name": "NVIDIA GeForce GTX 1050 Ti",
+          "driver": "582.66",
+          "total_mib": 4096,
+          "compute_cap": "6.1",
+          "device_used_mib": 3098
+        }
+      }
+    }
+  ],
+  "train_sequence_tokens": 101101,
+  "supervised_tokens": 465,
+  "optimizer_steps_actual": 126,
+  "checkpoint_dirs": [
+    "C:\\Users\\User\\Desktop\\ai factory\\predictfix-wave2-training\\.runtime\\qlora-repair-20261020\\qlora_train\\checkpoint-0018",
+    "C:\\Users\\User\\Desktop\\ai factory\\predictfix-wave2-training\\.runtime\\qlora-repair-20261020\\qlora_train\\checkpoint-0036",
+    "C:\\Users\\User\\Desktop\\ai factory\\predictfix-wave2-training\\.runtime\\qlora-repair-20261020\\qlora_train\\checkpoint-0054",
+    "C:\\Users\\User\\Desktop\\ai factory\\predictfix-wave2-training\\.runtime\\qlora-repair-20261020\\qlora_train\\checkpoint-0072",
+    "C:\\Users\\User\\Desktop\\ai factory\\predictfix-wave2-training\\.runtime\\qlora-repair-20261020\\qlora_train\\checkpoint-0090",
+    "C:\\Users\\User\\Desktop\\ai factory\\predictfix-wave2-training\\.runtime\\qlora-repair-20261020\\qlora_train\\checkpoint-0108",
+    "C:\\Users\\User\\Desktop\\ai factory\\predictfix-wave2-training\\.runtime\\qlora-repair-20261020\\qlora_train\\checkpoint-0126"
+  ],
+  "adapter_dir": "C:\\Users\\User\\Desktop\\ai factory\\predictfix-wave2-training\\.runtime\\qlora-repair-20261020\\qlora_train\\adapter",
+  "before_reload": {
+    "adapter_hash": "d5df3bf746e2761a8232cb55bd6bb84526421624de2f1e46b8cdf08f20d12daf",
+    "adapter_config_hash": "13c9276a9100d0ae43badf47494a4529b43378994ee64eb4dd47f72b53f35a0d",
+    "trainable_parameters": 12079104,
+    "probe_id": "feed-servo-19",
+    "probe_output": "{\"selected\":[]}",
+    "probe_token_ids": [
+      1083,
+      138609
+    ],
+    "probe_logits": [
+      29.99951934814453,
+      29.99917984008789
+    ]
+  },
+  "resources_final": {
+    "cpu_rss_mib": 6845.86,
+    "cpu_peak_working_set_mib": 11349.82,
+    "torch_cuda": {
+      "device_used_mib": 3283,
+      "device_free_mib": 812,
+      "peak_allocated_mib": 1782,
+      "peak_reserved_mib": 2082
+    },
+    "nvidia_smi_whole_device": {
+      "name": "NVIDIA GeForce GTX 1050 Ti",
+      "driver": "582.66",
+      "total_mib": 4096,
+      "compute_cap": "6.1",
+      "device_used_mib": 3098
+    }
+  }
+}

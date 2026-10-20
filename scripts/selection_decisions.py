@@ -18,7 +18,7 @@ def decisionPlan(choices, answer):
   return decisions
 
 
-def decisionLoss(model, hiddenStates, promptLength, plan):
+def decisionLoss(model, hiddenStates, promptLength, plan, applySoftcap=False):
   import torch
   import torch.nn.functional as functional
   losses = []
@@ -26,7 +26,7 @@ def decisionLoss(model, hiddenStates, promptLength, plan):
     hidden = hiddenStates[0, promptLength + item['position'] - 1].to('cpu', model.lm_head.weight.dtype)
     logits = functional.linear(hidden, model.lm_head.weight[item['allowed']]).float()
     softcap = model.config.final_logit_softcapping
-    if softcap:
+    if softcap and applySoftcap:
       logits = torch.tanh(logits / softcap) * softcap
     target = torch.tensor([item['targetIndex']], dtype=torch.long)
     losses.append(functional.cross_entropy(logits.unsqueeze(0), target) * item['weight'])

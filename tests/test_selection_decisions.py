@@ -72,3 +72,18 @@ def test_campaign_forwards_both_frozen_paths_and_rejects_outside_training():
   args.protocol = root / '.runtime/invalid.json'
   with pytest.raises(ValueError, match='training'):
     protocolFlags(args)
+
+
+def test_raw_objective_is_a_separate_frozen_protocol_not_a_v2_rewrite():
+  from gemma_sft_protocol import buildManifest, validateManifest
+  root = Path(__file__).resolve().parents[1]
+  dataset = root / 'training/selection-dataset-v2.json'
+  holdout = root / 'training/selection-holdout-v4-repair.json'
+  capped = buildManifest(dataset, holdout, decisionObjective=True)
+  raw = buildManifest(dataset, holdout, decisionObjective='raw')
+  assert capped['version'] == 'gemma-sft-v2'
+  assert raw['version'] == 'gemma-sft-v3'
+  assert raw['objective']['logit_transform'] == 'identity'
+  assert raw['objective']['name'] == 'grammar-decision-balanced-raw-v1'
+  assert raw['train_ids'] == capped['train_ids'] and raw['learning_rate'] == capped['learning_rate']
+  assert validateManifest(raw, dataset, holdout)

@@ -1,6 +1,6 @@
 # QLoRA 全拒答診斷與修正（2026-10-20）
 
-狀態：已完成正式舊 adapter 診斷與修正實作；新的正式訓練／獨立評估尚未完成，不預設改善。
+狀態：舊adapter診斷與v2候選已完成；v2仍在訓練正例拒答。v3數值修正已通過梯度回歸，正式訓練／評估尚未完成，不預設改善。
 
 ## 已量到的原因
 
@@ -38,3 +38,20 @@ $python = 'C:/Users/User/Desktop/ai factory/predictfix-ai-factory/.runtime/qlora
 使用者要求先完成本次QLoRA修正，暫不push。Ubuntu CI與POSIX實跑仍待授權，不把Windows結果當Linux驗證。
 
 小型官方權重診斷已實際跑完固定32步：最終正例選S3:P4、空金標題回[]，兩題皆正確。這是重複兩題的訓練能力檢查，非正式泛化成績；含原始輸出與診斷程式的[完整紀錄](../artifacts/qlora-decision-overfit-20261020.json)。CPU loss檢查確認只在決策位置產生梯度；官方tokenizer確認126訓練、28驗證及100新測試均無超長或截斷。
+
+## v2正式候選暴露的第二個原因：softcap飽和
+
+v2完整126步後，訓練正例feed-servo-19仍輸出[]。空／非空分支logits為29.9995193與29.9991798，近乎同為上限30；反推raw logits約176與168，softcap導數僅0.0000320與0.0000547。這項判斷使用訓練題probe，尚未讀取v4測試分數來選擇修正。原始v2基準、訓練、重載評估報告分別保存在artifacts的qlora-repair-capped系列。
+
+當raw logits都很大時，`30*tanh(raw/30)`會把錯誤次序壓成接近相等；進一步共同推高兩者可使錯誤CE接近ln(2)，卻沒有學對次序。這是數值上不理想的平坦方向，而非保存錯誤。CPU fixture實際呼叫production loss：錯誤分數176對168的梯度norm只有0.000031716，回歸測試確實失敗。
+
+v3只把**條件決策訓練loss**改用raw logits，移除這個飽和平坦方向；首分支與其餘分支權重不變。相同CPU fixture的梯度norm恢復為1.413739，梯度方向正確，並驗證共同平移兩個分數不會降低loss。生成端的softcap與grammar完全不改；v1及v2仍能用各自凍結protocol重跑舊loss，不改寫歷史。
+
+這不是把threshold改成強迫作答：raw-logit CE仍允許空答案，依金標學習。其最終品質與是否過度拒答，必須由完成訓練後的逐題評估證明。
+
+```powershell
+& $python scripts/check_selection_loss_runtime.py
+& $python scripts/run_gemma_sft_campaign.py --scope qlora --max-hours 1 --runtime-dir '../predictfix-ai-factory/.runtime' --run-dir '.runtime/qlora-repair-raw-20261020' --protocol training/gemma-sft-protocol-v3.json --holdout training/selection-holdout-v4-repair.json
+```
+
+原126題順序、初始化、rank、learning rate與v4資料皆不變；使用新的v3protocol與獨立輸出資料夾。v4是同作者合成家族，v2先前曾計算其評估但封存未讀，修正選擇只根據訓練probe與數值測試。不得把它描述成只執行過一次的外部專家盲測。

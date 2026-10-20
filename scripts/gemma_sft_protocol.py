@@ -90,11 +90,16 @@ def buildManifest(datasetPath, holdoutPath, decisionObjective=False):
     manifest['objective'] = {'name': 'grammar-decision-balanced-v1',
       'first_branch_weight': 1.0, 'remaining_branches_total_weight': 1.0,
       'forced_tokens_weight': 0.0, 'normalization': 'first branch plus mean remaining decision losses'}
+    if decisionObjective == 'raw':
+      manifest['version'] = 'gemma-sft-v3'
+      manifest['objective']['name'] = 'grammar-decision-balanced-raw-v1'
+      manifest['objective']['logit_transform'] = 'identity'
   return manifest
 
 
 def validateManifest(manifest, datasetPath, holdoutPath):
-  if manifest != buildManifest(datasetPath, holdoutPath, decisionObjective=manifest.get('version') == 'gemma-sft-v2'):
+  objective = 'raw' if manifest.get('version') == 'gemma-sft-v3' else manifest.get('version') == 'gemma-sft-v2'
+  if manifest != buildManifest(datasetPath, holdoutPath, decisionObjective=objective):
     raise ValueError('Manifest protocol, row ids, or data hash changed; freeze a new experiment')
   return True
 

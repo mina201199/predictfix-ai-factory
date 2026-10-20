@@ -1,0 +1,41 @@
+{
+  "candidate": "v2 capped decision loss",
+  "status": "Rejected using training-only positive probe before reading new holdout scores",
+  "actualSteps": 126,
+  "probe": {
+    "adapter_hash": "d5df3bf746e2761a8232cb55bd6bb84526421624de2f1e46b8cdf08f20d12daf",
+    "adapter_config_hash": "13c9276a9100d0ae43badf47494a4529b43378994ee64eb4dd47f72b53f35a0d",
+    "trainable_parameters": 12079104,
+    "probe_id": "feed-servo-19",
+    "probe_output": "{\"selected\":[]}",
+    "probe_token_ids": [
+      1083,
+      138609
+    ],
+    "probe_logits": [
+      29.99951934814453,
+      29.99917984008789
+    ]
+  },
+  "expectedSelected": [
+    "S3:P4"
+  ],
+  "softcapDerivative": [
+    3.204320033556307e-05,
+    5.467658007130005e-05
+  ],
+  "approximateRawLogits": [
+    176.02055841675784,
+    168.0051317212427
+  ],
+  "cpuNumericFixture": {
+    "rawLogits": [
+      176,
+      168
+    ],
+    "wrongDecisionGradientNorm": 3.171606294927187e-05,
+    "observedFailure": "Wrong decision lost learning gradient"
+  },
+  "nextChange": "Use raw logits only for conditional training CE, retain generation softcap and grammar; common-mode-invariant CE gradient cannot escape by pushing both scores into softcap saturation.",
+  "heldoutPolicy": "No v4 scores inspected for choosing this change; diagnosis uses training probe and CPU gradient counterexample."
+}

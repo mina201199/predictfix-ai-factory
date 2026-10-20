@@ -243,14 +243,15 @@ def train(model, tokenizer, manifest, args, report, save, probe=False):
     targets = labels[1:]
     positions = (targets != -100).nonzero().squeeze(1)
     decisionCount = None
-    if manifest.get('objective', {}).get('name') == 'grammar-decision-balanced-v1':
+    if manifest.get('objective', {}).get('name') in {'grammar-decision-balanced-v1', 'grammar-decision-balanced-raw-v1'}:
       from selection_decisions import decisionPlan, decisionLoss
       row = next(row for row in rows if row['id'] == rowId)
       answer = tokenizer.encode(canonicalAnswer(row), add_special_tokens=False)
       choices = [tokenizer.encode(value, add_special_tokens=False) for value in grammarAnswers(row)]
       plan = decisionPlan(choices, answer)
       promptLength = sum(value == -100 for value in labelValues)
-      loss = decisionLoss(model, output.last_hidden_state, promptLength, plan)
+      loss = decisionLoss(model, output.last_hidden_state, promptLength, plan,
+        applySoftcap=manifest['objective'].get('logit_transform') != 'identity')
       decisionCount = len(plan)
     else:
       hidden = output.last_hidden_state[0, positions.to('cuda')].to('cpu', model.lm_head.weight.dtype)
@@ -430,6 +431,7 @@ def main():
   parser.add_argument('--protocol', type=Path)
   parser.add_argument('--holdout', type=Path)
   parser.add_argument('--decision-objective', action='store_true', help='Freeze v2 decision-balanced objective')
+  parser.add_argument('--raw-decision-objective', action='store_true', help='Freeze v3 non-saturating decision loss')
   args = parser.parse_args()
   for argument, name in [(args.protocol, 'protocol'), (args.holdout, 'holdout')]:
     if argument and not argument.resolve().is_relative_to(ROOT / 'training'):
@@ -438,11 +440,14 @@ def main():
     PROTOCOL = args.protocol.resolve()
   if args.holdout:
     HOLDOUT = args.holdout.resolve()
-  if args.decision_objective and args.command != 'freeze':
-    parser.error('--decision-objective is only valid when freezing the protocol')
+  if (args.decision_objective or args.raw_decision_objective) and args.command != 'freeze':
+    parser.error('Objective flags are only valid when freezing the protocol')
+  if args.decision_objective and args.raw_decision_objective:
+    parser.error('Select one frozen objective')
   if args.command == 'freeze':
     with PROTOCOL.open('x', encoding='utf-8', newline='\n') as handle:
-      json.dump(buildManifest(DATASET, HOLDOUT, decisionObjective=args.decision_objective), handle, ensure_ascii=False, indent=2)
+      objective = 'raw' if args.raw_decision_objective else args.decision_objective
+      json.dump(buildManifest(DATASET, HOLDOUT, decisionObjective=objective), handle, ensure_ascii=False, indent=2)
       handle.write('\n')
     print(PROTOCOL)
   else:
