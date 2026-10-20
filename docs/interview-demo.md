@@ -45,10 +45,11 @@
 
 ## CI 與容器
 
-[GitHub Actions](../.github/workflows/ci.yml) 分成完整測試及容器建置兩個 job：
+[GitHub Actions](../.github/workflows/ci.yml) 分成完整測試、容器與 PostgreSQL 三個 job：
 
 - 測試 job 安裝固定套件、檢查依賴、跑全套 pytest，解析 JUnit，要求確實執行測試且零失敗、零錯誤、零跳過。
-- 容器 job 建置 Dockerfile，再啟動空資料庫的正式模式，檢查維修流程頁面／JS／CSS、API 文件與未登入阻擋。此 job 使用隔離 SQLite，尚未涵蓋 PostgreSQL、TLS 或高並發驗收。
+- 容器 job 建置 Dockerfile，再分別啟動正式及展示模式，檢查頁面／JS／CSS、嚴格 CSP、匿名 API 阻擋及手機展示資產。正式模式的 API 文件與手機展示回傳 404。
+- PostgreSQL job 執行並發派工、正式模式、維修流程情境，以及 Compose 重啟與備份還原。未涵蓋 TLS，新增圖譜／外部工單的 PostgreSQL 路徑也尚未驗收。
 
 本機可先跑：
 
@@ -57,14 +58,14 @@
 .\.venv\Scripts\python.exe scripts/check_test_report.py .runtime/tests.xml
 ```
 
-CI 檔案已建立不等於 GitHub 已執行。需要將經檢查的版本推到自己的 repo，再保存綠燈連結；目前未代為推送。
+歷史主線已有 GitHub Actions 成功紀錄；本次整合應核對推送提交的實際結果，見 [2026-10-20 交付驗證](release-validation-20261020.md)。
 
 ## 現況與下一步
 
-本機兩模式已恢復，可進行面試流程。SQLAlchemy 使用官方支援的純 Python 安裝，未修改 Windows 安全政策。Dockerfile 已補齊維修流程資產，兩份 Compose 設定通過語法與環境代入檢查，但本機 Docker 引擎仍無法連線。
+本機兩模式已恢復，可進行面試流程。Windows SQLAlchemy 使用官方支援的純 Python 安裝；Docker 與 PostgreSQL 已在後續版本完成既有情境驗證。獨立手機展示只使用瀏覽器資料，實機操作影片與截圖產品介紹皆已保存。
 
 2026-10-07 已新建 Python 3.12 環境，重新安裝固定依賴，全套 38 項測試通過、零跳過；再以該環境啟動隔離正式模式，頁面資產、API 文件與匿名存取阻擋通過。這是在目前工作目錄進行，尚未驗證另一台電腦或乾淨 Git checkout。完整狀態見 [交付檢查報告](../artifacts/interview-readiness-report.json)。
 
-Docker Desktop 的具體阻擋是無法重新命名 `sailor-ingest.sock`，Windows 回報無法存取；保留原檔的備份嘗試亦失敗。未刪除容器資料或修改安全設定。
+上述 2026-10-07 紀錄中的 Docker socket 阻擋屬歷史環境狀態，不能用來判斷目前 CI 或其他電腦的引擎狀態。
 
-後續還需：在可運作的 Docker 引擎實際建置／啟動，驗證 PostgreSQL 與 HTTPS，選定公開展示環境與網域，加入監控和備份演練。真實感測器、現場診斷與成效評估是另一階段，不應列為本次已完成。
+後續還需：驗證 HTTPS、圖譜／外部工單的 PostgreSQL 路徑，選定公開後端展示環境與網域，加入監控和異地備份演練。真實感測器、現場診斷與成效評估是另一階段。

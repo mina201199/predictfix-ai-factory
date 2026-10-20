@@ -1,0 +1,128 @@
+[
+  {
+    "start": 0,
+    "end": 6,
+    "label": "AI FACTORY / PredictFix AI",
+    "title": "讓維修流程\n從資訊走到行動",
+    "body": [
+      "智慧工廠維修 Copilot",
+      "一張工單，串起依據、人員與驗收"
+    ],
+    "image": "neon-equipment-desktop.png",
+    "crop": [
+      240,
+      185,
+      1505,
+      995
+    ],
+    "subtitle": "AI Factory｜把維修依據、派工與驗收，接成同一套流程。"
+  },
+  {
+    "start": 6,
+    "end": 15,
+    "label": "01 / 設備總覽",
+    "title": "先看見\n需要關注的設備",
+    "body": [
+      "設備與零件狀態集中查看",
+      "從總覽進入報修與工單"
+    ],
+    "image": "neon-equipment-desktop.png",
+    "crop": [
+      240,
+      185,
+      1505,
+      995
+    ],
+    "subtitle": "從設備總覽出發，查看示範設備狀態，找到需要處理的項目。"
+  },
+  {
+    "start": 15,
+    "end": 25,
+    "label": "02 / 維修依據",
+    "title": "每一項排查\n都有來源可核對",
+    "body": [
+      "依機型查找手冊與已發布案例",
+      "保留原文、來源版本與引用"
+    ],
+    "image": "openai-demo-ui.png",
+    "crop": [
+      706,
+      1026,
+      1397,
+      1466
+    ],
+    "subtitle": "AI 協助選取相關原文；適用性與排查清單，由人員核對與主管核准。"
+  },
+  {
+    "start": 25,
+    "end": 35,
+    "label": "03 / 人員與派工",
+    "title": "把工作交給\n合適的人員",
+    "body": [
+      "核對技能、必要資格與出勤",
+      "依剩餘容量推薦，主管確認派工"
+    ],
+    "image": "quick-questions-desktop.png",
+    "crop": [
+      254,
+      195,
+      1268,
+      890
+    ],
+    "subtitle": "派工前核對資格、出勤與剩餘容量，讓推薦理由可以檢查。"
+  },
+  {
+    "start": 35,
+    "end": 46,
+    "label": "04 / 排查與驗收",
+    "title": "逐項記錄\n再確認真的修好",
+    "body": [
+      "排查結果與復測條件留在工單",
+      "必填驗收通過，才能提交審核"
+    ],
+    "image": "repair-flow-proof.png",
+    "crop": [
+      249,
+      76,
+      1226,
+      670
+    ],
+    "subtitle": "工程師依核准清單逐項記錄；必填驗收未通過，系統會阻擋提交。"
+  },
+  {
+    "start": 46,
+    "end": 54,
+    "label": "05 / 審核與知識累積",
+    "title": "讓一次維修\n成為下次的依據",
+    "body": [
+      "主管核對量測、照片與維修紀錄",
+      "完成工單整理成案例，核對後發布"
+    ],
+    "image": "repair-evidence-proof.png",
+    "crop": [
+      90,
+      17,
+      605,
+      634
+    ],
+    "subtitle": "主管審核後，完成案件可整理成案例；人工發布後供下一次檢索。"
+  },
+  {
+    "start": 54,
+    "end": 60,
+    "label": "AI FACTORY / PredictFix AI",
+    "title": "維修有依據\n交接有紀錄",
+    "body": [
+      "查找依據  →  合資格派工",
+      "排查驗收  →  累積維修案例"
+    ],
+    "image": "neon-equipment-desktop.png",
+    "crop": [
+      1090,
+      510,
+      1492,
+      971
+    ],
+    "subtitle": "AI Factory｜讓維修知識，回到每一次現場決策。"
+  }
+]

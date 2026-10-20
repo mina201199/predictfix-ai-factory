@@ -1,0 +1,30 @@
+{
+  "verified_on": "2026-10-15",
+  "deployment_url": "https://predictfix-mobile-demo.ruru0109lee.chatgpt.site",
+  "audience": "owner-private",
+  "demo_data": "original fictional data; browser-local storage; no live API or LLM",
+  "browser_checks": {
+    "scenario_to_case_publication": true,
+    "source_approval_requires_confirmation": true,
+    "qualification_and_attendance_block_assignment": true,
+    "capacity_shortage_blocks_assignment": true,
+    "failed_acceptance_blocks_submission": true,
+    "reload_preserves_results": true,
+    "return_requires_reason": true,
+    "return_preserves_prior_snapshot": true,
+    "resubmission_and_supervisor_completion": true,
+    "published_case_visible": true,
+    "source_keyword_search": true,
+    "custom_coolant_work_order": true,
+    "second_assigned_engineer_can_submit": true,
+    "no_horizontal_overflow_at_document_widths": [305, 375, 1265]
+  },
+  "backend_regression": {
+    "command": "python -m pytest tests/test_api.py tests/test_production.py -q -p no:cacheprovider --basetemp=.test-mobile-20261015-v2 --tb=short",
+    "passed": 33,
+    "warnings": 1,
+    "warning": "Existing Starlette/httpx TestClient deprecation",
+    "isolated_databases": true
+  },
+  "limits": ["No physical phone device test; mobile browser viewport tested", "No cross-device data synchronization", "Role switch simulates permissions"]
+}

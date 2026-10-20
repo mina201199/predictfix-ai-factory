@@ -17,3 +17,6 @@ artifacts/demo-photos/upload-record.json
 
 # Isolated local verification databases and scratch files.
 .test-*/
+
+# Product video deliverables are not application runtime assets.
+artifacts/video/
