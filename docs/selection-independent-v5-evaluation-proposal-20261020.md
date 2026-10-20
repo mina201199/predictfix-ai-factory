@@ -36,3 +36,14 @@
 可打開`artifacts/selection-independent-v5-preparation-20261020.json`確認100題、四份舊資料無完全重複、長度上限及`modelInferencePerformed:false`。金標資料可在測試集查看selected及label_rationale。產生器使用獨占建立，不覆寫舊資料；新增檢查在`tests/test_selection_independent_holdout.py`，測試證據為`artifacts/selection-independent-v5-preparation-tests-20261020.xml`。
 
 這是同作者合成、不同設備來源群組的未用測試，並非企業工單或外部獨立專家驗收。每設備僅10題，100題亦非100個獨立設備群組；不得據此承諾實廠泛化、維修安全或自動復機。取得結果後不自動部署、合併或推送。
+
+
+## 執行授權與入口
+
+使用者已回覆OK，同意原模型及504步候選各100題、總預算最多30分鐘。上方「未授權」描述為準備階段紀錄；凍結plan本身不改寫，實際授權記錄於campaign。新增scripts/run_selection_independent_eval.py，與原訓練入口分離；先核對原training manifest與來源hash、504次更新ID、adapter權重／config、官方模型版本及新資料hash，再開始。候選以全新模型重載並比對原訓練probe後純推論，不建立optimizer。
+
+```powershell
+& '../predictfix-ai-factory/.runtime/qlora-env/Scripts/python.exe' scripts/run_selection_independent_eval.py --runtime-dir '../predictfix-ai-factory/.runtime' --run-dir '.runtime/selection-independent-v5-20261020'
+```
+
+父程序以既有owned-process tree隔離兩組子程序，合計1800秒硬上限；每題之間亦檢查剩餘預算。輸出目錄須全新，不覆蓋既有結果；失敗或超時不自動重跑。所有資料與候選在評估之前已凍結。
