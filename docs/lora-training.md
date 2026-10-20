@@ -26,7 +26,7 @@
 
 ```powershell
 .\.venv\Scripts\python.exe -m venv .runtime/lora-env
-.\.runtime\lora-env\Scripts\python.exe -m pip install torch==2.9.1 --index-url https://download.pytorch.org/whl/cpu
+.\.runtime\lora-env\Scripts\python.exe -m pip install torch==2.14.1 --index-url https://download.pytorch.org/whl/cpu
 .\.runtime\lora-env\Scripts\python.exe -m pip install -r training/requirements.txt
 .\.venv\Scripts\python.exe scripts/prepare_lora_data.py
 .\.runtime\lora-env\Scripts\python.exe scripts/train_lora.py --steps 12 --threads 2 --run-id cpu-smoke-v1
@@ -65,3 +65,11 @@ LoRA 結果尚未經量化後 serving、安全回歸或專家標註驗證，因�
 ```
 
 啟動先核對 adapter SHA-256 與模型 revision，使用本機已下載快取，不自動下載另一個模型。推論限制輸入大小、候選數、token 長度與輸出 token 數。驗證工具檢查重新載入後與訓練報告同一題的原始輸出一致，並拒絕空候選輸入；此結果不另算新增測試題命中率。
+
+## 2026-10-20 訓練相依安全更新
+
+CPU 安裝設定已更新為 PyTorch 2.14.1、Transformers 5.20.0、PEFT 0.21.2、Accelerate 1.15.0 與 setuptools 83.0.0，以排除舊版本的已知安全公告。`training/environment-lock.txt` 是新建隔離 CPU 環境的版本固定清單。既有環境不會因修改安裝檔而自動更新，請建立新環境驗證後再切換。
+
+已用隨機微型 Qwen3 CPU 模型確認有限 loss／梯度、一次 optimizer step、safetensors adapter 保存與重新載入輸出一致；未下載正式權重、未重跑品質評估，也不會改寫歷史成果。可在新訓練環境執行 `python tests/lora_runtime_scenario.py --report .runtime/lora-runtime-new.json` 重跑，報告路徑必須尚未存在。
+
+安全公告：[Transformers 模型載入](https://github.com/advisories/GHSA-29pf-2h5f-8g72)、[Accelerate 權重路徑](https://github.com/advisories/GHSA-4j2p-28q2-5m79)、[setuptools 路徑穿越](https://github.com/advisories/GHSA-5rjg-fvgr-3xxf)。
