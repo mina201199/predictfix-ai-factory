@@ -1,12 +1,22 @@
 import hashlib, hmac, secrets, os, time, json
 from datetime import datetime, timezone, timedelta
 from urllib.parse import urlparse
+from threading import Lock
 from fastapi import Request, HTTPException
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
 from . import store, config
 COOKIE='predictfix_session'
 ATTEMPTS={}
+attemptsLock = Lock()
+
+
+def sameOrigin(origin, url):
+  try:
+    parsed = urlparse(origin)
+    return parsed.scheme == url.scheme and parsed.netloc == url.netloc
+  except ValueError:
+    return False
 def password_hash(password,salt=None):
     salt=salt or secrets.token_hex(16)
     return salt+':'+hashlib.pbkdf2_hmac('sha256',password.encode(),bytes.fromhex(salt),310000).hex()
@@ -44,7 +54,7 @@ def register(app):
         if not request.url.path.startswith('/api/'):return await call_next(request)
         if request.method not in ['GET','HEAD']:
             origin=request.headers.get('origin')
-            if origin and urlparse(origin).netloc!=request.url.netloc:return JSONResponse({'detail':'不允許跨站請求'},status_code=403)
+            if origin and not sameOrigin(origin, request.url):return JSONResponse({'detail':'不允許跨站請求'},status_code=403)
         if request.url.path in ['/api/auth/login','/api/auth/config','/api/auth/demo']:return await call_next(request)
         token=request.cookies.get(COOKIE,'')
         with store.Session() as db:
@@ -53,7 +63,8 @@ def register(app):
             if not session or not user or not user.active or session.expires_at.replace(tzinfo=timezone.utc)<=datetime.now(timezone.utc):return JSONResponse({'detail':'請先登入'},status_code=401)
             request.state.user=dict(username=user.username,name=user.name,role=user.role)
             request.state.session_hash=session.token_hash;request.state.csrf=session.csrf
-            if request.method not in ['GET','HEAD'] and not hmac.compare_digest(request.headers.get('x-csrf-token',''),session.csrf):return JSONResponse({'detail':'驗證碼失效，請重新登入'},status_code=403)
+            csrfToken = request.headers.get('x-csrf-token', '')
+            if request.method not in ['GET','HEAD'] and (not csrfToken.isascii() or not hmac.compare_digest(csrfToken,session.csrf)):return JSONResponse({'detail':'驗證碼失效，請重新登入'},status_code=403)
         return await call_next(request)
     @app.get('/api/auth/config')
     def auth_config():
@@ -87,14 +98,22 @@ def register(app):
         password:str=Field(min_length=1,max_length=200)
     @app.post('/api/auth/login')
     def login(body:Login,request:Request):
-        key=(request.client.host,body.username.lower());recent=[t for t in ATTEMPTS.get(key,[]) if time.monotonic()-t<300];ATTEMPTS[key]=recent
-        if len(recent)>=5:raise HTTPException(429,'登入失敗次數過多，請五分鐘後再試')
+        key = (request.client.host, body.username.lower())
+        # 先保留此次嘗試的額度，避免並行驗證互相覆蓋失敗次數。
+        with attemptsLock:
+          now = time.monotonic()
+          recent = [attempt for attempt in ATTEMPTS.get(key, []) if now - attempt < 300]
+          if len(recent) >= 5:
+            raise HTTPException(429, '登入失敗次數過多，請五分鐘後再試')
+          recent.append(now)
+          ATTEMPTS[key] = recent
         with store.Session() as db:
             user=db.get(store.User,body.username.lower());encoded=user.password_hash if user else password_hash('invalid')
             valid=hmac.compare_digest(password_hash(body.password,encoded.split(':')[0]),encoded)
             if not user or not user.active or not valid:
-                recent.append(time.monotonic());raise HTTPException(401,'帳號或密碼錯誤')
-            ATTEMPTS.pop(key,None)
+                raise HTTPException(401,'帳號或密碼錯誤')
+            with attemptsLock:
+              ATTEMPTS.pop(key,None)
             old=request.cookies.get(COOKIE)
             if old:
                 existing=db.get(store.LoginSession,hashlib.sha256(old.encode()).hexdigest())

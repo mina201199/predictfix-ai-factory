@@ -122,7 +122,7 @@ def register(app):
     @app.patch('/api/machines/{mid}/asset')
     def asset(mid:str,body:AssetInput,request:Request):
         auth.supervisor(request)
-        values=body.model_dump()
+        values=body.model_dump(exclude_unset=True)
         dates=[body.installed_on,body.inspection_date,*body.part_dates.values()]
         if body.next_inspection:
             try:datetime.strptime(body.next_inspection,'%Y-%m-%d')
@@ -138,7 +138,10 @@ def register(app):
             m=s.get(store.Machine,mid)
             if not m or not m.active:raise HTTPException(404,'設備不存在')
             data=json.loads(m.payload);old=data.get('asset',{})
-            for key in ['installed_on','part_dates','responsible','next_inspection']:old[key]=values[key]
+            # PATCH 未提供的欄位必須保留，避免新增檢核時清空設備履歷。
+            for key in ['installed_on','part_dates','responsible','next_inspection']:
+              if key in values:
+                old[key]=values[key]
             if body.inspection_date:old.setdefault('inspections',[]).append({'date':body.inspection_date,'inspector':request.state.user['name'],'note':body.inspection_note})
             data['asset']=old;m.payload=json.dumps(data,ensure_ascii=False);s.commit();return data
     @app.get('/api/machines')
