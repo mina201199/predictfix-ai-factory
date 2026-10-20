@@ -71,3 +71,39 @@ v3只把**條件決策訓練loss**改用raw logits，移除這個飽和平坦方
 v3保留集100題全部固定選一段；包括validation的128題共有126題一段、1題兩段、1題三段。全拒答消失，但空金標40題全錯，多段答案仍漏選。validation EM為32.14%；保留集positive EM60%、precision100%、recall71.43%，不能用這些局部改善掩蓋拒答失敗。保留集injection EM從原模型20%降為0%，雖未選入注入段落，任務答案仍不正確。
 
 證據見artifacts/qlora-repair-comparison-20261020.json、raw-base/train/eval報告與adapter-integrity報告。此候選不部署、不宣稱完整修復；下一輪只驗證504題覆蓋量，已曝光v4不再作未見測試。原先52.7%描述僅為inverse-length名義權重，並非實測梯度占比。
+
+
+## 504題單一變項對照已完成
+
+使用者授權最多90分鐘，完整流程實際4757.187秒（79.29分鐘，背景工作未受控）。依凍結規格`gemma-sft-protocol-v4-coverage.json`完成504次optimizer更新、401626序列tokens與1806個監督決策位置。只增加訓練覆蓋量與相應步數，其餘模型、raw決策loss、LR、rank、seed、batch與生成流程不變。原126題順序保留；第126步checkpoint與上一輪最終adapter SHA256完全相同，確認前綴訓練軌跡相同。此對照支持繼續訓練有幫助，但不能單獨區分「新題覆蓋」與「更多更新步數」的效果。
+
+|同一28題validation|原模型NF4|raw126步|raw504步|
+|---|---:|---:|---:|
+|完全正確（EM）|1/28（3.57%）|9/28（32.14%）|24/28（85.71%）|
+|段落precision|36.00%|54.84%|92.86%|
+|段落recall|93.10%|58.62%|89.66%|
+|空金標正確拒答|0/9|0/9|9/9|
+|有答案卻拒答|0/19|0/19|2/19|
+|注入題EM|0/4|2/4|3/4|
+
+預測段落數0/1/2/3分別11/9/5/3，不再全拒答或固定只選一段。按金標基數分組：空答案9/9正確、單段9/11正確、雙段4/6正確、三段2/2正確。多段8題合計6題完全正確；三段樣本僅2題，不足以宣稱穩健。
+
+剩餘錯誤全部列於`artifacts/qlora-coverage-comparison-20261020.json`：`way-lube-09`、`lathe-turret-09`有答案卻回空；`lathe-turret-25`錯選一段並漏一段；`lathe-turret-13`多選一段。沒有以這些錯誤挑checkpoint或再調參。
+
+新adapter SHA256：`ca0915324cee4b32a10ad158fe7867cf17e7c49df275d70a07f31977d732262c`。實際檔案包含410個有限LoRA tensors、12079104參數、48370272 bytes。最後504步checkpoint、保存adapter與全新模型重載雜湊一致；重載probe logits最大誤差0。各階段來源雜湊一致且與現行程式相符，原始逐題輸出獨立重評分吻合。155項完整回歸通過，failures/errors/skipped均0；既有Starlette棄用警告1項。
+
+### 如何驗證
+
+開啟`artifacts/qlora-coverage-comparison-20261020.json`查看`optimizerSteps:504`、`reload.passed:true`、`prefix126ExactAdapterMatch:true`、`byGoldCardinality`及4題`errors`。原始基準、訓練、重載輸出及總流程在同目錄`qlora-coverage-base/train/eval/campaign-20261020.json`。測試證據為`qlora-coverage-tests-20261020.xml`，adapter完整性為`qlora-coverage-adapter-integrity-20261020.json`。
+
+若需檢查測試報告，在本worktree執行：
+
+```powershell
+& '../predictfix-ai-factory/.venv/Scripts/python.exe' scripts/check_test_report.py artifacts/qlora-coverage-tests-20261020.xml
+```
+
+預期tests155且failures/errors/skipped皆0。模型檔保存在`.runtime/qlora-coverage-504-20261020/qlora_train/adapter`，沒有替換服務模型。
+
+### 結論與界線
+
+目前已在開發validation解除全拒答與單段塌縮，數值修正加完整訓練有效；但validation已多次檢視且只有28題，不能宣稱未知案場泛化、資安或維修診斷可靠。已曝光v4 holdout本輪完全不評估，尚無新獨立測試；因此`modelReady:false`，不部署、不merge、不push、不開PR。本輪90分鐘授權已完成，不再啟動GPU。若往後要正式驗收，需另行凍結新的來源／設備主題測試集與人工標註核對，取得相應執行預算。

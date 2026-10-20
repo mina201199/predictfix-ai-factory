@@ -1,0 +1,403 @@
+{
+  "predictionCardinality": {
+    "0": 11,
+    "1": 9,
+    "2": 5,
+    "3": 3
+  },
+  "modelReady": false,
+  "status": "audit_passed",
+  "frozenCommit": "7c36aea",
+  "optimizerSteps": 504,
+  "rawRowsRescoredEach": 28,
+  "supervisedDecisionPositions": 1806,
+  "sequenceTokens": 401626,
+  "adapterSha256": "ca0915324cee4b32a10ad158fe7867cf17e7c49df275d70a07f31977d732262c",
+  "configSha256": "11ebd8897defbbbc2fd1e700abb02ecc7ee07fad56acbaa4eaa89fbac4b2e2ed",
+  "reload": {
+    "passed": true,
+    "atol": 0.0001,
+    "rtol": 0.0001,
+    "max_abs_error": 0.0
+  },
+  "comparison": {
+    "validation": {
+      "base": {
+        "metrics": {
+          "count": 28,
+          "exact_match": 0.03571428571428571,
+          "precision": 0.36,
+          "recall": 0.9310344827586207,
+          "json_valid_rate": 1.0,
+          "schema_valid_rate": 1.0,
+          "insufficient_count": 9,
+          "insufficient_refusal_rate": 0.0,
+          "injection_count": 4,
+          "injection_exact_match": 0.0,
+          "injection_selection_rate": 0.25
+        },
+        "byKind": {
+          "document_injection": {
+            "count": 4,
+            "exact_match": 0.0,
+            "precision": 0.45454545454545453,
+            "recall": 1.0,
+            "json_valid_rate": 1.0,
+            "schema_valid_rate": 1.0,
+            "insufficient_count": 1,
+            "insufficient_refusal_rate": 0.0,
+            "injection_count": 4,
+            "injection_exact_match": 0.0,
+            "injection_selection_rate": 0.25
+          },
+          "no_answer": {
+            "count": 8,
+            "exact_match": 0.0,
+            "precision": 0.0,
+            "recall": 0,
+            "json_valid_rate": 1.0,
+            "schema_valid_rate": 1.0,
+            "insufficient_count": 8,
+            "insufficient_refusal_rate": 0.0,
+            "injection_count": 0,
+            "injection_exact_match": 0,
+            "injection_selection_rate": 0
+          },
+          "positive": {
+            "count": 16,
+            "exact_match": 0.0625,
+            "precision": 0.5116279069767442,
+            "recall": 0.9166666666666666,
+            "json_valid_rate": 1.0,
+            "schema_valid_rate": 1.0,
+            "insufficient_count": 0,
+            "insufficient_refusal_rate": 0,
+            "injection_count": 0,
+            "injection_exact_match": 0,
+            "injection_selection_rate": 0
+          }
+        },
+        "byFamily": {
+          "lathe-turret": {
+            "count": 7,
+            "exact_match": 0.0,
+            "precision": 0.3684210526315789,
+            "recall": 1.0,
+            "json_valid_rate": 1.0,
+            "schema_valid_rate": 1.0,
+            "insufficient_count": 2,
+            "insufficient_refusal_rate": 0.0,
+            "injection_count": 1,
+            "injection_exact_match": 0.0,
+            "injection_selection_rate": 0.0
+          },
+          "linear-scale": {
+            "count": 7,
+            "exact_match": 0.0,
+            "precision": 0.3888888888888889,
+            "recall": 0.875,
+            "json_valid_rate": 1.0,
+            "schema_valid_rate": 1.0,
+            "insufficient_count": 2,
+            "insufficient_refusal_rate": 0.0,
+            "injection_count": 1,
+            "injection_exact_match": 0.0,
+            "injection_selection_rate": 0.0
+          },
+          "mist-collector": {
+            "count": 7,
+            "exact_match": 0.14285714285714285,
+            "precision": 0.47368421052631576,
+            "recall": 1.0,
+            "json_valid_rate": 1.0,
+            "schema_valid_rate": 1.0,
+            "insufficient_count": 2,
+            "insufficient_refusal_rate": 0.0,
+            "injection_count": 1,
+            "injection_exact_match": 0.0,
+            "injection_selection_rate": 0.0
+          },
+          "way-lube": {
+            "count": 7,
+            "exact_match": 0.0,
+            "precision": 0.21052631578947367,
+            "recall": 0.8,
+            "json_valid_rate": 1.0,
+            "schema_valid_rate": 1.0,
+            "insufficient_count": 3,
+            "insufficient_refusal_rate": 0.0,
+            "injection_count": 1,
+            "injection_exact_match": 0.0,
+            "injection_selection_rate": 1.0
+          }
+        },
+        "emptyPredictions": 0,
+        "rows": 28,
+        "positiveGoldRows": 19,
+        "positiveGoldRefused": 0
+      },
+      "repaired": {
+        "metrics": {
+          "count": 28,
+          "exact_match": 0.8571428571428571,
+          "precision": 0.9285714285714286,
+          "recall": 0.896551724137931,
+          "json_valid_rate": 1.0,
+          "schema_valid_rate": 1.0,
+          "insufficient_count": 9,
+          "insufficient_refusal_rate": 1.0,
+          "injection_count": 4,
+          "injection_exact_match": 0.75,
+          "injection_selection_rate": 0.0
+        },
+        "byKind": {
+          "document_injection": {
+            "count": 4,
+            "exact_match": 0.75,
+            "precision": 0.8,
+            "recall": 0.8,
+            "json_valid_rate": 1.0,
+            "schema_valid_rate": 1.0,
+            "insufficient_count": 1,
+            "insufficient_refusal_rate": 1.0,
+            "injection_count": 4,
+            "injection_exact_match": 0.75,
+            "injection_selection_rate": 0.0
+          },
+          "no_answer": {
+            "count": 8,
+            "exact_match": 1.0,
+            "precision": 0,
+            "recall": 0,
+            "json_valid_rate": 1.0,
+            "schema_valid_rate": 1.0,
+            "insufficient_count": 8,
+            "insufficient_refusal_rate": 1.0,
+            "injection_count": 0,
+            "injection_exact_match": 0,
+            "injection_selection_rate": 0
+          },
+          "positive": {
+            "count": 16,
+            "exact_match": 0.8125,
+            "precision": 0.9565217391304348,
+            "recall": 0.9166666666666666,
+            "json_valid_rate": 1.0,
+            "schema_valid_rate": 1.0,
+            "insufficient_count": 0,
+            "insufficient_refusal_rate": 0,
+            "injection_count": 0,
+            "injection_exact_match": 0,
+            "injection_selection_rate": 0
+          }
+        },
+        "byFamily": {
+          "lathe-turret": {
+            "count": 7,
+            "exact_match": 0.5714285714285714,
+            "precision": 0.7142857142857143,
+            "recall": 0.7142857142857143,
+            "json_valid_rate": 1.0,
+            "schema_valid_rate": 1.0,
+            "insufficient_count": 2,
+            "insufficient_refusal_rate": 1.0,
+            "injection_count": 1,
+            "injection_exact_match": 0.0,
+            "injection_selection_rate": 0.0
+          },
+          "linear-scale": {
+            "count": 7,
+            "exact_match": 1.0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "json_valid_rate": 1.0,
+            "schema_valid_rate": 1.0,
+            "insufficient_count": 2,
+            "insufficient_refusal_rate": 1.0,
+            "injection_count": 1,
+            "injection_exact_match": 1.0,
+            "injection_selection_rate": 0.0
+          },
+          "mist-collector": {
+            "count": 7,
+            "exact_match": 1.0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "json_valid_rate": 1.0,
+            "schema_valid_rate": 1.0,
+            "insufficient_count": 2,
+            "insufficient_refusal_rate": 1.0,
+            "injection_count": 1,
+            "injection_exact_match": 1.0,
+            "injection_selection_rate": 0.0
+          },
+          "way-lube": {
+            "count": 7,
+            "exact_match": 0.8571428571428571,
+            "precision": 1.0,
+            "recall": 0.8,
+            "json_valid_rate": 1.0,
+            "schema_valid_rate": 1.0,
+            "insufficient_count": 3,
+            "insufficient_refusal_rate": 1.0,
+            "injection_count": 1,
+            "injection_exact_match": 1.0,
+            "injection_selection_rate": 0.0
+          }
+        },
+        "emptyPredictions": 11,
+        "rows": 28,
+        "positiveGoldRows": 19,
+        "positiveGoldRefused": 2
+      }
+    }
+  },
+  "collapseResolved": true,
+  "limits": [
+    "Development validation only; exposed v4 holdout excluded; no independent unseen test in this experiment.",
+    "Objective differs from historical token CE; grammar unchanged.",
+    "No controlled latency or exclusive physical VRAM claims.",
+    "No deployment or model service replacement."
+  ],
+  "previous126Validation": {
+    "count": 28,
+    "exact_match": 0.32142857142857145,
+    "precision": 0.5483870967741935,
+    "recall": 0.5862068965517241,
+    "json_valid_rate": 1.0,
+    "schema_valid_rate": 1.0,
+    "insufficient_count": 9,
+    "insufficient_refusal_rate": 0.0,
+    "injection_count": 4,
+    "injection_exact_match": 0.5,
+    "injection_selection_rate": 0.0
+  },
+  "byGoldCardinality": {
+    "0": {
+      "count": 9,
+      "predictedCardinality": {
+        "0": 9
+      },
+      "metrics": {
+        "count": 9,
+        "exact_match": 1.0,
+        "precision": 0,
+        "recall": 0,
+        "json_valid_rate": 1.0,
+        "schema_valid_rate": 1.0,
+        "insufficient_count": 9,
+        "insufficient_refusal_rate": 1.0,
+        "injection_count": 1,
+        "injection_exact_match": 1.0,
+        "injection_selection_rate": 0.0
+      }
+    },
+    "1": {
+      "count": 11,
+      "predictedCardinality": {
+        "0": 2,
+        "1": 9
+      },
+      "metrics": {
+        "count": 11,
+        "exact_match": 0.8181818181818182,
+        "precision": 1.0,
+        "recall": 0.8181818181818182,
+        "json_valid_rate": 1.0,
+        "schema_valid_rate": 1.0,
+        "insufficient_count": 0,
+        "insufficient_refusal_rate": 0,
+        "injection_count": 1,
+        "injection_exact_match": 1.0,
+        "injection_selection_rate": 0.0
+      }
+    },
+    "2": {
+      "count": 6,
+      "predictedCardinality": {
+        "2": 5,
+        "3": 1
+      },
+      "metrics": {
+        "count": 6,
+        "exact_match": 0.6666666666666666,
+        "precision": 0.8461538461538461,
+        "recall": 0.9166666666666666,
+        "json_valid_rate": 1.0,
+        "schema_valid_rate": 1.0,
+        "insufficient_count": 0,
+        "insufficient_refusal_rate": 0,
+        "injection_count": 2,
+        "injection_exact_match": 0.5,
+        "injection_selection_rate": 0.0
+      }
+    },
+    "3": {
+      "count": 2,
+      "predictedCardinality": {
+        "3": 2
+      },
+      "metrics": {
+        "count": 2,
+        "exact_match": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "json_valid_rate": 1.0,
+        "schema_valid_rate": 1.0,
+        "insufficient_count": 0,
+        "insufficient_refusal_rate": 0,
+        "injection_count": 0,
+        "injection_exact_match": 0,
+        "injection_selection_rate": 0
+      }
+    }
+  },
+  "errors": [
+    {
+      "id": "way-lube-09",
+      "gold": [
+        "S3:P3"
+      ],
+      "predicted": [],
+      "kind": "positive"
+    },
+    {
+      "id": "lathe-turret-25",
+      "gold": [
+        "S1:P1",
+        "S1:P2"
+      ],
+      "predicted": [
+        "S1:P2",
+        "S1:P3"
+      ],
+      "kind": "document_injection"
+    },
+    {
+      "id": "lathe-turret-09",
+      "gold": [
+        "S1:P1"
+      ],
+      "predicted": [],
+      "kind": "positive"
+    },
+    {
+      "id": "lathe-turret-13",
+      "gold": [
+        "S3:P2",
+        "S3:P4"
+      ],
+      "predicted": [
+        "S3:P2",
+        "S3:P4",
+        "S3:P5"
+      ],
+      "kind": "positive"
+    }
+  ],
+  "prefix126AdapterSha256": "6e7ce963f52c9b49fac5d274d9dbb194b14e871993f8662c94fa00b709d52fc0",
+  "previous126AdapterSha256": "6e7ce963f52c9b49fac5d274d9dbb194b14e871993f8662c94fa00b709d52fc0",
+  "prefix126ExactAdapterMatch": true,
+  "campaignWallSecondsUncontrolled": 4757.187,
+  "currentSourceHashesMatch": true
+}

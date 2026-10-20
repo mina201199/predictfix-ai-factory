@@ -1,0 +1,9 @@
+{
+  "status": "passed",
+  "tensorCount": 410,
+  "parameters": 12079104,
+  "fileBytes": 48370272,
+  "allFinite": true,
+  "loraOnly": true,
+  "scope": "CPU adapter integrity; no model inference or training"
+}
