@@ -1,17 +1,85 @@
 # 面試展示與交付
 
-## 準備
+**目前展示方式已改為實際呼叫 Gemma。** 請先依 [本機 Gemma RAG 啟動方式](interview-gemma-live.md) 啟動模型與網站，並使用 [五分鐘講稿](interview-script-5min.md)。下方原有「不呼叫模型」的啟動指令保留作為純流程備案；不要在準備展示 RAG 時套用該組停用模型的環境變數。既有隔離資料準備與維修操作仍適用。
+
+## 本次固定展示版本與準備（2026-10-21）
+
+目前這台電腦使用 `C:\Users\User\Desktop\ai factory\predictfix-wave2-main`，分支 `codex/interview-readiness`，基底為 `2c9e38f`。資料夾名稱雖有 main，分支已是本次面試準備分支；`predictfix-ai-factory` 是另一個評估分支，不用來展示新增的圖譜與介接功能。這裡修改尚未代表已推送或合併。
+
+展示採本機 HTTP，API 用 **18962**，模擬接收端用 **18963**；不使用既有 8081 模型或其他埠的服務。資料、測試用 `.env`、日誌放在 `.runtime/interview-20261021/`，不寫正式資料庫。這是一個**不呼叫模型的流程展示**：一般來源查找使用現有檢索，不能把規則結果說成當場由 Gemma 生成。CPU/GPU 成績用 [既有量測證據](interview-readiness.md) 說明；如要現場展示模型，需另確認模型檔與服務可用。
+
+### 目前電腦：啟動已準備的資料
+
+開一個專門給展示的 PowerShell，執行下列指令。埠被占用時應停止並確認，不關閉不明程序。
 
 ```powershell
-.\setup.ps1
-.\start.ps1 -Demo -Port 8082
+Set-Location -LiteralPath 'C:\Users\User\Desktop\ai factory\predictfix-wave2-main'
+$python = (Resolve-Path '../predictfix-ai-factory/.venv/Scripts/python.exe').Path
+$demoDir = Join-Path $PWD '.runtime/interview-20261021'
+if (-not (Test-Path -LiteralPath "$demoDir/.env")) { throw '先完成下方新環境準備步驟' }
+if (-not (Test-Path -LiteralPath "$demoDir/demo.db")) { throw '找不到隔離展示資料庫' }
+$env:APP_MODE = 'demo'
+$env:DEMO_MODE = '1'
+$env:DATABASE_URL = 'sqlite:///' + (Join-Path $demoDir 'demo.db').Replace('\', '/')
+$env:INTEGRATION_SOURCES = $null
+$env:BOOTSTRAP_PASSWORD = $null
+$env:OPENAI_ENABLED = '0'
+$env:LLM_PROVIDER = 'ollama'
+$env:LOCAL_LLM_MODEL = ''
+$env:OLLAMA_MODEL = ''
+$env:OLLAMA_URL = 'http://127.0.0.1:9'
+$env:COOKIE_SECURE = '0'
+$env:LAN_MODE = '0'
+& $python scripts/integration_run.py --env-file "$demoDir/.env" serve --port 18962
 ```
 
-另開一個 PowerShell，在專案目錄執行：
+開啟 <http://127.0.0.1:18962/workflow.html>。快速登入主管與面試示範工程師僅用於 localhost 合成資料展示；不要將這個設定改為對外開放。停止時在這個終端機按 Ctrl+C，關閉終端機即可丟棄本次環境變數。
+
+### 新環境或需要另一份乾淨展示資料
+
+原始程式可用 `setup.ps1` 安裝相依，但本輪使用既有虛擬環境，沒有重新安裝。若移到別台電腦，先確認 Python 環境並把 `$python` 改成該專案 `.venv/Scripts/python.exe`；模型權重不包含於 Git。
+
+以下在服務尚未啟動時執行。新資料夾必須不存在，不覆寫既有 `.env` 或資料庫。完成後把三個終端機的 `$demoDir` 都改成這個新路徑。
 
 ```powershell
-.\.venv\Scripts\python.exe scripts/prepare_interview_demo.py
+$demoDir = Join-Path $PWD ('.runtime/interview-' + (Get-Date -Format 'yyyyMMdd-HHmmss'))
+if (Test-Path -LiteralPath $demoDir) { throw '展示資料夾已存在，請使用新路徑' }
+New-Item -ItemType Directory -Path $demoDir | Out-Null
+& $python scripts/evaluate_knowledge_graph.py --demo-db "$demoDir/demo.db" --output "$demoDir/graph-evaluation.json"
+if ($LASTEXITCODE -ne 0) { throw '圖譜準備失敗，請先查看輸出' }
+@'
+import json, secrets, sys
+from pathlib import Path
+folder = Path(sys.argv[1]).resolve()
+source = {'mes-demo': {'keys': {'v1': secrets.token_urlsafe(48)}, 'outboundKeyId': 'v1',
+  'outboundUrl': 'http://127.0.0.1:18963/events', 'allowHttp': True}}
+settings = {'APP_MODE': 'demo', 'DEMO_MODE': '1',
+  'DATABASE_URL': 'sqlite:///' + (folder / 'demo.db').as_posix(),
+  'BOOTSTRAP_PASSWORD': secrets.token_urlsafe(32), 'INTEGRATION_SOURCES': json.dumps(source)}
+with (folder / '.env').open('x', encoding='utf-8') as file:
+  file.write(''.join(key + '=' + value + '\n' for key, value in settings.items()))
+print('Created isolated demo settings; no secrets printed.')
+'@ | & $python - $demoDir
 ```
+
+`.runtime/` 和 `.env` 均由 `.gitignore` 排除。圖譜建立器先建立合成 fixture 帳號；此處隨機初始密碼不會重設已存在帳號，展示一律使用快速登入。
+
+### 第二個終端機：更新當日出勤與面試工單
+
+先設定相同的專案路徑與 `$python`，再執行：
+
+```powershell
+@'
+import json
+import httpx
+from scripts.prepare_interview_demo import prepare
+with httpx.Client(base_url='http://127.0.0.1:18962', timeout=30, trust_env=False) as client:
+  result = prepare(client)
+print(json.dumps(result, ensure_ascii=False))
+'@ | & $python -
+```
+
+預期 `ready_for_dispatch: true`、`procedure_present: true`，並顯示當次 `ticket_id`。這個方式不覆寫 Git 內的舊展示報告。
 
 初始化工具只接受本機、且必須明確開啟展示模式。建立 `DEMO-INTERVIEW` 設備、虛構手冊、專用 `interview_demo` 工程師、當日出勤、資格、30 分鐘估時、已核准且已派工的排查／驗收清單、到期保養計畫及五個示範備品。專用工程師透過展示登入使用，不輸出或保存其隨機密碼；正式環境沒有快速登入。
 
@@ -21,7 +89,7 @@
 
 ## 2–3 分鐘展示腳本
 
-入口：<http://127.0.0.1:8082/workflow.html>。這是本機網址。
+入口：<http://127.0.0.1:18962/workflow.html>。這是本機網址。
 
 | 時間 | 操作 | 要說的重點 |
 |---|---|---|
@@ -35,36 +103,76 @@
 
 ## 完整流程自動驗證
 
-```powershell
-.\.venv\Scripts\python.exe scripts/prepare_interview_demo.py --walkthrough
-```
+在上述第二個終端機，把 Python 呼叫改成 `prepare(client, complete=True)` 即可執行完整 API 流程。只用這份隔離資料庫；完成後再執行一次 `prepare(client)`，留下新工單供現場操作。
 
-此指令真的執行驗收失敗阻擋、重新復測、提交、主管審核、案例發布及檢索；會完成目前那張示範工單。結果存於 [完整流程報告](../artifacts/interview-walkthrough-report.json)，準備狀態另存 [展示準備報告](../artifacts/interview-demo-report.json)。之後再次執行不帶 `--walkthrough` 的準備指令，留下新工單供面試操作。
+此函式真的執行驗收失敗阻擋、重新復測、提交、主管審核、案例發布及檢索；會完成目前那張示範工單。舊 CLI `prepare_interview_demo.py --walkthrough` 仍可用，但會覆寫舊報告，本輪採上述函式呼叫並另存結果。新證據見 [本輪證據目錄](../artifacts/interview-20261021/README.md)；[舊完整流程報告](../artifacts/interview-walkthrough-report.json) 與 [舊準備報告](../artifacts/interview-demo-report.json) 保留歷史內容。
 
 這些是 API 操作證據；操作過程另見 [60 秒操作影片](media/predictfix-demo.mp4)。尚未部署公開網址；不能把本機地址分享給面試官並稱為線上 Demo。
 
-## CI 與容器
+## 圖譜加演：來源有效性與權限（約 2 分鐘）
 
-[GitHub Actions](../.github/workflows/ci.yml) 分成完整測試及容器建置兩個 job：
+開 <http://127.0.0.1:18962/graph.html>，以主管登入。機型填 `KG-SYNTH-M1`、起點填 `DEMO-E17`，選「字詞＋圖譜」應有 4 條路徑，包含 `FILTER-A` 與 `LOTO`；純字詞模式沒有圖譜路徑。展開引用，說明來源版本與逐字引文。
+
+在候選區找 `壓差確認 → 需要備品 → FILTER-A`，填寫合成演練理由後撤回；再查剩 3 條。重新核准恢復 4 條。登出再以工程師登入：能查詢，不能管理候選。這是獨立圖譜入口，沒有呼叫模型，也沒有自動判定故障原因或庫存適用性。
+
+## 介接加演：重送與回寫（約 2–3 分鐘）
+
+主管開 <http://127.0.0.1:18962/integrations.html>，建立來源 `mes-demo`、外部機台 `SIM-CNC-01`、內部設備 `DEMO-INTERVIEW` 的對照。本輪資料已準備這個對照，新環境需先完成維修工單準備。
+
+在第二個終端機設定同一 `$demoDir`。為避免其他環境設定蓋過這份 `.env`，只在這個展示終端機清除相關值：
+
+```powershell
+$demoDir = Join-Path $PWD '.runtime/interview-20261021'
+foreach ($name in @('DATABASE_URL', 'INTEGRATION_SOURCES', 'BOOTSTRAP_PASSWORD', 'APP_MODE', 'DEMO_MODE')) {
+  [Environment]::SetEnvironmentVariable($name, $null, 'Process')
+}
+$runId = [guid]::NewGuid().ToString('N')
+& $python scripts/integration_run.py --env-file "$demoDir/.env" simulator send --target http://127.0.0.1:18962 --source mes-demo --scenario replay --external-id "DEMO-$runId" --event-id "EVT-$runId"
+```
+
+預期兩筆 HTTP 200、相同 `ticketId`，管理頁只有一張對應工單。每次演練使用新 `$runId`，不要跨次重用事件 ID 卻改動內容。可另以 `--scenario bad-signature`、新的 ID 展示 401；以 `--scenario unknown`、新的 ID 展示 pending，待主管建立對照後再解析。
+
+第三個專用終端機先設定相同專案路徑、`$python`、`$demoDir`，並同樣清除上列五個環境值，啟動接收器：
+
+```powershell
+& $python scripts/integration_run.py --env-file "$demoDir/.env" simulator receiver --source mes-demo --port 18963 --db "$demoDir/receiver.db" --fail-first 1
+```
+
+回第二個終端機執行一次 worker：
+
+```powershell
+& $python scripts/integration_run.py --env-file "$demoDir/.env" worker --once
+```
+
+新事件第一次會收到 503，管理頁顯示 pending、attempts=1、`http_status_503`；等待至少 11 秒，再執行同一指令，應變成 sent、attempts=2。`--once` 每次只處理一筆，若先前有待送事件，要依管理頁順序處理至本次事件。資料庫保存重試紀錄，接收器不會因重啟就把相同事件當新事件。
+
+停止 API 與接收器各自用 Ctrl+C。`--once` worker 自行退出。不要關閉其他專案服務，不要刪除資料庫來重跑；需要乾淨狀態時建立新資料夾。
+
+## 面試前測試與 CI 邊界
+
+[GitHub Actions](../.github/workflows/ci.yml) 目前有 tests、container、postgres 三個 job：
 
 - 測試 job 安裝固定套件、檢查依賴、跑全套 pytest，解析 JUnit，要求確實執行測試且零失敗、零錯誤、零跳過。
-- 容器 job 建置 Dockerfile，再啟動空資料庫的正式模式，檢查維修流程頁面／JS／CSS、API 文件與未登入阻擋。此 job 使用隔離 SQLite，尚未涵蓋 PostgreSQL、TLS 或高並發驗收。
+- 容器 job 建置 Dockerfile，再啟動空資料庫的正式模式，檢查維修流程頁面／JS／CSS、API 文件與未登入阻擋，使用隔離 SQLite。
+- PostgreSQL job 執行情境與 Compose、重啟、備份還原；job 存在不代表本輪已執行，也不代表手機 TLS 或企業高並發驗收。
 
 本機可先跑：
 
 ```powershell
-.\.venv\Scripts\python.exe -m pytest -q --junitxml=.runtime/tests.xml
-.\.venv\Scripts\python.exe scripts/check_test_report.py .runtime/tests.xml
+$testDir = Join-Path $PWD ('.runtime/interview-tests-' + [guid]::NewGuid().ToString('N'))
+& $python -m pytest --confcutdir=. --rootdir=. tests tools/demo-video/tests -q -p no:cacheprovider --basetemp=$testDir --junitxml=.runtime/interview-tests.xml
+if ($LASTEXITCODE -ne 0) { throw '測試有失敗，請保留輸出並先處理' }
+& $python scripts/check_test_report.py .runtime/interview-tests.xml
 ```
 
 CI 檔案已建立不等於 GitHub 已執行。需要將經檢查的版本推到自己的 repo，再保存綠燈連結；目前未代為推送。
 
-## 現況與下一步
+## 歷史環境紀錄（2026-10-07）
 
-本機兩模式已恢復，可進行面試流程。SQLAlchemy 使用官方支援的純 Python 安裝，未修改 Windows 安全政策。Dockerfile 已補齊維修流程資產，兩份 Compose 設定通過語法與環境代入檢查，但本機 Docker 引擎仍無法連線。
+以下保留 2026-10-07 當時的環境紀錄，不代表目前 Docker 或 PostgreSQL 狀態。當時本機兩模式已恢復，SQLAlchemy 使用官方支援的純 Python 安裝，未修改 Windows 安全政策；Dockerfile 已補齊維修流程資產，兩份 Compose 設定通過語法與環境代入檢查，但當時本機 Docker 引擎無法連線。
 
 2026-10-07 已新建 Python 3.12 環境，重新安裝固定依賴，全套 38 項測試通過、零跳過；再以該環境啟動隔離正式模式，頁面資產、API 文件與匿名存取阻擋通過。這是在目前工作目錄進行，尚未驗證另一台電腦或乾淨 Git checkout。完整狀態見 [交付檢查報告](../artifacts/interview-readiness-report.json)。
 
 Docker Desktop 的具體阻擋是無法重新命名 `sailor-ingest.sock`，Windows 回報無法存取；保留原檔的備份嘗試亦失敗。未刪除容器資料或修改安全設定。
 
-後續還需：在可運作的 Docker 引擎實際建置／啟動，驗證 PostgreSQL 與 HTTPS，選定公開展示環境與網域，加入監控和備份演練。真實感測器、現場診斷與成效評估是另一階段，不應列為本次已完成。
+後續 Docker／PostgreSQL 已有驗證與修正，見 [2026-10-20 稽核](../artifacts/system-audit-20261020/README.md)。2026-10-21 本機面試演練結果與仍待處理的手機／企業網路、現場成效，見 [本次交接](interview-handoff-20261021.md)。正式部署與現場項目不在本輪範圍內。

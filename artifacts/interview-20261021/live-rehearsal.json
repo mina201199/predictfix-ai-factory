@@ -1,0 +1,37 @@
+{
+  "date": "2026-10-21",
+  "transport": "localhost HTTP",
+  "database": "isolated SQLite",
+  "llmUsed": false,
+  "gpuUsed": false,
+  "browserVisualRetested": false,
+  "productionDeploymentChanged": false,
+  "checks": {
+    "pagesServed": true,
+    "freshTicketAfterWalkthrough": true
+  },
+  "walkthrough": {
+    "synthetic": true,
+    "ticket_id": "WO-17e39ea5444c458a8c205109b410645f",
+    "machine_id": "DEMO-INTERVIEW",
+    "engineer": "INTERVIEW DEMO 工程師",
+    "qualification": "DEMO換刀資格",
+    "ready_for_dispatch": true,
+    "procedure_present": true,
+    "completed": true,
+    "failed_verification_blocked": true,
+    "case_id": "CASE-a830ebde234840b1ba89dca35238f4fd",
+    "published_case_retrievable": true
+  },
+  "prepared": {
+    "synthetic": true,
+    "ticket_id": "WO-3b1605c06c544547a3fec71d21550ea4",
+    "machine_id": "DEMO-INTERVIEW",
+    "engineer": "INTERVIEW DEMO 工程師",
+    "qualification": "DEMO換刀資格",
+    "ready_for_dispatch": true,
+    "procedure_present": true,
+    "completed": false
+  },
+  "ownedServicesStopped": true
+}

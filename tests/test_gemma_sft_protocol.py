@@ -273,23 +273,26 @@ def test_exception_cleans_owned_processes_before_propagating(tmp_path, monkeypat
     time.sleep(4.1)
 
 
-def test_timeout_contains_descendants_born_after_launch(tmp_path, monkeypatch):
+@pytest.mark.parametrize('startupDelay', [0, 3.2])
+def test_timeout_contains_descendants_born_after_launch(tmp_path, monkeypatch, startupDelay):
   import time
   import gemma_sft_process
   from run_gemma_sft_campaign import runBounded
   heartbeat = tmp_path / 'late-heartbeat.txt'
   leafCode = ('import sys,time\nfrom pathlib import Path\np=Path(sys.argv[1])\n'
-    'end=time.monotonic()+4\nwhile time.monotonic()<end:\n'
+    'end=time.monotonic()+20\nwhile time.monotonic()<end:\n'
     '  p.write_text(str(time.monotonic()))\n  time.sleep(0.03)\n')
   spawnerCode = ('import subprocess,sys,time\ntime.sleep(0.25)\n'
-    'subprocess.Popen([sys.executable,"-c",sys.argv[1],sys.argv[2]])\ntime.sleep(4)\n')
+    'subprocess.Popen([sys.executable,"-c",sys.argv[1],sys.argv[2]])\ntime.sleep(20)\n')
   parentCode = ('import subprocess,sys,time\n'
-    'subprocess.Popen([sys.executable,"-c",sys.argv[1],sys.argv[2],sys.argv[3]])\ntime.sleep(4)\n')
+    'time.sleep(float(sys.argv[4]))\n'
+    'subprocess.Popen([sys.executable,"-c",sys.argv[1],sys.argv[2],sys.argv[3]])\ntime.sleep(20)\n')
   originalStart = gemma_sft_process.startOwnedProcess
   def startAndAwaitLateDescendant(*args):
     process = originalStart(*args)
     try:
-      deadline = time.monotonic() + 3
+      # 啟動排程不屬於清理時限；先確認後代已執行，再驗證 0.1 秒逾時會收束整組。
+      deadline = time.monotonic() + 15
       while not heartbeat.exists() and time.monotonic() < deadline:
         time.sleep(0.01)
       assert heartbeat.exists(), 'The late descendant must run before testing cleanup'
@@ -300,7 +303,7 @@ def test_timeout_contains_descendants_born_after_launch(tmp_path, monkeypatch):
   monkeypatch.setattr(gemma_sft_process, 'startOwnedProcess', startAndAwaitLateDescendant)
   try:
     with (tmp_path / 'late.log').open('w', encoding='utf-8') as log:
-      result = runBounded([sys.executable, '-c', parentCode, spawnerCode, leafCode, str(heartbeat)],
+      result = runBounded([sys.executable, '-c', parentCode, spawnerCode, leafCode, str(heartbeat), str(startupDelay)],
         tmp_path, None, log, 0.1)
     assert result['timed_out']
     assert heartbeat.exists(), 'The late descendant must run before termination'

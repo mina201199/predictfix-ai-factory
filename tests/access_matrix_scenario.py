@@ -255,6 +255,8 @@ def integrationRetry(role):
 
 
 MATRIX=[
+  row('GET','/api/agent/context',SIGNED_IN),
+  row('POST','/api/agent/chat',SIGNED_IN,lambda role:{'json':{'message':'換刀卡住要核對什麼'}},ai=True),
   # 公開頁面與登入
   row('GET','/healthz',PUBLIC),
   row('GET','/',PUBLIC),

@@ -1,0 +1,112 @@
+Browser tab: 3, Title: "PredictFix · 維修 AI 中心", URL: "http://127.0.0.1:18962/knowledge.html".
+0 AXWebArea PredictFix · 維修 AI 中心, URL: 127.0.0.1:18962/knowledge.html
+	1 container
+		2 link Description: PredictFix AI, Value: 127.0.0.1:18962/
+		3 text 維修知識，從證據開始。
+		4 container 知識中心
+			5 button 排查助手
+			6 button 手冊與來源
+			7 button 維修案例
+			8 link Description: ← 設備與工單, Value: 127.0.0.1:18962/
+			9 link Description: 維修流程・保養・備品 →, Value: 127.0.0.1:18962/workflow.html
+		10 text 本機帳號登入
+		11 text 陳主管 · 主管
+	12 container
+		13 text 設備維修 / 知識與經驗
+		14 heading 排查助手, Value: 1, ID: title
+			15 text 排查助手
+		16 text 陳主管 · 主管
+		17 button 登出
+		47 text 已完成
+		19 container assist
+			20 text EVIDENCE FIRST
+			21 heading 找到這次維修需要的依據, Value: 2
+				22 text 找到這次維修需要的依據
+			23 text 比對適用手冊與主管發布的案例，保留原文，讓每一項建議可以核對。
+			24 container ask-form
+				25 container
+					26 text 問題或異常描述
+					27 text entry area (settable) 問題或異常描述, Value: 特定刀位換刀卡住，應先核對哪些資料？
+				28 container
+					29 text 適用機型
+					30 pop up button (collapsed, settable) 適用機型, Value: PF-INTERVIEW-DEMO, ID: model-select, Secondary Actions: Expand
+						31 menu
+							32 尚未確認機型
+							33 PF-VMC850-DEMO
+							34 KG-SYNTH-M1
+							35 KG-SYNTH-M2
+							36 (selected) PF-INTERVIEW-DEMO
+				37 container
+					38 text 零件／系統
+					39 text field (settable) 零件／系統, Value: 換刀
+				40 checkbox (settable, integer) Description: 納入虛構示範資料, Value: 1
+				41 checkbox (settable, integer) Description: 由 AI 選取相關原文, Value: 1
+				42 button 查找維修依據
+				43 button 換刀卡住
+				44 button 冷卻異常
+				45 button 尺寸漂移
+			46 container answer
+				48 text AI 原文整理
+				49 heading 查詢結果, Value: 2
+					50 text 查詢結果
+				51 text 含虛構示範資料，不能作現場維修或驗收依據。
+以下為與問題相關的文件原文，供人員排查時確認。
+				52 container
+					53 text [S1]  原因狀態：假設
+症狀：【INTERVIEW DEMO】特定刀位換刀卡住
+發生條件：虛構：新增刀具後僅特定刀位卡住
+檢查發現：核對刀具主檔與刀位資料：虛構：資料已核對，測試條件與結果已保存
+原因：虛構假設：刀位資料不一致，非通用故障根因
+處置：虛構：核對刀位資料並依核准程序完成復測，記錄示範結果。
+驗收：維修後復測與驗收：虛構：資料已核對，測試條件與結果已保存
+				54 container
+					55 text [S2]  原因狀態：假設
+症狀：【INTERVIEW DEMO】特定刀位換刀卡住
+發生條件：虛構：新增刀具後僅特定刀位卡住
+檢查發現：核對刀具主檔與刀位資料：虛構：資料已核對，測試條件與結果已保存
+原因：虛構假設：刀位資料不一致，非通用故障根因
+處置：虛構：核對刀位資料並依核准程序完成復測，記錄示範結果。
+驗收：維修後復測與驗收：虛構：資料已核對，測試條件與結果已保存
+				56 container
+					57 text [S3]  虛構情境：換刀卡住時，記錄刀位、警報及近期變更，核對刀具主檔與刀位資料。
+虛構情境：換刀卡住時，記錄刀位、警報及近期變更，核對刀具主檔與刀位資料。
+虛構情境：換刀卡住時，記錄刀位、警報及近期變更，核對刀具主檔與刀位資料。
+虛構情境：換刀卡住時，記錄刀位、警報及近期變更，核對刀具主檔與刀位資料。
+虛構情境：換刀卡住時，記錄刀位、警報及近期變更，核對刀具主檔與刀位資料。
+虛構情境：換刀卡住時，記錄刀位、警報及近期變更，核對刀具主檔與刀位資料。
+虛構情境：換刀卡住時，記錄刀位、警報及近期變更，核對刀具主檔與刀位資料。
+虛構情境：換刀卡住時，記錄刀位、警報及近期變更，核對刀具主檔與刀位資料。
+				58 heading 待確認資訊, Value: 3
+					59 text 待確認資訊
+				60 content list
+					61 container
+						62 AXListMarker •
+						63 text 請補充發生條件、近期變更及已完成的檢查。
+				64 text 本機模型已執行 · gemma-4-E2B-it-Q8_0 · 10466.51 ms
+				65 text 引用檢查只驗證來源與原文存在，不代表專業診斷正確。由人員確認。
+				66 heading 來源與證據, Value: 3
+					67 text 來源與證據
+				68 button (collapsed) 虛構示範 S1 【INTERVIEW DEMO】特定刀位換刀卡住 CASE-a830ebde234840b1ba89dca35238f4fd · v2 · 主管發布的維修案例, Secondary Actions: Expand
+					69 text 虛構示範
+					70 text S1 【INTERVIEW DEMO】特定刀位換刀卡住
+					71 text CASE-a830ebde234840b1ba89dca35238f4fd · v2 · 主管發布的維修案例
+				72 button (collapsed) 虛構示範 S2 【INTERVIEW DEMO】特定刀位換刀卡住 CASE-de33ba032f5f4d449d75860058ac59f9 · v2 · 主管發布的維修案例, Secondary Actions: Expand
+					73 text 虛構示範
+					74 text S2 【INTERVIEW DEMO】特定刀位換刀卡住
+					75 text CASE-de33ba032f5f4d449d75860058ac59f9 · v2 · 主管發布的維修案例
+				76 container
+					77 button (expanded) 虛構示範 S3 INTERVIEW DEMO 換刀排查手冊 MAN-2279398c3c201f690f96562492450e1b · v1 · 換刀卡住排查 · 行 2–11, Secondary Actions: Collapse
+						78 text 虛構示範
+						79 text S3 INTERVIEW DEMO 換刀排查手冊
+						80 text MAN-2279398c3c201f690f96562492450e1b · v1 · 換刀卡住排查 · 行 2–11
+					81 text 適用機型：PF-INTERVIEW-DEMO  虛構情境：換刀卡住時，記錄刀位、警報及近期變更，核對刀具主檔與刀位資料。
+虛構情境：換刀卡住時，記錄刀位、警報及近期變更，核對刀具主檔與刀位資料。
+虛構情境：換刀卡住時，記錄刀位、警報及近期變更，核對刀具主檔與刀位資料。
+虛構情境：換刀卡住時，記錄刀位、警報及近期變更，核對刀具主檔與刀位資料。
+虛構情境：換刀卡住時，記錄刀位、警報及近期變更，核對刀具主檔與刀位資料。
+虛構情境：換刀卡住時，記錄刀位、警報及近期變更，核對刀具主檔與刀位資料。
+虛構情境：換刀卡住時，記錄刀位、警報及近期變更，核對刀具主檔與刀位資料。
+虛構情境：換刀卡住時，記錄刀位、警報及近期變更，核對刀具主檔與刀位資料。
+					82 button 查看完整來源
+
+The focused UI element is 77 button (expanded) 虛構示範 S3 INTERVIEW DEMO 換刀排查手冊 MAN-2279398c3c201f690f96562492450e1b · v1 · 換刀卡住排查 · 行 2–11, Secondary Actions: Collapse

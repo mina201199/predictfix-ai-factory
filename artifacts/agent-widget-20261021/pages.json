@@ -1,0 +1,30 @@
+[
+  {
+    "path": "/console.html",
+    "widgetCount": 1
+  },
+  {
+    "path": "/workflow.html",
+    "widgetCount": 1
+  },
+  {
+    "path": "/scan.html",
+    "widgetCount": 1
+  },
+  {
+    "path": "/integrations.html",
+    "widgetCount": 1
+  },
+  {
+    "path": "/graph.html",
+    "widgetCount": 1
+  },
+  {
+    "path": "/index.html",
+    "widgetCount": 1
+  },
+  {
+    "path": "/knowledge.html",
+    "widgetCount": 1
+  }
+]
