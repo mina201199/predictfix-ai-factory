@@ -1,4 +1,4 @@
-# PredictFix AI｜智慧工廠維修 Copilot
+# PredictFix AI｜智慧工廠維修 COPILOT
 
 > **CNC 換刀卡住了。該先查什麼、派誰處理，以及怎麼確認真的修好了？**
 
