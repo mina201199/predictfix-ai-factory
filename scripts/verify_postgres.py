@@ -1,4 +1,4 @@
-"""Verify Vulkrion on PostgreSQL 17 in two layers, without touching any real database.
+"""Verify PredictFix on PostgreSQL 17 in two layers, without touching any real database.
 
 scenarios: run the in-process production scenarios, each on its own throwaway database.
 container: run the production compose stack (API image + PostgreSQL), restart it, then

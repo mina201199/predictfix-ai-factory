@@ -24,7 +24,7 @@ def connect_read(path):
 def check(conn):
     if conn.execute('PRAGMA integrity_check').fetchone()[0]!='ok':raise RuntimeError('Database integrity check failed')
     tables={r[0] for r in conn.execute("SELECT name FROM sqlite_master WHERE type='table'")}
-    if not {'users','tickets','machines','schema_versions'}<=tables:raise RuntimeError('Not a current Vulkrion database')
+    if not {'users','tickets','machines','schema_versions'}<=tables:raise RuntimeError('Not a current PredictFix database')
     latest=conn.execute('SELECT MAX(version) FROM schema_versions').fetchone()[0]
     if latest!=1:raise RuntimeError('Unsupported schema version')
 

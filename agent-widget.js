@@ -6,7 +6,7 @@
   root.innerHTML = `
     <button class="agent-launch" type="button" aria-label="開啟維修 Agent" aria-expanded="false" aria-controls="agent-panel"><span aria-hidden="true">✦</span><span>維修助手</span></button>
     <section id="agent-panel" role="dialog" aria-labelledby="agent-title" hidden>
-      <header class="agent-header"><div><small>VULKRION · AGENT</small><h2 id="agent-title">維修助手</h2><p>查知識、建工單、協助主管派工</p></div><button type="button" class="agent-close" aria-label="關閉維修助手">×</button></header>
+      <header class="agent-header"><div><small>PREDICTFIX · AGENT</small><h2 id="agent-title">維修助手</h2><p>查知識、建工單、協助主管派工</p></div><button type="button" class="agent-close" aria-label="關閉維修助手">×</button></header>
       <div class="agent-notice">操作先確認，權限由系統檢查。維修建議須由人員核對。</div>
       <div class="agent-messages" role="log" aria-label="助手對話" aria-live="polite"></div>
       <div class="agent-status" role="status"></div>

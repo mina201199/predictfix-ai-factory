@@ -1,8 +1,8 @@
-# Vulkrion AI｜智慧工廠維修 Copilot
+# PredictFix AI｜智慧工廠維修 COPILOT
 
 > **CNC 換刀卡住了。該先查什麼、派誰處理，以及怎麼確認真的修好了？**
 
-Vulkrion AI 將維修知識查找、資格與容量派工、排查驗收及案例累積接成一套可操作的維修管理系統，面向 CNC 工廠的主管與維修工程師。
+PredictFix AI 將維修知識查找、資格與容量派工、排查驗收及案例累積接成一套可操作的維修管理系統，面向 CNC 工廠的主管與維修工程師。
 
 **[面試回答與證據](docs/interview-readiness.md) · [面試展示步驟](docs/interview-demo.md) · [本機體驗](#快速開始) · [操作手冊](docs/repair-flow.md) · [系統架構](docs/system-architecture.md) · [安全測試](docs/security-testing.md)**
 
@@ -90,7 +90,7 @@ git diff --check
 | 外部工單介接 | API／CSV／outbox 已實作 | 本機模擬器及隔離測試已驗證；正式 Compose 已含 worker，尚未對接真實企業端點。 |
 | 維修知識圖譜 | 可追溯關係、審查與獨立查詢已實作 | 有合成來源覆蓋評估；一般 AI 查詢尚未直接使用圖譜，未經領域專家及現場成效驗收。 |
 | 可重複展示 | 已提供準備工具與展示腳本 | 專用設備、工程師、資格與出勤；驗收阻擋、主管審核、案例發布與檢索已跑通。 |
-| CI | 有既有通過紀錄，本輪未重跑 | 設定含完整測試、容器與 PostgreSQL job；現有連結是先前執行紀錄，非本次面試修改的 CI。[歷史執行紀錄](https://github.com/mina201199/vulkrion/actions/runs/38715442505)。 |
+| CI | 有既有通過紀錄，本輪未重跑 | 設定含完整測試、容器與 PostgreSQL job；現有連結是先前執行紀錄，非本次面試修改的 CI。[歷史執行紀錄](https://github.com/mina201199/predictfix-ai-factory/actions/runs/38715442505)。 |
 | Docker／PostgreSQL／HTTPS | 有本機驗證紀錄，正式環境尚待驗收 | 既有 PostgreSQL 備份還原及 2026-10-20 工單介接稽核已留證據；交接另記錄本機 Caddy TLS 驗證，手機與企業網路尚未驗收。本輪不重跑部署。 |
 | 公開網站／企業上線 | 尚未完成 | 尚無外部可用網址，未接真實感測器，未完成工廠現場驗收。 |
 
@@ -407,7 +407,7 @@ docker stop pf-verify-pg
 
 | 優先序 | 要補的工作 | 完成判準 |
 |---|---|---|
-| **1．交付紀錄** | 已完成：GitHub Actions 測試與容器檢查通過，見 [執行紀錄](https://github.com/mina201199/vulkrion/actions/runs/38553389662)。 | GitHub 確實跑完測試與容器檢查。 |
+| **1．交付紀錄** | 已完成：GitHub Actions 測試與容器檢查通過，見 [執行紀錄](https://github.com/mina201199/predictfix-ai-factory/actions/runs/38553389662)。 | GitHub 確實跑完測試與容器檢查。 |
 | **2．展示影片** | 已完成：[60 秒操作影片](docs/media/predictfix-demo.mp4)涵蓋報修、派工、驗收阻擋、審核與案例發布。 | 面試官能快速看完操作，現場也可重新準備工單。 |
 | **3．外部可用** | 實測 Docker／PostgreSQL／HTTPS，建立獨立的公開展示環境。 | 外部可開啟、資料可持久化、重啟與備份還原通過；展示與正式資料隔離。 |
 | **4．效果評估** | 建立獨立手冊題集與相關性標註；由領域人員評估引用適用性和流程成效。 | 有獨立測試集、逐題錯誤分析與清楚的成效指標。 |

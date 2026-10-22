@@ -51,7 +51,7 @@ async def lifespan(app):
         replay=json.loads((ART/'replay.json').read_text(encoding='utf-8'))
     yield
 
-app=FastAPI(title='Vulkrion AI',version='0.2.0',lifespan=lifespan)
+app=FastAPI(title='PredictFix AI',version='0.2.0',lifespan=lifespan)
 
 @app.exception_handler(RequestValidationError)
 async def safe_validation_error(request:Request, exc:RequestValidationError):

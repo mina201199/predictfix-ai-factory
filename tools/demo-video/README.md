@@ -1,4 +1,4 @@
-# Vulkrion AI Demo 影片工具
+# PredictFix AI Demo 影片工具
 
 產出 `output/predictfix-demo.mp4`、`output/predictfix-preview.gif` 與 `output/predictfix-thumbnail.png`。旁白與分鏡見 [narration.md](narration.md)。工具位於主專案的 `tools/demo-video/`，會讀取專案根目錄的 `demo-measurements.csv`。
 
