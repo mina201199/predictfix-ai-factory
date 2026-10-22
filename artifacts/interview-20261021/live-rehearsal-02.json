@@ -1,0 +1,46 @@
+{
+  "date": "2026-10-21",
+  "transport": "localhost HTTP",
+  "database": "isolated SQLite",
+  "llmUsed": false,
+  "gpuUsed": false,
+  "browserVisualRetested": false,
+  "productionDeploymentChanged": false,
+  "checks": {
+    "pagesServed": true,
+    "freshTicketAfterWalkthrough": true,
+    "graphWithdrawRestore": true,
+    "replayOneTicket": true,
+    "badSignatureRejected": true,
+    "receiverFailureRetained": true,
+    "retryDelivered": true,
+    "engineerReadOnlyGraphAndNoManagement": true,
+    "anonymousRejected": true
+  },
+  "walkthrough": {
+    "synthetic": true,
+    "ticket_id": "WO-3b1605c06c544547a3fec71d21550ea4",
+    "machine_id": "DEMO-INTERVIEW",
+    "engineer": "INTERVIEW DEMO 工程師",
+    "qualification": "DEMO換刀資格",
+    "ready_for_dispatch": true,
+    "procedure_present": true,
+    "completed": true,
+    "failed_verification_blocked": true,
+    "case_id": "CASE-de33ba032f5f4d449d75860058ac59f9",
+    "published_case_retrievable": true
+  },
+  "prepared": {
+    "synthetic": true,
+    "ticket_id": "WO-ff9a742a10304675996690ed28f47b65",
+    "machine_id": "DEMO-INTERVIEW",
+    "engineer": "INTERVIEW DEMO 工程師",
+    "qualification": "DEMO換刀資格",
+    "ready_for_dispatch": true,
+    "procedure_present": true,
+    "completed": false
+  },
+  "integrationTicket": "WO-51CCD34E0A90",
+  "passed": true,
+  "ownedServicesStopped": true
+}

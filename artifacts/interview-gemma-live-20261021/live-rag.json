@@ -1,0 +1,329 @@
+{
+  "date": "2026-10-21",
+  "model": "gemma-4-E2B-it-Q8_0",
+  "modelSha256": "996d08777aadc6bfd3c7375ef70ba25a0f55240075860754fdb18d6d860aa63a",
+  "runtime": "llama.cpp b11491",
+  "device": "CPU",
+  "threads": 12,
+  "gpuLayers": 0,
+  "context": 8192,
+  "parallelSlots": 1,
+  "modelUrl": "http://127.0.0.1:18964",
+  "appUrl": "http://127.0.0.1:18962",
+  "openaiEnabled": false,
+  "request": {
+    "question": "特定刀位換刀卡住，應先核對哪些資料？",
+    "machine_model": "PF-INTERVIEW-DEMO",
+    "component": "換刀",
+    "allow_synthetic": true,
+    "use_llm": true
+  },
+  "browserFirstAssistantMs": 10466.51,
+  "firstWorkflowModelProcessingMs": 12162.26,
+  "runs": [
+    {
+      "kind": "same-question-repeat-with-server-prompt-cache-possible",
+      "wallMs": 3333.21,
+      "response": {
+        "question": "特定刀位換刀卡住，應先核對哪些資料？",
+        "citations": [
+          {
+            "id": "CASE-a830ebde234840b1ba89dca35238f4fd",
+            "chunk_id": "CASE-a830ebde234840b1ba89dca35238f4fd:r2",
+            "title": "【INTERVIEW DEMO】特定刀位換刀卡住",
+            "section": "主管發布的維修案例",
+            "version": "2",
+            "text": "原因狀態：假設\n症狀：【INTERVIEW DEMO】特定刀位換刀卡住\n發生條件：虛構：新增刀具後僅特定刀位卡住\n檢查發現：核對刀具主檔與刀位資料：虛構：資料已核對，測試條件與結果已保存\n原因：虛構假設：刀位資料不一致，非通用故障根因\n處置：虛構：核對刀位資料並依核准程序完成復測，記錄示範結果。\n驗收：維修後復測與驗收：虛構：資料已核對，測試條件與結果已保存",
+            "source_type": "reviewed_repair_case",
+            "is_synthetic": true,
+            "machine_models": [
+              "PF-INTERVIEW-DEMO"
+            ],
+            "component": "換刀",
+            "ticket_id": "WO-17e39ea5444c458a8c205109b410645f",
+            "source_url": "/api/cases/CASE-a830ebde234840b1ba89dca35238f4fd",
+            "source_sha256": "66e112c2430ee92f4276f6da3f6c1307402c60cd62523daeb0f81381db208dfb",
+            "reviewed_by": "supervisor",
+            "cause_status": "hypothesis",
+            "rank": 1,
+            "score": 0.032787,
+            "tfidf_score": 0.3664,
+            "bm25_score": 6.6347,
+            "applicability": "matched_model",
+            "reference": "S1"
+          },
+          {
+            "id": "CASE-de33ba032f5f4d449d75860058ac59f9",
+            "chunk_id": "CASE-de33ba032f5f4d449d75860058ac59f9:r2",
+            "title": "【INTERVIEW DEMO】特定刀位換刀卡住",
+            "section": "主管發布的維修案例",
+            "version": "2",
+            "text": "原因狀態：假設\n症狀：【INTERVIEW DEMO】特定刀位換刀卡住\n發生條件：虛構：新增刀具後僅特定刀位卡住\n檢查發現：核對刀具主檔與刀位資料：虛構：資料已核對，測試條件與結果已保存\n原因：虛構假設：刀位資料不一致，非通用故障根因\n處置：虛構：核對刀位資料並依核准程序完成復測，記錄示範結果。\n驗收：維修後復測與驗收：虛構：資料已核對，測試條件與結果已保存",
+            "source_type": "reviewed_repair_case",
+            "is_synthetic": true,
+            "machine_models": [
+              "PF-INTERVIEW-DEMO"
+            ],
+            "component": "換刀",
+            "ticket_id": "WO-3b1605c06c544547a3fec71d21550ea4",
+            "source_url": "/api/cases/CASE-de33ba032f5f4d449d75860058ac59f9",
+            "source_sha256": "cb9fd0f6170e6bef2c24c738eeeb579d9f0635193ca2a5b512e2bfd51077e891",
+            "reviewed_by": "supervisor",
+            "cause_status": "hypothesis",
+            "rank": 2,
+            "score": 0.032258,
+            "tfidf_score": 0.3664,
+            "bm25_score": 6.6347,
+            "applicability": "matched_model",
+            "reference": "S2"
+          },
+          {
+            "title": "INTERVIEW DEMO 換刀排查手冊",
+            "version": "1",
+            "machine_model": "PF-INTERVIEW-DEMO",
+            "controller": "",
+            "component": "換刀",
+            "is_synthetic": true,
+            "source_label": "原創虛構面試資料，不作現場維修依據",
+            "rights_confirmed": true,
+            "id": "MAN-2279398c3c201f690f96562492450e1b",
+            "source_type": "imported_manual",
+            "machine_models": [
+              "PF-INTERVIEW-DEMO"
+            ],
+            "source_sha256": "1f8a887ef5a783ede00793feba010892cfcf1c266a5408780e8757d3177cbd0c",
+            "imported_by": "supervisor",
+            "imported_at": "2026-10-21T02:00:29.088420+00:00",
+            "source_url": "/api/knowledge/manuals/MAN-2279398c3c201f690f96562492450e1b",
+            "category": "匯入手冊",
+            "active": true,
+            "builtin": false,
+            "text": "虛構情境：換刀卡住時，記錄刀位、警報及近期變更，核對刀具主檔與刀位資料。\n虛構情境：換刀卡住時，記錄刀位、警報及近期變更，核對刀具主檔與刀位資料。\n虛構情境：換刀卡住時，記錄刀位、警報及近期變更，核對刀具主檔與刀位資料。\n虛構情境：換刀卡住時，記錄刀位、警報及近期變更，核對刀具主檔與刀位資料。\n虛構情境：換刀卡住時，記錄刀位、警報及近期變更，核對刀具主檔與刀位資料。\n虛構情境：換刀卡住時，記錄刀位、警報及近期變更，核對刀具主檔與刀位資料。\n虛構情境：換刀卡住時，記錄刀位、警報及近期變更，核對刀具主檔與刀位資料。\n虛構情境：換刀卡住時，記錄刀位、警報及近期變更，核對刀具主檔與刀位資料。",
+            "section": "換刀卡住排查",
+            "chunk_id": "MAN-2279398c3c201f690f96562492450e1b:2",
+            "line_start": 2,
+            "line_end": 11,
+            "rank": 3,
+            "score": 0.031746,
+            "tfidf_score": 0.1413,
+            "bm25_score": 3.5874,
+            "applicability": "matched_model",
+            "reference": "S3"
+          }
+        ],
+        "steps": [
+          {
+            "reference": "S1",
+            "quote": "原因狀態：假設\n症狀：【INTERVIEW DEMO】特定刀位換刀卡住\n發生條件：虛構：新增刀具後僅特定刀位卡住\n檢查發現：核對刀具主檔與刀位資料：虛構：資料已核對，測試條件與結果已保存\n原因：虛構假設：刀位資料不一致，非通用故障根因\n處置：虛構：核對刀位資料並依核准程序完成復測，記錄示範結果。\n驗收：維修後復測與驗收：虛構：資料已核對，測試條件與結果已保存",
+            "source_id": "CASE-a830ebde234840b1ba89dca35238f4fd",
+            "excerpt_id": "S1:P1"
+          },
+          {
+            "reference": "S2",
+            "quote": "原因狀態：假設\n症狀：【INTERVIEW DEMO】特定刀位換刀卡住\n發生條件：虛構：新增刀具後僅特定刀位卡住\n檢查發現：核對刀具主檔與刀位資料：虛構：資料已核對，測試條件與結果已保存\n原因：虛構假設：刀位資料不一致，非通用故障根因\n處置：虛構：核對刀位資料並依核准程序完成復測，記錄示範結果。\n驗收：維修後復測與驗收：虛構：資料已核對，測試條件與結果已保存",
+            "source_id": "CASE-de33ba032f5f4d449d75860058ac59f9",
+            "excerpt_id": "S2:P1"
+          },
+          {
+            "reference": "S3",
+            "quote": "虛構情境：換刀卡住時，記錄刀位、警報及近期變更，核對刀具主檔與刀位資料。\n虛構情境：換刀卡住時，記錄刀位、警報及近期變更，核對刀具主檔與刀位資料。\n虛構情境：換刀卡住時，記錄刀位、警報及近期變更，核對刀具主檔與刀位資料。\n虛構情境：換刀卡住時，記錄刀位、警報及近期變更，核對刀具主檔與刀位資料。\n虛構情境：換刀卡住時，記錄刀位、警報及近期變更，核對刀具主檔與刀位資料。\n虛構情境：換刀卡住時，記錄刀位、警報及近期變更，核對刀具主檔與刀位資料。\n虛構情境：換刀卡住時，記錄刀位、警報及近期變更，核對刀具主檔與刀位資料。\n虛構情境：換刀卡住時，記錄刀位、警報及近期變更，核對刀具主檔與刀位資料。",
+            "source_id": "MAN-2279398c3c201f690f96562492450e1b",
+            "excerpt_id": "S3:P1"
+          }
+        ],
+        "retrieval_method": "TF-IDF + BM25 reciprocal-rank fusion",
+        "llm_used": true,
+        "model": "gemma-4-E2B-it-Q8_0",
+        "needs_confirmation": false,
+        "follow_up": [
+          "請補充發生條件、近期變更及已完成的檢查。"
+        ],
+        "limits": "引用檢查只驗證來源與原文存在，不代表專業診斷正確。由人員確認。",
+        "provider": "llamacpp",
+        "citation_checks": {
+          "accepted": 3,
+          "rejected": 0,
+          "method": "selected_id_to_immutable_source_paragraph"
+        },
+        "answer_method": "llm_selected_verified_excerpts",
+        "answer": "含虛構示範資料，不能作現場維修或驗收依據。\n以下為與問題相關的文件原文，供人員排查時確認。",
+        "elapsed_ms": 3323.73
+      },
+      "verification": [
+        {
+          "excerptId": "S1:P1",
+          "sourceId": "CASE-a830ebde234840b1ba89dca35238f4fd",
+          "version": "2",
+          "exactParagraphMatch": true,
+          "machineModelMatched": true
+        },
+        {
+          "excerptId": "S2:P1",
+          "sourceId": "CASE-de33ba032f5f4d449d75860058ac59f9",
+          "version": "2",
+          "exactParagraphMatch": true,
+          "machineModelMatched": true
+        },
+        {
+          "excerptId": "S3:P1",
+          "sourceId": "MAN-2279398c3c201f690f96562492450e1b",
+          "version": "1",
+          "exactParagraphMatch": true,
+          "machineModelMatched": true
+        }
+      ]
+    },
+    {
+      "kind": "same-question-repeat-with-server-prompt-cache-possible",
+      "wallMs": 3500.79,
+      "response": {
+        "question": "特定刀位換刀卡住，應先核對哪些資料？",
+        "citations": [
+          {
+            "id": "CASE-a830ebde234840b1ba89dca35238f4fd",
+            "chunk_id": "CASE-a830ebde234840b1ba89dca35238f4fd:r2",
+            "title": "【INTERVIEW DEMO】特定刀位換刀卡住",
+            "section": "主管發布的維修案例",
+            "version": "2",
+            "text": "原因狀態：假設\n症狀：【INTERVIEW DEMO】特定刀位換刀卡住\n發生條件：虛構：新增刀具後僅特定刀位卡住\n檢查發現：核對刀具主檔與刀位資料：虛構：資料已核對，測試條件與結果已保存\n原因：虛構假設：刀位資料不一致，非通用故障根因\n處置：虛構：核對刀位資料並依核准程序完成復測，記錄示範結果。\n驗收：維修後復測與驗收：虛構：資料已核對，測試條件與結果已保存",
+            "source_type": "reviewed_repair_case",
+            "is_synthetic": true,
+            "machine_models": [
+              "PF-INTERVIEW-DEMO"
+            ],
+            "component": "換刀",
+            "ticket_id": "WO-17e39ea5444c458a8c205109b410645f",
+            "source_url": "/api/cases/CASE-a830ebde234840b1ba89dca35238f4fd",
+            "source_sha256": "66e112c2430ee92f4276f6da3f6c1307402c60cd62523daeb0f81381db208dfb",
+            "reviewed_by": "supervisor",
+            "cause_status": "hypothesis",
+            "rank": 1,
+            "score": 0.032787,
+            "tfidf_score": 0.3664,
+            "bm25_score": 6.6347,
+            "applicability": "matched_model",
+            "reference": "S1"
+          },
+          {
+            "id": "CASE-de33ba032f5f4d449d75860058ac59f9",
+            "chunk_id": "CASE-de33ba032f5f4d449d75860058ac59f9:r2",
+            "title": "【INTERVIEW DEMO】特定刀位換刀卡住",
+            "section": "主管發布的維修案例",
+            "version": "2",
+            "text": "原因狀態：假設\n症狀：【INTERVIEW DEMO】特定刀位換刀卡住\n發生條件：虛構：新增刀具後僅特定刀位卡住\n檢查發現：核對刀具主檔與刀位資料：虛構：資料已核對，測試條件與結果已保存\n原因：虛構假設：刀位資料不一致，非通用故障根因\n處置：虛構：核對刀位資料並依核准程序完成復測，記錄示範結果。\n驗收：維修後復測與驗收：虛構：資料已核對，測試條件與結果已保存",
+            "source_type": "reviewed_repair_case",
+            "is_synthetic": true,
+            "machine_models": [
+              "PF-INTERVIEW-DEMO"
+            ],
+            "component": "換刀",
+            "ticket_id": "WO-3b1605c06c544547a3fec71d21550ea4",
+            "source_url": "/api/cases/CASE-de33ba032f5f4d449d75860058ac59f9",
+            "source_sha256": "cb9fd0f6170e6bef2c24c738eeeb579d9f0635193ca2a5b512e2bfd51077e891",
+            "reviewed_by": "supervisor",
+            "cause_status": "hypothesis",
+            "rank": 2,
+            "score": 0.032258,
+            "tfidf_score": 0.3664,
+            "bm25_score": 6.6347,
+            "applicability": "matched_model",
+            "reference": "S2"
+          },
+          {
+            "title": "INTERVIEW DEMO 換刀排查手冊",
+            "version": "1",
+            "machine_model": "PF-INTERVIEW-DEMO",
+            "controller": "",
+            "component": "換刀",
+            "is_synthetic": true,
+            "source_label": "原創虛構面試資料，不作現場維修依據",
+            "rights_confirmed": true,
+            "id": "MAN-2279398c3c201f690f96562492450e1b",
+            "source_type": "imported_manual",
+            "machine_models": [
+              "PF-INTERVIEW-DEMO"
+            ],
+            "source_sha256": "1f8a887ef5a783ede00793feba010892cfcf1c266a5408780e8757d3177cbd0c",
+            "imported_by": "supervisor",
+            "imported_at": "2026-10-21T02:00:29.088420+00:00",
+            "source_url": "/api/knowledge/manuals/MAN-2279398c3c201f690f96562492450e1b",
+            "category": "匯入手冊",
+            "active": true,
+            "builtin": false,
+            "text": "虛構情境：換刀卡住時，記錄刀位、警報及近期變更，核對刀具主檔與刀位資料。\n虛構情境：換刀卡住時，記錄刀位、警報及近期變更，核對刀具主檔與刀位資料。\n虛構情境：換刀卡住時，記錄刀位、警報及近期變更，核對刀具主檔與刀位資料。\n虛構情境：換刀卡住時，記錄刀位、警報及近期變更，核對刀具主檔與刀位資料。\n虛構情境：換刀卡住時，記錄刀位、警報及近期變更，核對刀具主檔與刀位資料。\n虛構情境：換刀卡住時，記錄刀位、警報及近期變更，核對刀具主檔與刀位資料。\n虛構情境：換刀卡住時，記錄刀位、警報及近期變更，核對刀具主檔與刀位資料。\n虛構情境：換刀卡住時，記錄刀位、警報及近期變更，核對刀具主檔與刀位資料。",
+            "section": "換刀卡住排查",
+            "chunk_id": "MAN-2279398c3c201f690f96562492450e1b:2",
+            "line_start": 2,
+            "line_end": 11,
+            "rank": 3,
+            "score": 0.031746,
+            "tfidf_score": 0.1413,
+            "bm25_score": 3.5874,
+            "applicability": "matched_model",
+            "reference": "S3"
+          }
+        ],
+        "steps": [
+          {
+            "reference": "S1",
+            "quote": "原因狀態：假設\n症狀：【INTERVIEW DEMO】特定刀位換刀卡住\n發生條件：虛構：新增刀具後僅特定刀位卡住\n檢查發現：核對刀具主檔與刀位資料：虛構：資料已核對，測試條件與結果已保存\n原因：虛構假設：刀位資料不一致，非通用故障根因\n處置：虛構：核對刀位資料並依核准程序完成復測，記錄示範結果。\n驗收：維修後復測與驗收：虛構：資料已核對，測試條件與結果已保存",
+            "source_id": "CASE-a830ebde234840b1ba89dca35238f4fd",
+            "excerpt_id": "S1:P1"
+          },
+          {
+            "reference": "S2",
+            "quote": "原因狀態：假設\n症狀：【INTERVIEW DEMO】特定刀位換刀卡住\n發生條件：虛構：新增刀具後僅特定刀位卡住\n檢查發現：核對刀具主檔與刀位資料：虛構：資料已核對，測試條件與結果已保存\n原因：虛構假設：刀位資料不一致，非通用故障根因\n處置：虛構：核對刀位資料並依核准程序完成復測，記錄示範結果。\n驗收：維修後復測與驗收：虛構：資料已核對，測試條件與結果已保存",
+            "source_id": "CASE-de33ba032f5f4d449d75860058ac59f9",
+            "excerpt_id": "S2:P1"
+          },
+          {
+            "reference": "S3",
+            "quote": "虛構情境：換刀卡住時，記錄刀位、警報及近期變更，核對刀具主檔與刀位資料。\n虛構情境：換刀卡住時，記錄刀位、警報及近期變更，核對刀具主檔與刀位資料。\n虛構情境：換刀卡住時，記錄刀位、警報及近期變更，核對刀具主檔與刀位資料。\n虛構情境：換刀卡住時，記錄刀位、警報及近期變更，核對刀具主檔與刀位資料。\n虛構情境：換刀卡住時，記錄刀位、警報及近期變更，核對刀具主檔與刀位資料。\n虛構情境：換刀卡住時，記錄刀位、警報及近期變更，核對刀具主檔與刀位資料。\n虛構情境：換刀卡住時，記錄刀位、警報及近期變更，核對刀具主檔與刀位資料。\n虛構情境：換刀卡住時，記錄刀位、警報及近期變更，核對刀具主檔與刀位資料。",
+            "source_id": "MAN-2279398c3c201f690f96562492450e1b",
+            "excerpt_id": "S3:P1"
+          }
+        ],
+        "retrieval_method": "TF-IDF + BM25 reciprocal-rank fusion",
+        "llm_used": true,
+        "model": "gemma-4-E2B-it-Q8_0",
+        "needs_confirmation": false,
+        "follow_up": [
+          "請補充發生條件、近期變更及已完成的檢查。"
+        ],
+        "limits": "引用檢查只驗證來源與原文存在，不代表專業診斷正確。由人員確認。",
+        "provider": "llamacpp",
+        "citation_checks": {
+          "accepted": 3,
+          "rejected": 0,
+          "method": "selected_id_to_immutable_source_paragraph"
+        },
+        "answer_method": "llm_selected_verified_excerpts",
+        "answer": "含虛構示範資料，不能作現場維修或驗收依據。\n以下為與問題相關的文件原文，供人員排查時確認。",
+        "elapsed_ms": 3489.32
+      },
+      "verification": [
+        {
+          "excerptId": "S1:P1",
+          "sourceId": "CASE-a830ebde234840b1ba89dca35238f4fd",
+          "version": "2",
+          "exactParagraphMatch": true,
+          "machineModelMatched": true
+        },
+        {
+          "excerptId": "S2:P1",
+          "sourceId": "CASE-de33ba032f5f4d449d75860058ac59f9",
+          "version": "2",
+          "exactParagraphMatch": true,
+          "machineModelMatched": true
+        },
+        {
+          "excerptId": "S3:P1",
+          "sourceId": "MAN-2279398c3c201f690f96562492450e1b",
+          "version": "1",
+          "exactParagraphMatch": true,
+          "machineModelMatched": true
+        }
+      ]
+    }
+  ]
+}

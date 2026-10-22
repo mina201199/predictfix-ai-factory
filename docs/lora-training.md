@@ -1,5 +1,7 @@
 # 本機部署與 LoRA 實驗
 
+本文保存歷史 Qwen CPU LoRA 與當時部署紀錄，不代表目前仍開啟 8084／8085。2026-10-20 後續 Gemma QLoRA 已完成 504 步與新題評估，但尚不採用，見 [面試數據整理](interview-readiness.md)。後續 Docker／PostgreSQL 驗證另見 [系統稽核](../artifacts/system-audit-20261020/README.md)；本文舊環境限制按當時日期解讀。
+
 ## 部署範圍
 
 `scripts/deploy_local.py` 建立具有逐檔 SHA-256 的版本快照，以獨立 SQLite 在 localhost 啟動正式資料模式。此版本不載入展示資料、不提供快速登入；LLM 暫停使用，維持候選來源降級功能。原本 8082 Demo 與 8083 正式資料服務不受影響。
@@ -10,7 +12,7 @@
 
 入口為 <http://127.0.0.1:8084/>。首次帳密只保存於未納入 Git 的 `.runtime/local-deploy/data/initial-access.json`；不可分享此檔案。資料庫、快照與日誌放在 `.runtime/local-deploy/`。已占用的服務不會被覆蓋，重跑需改用空閒連接埠。
 
-結果見 [本機部署報告](../artifacts/local-deployment-report.json)。這是本機原生 Python 部署，不是 Docker、公網或 HTTPS 上線。Docker 引擎目前無法連線，PostgreSQL／TLS 與異地還原仍未驗證。
+結果見 [本機部署報告](../artifacts/local-deployment-report.json)。這是本機原生 Python 部署，不是 Docker、公網或 HTTPS 上線。當時 Docker 引擎無法連線，PostgreSQL／TLS 與異地還原未驗證；後續狀態依頁首連結的稽核與面試交接，不把這句當作目前環境狀態。
 
 ## 訓練目標與資料
 

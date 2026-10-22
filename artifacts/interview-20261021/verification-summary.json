@@ -1,0 +1,32 @@
+{
+  "date": "2026-10-21",
+  "baseCommit": "2c9e38f",
+  "branch": "codex/interview-readiness",
+  "tests": {
+    "tests": 161,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "seconds": 332.43,
+  "warnings": [
+    "Existing StarletteDeprecationWarning: httpx TestClient"
+  ],
+  "command": "python -m pytest --confcutdir=. --rootdir=. tests tools/demo-video/tests -q -p no:cacheprovider --basetemp=<new .runtime directory> --junitxml=artifacts/interview-20261021/tests.xml",
+  "relativeLinksChecked": 144,
+  "missingLinks": [],
+  "archivedEvidenceHashesVerified": true,
+  "testCodeSha256": "cc48b8b952e88c6816ca6fc1337d855c33ea7cd09ca2074fcb938211900a297a",
+  "limits": [
+    "No GPU training or live model benchmark",
+    "No production/PostgreSQL/TLS/CI rerun",
+    "Local HTTP and SQLite; no browser visual retest"
+  ],
+  "testRepair": {
+    "productionCodeChanged": false,
+    "controlledStartupDelaySeconds": 3.2,
+    "before": "1 failed before cleanup at the 3-second readiness assertion",
+    "after": "2 passed; readiness budget 15 seconds, cleanup timeout remains 0.1 seconds",
+    "originalSlowStartupCause": "Not determined"
+  }
+}

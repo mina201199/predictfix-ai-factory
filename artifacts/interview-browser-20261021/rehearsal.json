@@ -1,0 +1,56 @@
+{
+  "date": "2026-10-21",
+  "browser": "Codex in-app browser",
+  "url": "http://127.0.0.1:18962/workflow.html",
+  "database": ".runtime/interview-20261021/demo.db",
+  "completedTicketId": "WO-ff9a742a10304675996690ed28f47b65",
+  "nextReadyTicketId": "WO-792151ef47ec4bf4995c41113d47ea7e",
+  "checks": {
+    "sourceRetrieved": true,
+    "sourceExpanded": true,
+    "engineerLogin": true,
+    "failedVerificationBlocked": true,
+    "resubmissionAfterPass": true,
+    "supervisorApproved": true,
+    "graphPathCount": 4
+  },
+  "timing": {
+    "workflowSecondsRounded": 100,
+    "graphSecondsRounded": 12,
+    "sumSeconds": 112,
+    "method": "Wall time from first search click through UI-confirmed closure; separately timed graph open/query/source expansion. Includes assistant interaction gaps; no spoken narration; form preparation excluded. Native setValue inserts text faster than human typing.",
+    "scriptChineseCharacters": 542,
+    "assumedSpokenUnitsWithEnglishAndPauses": 600,
+    "assumedSpokenUnitsPerMinute": [
+      200,
+      220
+    ],
+    "estimatedSpeechSeconds": [
+      164,
+      180
+    ],
+    "estimatedCoreWithoutGraphIncluding10SecondBuffer": [
+      274,
+      290
+    ],
+    "estimatedWithGraphIncluding10SecondBuffer": [
+      286,
+      302
+    ],
+    "conclusion": "Core is estimated to fit five minutes with prefilled forms and prepared short notes; graph query is optional. Human spoken rehearsal not validated."
+  },
+  "llmUsed": false,
+  "productCodeChanged": false,
+  "screenshots": [
+    "verification-blocked.png",
+    "completed.png",
+    "graph.png"
+  ],
+  "browserAutomationFallback": "agent-browser Chrome launch failed with CDP response channel closed; doctor could not determine home directory. Used in-app browser; no system security/settings changes.",
+  "limitations": [
+    "No live model inference",
+    "No human speech recording",
+    "Automated text insertion is not human typing speed",
+    "Only selected demo flow tested, not full UI audit"
+  ]
+}

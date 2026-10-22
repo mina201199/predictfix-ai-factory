@@ -11,22 +11,26 @@ import asyncio,json
 import httpx
 from backend import copilot, maintenance_ai
 sent=[]
+budgets=[]
 class Reply:
     def raise_for_status(self):pass
     def json(self):return {'choices':[{'message':{'content':json.dumps({'selected':[],'machine_id':None,'symptoms':[],'temperature_c':None,'error_code':None,'answer':'x'})}}]}
 async def post(self,url,json=None,**kwargs):
-    sent.append(json['messages'][0]['content']);return Reply()
+    sent.append(json['messages'][0]['content']);budgets.append(json.get('max_tokens'));return Reply()
 httpx.AsyncClient.post=post
 asyncio.run(maintenance_ai.generate_json('PROMPT',{'type':'object'}))
 asyncio.run(copilot.analyze('CNC-03 主軸異音，振動升高'))
-print(json.dumps(sent))
+asyncio.run(maintenance_ai.generate_json('SHORT',{'type':'object'},maxTokens=260,timeoutSeconds=35))
+print(json.dumps({'sent':sent,'budgets':budgets}))
 '''
   env={**os.environ,'DATABASE_URL':'sqlite:///'+str(tmp_path/'isolated.db'),'APP_MODE':'demo','DEMO_MODE':'1',
        'LLM_PROVIDER':'llamacpp','LOCAL_LLM_MODEL':'gemma-4-E2B-it-Q8_0','OPENAI_ENABLED':'0','OPENAI_API_KEY':''}
   result=subprocess.run([sys.executable,'-c',code],env=env,capture_output=True,text=True,timeout=120)
   assert result.returncode==0,result.stderr
-  sent=json.loads(result.stdout.strip().splitlines()[-1])
+  report=json.loads(result.stdout.strip().splitlines()[-1])
+  sent=report['sent']
   # 兩條本機模型路徑都要被呼叫到，否則這個測試沒有檢查到 copilot
-  assert len(sent)==2
+  assert len(sent)==3
   # /no_think 只對 Qwen3 有意義，對其他模型只是混進 prompt 的雜訊
   assert sent[0]=='PROMPT' and not any('/no_think' in prompt for prompt in sent)
+  assert report['budgets'][0]==650 and report['budgets'][2]==260
