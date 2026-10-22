@@ -74,7 +74,7 @@ DOCS_PATHS=['/docs','/docs/oauth2-redirect','/redoc']
 # 正式模式不需登入就能看到完整 API 結構的文件頁也一併關閉
 DEMO_ONLY_PATHS=['/api/replay','/api/predict','/api/model/report','/api/chat','/api/copilot','/api/documents','/demo-measurements.csv',
                  '/index.html','/index.js','/index.css','/dynamic-styles.js','/roles.css','/factory.js','/live.js','/management.js',
-                 '/openapi.json',*DOCS_PATHS]
+                 '/mobile.html','/app.css','/app.js','/openapi.json',*DOCS_PATHS]
 
 @app.middleware('http')
 async def operational_boundary(request:Request,call_next):
@@ -321,6 +321,9 @@ STATIC={'':'index.html','index.html':'index.html','index.js':'index.js','index.c
         'workflow.html':'workflow.html','workflow.js':'workflow.js','workflow.css':'workflow.css',
         'scan.html':'scan.html','scan.js':'scan.js','scan.css':'scan.css',
         'graph.html':'graph.html','graph.js':'graph.js','graph.css':'graph.css'}
+STATIC.update({'mobile.html':'sites/predictfix-mobile/dist/index.html',
+               'app.css':'sites/predictfix-mobile/dist/app.css',
+               'app.js':'sites/predictfix-mobile/dist/app.js'})
 STATIC.update({name:name for name in ['integrations.html','integrations.js','integrations.css']})
 STATIC.update({name:name for name in ['agent-widget.js','agent-widget.css']})
 @app.get('/')

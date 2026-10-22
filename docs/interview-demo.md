@@ -1,6 +1,30 @@
 # 面試展示與交付
 
-**目前展示方式已改為實際呼叫 Gemma。** 請先依 [本機 Gemma RAG 啟動方式](interview-gemma-live.md) 啟動模型與網站，並使用 [五分鐘講稿](interview-script-5min.md)。下方原有「不呼叫模型」的啟動指令保留作為純流程備案；不要在準備展示 RAG 時套用該組停用模型的環境變數。既有隔離資料準備與維修操作仍適用。
+## 面試官直接開啟
+
+**[開啟公開面試展示](https://predictfix-mobile-demo.ruru0109lee.chatgpt.site)**，不需登入、安裝程式或準備 API Key。首頁包含約一分鐘實機影片、中文逐字稿、三分鐘操作指南與常見問題。也可以 [直接觀看 MP4](https://predictfix-mobile-demo.ruru0109lee.chatgpt.site/media/predictfix-demo.mp4)。
+
+1. 先播放影片，了解「來源 → 派工 → 復測 → 審核 → 案例」。
+2. 按「開始互動展示」，以主管身分開啟換刀情境。核對來源原文、勾選確認，再核准清單。
+3. 指派陳怡安，觀察另兩位工程師因資格或出勤不符而無法派工；切換為被指派的工程師。
+4. 按「填入示範排查紀錄」，把任一驗收改為「失敗」並嘗試提交，確認阻擋；改回「通過」再提交。
+5. 切換為主管，核對結果並結案；確認案例內容與來源後發布，再查看案例。
+
+隨時點「面試導覽」返回說明。再次開始會接續未完成工單；頁尾「重設展示」經確認後恢復初始資料。操作紀錄只留在當前瀏覽器，不跨裝置同步。影片約 13 MB；首次載入請視網路等候，若無聲請開啟播放器音量。
+
+影片是本機後端應用的實際操作錄影；公開互動版是固定虛構情境，檢查在瀏覽器執行，不連接正式資料庫、現場設備或即時 AI。角色切換只是體驗功能。兩者介面、人名與驗收數值可能不同。正式後端仍須本機啟動。
+
+可直接附在履歷或面試訊息中的文字：
+
+> PredictFix AI 維修流程展示：免登入觀看一分鐘實機影片，並依三分鐘導覽體驗來源核對、資格派工、復測驗收與案例發布。所有資料均為虛構。
+>
+> https://predictfix-mobile-demo.ruru0109lee.chatgpt.site
+
+公開展示版本與檢查結果見 [2026-10-21 對外交付紀錄](showcase-delivery-20261021.md)。
+
+## 本機 Gemma 與維修助手展示
+
+**本機 AI 展示使用實際 Gemma 呼叫。** 請先依 [本機 Gemma RAG 啟動方式](interview-gemma-live.md) 啟動模型與網站，並使用 [五分鐘講稿](interview-script-5min.md)。下方原有「不呼叫模型」的啟動指令保留作為純流程備案；不要在準備展示 RAG 時套用該組停用模型的環境變數。既有隔離資料準備與維修操作仍適用。
 
 ## 本次固定展示版本與準備（2026-10-21）
 
@@ -107,7 +131,7 @@ print(json.dumps(result, ensure_ascii=False))
 
 此函式真的執行驗收失敗阻擋、重新復測、提交、主管審核、案例發布及檢索；會完成目前那張示範工單。舊 CLI `prepare_interview_demo.py --walkthrough` 仍可用，但會覆寫舊報告，本輪採上述函式呼叫並另存結果。新證據見 [本輪證據目錄](../artifacts/interview-20261021/README.md)；[舊完整流程報告](../artifacts/interview-walkthrough-report.json) 與 [舊準備報告](../artifacts/interview-demo-report.json) 保留歷史內容。
 
-這些是 API 操作證據；操作過程另見 [60 秒操作影片](media/predictfix-demo.mp4)。尚未部署公開網址；不能把本機地址分享給面試官並稱為線上 Demo。
+這些是 API 操作證據；操作過程另見 [60 秒操作影片](media/predictfix-demo.mp4)。本機地址只供目前電腦使用；面試官請使用上方公開展示網址。公開網站不代表 FastAPI 後端已完成公網部署。
 
 ## 圖譜加演：來源有效性與權限（約 2 分鐘）
 
@@ -150,11 +174,11 @@ $runId = [guid]::NewGuid().ToString('N')
 
 ## 面試前測試與 CI 邊界
 
-[GitHub Actions](../.github/workflows/ci.yml) 目前有 tests、container、postgres 三個 job：
+[GitHub Actions](../.github/workflows/ci.yml) 分成完整測試、容器與 PostgreSQL 三個 job：
 
 - 測試 job 安裝固定套件、檢查依賴、跑全套 pytest，解析 JUnit，要求確實執行測試且零失敗、零錯誤、零跳過。
-- 容器 job 建置 Dockerfile，再啟動空資料庫的正式模式，檢查維修流程頁面／JS／CSS、API 文件與未登入阻擋，使用隔離 SQLite。
-- PostgreSQL job 執行情境與 Compose、重啟、備份還原；job 存在不代表本輪已執行，也不代表手機 TLS 或企業高並發驗收。
+- 容器 job 建置 Dockerfile，再分別啟動正式及展示模式，檢查頁面／JS／CSS、嚴格 CSP、匿名 API 阻擋及手機展示資產。正式模式的 API 文件與手機展示回傳 404。
+- PostgreSQL job 執行並發派工、正式模式、維修流程情境，以及 Compose 重啟與備份還原。未涵蓋 TLS，新增圖譜／外部工單的 PostgreSQL 路徑也尚未驗收。
 
 本機可先跑：
 
@@ -165,7 +189,7 @@ if ($LASTEXITCODE -ne 0) { throw '測試有失敗，請保留輸出並先處理'
 & $python scripts/check_test_report.py .runtime/interview-tests.xml
 ```
 
-CI 檔案已建立不等於 GitHub 已執行。需要將經檢查的版本推到自己的 repo，再保存綠燈連結；目前未代為推送。
+歷史主線已有 GitHub Actions 成功紀錄；本次整合應核對推送提交的實際結果，見 [2026-10-20 交付驗證](release-validation-20261020.md)。
 
 ## 歷史環境紀錄（2026-10-07）
 
@@ -173,6 +197,8 @@ CI 檔案已建立不等於 GitHub 已執行。需要將經檢查的版本推到
 
 2026-10-07 已新建 Python 3.12 環境，重新安裝固定依賴，全套 38 項測試通過、零跳過；再以該環境啟動隔離正式模式，頁面資產、API 文件與匿名存取阻擋通過。這是在目前工作目錄進行，尚未驗證另一台電腦或乾淨 Git checkout。完整狀態見 [交付檢查報告](../artifacts/interview-readiness-report.json)。
 
-Docker Desktop 的具體阻擋是無法重新命名 `sailor-ingest.sock`，Windows 回報無法存取；保留原檔的備份嘗試亦失敗。未刪除容器資料或修改安全設定。
+上述 2026-10-07 紀錄中的 Docker socket 阻擋屬歷史環境狀態，不能用來判斷目前 CI 或其他電腦的引擎狀態。
 
 後續 Docker／PostgreSQL 已有驗證與修正，見 [2026-10-20 稽核](../artifacts/system-audit-20261020/README.md)。2026-10-21 本機面試演練結果與仍待處理的手機／企業網路、現場成效，見 [本次交接](interview-handoff-20261021.md)。正式部署與現場項目不在本輪範圍內。
+
+後續還需：驗證 HTTPS、圖譜／外部工單的 PostgreSQL 路徑，選定公開後端展示環境與網域，加入監控和異地備份演練。真實感測器、現場診斷與成效評估是另一階段。

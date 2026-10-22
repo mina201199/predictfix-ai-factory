@@ -1,11 +1,17 @@
 import asyncio
+import os
+from pathlib import Path
+import subprocess
+import sys
 from types import SimpleNamespace
 from unittest.mock import patch
 
-from backend import agent, agent_answers as answers, maintenance_ai as ai
+ROOT = Path(__file__).resolve().parents[1]
 
 
-def test_citation_label_is_not_a_new_maintenance_number():
+def checkCitationLabel():
+  from backend import agent, agent_answers as answers, maintenance_ai as ai
+
   sources = {'S1': '記錄刀位、警報及近期變更。'}
   valid = answers.Advice(text='來源S1提到應記錄刀位、警報及近期變更。', source='S1')
   assert answers.checkedAdvice(valid, sources)
@@ -14,7 +20,9 @@ def test_citation_label_is_not_a_new_maintenance_number():
     assert not answers.checkedAdvice(answers.Advice(text=text, source='S1'), sources)
 
 
-def test_explicit_question_after_assignment_uses_one_model_call():
+def checkFollowupModelCall():
+  from backend import agent, agent_answers as answers, maintenance_ai as ai
+
   context = {'machines': [
     {'id': 'CNC-01', 'name': '測試設備', 'model': 'TEST-ATC'},
     {'id': 'CNC-02', 'name': '另一設備', 'model': 'TEST-OTHER'}],
@@ -60,3 +68,22 @@ def test_explicit_question_after_assignment_uses_one_model_call():
   with patch.object(agent, 'readContext', return_value=context), patch.object(agent.openai_runtime, 'configured', return_value=False), \
       patch.object(ai, 'corpus', return_value=[source]), patch.object(ai, 'search', search), patch.object(ai, 'generate_json', model):
     asyncio.run(run())
+
+
+def runScenario(tmpPath, scenario):
+  # 獨立程序避免模組載入時固定資料庫連線，污染其他測試或本機展示資料。
+  env = {**os.environ, 'APP_MODE': 'demo', 'DEMO_MODE': '1', 'OPENAI_ENABLED': '0',
+    'DATABASE_URL': 'sqlite:///' + str(tmpPath / 'followup.db'),
+    'LOCAL_LLM_MODEL': '', 'OLLAMA_MODEL': '', 'PYTHONUTF8': '1'}
+  script = "import runpy, sys; runpy.run_path(sys.argv[1])[sys.argv[2]]()"
+  result = subprocess.run([sys.executable, '-c', script, str(Path(__file__).resolve()), scenario],
+    cwd=ROOT, env=env, capture_output=True, text=True, encoding='utf-8', timeout=90)
+  assert result.returncode == 0, result.stdout + result.stderr
+
+
+def test_citation_label_is_not_a_new_maintenance_number(tmp_path):
+  runScenario(tmp_path, 'checkCitationLabel')
+
+
+def test_explicit_question_after_assignment_uses_one_model_call(tmp_path):
+  runScenario(tmp_path, 'checkFollowupModelCall')

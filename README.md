@@ -4,6 +4,117 @@
 
 PredictFix AI 將維修知識查找、資格與容量派工、排查驗收及案例累積接成一套可操作的維修管理系統，面向 CNC 工廠的主管與維修工程師。
 
+**[組員接手](#組員接手與協作) · [直接開啟面試展示](https://predictfix-mobile-demo.ruru0109lee.chatgpt.site) · [三分鐘操作指南](docs/interview-demo.md) · [本機體驗](#快速開始) · [操作手冊](docs/repair-flow.md) · [系統架構](docs/system-architecture.md) · [安全測試](docs/security-testing.md)**
+
+**已驗證成果：161 項自動化測試通過，零跳過（2026-10-20 乾淨環境實跑）；完整展示流程已跑通。** 2026-10-07 已完成獨立本機部署與備份還原檢查；2026-10-15 本機模型改用 Gemma 4 E2B 後重跑 45 個安全檢查全數通過，包含 8 個本機模型攻擊情境。詳見下方測試與限制。
+
+本次版本整合、本機完整回歸與 CI 範圍見 [2026-10-20 交付驗證](docs/release-validation-20261020.md)。
+
+## 組員接手與協作
+
+交接基準（2026-10-21）：PR #10、#11 已合併到 `main`，程式與面試交付基準提交為 `30d9b0d`。[合併後 CI](https://github.com/mina201199/predictfix-ai-factory/actions/runs/39509848713) 的 tests、container、postgres 全數通過，pytest 為 161 項、零失敗、零錯誤、零跳過。這是指定提交的驗證紀錄；後續開發請確認自己提交的 CI。
+
+### 先選擇操作環境
+
+| 目的 | 入口／指令 | 資料與權限 |
+| --- | --- | --- |
+| 向面試官或組員介紹成果 | [公開展示](https://predictfix-mobile-demo.ruru0109lee.chatgpt.site) | 免登入，含影片與操作指南；固定虛構情境，紀錄只留在當前瀏覽器。 |
+| 開發、測試後端與完整流程 | `./start.ps1 -Demo -Port 8082` | 本機 FastAPI；預設 `data/predictfix.db`，可用展示角色體驗。 |
+| 驗證正式帳號與空資料建檔 | `./start-production.ps1 -Port 8083` | 本機正式資料模式；`data/factory.db`，不提供快速登入。 |
+| 只調整內嵌手機工作台 | `node scripts/serve_mobile_demo.cjs` | 開啟 `http://127.0.0.1:8096`；不連後端，與公開網站的面試首頁不同。 |
+
+資料庫路徑以未自訂 `DATABASE_URL` 為前提；啟動前若已有該環境變數，先確認它指向哪個資料庫。外部觀眾請使用公開網址，`127.0.0.1` 只指向操作當下的電腦。
+
+### 第一次取得專案
+
+準備 Git、Python 3.12 與 PowerShell；需要前端檢查或獨立手機預覽時安裝 Node.js 22（與 CI 一致）。Docker 僅用於容器／PostgreSQL 驗證。本機模型為選配，先跑通基本流程再安裝。
+
+```powershell
+git clone https://github.com/mina201199/predictfix-ai-factory.git
+cd predictfix-ai-factory
+git switch main
+git pull --ff-only origin main
+python --version
+.\setup.ps1
+.\start.ps1 -Demo -Port 8082
+```
+
+保持啟動終端機開啟，瀏覽 `http://127.0.0.1:8082/workflow.html`。另開 PowerShell、切到同一個專案目錄後執行：
+
+```powershell
+.\.venv\Scripts\python.exe scripts/prepare_interview_demo.py
+```
+
+成功時會輸出 `ready_for_dispatch: true`，並寫入 `artifacts/interview-demo-report.json`；依 [面試操作指南](docs/interview-demo.md) 切換角色、完成驗收與審核。要自動走完示範工單，可加 `--walkthrough`；這會實際完成該張展示工單，之後再跑不帶此參數的指令，準備下一張。
+
+結束 API 服務請在啟動終端機按 `Ctrl+C`；再次啟動會沿用資料。若曾安裝本機模型，背景模型服務不會隨 API 一起結束。僅操作基本展示不需 OpenAI API Key；`.venv`、`.runtime`、資料庫與本機帳密不包含在 Git checkout，需要各自建立。`.env.example` 的註解區分哪些值由 `.env` 載入、哪些需要程序環境變數，勿假設複製檔案就會套用全部設定。
+
+### 每次開發與交付
+
+先用 `git status` 確認自己的修改已保存，再更新 main 並建立工作分支。以下分支名是範例，每項工作使用不同名稱：
+
+```powershell
+git switch main
+git pull --ff-only origin main
+git switch -c codex/repair-flow-update
+```
+
+程式或依賴變更完成後，在專案根目錄執行：
+
+```powershell
+# requirements.txt 有變更時，先重跑 .\setup.ps1
+.\.venv\Scripts\python.exe scripts/check_runtime.py
+.\.venv\Scripts\python.exe -m pip check
+New-Item -ItemType Directory -Force .runtime | Out-Null
+.\.venv\Scripts\python.exe -m pytest -q --junitxml=.runtime/tests.xml
+if ($LASTEXITCODE -ne 0) { throw 'pytest failed' }
+.\.venv\Scripts\python.exe scripts/check_test_report.py .runtime/tests.xml
+if ($LASTEXITCODE -ne 0) { throw 'JUnit report failed' }
+node tests/scan_race.cjs
+node --check sites/predictfix-mobile/dist/app.js
+node --check scripts/serve_mobile_demo.cjs
+git diff --check
+git diff --stat
+```
+
+確認每個指令都成功。前端變更另以瀏覽器確認桌面、手機寬度與相關操作；涉及維修流程時驗證驗收失敗阻擋、重新復測及主管審核。純文件修改核對連結、腳本參數與 `git diff --check` 即可，無須為文字重跑本機模型訓練。額外安全與 PostgreSQL 檢查見 [重跑測試](#重跑測試)。
+
+只加入這次修改的具體檔案，例如本次只更新 README 時：
+
+```powershell
+git add README.md
+git diff --cached
+git commit -m "docs: update team handoff guide"
+git push -u origin HEAD
+```
+
+在 GitHub 建立以 `main` 為目標的 PR，寫明改動、驗證方式與已知限制。確認 [GitHub Actions](https://github.com/mina201199/predictfix-ai-factory/actions) 的 tests、container、postgres 三個 job 全部成功，再由組員審查合併；合併後再次核對 main 的 push CI，其他組員以 `git pull --ff-only origin main` 更新。推送需要儲存庫寫入權限與各自的 GitHub 認證。
+
+### 接手時找哪些檔案
+
+| 位置 | 工作範圍 |
+| --- | --- |
+| `backend/` | API、資料保存、權限與維修規則；整體關係見 [系統架構](docs/system-architecture.md)。 |
+| 根目錄 `*.html`、`*.js`、`*.css` | 本機應用介面，例如維修工作台、知識中心、銘牌掃描。 |
+| `sites/predictfix-mobile/dist/` | 本機內嵌的靜態手機工作台。 |
+| `scripts/`、`tests/`、`.github/workflows/ci.yml` | 準備工具、驗證腳本、自動測試與 CI。 |
+| `docs/`、`docs/media/`、`tools/demo-video/` | 操作與部署文件、可直接觀看的實機影片、影片製作來源。 |
+
+**公開網站另有 Sites 原始碼與發布流程。** 推送此 GitHub repo 不會自動更新公開網站；修改 `sites/predictfix-mobile/dist/` 也不會自動更新線上面試首頁。網站接手者須由擁有者提供該 Site 的編輯權限，取得同一個 project 的正式來源，核對 [版本與 project ID](docs/showcase-delivery-20261021.md) 後再修改、預覽與發布；保留原網址。公開瀏覽權限不等於編輯權限，原作者 `.runtime` 下的工作副本也不是組員 clone 後會取得的來源。
+
+### 常見操作問題
+
+| 現象 | 處理方式 |
+| --- | --- |
+| 找不到 Python 或安裝檢查失敗 | 確認 `python --version` 為 3.12，使用正確 Python 路徑執行 `./setup.ps1 -Python <python.exe路徑>`；保留錯誤輸出供排查。 |
+| 8082 已被其他服務使用 | 改用 `./start.ps1 -Demo -Port 8092`，準備工具加 `--url http://127.0.0.1:8092`，瀏覽器也改成相同 port。 |
+| 沒有可派工程師 | 確認資格、當日出勤與剩餘容量；面試專用情境可重跑準備工具。 |
+| 模型未啟動／只顯示來源 | 先確認基本流程可用；需要本機 LLM 再按 [安裝指南](docs/local-setup.md) 安裝，並檢查 8081 模型服務。 |
+| 正式模式要求登入 | 依 [正式環境手冊](docs/production-setup.md) 取得自己的初始管理員帳密，不使用其他人的展示快速登入。 |
+| `git pull --ff-only` 拒絕或有本機修改 | 先保存修改並檢查分支差異，再透過工作分支／PR 整合；不要直接覆蓋組員的工作。 |
+
+`.env`、API Key、`data/` 內的資料庫／初始帳密、上傳資料及 `backups/` 不進 Git。需要移交實際資料時，按 [備份還原流程](docs/production-setup.md#sqlite-備份與還原) 另外交付；程式碼同步不等於資料庫同步。
+
 **[面試回答與證據](docs/interview-readiness.md) · [面試展示步驟](docs/interview-demo.md) · [本機體驗](#快速開始) · [操作手冊](docs/repair-flow.md) · [系統架構](docs/system-architecture.md) · [安全測試](docs/security-testing.md)**
 
 **目前是本機 MVP，尚未完成企業現場驗收。** 2026-10-21 階段交接位於分支 `codex/interview-readiness`（基底 `2c9e38f`），包含面試材料、本機 Gemma RAG、浮動維修 Agent 與操作 Demo。最新接手事項以下方清單為準；[早期交接紀錄](docs/interview-handoff-20261021.md) 與各日期實驗保留當時狀態，不能視為即時服務狀態。
@@ -90,9 +201,10 @@ git diff --check
 | 外部工單介接 | API／CSV／outbox 已實作 | 本機模擬器及隔離測試已驗證；正式 Compose 已含 worker，尚未對接真實企業端點。 |
 | 維修知識圖譜 | 可追溯關係、審查與獨立查詢已實作 | 有合成來源覆蓋評估；一般 AI 查詢尚未直接使用圖譜，未經領域專家及現場成效驗收。 |
 | 可重複展示 | 已提供準備工具與展示腳本 | 專用設備、工程師、資格與出勤；驗收阻擋、主管審核、案例發布與檢索已跑通。 |
-| CI | 有既有通過紀錄，本輪未重跑 | 設定含完整測試、容器與 PostgreSQL job；現有連結是先前執行紀錄，非本次面試修改的 CI。[歷史執行紀錄](https://github.com/mina201199/predictfix-ai-factory/actions/runs/38715442505)。 |
-| Docker／PostgreSQL／HTTPS | 有本機驗證紀錄，正式環境尚待驗收 | 既有 PostgreSQL 備份還原及 2026-10-20 工單介接稽核已留證據；交接另記錄本機 Caddy TLS 驗證，手機與企業網路尚未驗收。本輪不重跑部署。 |
-| 公開網站／企業上線 | 尚未完成 | 尚無外部可用網址，未接真實感測器，未完成工廠現場驗收。 |
+| CI | PR #11 合併後 main 三個 job 全數通過（2026-10-21） | 全套 161 項測試、正式／展示容器與 PostgreSQL 驗證成功。[執行紀錄](https://github.com/mina201199/predictfix-ai-factory/actions/runs/39509848713)；早期整合範圍見 [交付驗證](docs/release-validation-20261020.md)。 |
+| Docker／PostgreSQL／HTTPS | Docker 與 PostgreSQL 17 有歷史實測；本機 TLS 曾有交接紀錄 | 並發派工、正式模式、維修流程三個情境在 PostgreSQL 上通過；Compose 正式模式「API＋PostgreSQL」通過健康檢查、重啟後資料保存，`pg_dump` 備份可還原到新資料庫並撤銷工作階段。CI 每次重跑。本 repo 缺完整 TLS 原始輸出，手機與企業 HTTPS 仍待驗收，見 [交接紀錄](docs/interview-handoff-20261021.md)。 |
+| 公開面試展示 | 已公開（2026-10-21） | 免登入觀看實機影片與三分鐘操作指南，可用手機或電腦體驗虛構維修流程。[交付驗證](docs/showcase-delivery-20261021.md)。 |
+| 正式後端／企業上線 | 尚未完成 | 正式後端尚無外部可用網址，未接真實感測器，未完成工廠現場驗收。 |
 
 **目前定位是具備資料保存與權限流程的本機 MVP。** 「正式資料模式」是應用程式的運行模式，不代表已部署到正式伺服器。
 
@@ -203,7 +315,7 @@ New-NetFirewallRule -DisplayName "PredictFix LAN demo" -Direction Inbound -Proto
 | **前端** | HTML／CSS／JavaScript | 直接呈現角色、工單狀態與來源，讓完整操作流程容易追查；未使用大型前端框架。 |
 | **銘牌影像辨識** | RapidOCR、ONNX Runtime、Pillow | 本機 CPU 偵測與辨識文字，比對已建檔機台；低信心交由人確認。模型隨套件安裝，不依賴外部 API。 |
 | **API 與資料** | FastAPI、Pydantic、SQLAlchemy；本機 SQLite、部署 PostgreSQL 17 | 驗證輸入、維持一致 API 契約並保存工單；SQLite 降低單機啟動成本，PostgreSQL 已用相同情境實測，高並發負載仍需另行壓測。 |
-| **知識檢索** | TF-IDF＋BM25 排名融合 | 支援機型、術語與錯誤碼的字詞檢索；合成題比較三種方法目前同分，尚無證據顯示融合更準。未使用 Embedding 或 Vector DB。 |
+| **知識檢索** | TF-IDF＋BM25；選配 OpenAI Embedding 排名融合 | 本機字詞檢索支援機型、術語與錯誤碼。啟用 OpenAI 且來源獲授權時可加入向量排序；未使用獨立 Vector DB。舊合成題報告只比較字詞方法，不代表向量檢索成效。 |
 | **本機 AI** | Gemma 4 E2B Q8_0（Google，Apache 2.0）、llama.cpp 純 CPU；另支援 Ollama | 知識中心由模型選段；浮動助手以 RAG 整理白話建議、引用與操作草稿。操作須人工確認並通過後端權限檢查，模型不核准復機。模型不可用時明示未取得有效模型結果。不需 GPU，選型依據見 [本機模型基準](docs/local-llm-benchmark.md) 與 [模型選型與合規](docs/model-selection.md)。 |
 | **工程師推薦** | 規則篩選與排序 | 必要資格、出勤與容量是可核對的條件；目前沒有可用來訓練推薦模型的現場成效資料。 |
 | **一致性與權限** | 工作階段、角色、CSRF、版本檢查、冪等請求 | 限制操作身分，避免重送造成重複工單或扣帳，拒絕過期版本覆寫。 |
@@ -279,9 +391,9 @@ flowchart TD
 
 | 驗證項目 | 現有結果 | 能證明什麼／不能證明什麼 |
 |---|---|---|
-| **功能與整合測試** | 148 項 pytest 通過、零跳過，2026-10-19 本機實跑 | 涵蓋權限、派工、驗收、重修、保養、庫存、備份、持久化、展示、LoRA 分組／評分器、引用截斷、檢索快取與工單分頁；不能代表工廠現場驗收。 |
+| **功能與整合測試** | 161 項 pytest 通過、零跳過，2026-10-20 乾淨環境實跑 | 涵蓋權限、派工、驗收、重修、保養、庫存、備份、持久化、展示、LoRA 分組／評分器、引用截斷、檢索快取與工單分頁；不能代表工廠現場驗收。 |
+| **重新安裝驗證** | 2026-10-20 GitHub Actions 從乾淨 Git checkout 安裝固定依賴，通過 161 項測試 | 驗證依賴安裝可在另一台機器重現；CI 為 Ubuntu，本次 Windows 另建乾淨虛擬環境安裝，但未透過 `setup.ps1`。 |
 | **本輪面試回歸** | 161 項 pytest 通過、零失敗／錯誤／跳過，2026-10-21 | 包含 `tests` 與 `tools/demo-video/tests`；增加慢啟動的程序清理測試，沒有重跑 GPU／正式部署。見 [JUnit](artifacts/interview-20261021/tests.xml)。 |
-| **重新安裝驗證** | GitHub Actions 從乾淨 Git checkout 安裝固定依賴，通過 60 項測試 | 驗證依賴安裝可在另一台機器重現；CI 為 Ubuntu，尚未驗證 Windows 的 `setup.ps1` 安裝流程。 |
 | **AI／API 安全** | 45／45 個檢查通過（2026-10-15，Gemma 4 E2B），其中含 8 個真實本機模型攻擊情境 | 測提示詞注入、越權、敏感資料暴露與捏造引用；是有限情境驗證，未完成全面滲透測試。 |
 | **檢索方法比較** | 16 題正例 Top-3 命中 15 題（93.75%）；4 題負例均無結果 | TF-IDF、BM25、融合方法同分；開發用合成題，不是獨立保留集，也不是 AI 回答正確率。 |
 | **完整展示流程** | 驗收失敗阻擋、復測提交、主管審核、案例發布及再檢索通過 | [流程報告](artifacts/interview-walkthrough-report.json) 是 API 操作證據；[60 秒操作影片](docs/media/predictfix-demo.mp4)為本機展示模式錄影。 |
@@ -336,6 +448,22 @@ Exact match 變化：**+75.0 個百分點**。這是小規模流程實驗，不�
 跨負載測試 Accuracy **66.7%**、Macro-F1 **0.556**，內圈類別 Recall **0**，顯示目前模型的泛化不足。保留混淆矩陣與逐類結果，供後續改進；不將此結果換算成 CNC 健康度或故障風險。
 
 資料沒有正常類別，測試只有 3 個獨立檔案，同檔視窗彼此相關。這是獨立的分類實驗，尚未串成現場預測維護。完整內容見 [模型評估報告](artifacts/model-report.json)。
+
+## 手機互動 Demo
+
+另有適合手機與桌面的獨立展示介面，無須安裝 Python 或模型。包含報修、核對來源、清單核准、資格／出勤／容量派工、逐項排查與驗收、主管審核／退回重修及案例發布。
+
+[開啟公開面試展示](https://predictfix-mobile-demo.ruru0109lee.chatgpt.site)，免登入。首頁有實機影片、逐字稿、三分鐘導覽及操作協助；按「開始互動展示」即可體驗。這是靜態模擬介面，不代表原 FastAPI 系統已完成公網部署。
+
+- 在既有本機服務開啟 `/mobile.html`，或以 `node scripts/serve_mobile_demo.cjs` 啟動獨立預覽，再開啟 `http://127.0.0.1:8096`。
+- 點「開始換刀卡住情境」，依畫面引導操作；右上角可切換主管／工程師。
+- 工程師可點「填入示範排查紀錄」，再將驗收改為「失敗」，體驗提交阻擋；主管可退回重修，前次提交快照仍會保留。
+- 所有設備、手冊摘要、量測與人員均為虛構資料。資料只保存在當前瀏覽器，可用「重設展示」清除；不同手機與電腦不會同步。
+- 此介面未連接 FastAPI、現場設備、即時 LLM 或正式資料庫；角色切換僅模擬流程，不是正式登入權限。
+
+內嵌工作台原始檔位於 `sites/predictfix-mobile/dist/`；公開網站另在 Sites 正式原始碼庫維護面試導覽與影片，版本與提交識別見 [交付紀錄](docs/showcase-delivery-20261021.md)。本機 `127.0.0.1` 網址只供該電腦使用；手機遠端體驗請開啟已部署的 HTTPS 網址。
+
+另有本機保存的 60 秒截圖產品介紹；版本內附 [字幕](artifacts/video/AI-Factory-60s-zh-TW.srt)與分鏡。成品位置、雜湊及重製條件見 [影片資產說明](docs/product-video.md)。
 
 ## 快速開始
 
@@ -407,10 +535,11 @@ docker stop pf-verify-pg
 
 | 優先序 | 要補的工作 | 完成判準 |
 |---|---|---|
-| **1．交付紀錄** | 已完成：GitHub Actions 測試與容器檢查通過，見 [執行紀錄](https://github.com/mina201199/predictfix-ai-factory/actions/runs/38553389662)。 | GitHub 確實跑完測試與容器檢查。 |
+| **1．交付紀錄** | 已完成：GitHub Actions 全套測試、雙模式容器及 PostgreSQL 通過，見 [執行紀錄](https://github.com/mina201199/predictfix-ai-factory/actions/runs/39452377590)。 | 已保存原始測試報告、版本來源與 CI 連結。 |
 | **2．展示影片** | 已完成：[60 秒操作影片](docs/media/predictfix-demo.mp4)涵蓋報修、派工、驗收阻擋、審核與案例發布。 | 面試官能快速看完操作，現場也可重新準備工單。 |
-| **3．外部可用** | 實測 Docker／PostgreSQL／HTTPS，建立獨立的公開展示環境。 | 外部可開啟、資料可持久化、重啟與備份還原通過；展示與正式資料隔離。 |
-| **4．效果評估** | 建立獨立手冊題集與相關性標註；由領域人員評估引用適用性和流程成效。 | 有獨立測試集、逐題錯誤分析與清楚的成效指標。 |
+| **3．對外展示交付** | 已完成：[公開展示](https://predictfix-mobile-demo.ruru0109lee.chatgpt.site)整合影片、逐字稿與操作指南。 | 已驗證免登入存取、影片完整播放與互動流程，見 [交付紀錄](docs/showcase-delivery-20261021.md)。 |
+| **4．公開後端部署** | Docker／PostgreSQL 已有驗證；接續驗收後端 HTTPS 並建立獨立展示環境，補上監控與異地備份演練。 | 外部可登入後端、資料可持久化、重啟與備份還原通過；展示與正式資料隔離。 |
+| **5．效果評估** | 建立獨立手冊題集與相關性標註；由領域人員評估引用適用性和流程成效，補測圖譜／外部工單的 PostgreSQL 路徑。 | 有獨立測試集、逐題錯誤分析、資料庫驗收與清楚的成效指標。 |
 
 尚未完成：PLC／感測器接入、現場健康度與剩餘壽命預測、完整 PDF 手冊匯入／OCR、企業 SSO、多租戶隔離、真實 ERP／人事串接及工廠現場驗收。機台銘牌 OCR 已實作並做合成評估，不等於完整 PDF 手冊處理。
 
