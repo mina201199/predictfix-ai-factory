@@ -107,10 +107,12 @@ async def fastKnowledge(body, context, onEvent=None):
   questionWords = r'怎麼|如何|怎樣|哪些|哪一|為什麼|怎辦|查|異常|故障|卡住|警報|振動|記錄|核對|檢查|冷卻'
   if re.search(actionWords, body.message):
     return None
-  if body.history and re.search(r'草稿|工單|派工', body.history[-1].content):
+  explicitQuestion = bool(re.search(r'怎麼|如何|怎樣|哪些|哪一|為什麼|什麼|怎辦', body.message)
+    and re.search(r'記錄|核對|檢查|故障|異常|警報|換刀|刀位|振動|冷卻|漏油|溫度|流量', body.message))
+  if not explicitQuestion and body.history and re.search(r'草稿|工單|派工', body.history[-1].content):
     return None
   userHistory = [turn.content for turn in body.history if turn.role == 'user']
-  if userHistory and re.search(actionWords, userHistory[-1]):
+  if not explicitQuestion and userHistory and re.search(actionWords, userHistory[-1]):
     return None
   if not re.search(questionWords, body.message + '\n' + '\n'.join(userHistory[-2:])):
     return None
@@ -118,20 +120,28 @@ async def fastKnowledge(body, context, onEvent=None):
   models = {model for chunk in chunks for model in chunk.get('machine_models', [])}
   models.update(machine['model'] for machine in context['machines'] if machine['model'])
   knownCodes = {value.casefold() for value in models} | {machine['id'].casefold() for machine in context['machines']}
+  tickets = {ticket['id'].casefold(): ticket for ticket in context.get('tickets', [])}
 
   def mentions(text, value):
     return bool(value and re.search(r'(?<![A-Za-z0-9_-])' + re.escape(value) + r'(?![A-Za-z0-9_-])', text, re.I))
 
   chosen = None
   model = ''
-  for text in [body.message] + list(reversed(userHistory)):
+  for index, text in enumerate([body.message] + list(reversed(userHistory))):
     codes = re.findall(r'(?<![A-Za-z0-9_-])[A-Za-z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)+(?![A-Za-z0-9_-])', text)
-    if any(code.casefold() not in knownCodes for code in codes) or re.search(
+    # 歷史工單只從目前可見的資料庫目錄解析設備，不採信助手的成功宣稱。
+    ticketMachines = {tickets[code.casefold()]['machine'] for code in codes
+      if index > 0 and code.casefold() in tickets}
+    if any(code.casefold() not in knownCodes and not (index > 0 and code.casefold() in tickets)
+      for code in codes) or re.search(
       r'(?:不是|並非|改成|改為|更正為|換成)\s*[:：]?\s*[A-Za-z0-9]', text):
       return None
     machines = [machine for machine in context['machines'] if mentions(text, machine['id'])]
     if not machines:
       machines = [machine for machine in context['machines'] if machine['name'] and machine['name'] in text]
+    machines = [machine for machine in context['machines'] if machine in machines or machine['id'] in ticketMachines]
+    if ticketMachines - {machine['id'] for machine in machines}:
+      return None
     matchedModels = [name for name in models if mentions(text, name)]
     if len(machines) > 1 or len(matchedModels) > 1:
       return needsContext('你提到不只一台設備或機型，這次要先查哪一台？')
