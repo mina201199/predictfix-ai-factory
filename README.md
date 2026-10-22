@@ -1,8 +1,8 @@
-# PredictFix AI｜智慧工廠維修 Copilot
+# Vulkrion AI｜智慧工廠維修 Copilot
 
 > **CNC 換刀卡住了。該先查什麼、派誰處理，以及怎麼確認真的修好了？**
 
-PredictFix AI 將維修知識查找、資格與容量派工、排查驗收及案例累積接成一套可操作的維修管理系統，面向 CNC 工廠的主管與維修工程師。
+Vulkrion AI 將維修知識查找、資格與容量派工、排查驗收及案例累積接成一套可操作的維修管理系統，面向 CNC 工廠的主管與維修工程師。
 
 **[面試回答與證據](docs/interview-readiness.md) · [面試展示步驟](docs/interview-demo.md) · [本機體驗](#快速開始) · [操作手冊](docs/repair-flow.md) · [系統架構](docs/system-architecture.md) · [安全測試](docs/security-testing.md)**
 

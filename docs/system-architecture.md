@@ -1,4 +1,4 @@
-# PredictFix AI 維修系統架構
+# Vulkrion AI 維修系統架構
 
 版本：2026-10-06。正式資料環境與展示環境分開；已支援真實資料建檔及維修流程，未接 CNC、PLC 或企業人事系統。部署與驗收限制見 [部署手冊](production-setup.md)。
 

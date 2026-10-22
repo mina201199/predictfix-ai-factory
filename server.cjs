@@ -8,4 +8,4 @@ http.createServer((req, res) => {
     res.writeHead(200, { 'Content-Type': file[1] + '; charset=utf-8', 'Cache-Control': 'no-store' });
     res.end(fs.readFileSync(path.join(__dirname, file[0])));
   } else { res.writeHead(404); res.end('Not found'); }
-}).listen(8080, '127.0.0.1', () => console.log('PredictFix demo: http://127.0.0.1:8080'));
+}).listen(8080, '127.0.0.1', () => console.log('Vulkrion demo: http://127.0.0.1:8080'));

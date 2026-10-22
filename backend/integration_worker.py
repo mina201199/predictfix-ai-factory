@@ -93,7 +93,7 @@ def runOnce(now=None, transport=None):
 
 
 def main():
-  parser = argparse.ArgumentParser(description='PredictFix integration outbox worker')
+  parser = argparse.ArgumentParser(description='Vulkrion integration outbox worker')
   parser.add_argument('--once', action='store_true')
   args = parser.parse_args()
   store.init()

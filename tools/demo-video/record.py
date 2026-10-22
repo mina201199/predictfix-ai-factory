@@ -1,4 +1,4 @@
-"""Drive the local PredictFix demo and capture frames, paced to the narration in build/timing.json.
+"""Drive the local Vulkrion demo and capture frames, paced to the narration in build/timing.json.
 
 Frames come from the Chrome DevTools screencast (JPEG, 1920x1080) and are stored with their
 arrival time; build/marks.json records where each narration segment starts and ends.
