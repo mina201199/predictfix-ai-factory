@@ -252,7 +252,7 @@ def search(query, chunks=None, machine_model='', method='hybrid', limit=5, allow
             for rank, i in enumerate(ranked)]
 
 
-async def generate_json(prompt, schema, synthetic=False):
+async def generate_json(prompt, schema, synthetic=False, maxTokens=650, timeoutSeconds=75, onDelta=None):
     from . import openai_runtime
     if openai_runtime.configured():
         if not openai_runtime.document_allowed(synthetic):
@@ -263,17 +263,49 @@ async def generate_json(prompt, schema, synthetic=False):
     if not model:
         return None, {'llm_used': False, 'model': None, 'reason': 'not_configured'}
     try:
-        async with httpx.AsyncClient(timeout=75) as client:
+        async with httpx.AsyncClient(timeout=timeoutSeconds) as client:
+            if onDelta:
+                if provider == 'llamacpp':
+                    url = os.getenv('LLM_URL', 'http://127.0.0.1:8081')+'/v1/chat/completions'
+                    payload = {'model': model, 'messages': [{'role':'user','content':prompt}],
+                        'temperature': 0, 'max_tokens': maxTokens, 'stream': True,
+                        'response_format': {'type':'json_object','schema':schema},
+                        'chat_template_kwargs': {'enable_thinking':False}}
+                else:
+                    url = os.getenv('OLLAMA_URL','http://127.0.0.1:11434')+'/api/generate'
+                    payload = {'model':model,'prompt':prompt,'stream':True,'think':False,'format':schema,
+                        'options': {'temperature':0,'num_predict':maxTokens,'num_ctx':4096}}
+                content = ''
+                async with client.stream('POST', url, json=payload) as response:
+                    response.raise_for_status()
+                    async for line in response.aiter_lines():
+                        if not line or (provider == 'llamacpp' and not line.startswith('data:')):
+                            continue
+                        data = line[5:].strip() if provider == 'llamacpp' else line
+                        if data == '[DONE]':
+                            break
+                        event = json.loads(data)
+                        if provider == 'llamacpp':
+                            choices = event.get('choices', [])
+                            delta = choices[0].get('delta', {}).get('content', '') if choices else ''
+                        else:
+                            delta = event.get('response', '')
+                        if delta:
+                            content += delta
+                            if len(content) > 20000:
+                                raise ValueError('model output too long')
+                            await onDelta(delta)
+                return json.loads(content), {'llm_used':True,'model':model,'provider':provider}
             if provider == 'llamacpp':
                 response = await client.post(os.getenv('LLM_URL', 'http://127.0.0.1:8081')+'/v1/chat/completions',
                     json={'model': model, 'messages': [{'role':'user','content':prompt}],
-                          'temperature': 0, 'max_tokens': 650,
+                          'temperature': 0, 'max_tokens': maxTokens,
                           'response_format': {'type':'json_object','schema':schema},
                           'chat_template_kwargs': {'enable_thinking':False}})
             else:
                 response = await client.post(os.getenv('OLLAMA_URL','http://127.0.0.1:11434')+'/api/generate',
                     json={'model':model,'prompt':prompt,'stream':False,'think':False,'format':schema,
-                          'options': {'temperature':0,'num_predict':650,'num_ctx':4096}})
+                          'options': {'temperature':0,'num_predict':maxTokens,'num_ctx':4096}})
             response.raise_for_status()
             body = response.json()
             result = json.loads(body['choices'][0]['message']['content'] if provider=='llamacpp' else body['response'])

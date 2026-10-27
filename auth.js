@@ -2,6 +2,15 @@
 window.authUser=null;window.authCsrf='';
 let resolveAuthentication;
 window.authReady=new Promise(resolve=>resolveAuthentication=resolve);
+window.authReady.then(() => {
+  const agentStyles = document.createElement('link');
+  agentStyles.rel = 'stylesheet';
+  agentStyles.href = '/agent-widget.css';
+  document.head.append(agentStyles);
+  const agentScript = document.createElement('script');
+  agentScript.src = '/agent-widget.js';
+  document.body.append(agentScript);
+});
 const loginScreen=document.createElement('div');loginScreen.id='login-screen';
 loginScreen.innerHTML=`<form id="login-form"><h1>PredictFix <span>AI</span></h1><h2>登入智慧維修平台</h2><p>使用你的帳號，查看設備與處理維修任務。</p><label>帳號<input name="username" autocomplete="username" required maxlength="50" placeholder="supervisor / amy"></label><label>密碼<input name="password" type="password" autocomplete="current-password" required maxlength="200"></label><p id="login-error" role="alert"></p><button class="btn primary">登入</button><small>初始帳號資料：專案 data/initial-accounts.json</small></form>`;
 document.body.append(loginScreen);document.querySelectorAll('aside,.main').forEach(el=>el.inert=true);

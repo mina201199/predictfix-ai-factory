@@ -2,9 +2,11 @@
 
 這版可把警報／零件連到排查步驟，再找到來源明示的備品與資格。每條關係須主管核對；工程師只能讀取當下仍有效的核准路徑。系統不判定診斷正確、不自動派工、結案或核准復機，人工核准也不等於原廠認證。
 
+2026-10-21 面試整理：圖譜是獨立查詢頁及 API，一般 `/api/assist` 尚未使用圖譜。本輪重跑的 SQLite 合成評估見 [新報告](../artifacts/interview-20261021/knowledge-graph-evaluation.json)，操作使用 [共同展示步驟](interview-demo.md)。來源覆蓋數字不代表診斷正確率或節省維修時間。
+
 ## 資料與 schema
 
-沿用 SQLAlchemy `store.Base` 與既有資料庫，不新增依賴或 Neo4j。`app.py` 在 `store.init()` 前匯入圖譜模型，所以既有 SQLite 啟動時會新增獨立表，不修改原表。PostgreSQL **未實際驗證**，不能視為已通過部署驗收。
+沿用 SQLAlchemy `store.Base` 與既有資料庫，不新增依賴或 Neo4j。`app.py` 在 `store.init()` 前匯入圖譜模型，所以既有 SQLite 啟動時會新增獨立表，不修改原表。此頁品質評估仍以 SQLite 為範圍；不能把 PostgreSQL 工單介接通過延伸為圖譜品質或部署驗收。
 
 | 表 | 欄位／用途 |
 |---|---|
@@ -110,6 +112,6 @@ git diff --check
 
 本分支基準為 68 項 pytest 通過；全套為 **70 passed，0 failure／error／skip**，140.07 秒；另有既有 Starlette 套件 deprecation warning 一則。後續將評估限定為固定快照，已另重跑圖譜兩項測試，**2 passed**，10.22 秒；重跑評估品質門檻通過、表列指標不變。圖譜單一情境包含 52 次檢查，不能將其和 pytest 項數相加。見 [驗證紀錄](../artifacts/knowledge-graph-verification.json)、[JUnit](../artifacts/knowledge-graph-tests.xml) 與 [合成畫面](../artifacts/knowledge-graph-engineer.png)。
 
-獨立審查已修正：失效邊占配額、模板 JSON 跳脫、預送未讀 revision 的競態、評估成功退出未代表品質門檻。仍需真實來源與領域人員核對；大規模資料的索引／批次有效性維護、PostgreSQL、語意抽取模型及正式現場維修效益尚未驗證。
+獨立審查已修正：失效邊占配額、模板 JSON 跳脫、預送未讀 revision 的競態、評估成功退出未代表品質門檻。仍需真實來源與領域人員核對；大規模資料的索引／批次有效性維護、跨資料庫的檢索品質一致性、語意抽取模型及正式現場維修效益仍需驗證；本頁合成品質評估使用 SQLite。
 
 面試可這樣說：「我把搜尋不到的跨段準備資訊變成可追溯的有向路徑，但不把路徑當診斷。每條邊都有來源版本、引文及核准者；撤回或改版會立即失效。合成評估看的是來源覆蓋，真實維修成效仍需要領域標註與現場驗收。」

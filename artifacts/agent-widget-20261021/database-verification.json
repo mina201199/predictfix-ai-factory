@@ -1,0 +1,13 @@
+{
+  "ticket": {
+    "id": "WO-121641a4167e480ca75c878ee852d254",
+    "status": "已指派",
+    "engineer": "INTERVIEW DEMO 工程師"
+  },
+  "cancelledTicketCount": 0,
+  "auditKinds": [
+    "flow_report",
+    "ticket_reassigned"
+  ],
+  "confirmedCreateCount": 1
+}

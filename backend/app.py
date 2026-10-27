@@ -309,6 +309,9 @@ knowledge_graph.register(app)
 from . import integrations
 integrations.register(app)
 
+from . import agent
+agent.register(app)
+
 STATIC={'':'index.html','index.html':'index.html','index.js':'index.js','index.css':'index.css','dynamic-styles.js':'dynamic-styles.js',
         'auth.css':'auth.css','roles.css':'roles.css',
         'factory.css':'factory.css','factory.js':'factory.js',
@@ -322,6 +325,7 @@ STATIC.update({'mobile.html':'sites/predictfix-mobile/dist/index.html',
                'app.css':'sites/predictfix-mobile/dist/app.css',
                'app.js':'sites/predictfix-mobile/dist/app.js'})
 STATIC.update({name:name for name in ['integrations.html','integrations.js','integrations.css']})
+STATIC.update({name:name for name in ['agent-widget.js','agent-widget.css']})
 @app.get('/')
 def index():
     return FileResponse(ROOT/('index.html' if config.demo() else 'console.html'),headers={'Cache-Control':'no-store'})

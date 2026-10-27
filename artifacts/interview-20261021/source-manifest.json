@@ -1,0 +1,27 @@
+{
+  "date": "2026-10-21",
+  "timezone": "Asia/Taipei",
+  "newModelExperiment": false,
+  "files": [
+    {
+      "file": "selection-independent-v5-comparison-20261020.json",
+      "sourceCommit": "fc2ed2a8563530365ab35f74351e1a695d63bbf1",
+      "sourcePath": "artifacts/selection-independent-v5-comparison-20261020.json",
+      "sourceWorktree": "predictfix-wave2-training",
+      "sha256": "d4cd2e1628e5047e3ca27cd64ae67bb42b76588fe6aacfe2f45d2f430c43a4d5",
+      "gitContentSha256": "b04ff2ed6428c733c1b9a24314e8e80613075b68404a668ef0c9b560d6a725f8",
+      "bytes": 63096,
+      "copiedBytesMatch": true
+    },
+    {
+      "file": "qlora-coverage-train-20261020.json",
+      "sourceCommit": "fc2ed2a8563530365ab35f74351e1a695d63bbf1",
+      "sourcePath": "artifacts/qlora-coverage-train-20261020.json",
+      "sourceWorktree": "predictfix-wave2-training",
+      "sha256": "58a4719c892f12a13790822a044663534cfe140de3023d95f43ddf3f5fd24ac6",
+      "gitContentSha256": "8ead9eb110634572aa4380876bb76fc01c2111c91c52225d58d7ed4bc99c426a",
+      "bytes": 417007,
+      "copiedBytesMatch": true
+    }
+  ]
+}
