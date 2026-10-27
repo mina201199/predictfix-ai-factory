@@ -4,7 +4,7 @@
 
 PredictFix AI 將維修知識查找、資格與容量派工、排查驗收及案例累積接成一套可操作的維修管理系統，面向 CNC 工廠的主管與維修工程師。
 
-**[直接開啟面試展示](https://predictfix-mobile-demo.ruru0109lee.chatgpt.site) · [三分鐘操作指南](docs/interview-demo.md) · [本機體驗](#快速開始) · [操作手冊](docs/repair-flow.md) · [系統架構](docs/system-architecture.md) · [安全測試](docs/security-testing.md)**
+**[直接開啟展示](https://predictfix-mobile-demo.ruru0109lee.chatgpt.site) · [三分鐘操作指南](docs/interview-demo.md) · [本機體驗](#快速開始) · [操作手冊](docs/repair-flow.md) · [系統架構](docs/system-architecture.md) · [安全測試](docs/security-testing.md)**
 
 **已驗證成果：161 項自動化測試通過，零跳過（2026-10-20 乾淨環境實跑）；完整展示流程已跑通。** 2026-10-07 已完成獨立本機部署與備份還原檢查；2026-10-15 本機模型改用 Gemma 4 E2B 後重跑 45 個安全檢查全數通過，包含 8 個本機模型攻擊情境。詳見下方測試與限制。
 
