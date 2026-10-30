@@ -94,7 +94,7 @@ flowchart TD
 
 | 項目 | 結果 | 來源 |
 |---|---|---|
-| 自動化測試 | 161 項 pytest 通過、零跳過（2026-10-21 完整回歸，含 `tools/demo-video/tests`） | `artifacts/interview-20261021/tests.xml` |
+| 自動化測試 | **164 passed**（2026-10-30 本機重跑 `pytest tests`，Python 3.13，不需模型服務與 API key）；2026-10-21 完整回歸 161 項、零跳過 | `tests/`、`artifacts/interview-20261021/tests.xml` |
 | AI／API 安全檢查 | 45／45 通過，含 8 個真實本機模型攻擊情境（2026-10-15，Gemma 4 E2B） | `artifacts/security-test-report.json` |
 | 檢索方法比較 | 16 題正例 Top-3 命中 15 題（93.75%）；4 題負例皆無結果；TF-IDF／BM25／融合同分 | `artifacts/retrieval-eval-report.json` |
 | 銘牌 OCR | 90 張合成銘牌（18 台 × 5 種變化）top-1 100%、自動開錯台 0 次 | `artifacts/ocr-eval-report.json` |
