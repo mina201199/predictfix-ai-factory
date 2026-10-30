@@ -1,6 +1,6 @@
 # 本機部署與 LoRA 實驗
 
-本文保存歷史 Qwen CPU LoRA 與當時部署紀錄，不代表目前仍開啟 8084／8085。2026-10-20 後續 Gemma QLoRA 已完成 504 步與新題評估，但尚不採用，見 [面試數據整理](interview-readiness.md)。後續 Docker／PostgreSQL 驗證另見 [系統稽核](../artifacts/system-audit-20261020/README.md)；本文舊環境限制按當時日期解讀。
+本文保存歷史 Qwen CPU LoRA 與當時部署紀錄，不代表目前仍開啟 8084／8085。2026-10-20 後續 Gemma QLoRA 已完成 504 步與新題評估，但尚不採用，見 [Gemma QLoRA 兩輪結果](../README.md#gemma-qlora-兩輪結果)。後續 Docker／PostgreSQL 驗證另見 [系統稽核](../artifacts/system-audit-20261020/README.md)；本文舊環境限制按當時日期解讀。
 
 ## 部署範圍
 
