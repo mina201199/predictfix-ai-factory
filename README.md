@@ -1,5 +1,13 @@
 # PredictFix AI｜智慧工廠維修 COPILOT
 
+**TL;DR**
+
+- **這是什麼**：給 CNC 工廠主管與維修工程師的維修管理系統本機 MVP，把手冊查找、資格與容量派工、排查驗收及案例累積接在同一張工單上。
+- **核心 AI 技術**：TF-IDF＋BM25 檢索，本機 Gemma 4 E2B Q8_0（llama.cpp 純 CPU）只回傳段落 ID，後端再帶出原文；另有離線 OCR 銘牌辨識；Gemma QLoRA 微調仍是實驗，尚不採用。
+- **可靠性設計**：模型輸出要通過格式與引用 ID 檢查，不合格即降級；派工 API 再核對資格與容量，驗收未通過不能提交；權限、CSRF、版本檢查與冪等請求都在後端執行。
+- **測試與部署**：161 項 pytest 通過、零跳過；45／45 個 AI／API 安全檢查通過；GitHub Actions 跑全套測試、雙模式容器與 PostgreSQL 情境。本機用 SQLite，Docker Compose 部署用 PostgreSQL 17。
+- **目前限制**：資料皆為虛構或合成；未接真實感測器與企業系統，未完成工廠現場驗收與領域專家評估，正式後端尚無外部可用網址。
+
 > **CNC 換刀卡住了。該先查什麼、派誰處理，以及怎麼確認真的修好了？**
 
 PredictFix AI 將維修知識查找、資格與容量派工、排查驗收及案例累積接成一套可操作的維修管理系統，面向 CNC 工廠的主管與維修工程師。
@@ -19,13 +27,13 @@ PredictFix AI 將維修知識查找、資格與容量派工、排查驗收及案
 | 本機運行 | 已恢復並驗證 | SQLAlchemy 改採官方支援的純 Python 安裝，展示及正式資料模式皆通過健康檢查。 |
 | 獨立本機部署 | 曾於 8084 驗證，非即時服務狀態 | 檔案雜湊快照、隔離 SQLite、正式登入、重啟及備份還原的歷史紀錄；不是公開網站。 |
 | LoRA 小規模訓練 | 已完成並部署獨立實驗 API | Qwen3-0.6B，12 步 CPU 訓練；保留測試 9／12 題符合，資料不足 3 題皆失敗，未替換正式模型。 |
-| Gemma QLoRA | 504 步實驗完成，尚不採用 | 新 100 題合成評估完全正確率 42%、recall 50.77%，三段答案 0/20；最新結果來自獨立訓練分支，沒有替換現用 Q8_0 模型。見 [面試證據](docs/interview-readiness.md)。 |
+| Gemma QLoRA | 504 步實驗完成，尚不採用 | 最新 504 步（2026-10-20）：新 100 題合成評估完全正確率 42%、recall 50.77%，三段答案 0/20。較早 126 步（2026-10-19）為 128 題全部輸出空選段（全部拒答），兩輪對照見 [Gemma QLoRA 兩輪結果](#gemma-qlora-兩輪結果)。最新結果來自獨立訓練分支，沒有替換現用 Q8_0 模型。見 [面試證據](docs/interview-readiness.md)。 |
 | 外部工單介接 | API／CSV／outbox 已實作 | 本機模擬器及隔離測試已驗證；正式 Compose 已含 worker，尚未對接真實企業端點。 |
 | 維修知識圖譜 | 可追溯關係、審查與獨立查詢已實作 | 有合成來源覆蓋評估；一般 AI 查詢尚未直接使用圖譜，未經領域專家及現場成效驗收。 |
 | 可重複展示 | 已提供準備工具與展示腳本 | 專用設備、工程師、資格與出勤；驗收阻擋、主管審核、案例發布與檢索已跑通。 |
 | CI | PR #11 合併後 main 三個 job 全數通過（2026-10-21） | 全套 161 項測試、正式／展示容器與 PostgreSQL 驗證成功。[執行紀錄](https://github.com/mina201199/predictfix-ai-factory/actions/runs/39509848713)；早期整合範圍見 [交付驗證](docs/release-validation-20261020.md)。 |
 | Docker／PostgreSQL／HTTPS | Docker 與 PostgreSQL 17 有歷史實測；本機 TLS 曾有交接紀錄 | 並發派工、正式模式、維修流程三個情境在 PostgreSQL 上通過；Compose 正式模式「API＋PostgreSQL」通過健康檢查、重啟後資料保存，`pg_dump` 備份可還原到新資料庫並撤銷工作階段。CI 每次重跑。本 repo 缺完整 TLS 原始輸出，手機與企業 HTTPS 仍待驗收，見 [交接紀錄](docs/interview-handoff-20261021.md)。 |
-| 公開面試展示 | 已公開（2026-10-21） | 免登入觀看實機影片與三分鐘操作指南，可用手機或電腦體驗虛構維修流程。[交付驗證](docs/showcase-delivery-20261021.md)。 |
+| 公開展示 | 已公開（2026-10-21） | 免登入觀看實機影片與三分鐘操作指南，可用手機或電腦體驗虛構維修流程。[交付驗證](docs/showcase-delivery-20261021.md)。 |
 | 正式後端／企業上線 | 尚未完成 | 正式後端尚無外部可用網址，未接真實感測器，未完成工廠現場驗收。 |
 
 **目前定位是具備資料保存與權限流程的本機 MVP。** 「正式資料模式」是應用程式的運行模式，不代表已部署到正式伺服器。
@@ -128,7 +136,7 @@ New-NetFirewallRule -DisplayName "PredictFix LAN demo" -Direction Inbound -Proto
 
 實體手機的連線與拍攝仍待裝置實測；Getac 工業平板僅列入未來選型評估，不屬於目前展示範圍。瀏覽器測試已覆蓋手機版 375×812 與桌面版、範例辨識、無文字圖片及手動輸入。另以 `node tests/scan_race.cjs` 檢查舊 OCR 回應不會蓋掉使用者後續選擇。
 
-面試說法：「目前以響應式網頁展示，先驗證拍照、離線 OCR、維修資料整合與附來源的 AI 建議。後續可用 Capacitor 包裝成 App，或以原生 App 接同一套 API，再整合工業平板掃描器、MDM 派送與離線快取。」這些 App 能力是後續規劃。
+目前以響應式網頁先驗證拍照、離線 OCR、維修資料整合與附來源的 AI 建議。後續可用 Capacitor 包裝成 App，或以原生 App 接同一套 API，再整合工業平板掃描器、MDM 派送與離線快取；這些 App 能力是後續規劃，尚未實作。
 
 ## 用了哪些技術，以及為什麼
 
@@ -156,8 +164,10 @@ flowchart TD
 
     API --> FLOW[工單・派工・排查驗收]
     API --> OPS[人員出勤・保養・備品]
-    FLOW --> DB[(SQLite)]
-    OPS --> DB
+    FLOW --> ORM[SQLAlchemy・DATABASE_URL]
+    OPS --> ORM
+    ORM -->|本機 start.ps1／測試| SQLITE[(SQLite)]
+    ORM -->|Docker Compose 部署| PG[(PostgreSQL 17)]
 
     API --> FILTER[機型與有效來源篩選]
     MAN[已授權手冊] --> FILTER
@@ -174,6 +184,8 @@ flowchart TD
 ```
 
 後端控制流程與資料修改，模型只提供受限的摘錄建議。來源、清單版本、提交結果與審核紀錄各自保存，以便追查一次維修的判斷依據。
+
+資料庫由 `DATABASE_URL` 決定：本機 `start.ps1`／`start-production.ps1` 與 pytest 使用 SQLite；`compose.yaml` 與 `compose.production.yaml` 使用 PostgreSQL 17。兩份 Compose 都以 Ollama 提供 Gemma，正式 Compose 另含外部工單 worker 與 Caddy HTTPS 反向代理；本機 `start.ps1` 優先以 llama.cpp 執行 Gemma，另支援 Ollama。
 
 主要模組：
 
@@ -215,7 +227,7 @@ flowchart TD
 |---|---|---|
 | **功能與整合測試** | 161 項 pytest 通過、零跳過，2026-10-20 乾淨環境實跑 | 涵蓋權限、派工、驗收、重修、保養、庫存、備份、持久化、展示、LoRA 分組／評分器、引用截斷、檢索快取與工單分頁；不能代表工廠現場驗收。 |
 | **重新安裝驗證** | 2026-10-20 GitHub Actions 從乾淨 Git checkout 安裝固定依賴，通過 161 項測試 | 驗證依賴安裝可在另一台機器重現；CI 為 Ubuntu，本次 Windows 另建乾淨虛擬環境安裝，但未透過 `setup.ps1`。 |
-| **本輪面試回歸** | 161 項 pytest 通過、零失敗／錯誤／跳過，2026-10-21 | 包含 `tests` 與 `tools/demo-video/tests`；增加慢啟動的程序清理測試，沒有重跑 GPU／正式部署。見 [JUnit](artifacts/interview-20261021/tests.xml)。 |
+| **完整回歸** | 161 項 pytest 通過、零失敗／錯誤／跳過，2026-10-21 | 包含 `tests` 與 `tools/demo-video/tests`；增加慢啟動的程序清理測試，沒有重跑 GPU／正式部署。見 [JUnit](artifacts/interview-20261021/tests.xml)。 |
 | **AI／API 安全** | 45／45 個檢查通過（2026-10-15，Gemma 4 E2B），其中含 8 個真實本機模型攻擊情境 | 測提示詞注入、越權、敏感資料暴露與捏造引用；是有限情境驗證，未完成全面滲透測試。 |
 | **檢索方法比較** | 16 題正例 Top-3 命中 15 題（93.75%）；4 題負例均無結果 | TF-IDF、BM25、融合方法同分；開發用合成題，不是獨立保留集，也不是 AI 回答正確率。 |
 | **完整展示流程** | 驗收失敗阻擋、復測提交、主管審核、案例發布及再檢索通過 | [流程報告](artifacts/interview-walkthrough-report.json) 是 API 操作證據；[60 秒操作影片](docs/media/predictfix-demo.mp4)為本機展示模式錄影。 |
@@ -223,7 +235,7 @@ flowchart TD
 
 [安全測試說明](docs/security-testing.md) · [逐項安全報告](artifacts/security-test-report.json) · [檢索報告](artifacts/retrieval-eval-report.json)
 
-2026-10-21 面試交付狀態見 [交接清單](docs/interview-handoff-20261021.md)；[舊交付檢查報告](artifacts/interview-readiness-report.json) 保留其原始日期與測試範圍。
+2026-10-21 交付狀態見 [交接清單](docs/interview-handoff-20261021.md)；[舊交付檢查報告](artifacts/interview-readiness-report.json) 保留其原始日期與測試範圍。
 
 ## 本機部署與 LoRA 微調實驗
 
@@ -263,6 +275,17 @@ Exact match 變化：**+75.0 個百分點**。這是小規模流程實驗，不�
 [實驗方法與重跑](docs/lora-training.md) · [部署報告](artifacts/local-deployment-report.json) · [LoRA 完整報告](artifacts/lora-training-report.json) · [資料集](training/selection-dataset.json)
 <!-- experiment-results:end -->
 
+### Gemma QLoRA 兩輪結果
+
+兩輪都在 GTX 1050 Ti 4 GB 上以 NF4 訓練 Gemma 4 E2B，與同條件的未微調 NF4 基準比較。兩輪評估題集不同，數字不能跨輪直接比較；兩輪都沒有替換現用 Q8_0 服務模型。
+
+| 輪次 | 評估題集 | 未微調 NF4 基準 | QLoRA | 判讀 |
+|---|---|---|---|---|
+| **126 步（舊，2026-10-19）** | 100 題保留集（另有 28 題開發驗證） | 完全正確率 9%、recall 97.78%、空金標拒答 0/40 | 完全正確率 40%、recall 0%；128 題全部輸出空選段 | 全部拒答，正確率上升只來自空金標題，不可用 |
+| **504 步（最新，2026-10-20）** | 新 100 題合成題 | 完全正確率 18%、precision 42.29%、recall 90.77%、空金標拒答 0/30、三段答案 14/20 | 完全正確率 42%、precision 73.33%、recall 50.77%、空金標拒答 18/30、三段答案 0/20 | 解除全部拒答，但多段答案嚴重漏選，`modelReady: false`，尚不採用 |
+
+原始數字：126 步見 [比較報告](artifacts/gemma-sft-comparison-20261019.json) 與 [實驗紀錄](docs/gemma-sft-results-20261019.md)；504 步見 [100 題比較](artifacts/interview-20261021/selection-independent-v5-comparison-20261020.json) 與 [訓練紀錄](artifacts/interview-20261021/qlora-coverage-train-20261020.json)。題目與標註皆由同一作者合成，沒有外部維修專家盲測。
+
 ### 另外做的 ML 實驗：公開軸承故障分類
 
 使用 CWRU 12 kHz 實驗資料，抽取 14 個時域／頻域特徵，以決策樹分類滾珠、內圈與外圈故障。依負載切分：0／1 hp 訓練、2 hp 驗證、3 hp 測試。
@@ -275,7 +298,7 @@ Exact match 變化：**+75.0 個百分點**。這是小規模流程實驗，不�
 
 另有適合手機與桌面的獨立展示介面，無須安裝 Python 或模型。包含報修、核對來源、清單核准、資格／出勤／容量派工、逐項排查與驗收、主管審核／退回重修及案例發布。
 
-[開啟公開面試展示](https://predictfix-mobile-demo.ruru0109lee.chatgpt.site)，免登入。首頁有實機影片、逐字稿、三分鐘導覽及操作協助；按「開始互動展示」即可體驗。這是靜態模擬介面，不代表原 FastAPI 系統已完成公網部署。
+[開啟公開展示](https://predictfix-mobile-demo.ruru0109lee.chatgpt.site)，免登入。首頁有實機影片、逐字稿、三分鐘導覽及操作協助；按「開始互動展示」即可體驗。這是靜態模擬介面，不代表原 FastAPI 系統已完成公網部署。
 
 - 在既有本機服務開啟 `/mobile.html`，或以 `node scripts/serve_mobile_demo.cjs` 啟動獨立預覽，再開啟 `http://127.0.0.1:8096`。
 - 點「開始換刀卡住情境」，依畫面引導操作；右上角可切換主管／工程師。
@@ -283,7 +306,7 @@ Exact match 變化：**+75.0 個百分點**。這是小規模流程實驗，不�
 - 所有設備、手冊摘要、量測與人員均為虛構資料。資料只保存在當前瀏覽器，可用「重設展示」清除；不同手機與電腦不會同步。
 - 此介面未連接 FastAPI、現場設備、即時 LLM 或正式資料庫；角色切換僅模擬流程，不是正式登入權限。
 
-內嵌工作台原始檔位於 `sites/predictfix-mobile/dist/`；公開網站另在 Sites 正式原始碼庫維護面試導覽與影片，版本與提交識別見 [交付紀錄](docs/showcase-delivery-20261021.md)。本機 `127.0.0.1` 網址只供該電腦使用；手機遠端體驗請開啟已部署的 HTTPS 網址。
+內嵌工作台原始檔位於 `sites/predictfix-mobile/dist/`；公開網站另在 Sites 正式原始碼庫維護導覽與影片，版本與提交識別見 [交付紀錄](docs/showcase-delivery-20261021.md)。本機 `127.0.0.1` 網址只供該電腦使用；手機遠端體驗請開啟已部署的 HTTPS 網址。
 
 另有本機保存的 60 秒截圖產品介紹；版本內附 [字幕](artifacts/video/AI-Factory-60s-zh-TW.srt)與分鏡。成品位置、雜湊及重製條件見 [影片資產說明](docs/product-video.md)。
 
@@ -310,7 +333,7 @@ Exact match 變化：**+75.0 個百分點**。這是小規模流程實驗，不�
 
 **以上都是本機網址，外部訪客無法直接開啟。** 安裝工具使用 SQLAlchemy 純 Python 建置並檢查依賴及 SQLite 讀寫；啟動時也會先檢查環境。
 
-服務啟動後另開終端機，準備面試工單：
+服務啟動後另開終端機，準備示範工單：
 
 ```powershell
 .\.venv\Scripts\python.exe scripts/prepare_interview_demo.py
@@ -351,14 +374,14 @@ docker stop pf-verify-pg
 .\.venv\Scripts\python.exe scripts\verify_postgres.py container
 ```
 
-兩個指令最後一行都是 JSON，所有值為 `true` 即通過。pytest 項數、安全情境與模型題數不能直接相加；148 項是 2026-10-19 歷史結果。CI 另解析 JUnit，拒絕零測試或跳過測試的結果。面試前依 [隔離驗證方式](docs/interview-demo.md) 取得當次結果。
+兩個指令最後一行都是 JSON，所有值為 `true` 即通過。pytest 項數、安全情境與模型題數不能直接相加；148 項是 2026-10-19 歷史結果。CI 另解析 JUnit，拒絕零測試或跳過測試的結果。展示前依 [隔離驗證方式](docs/interview-demo.md) 取得當次結果。
 
 ## 下一步
 
 | 優先序 | 要補的工作 | 完成判準 |
 |---|---|---|
 | **1．交付紀錄** | 已完成：GitHub Actions 全套測試、雙模式容器及 PostgreSQL 通過，見 [執行紀錄](https://github.com/mina201199/predictfix-ai-factory/actions/runs/39452377590)。 | 已保存原始測試報告、版本來源與 CI 連結。 |
-| **2．展示影片** | 已完成：[60 秒操作影片](docs/media/predictfix-demo.mp4)涵蓋報修、派工、驗收阻擋、審核與案例發布。 | 面試官能快速看完操作，現場也可重新準備工單。 |
+| **2．展示影片** | 已完成：[60 秒操作影片](docs/media/predictfix-demo.mp4)涵蓋報修、派工、驗收阻擋、審核與案例發布。 | 觀看者能快速看完操作，現場也可重新準備工單。 |
 | **3．對外展示交付** | 已完成：[公開展示](https://predictfix-mobile-demo.ruru0109lee.chatgpt.site)整合影片、逐字稿與操作指南。 | 已驗證免登入存取、影片完整播放與互動流程，見 [交付紀錄](docs/showcase-delivery-20261021.md)。 |
 | **4．公開後端部署** | Docker／PostgreSQL 已有驗證；接續驗收後端 HTTPS 並建立獨立展示環境，補上監控與異地備份演練。 | 外部可登入後端、資料可持久化、重啟與備份還原通過；展示與正式資料隔離。 |
 | **5．效果評估** | 建立獨立手冊題集與相關性標註；由領域人員評估引用適用性和流程成效，補測圖譜／外部工單的 PostgreSQL 路徑。 | 有獨立測試集、逐題錯誤分析、資料庫驗收與清楚的成效指標。 |
@@ -372,10 +395,10 @@ docker stop pf-verify-pg
 | [操作手冊](docs/repair-flow.md) | 報修、清單、派工、驗收、保養與備品。 |
 | [面試展示指南](docs/interview-demo.md) | 一鍵準備、2–3 分鐘腳本、流程驗證與 CI 邊界。 |
 | [本機部署與 LoRA 實驗](docs/lora-training.md) | 部署快照、資料分組、CPU 訓練、基準比較與適用限制。 |
-| [Gemma 固定 SFT 實驗](docs/gemma-sft-protocol.md) · [實測結果](docs/gemma-sft-results-20261019.md) · [重跑與驗證](docs/gemma-sft-running.md) | 官方權重、獨立保留集與 adapter 重載；本次 QLoRA 全部拒答，未達可用的選段改善。 |
+| [Gemma 固定 SFT 實驗](docs/gemma-sft-protocol.md) · [實測結果](docs/gemma-sft-results-20261019.md) · [重跑與驗證](docs/gemma-sft-running.md) | 官方權重、獨立保留集與 adapter 重載；記錄 2026-10-19 第一輪 126 步 QLoRA（全部拒答，未達可用的選段改善）。504 步最新結果見 [Gemma QLoRA 兩輪結果](#gemma-qlora-兩輪結果)。 |
 | [系統架構](docs/system-architecture.md) | 資料流、API、來源管理與實作邊界。 |
 | [安全測試](docs/security-testing.md) | 攻擊情境、發現與修正、重跑方式及限制。 |
-| [權限設計與矩陣](docs/access-control.md) | 主管／工程師權限劃分、資料歸屬、職責分離、逐路由權限矩陣與面試問答。 |
+| [權限設計與矩陣](docs/access-control.md) | 主管／工程師權限劃分、資料歸屬、職責分離、逐路由權限矩陣與問答。 |
 | [維修知識圖譜](docs/knowledge-graph.md) | 有來源的候選／核准路徑、主管審查、隔離展示與合成評估。 |
 | [本機安裝](docs/local-setup.md) · [正式環境與部署](docs/production-setup.md) | 安裝、帳號、出勤、備份還原及伺服器設定。 |
 | [歷史開發紀錄](docs/development-history.md) | 過往實作與驗證紀錄，含已被後續版本更新的內容。 |
