@@ -147,4 +147,4 @@ worker claim 的交易先提交，再發 HTTP；租約 60 秒、timeout 5 秒、
 & $python -m pytest --confcutdir=. --rootdir=. tests -q -p no:cacheprovider --basetemp=.runtime/integration-verification
 ```
 
-詳細實際結果與限制見 [驗收報告](ticket-integration-validation.md)。設計與計畫位於 `docs/superpowers/specs/2026-10-19-ticket-integration-design.md` 與 `docs/superpowers/plans/2026-10-19-ticket-integration.md`。
+詳細實際結果與限制見 [驗收報告](ticket-integration-validation.md)。

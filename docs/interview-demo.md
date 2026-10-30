@@ -28,7 +28,7 @@
 
 ## 本次固定展示版本與準備（2026-10-21）
 
-目前這台電腦使用 `C:\Users\User\Desktop\ai factory\predictfix-wave2-main`，分支 `codex/interview-readiness`，基底為 `2c9e38f`。資料夾名稱雖有 main，分支已是本次面試準備分支；`predictfix-ai-factory` 是另一個評估分支，不用來展示新增的圖譜與介接功能。這裡修改尚未代表已推送或合併。
+目前這台電腦使用 worktree `predictfix-wave2-main`，分支 `codex/interview-readiness`，基底為 `2c9e38f`。資料夾名稱雖有 main，分支已是本次面試準備分支；`predictfix-ai-factory` 是另一個評估分支，不用來展示新增的圖譜與介接功能。這裡修改尚未代表已推送或合併。
 
 展示採本機 HTTP，API 用 **18962**，模擬接收端用 **18963**；不使用既有 8081 模型或其他埠的服務。資料、測試用 `.env`、日誌放在 `.runtime/interview-20261021/`，不寫正式資料庫。這是一個**不呼叫模型的流程展示**：一般來源查找使用現有檢索，不能把規則結果說成當場由 Gemma 生成。CPU/GPU 成績用 [既有量測證據](interview-readiness.md) 說明；如要現場展示模型，需另確認模型檔與服務可用。
 
@@ -37,7 +37,7 @@
 開一個專門給展示的 PowerShell，執行下列指令。埠被占用時應停止並確認，不關閉不明程序。
 
 ```powershell
-Set-Location -LiteralPath 'C:\Users\User\Desktop\ai factory\predictfix-wave2-main'
+# 在 repo 根目錄執行
 $python = (Resolve-Path '../predictfix-ai-factory/.venv/Scripts/python.exe').Path
 $demoDir = Join-Path $PWD '.runtime/interview-20261021'
 if (-not (Test-Path -LiteralPath "$demoDir/.env")) { throw '先完成下方新環境準備步驟' }

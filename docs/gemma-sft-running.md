@@ -9,7 +9,7 @@
 在此 worktree 執行，不在外層 App 專案根執行。沿用主 repo 獨立環境，不安裝／改動依賴；`.runtime` 與 `.env` 已被忽略。實驗不需要 API key、token 或任何現場資料。
 
 ```powershell
-$python = 'C:/Users/User/Desktop/ai factory/predictfix-ai-factory/.runtime/qlora-env/Scripts/python.exe'
+$python = '../predictfix-ai-factory/.runtime/qlora-env/Scripts/python.exe'
 $runtimeDir = '../predictfix-ai-factory/.runtime'
 $env:HF_HUB_OFFLINE = '1'
 $env:PYTHONIOENCODING = 'utf-8'

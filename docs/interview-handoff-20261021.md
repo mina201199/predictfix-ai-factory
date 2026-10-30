@@ -8,7 +8,7 @@
 2. 依 [展示步驟](interview-demo.md) 啟動本機服務，重新執行準備函式更新當日出勤，再開 `http://127.0.0.1:18962/workflow.html`。
 3. 主流程應能看到虛構 `INTERVIEW DEMO` 工單；未通過驗收不能提交。圖譜頁可展示 4→3→4 條路徑，介接頁可展示重送去重與 503 重試。
 
-程式碼位於 `C:\Users\User\Desktop\ai factory\predictfix-wave2-main`，分支 `codex/interview-readiness`，基底 `2c9e38f`。不要因資料夾名稱而認為目前仍在 main。其他工作樹未改動，最新訓練程式未合併，模型未替換。本輪沒有推送或部署。
+程式碼位於 worktree `predictfix-wave2-main`，分支 `codex/interview-readiness`，基底 `2c9e38f`。不要因資料夾名稱而認為目前仍在 main。其他工作樹未改動，最新訓練程式未合併，模型未替換。本輪沒有推送或部署。
 
 ## 本輪已完成
 
