@@ -58,13 +58,26 @@ def runBounded(command, cwd, environment, log, timeoutSeconds):
     process.close()
 
 
+def protocolFlags(args):
+  flags = []
+  for name in ['protocol', 'holdout']:
+    path = getattr(args, name, None)
+    if path:
+      if not path.resolve().is_relative_to(ROOT / 'training'):
+        raise ValueError('Frozen paths must be inside this worktree training folder')
+      flags.extend(['--' + name, str(path.resolve())])
+  return flags
+
+
 def campaign(args):
   started = time.monotonic()
   args.run_dir = args.run_dir.resolve()
   if not args.run_dir.is_relative_to(ROOT / '.runtime'):
     raise ValueError('Campaign output must be inside this worktree .runtime')
   args.run_dir.mkdir(parents=True, exist_ok=False)
-  report = {'scope': args.scope, 'max_hours': args.max_hours, 'protocol_sha256': textHash(PROTOCOL),
+  frozenFlags = protocolFlags(args)
+  protocolPath = getattr(args, 'protocol', None) or PROTOCOL
+  report = {'scope': args.scope, 'max_hours': args.max_hours, 'protocol_sha256': textHash(protocolPath),
     'status': 'running', 'stages': {}, 'quality_table': {},
     'limitations': ['Concurrent workloads; wall clock is cost evidence, not controlled performance.',
       'Missing/failed arms have no quality score; resource probe is not formal training.']}
@@ -75,7 +88,7 @@ def campaign(args):
   stages = campaignStages(args.scope)
   if args.baseline_nf4:
     from run_gemma_sft import checkBaseline
-    checkBaseline(args.baseline_nf4, 'qlora', textHash(PROTOCOL))
+    checkBaseline(args.baseline_nf4, 'qlora', textHash(protocolPath))
     report['stages']['base_nf4'] = {'status': 'completed', 'report': str(args.baseline_nf4.resolve()), 'reused': True}
     statuses['base_nf4'] = 'completed'
   save()
@@ -93,6 +106,7 @@ def campaign(args):
     command = [sys.executable, str(ROOT / 'scripts/run_gemma_sft.py'), stage['command'],
       '--mode', stage['mode'], '--runtime-dir', str(args.runtime_dir.resolve()), '--run-dir', str(output),
       '--max-seconds', str(remaining)]
+    command.extend(frozenFlags)
     if stage.get('baseline'):
       command += ['--baseline-report', report['stages'][stage['baseline']]['report']]
     if stage.get('adapter'):
@@ -135,6 +149,8 @@ if __name__ == '__main__':
   parser.add_argument('--runtime-dir', type=Path, required=True)
   parser.add_argument('--run-dir', type=Path, required=True)
   parser.add_argument('--baseline-nf4', type=Path, help='Reuse a complete matching baseline')
+  parser.add_argument('--protocol', type=Path)
+  parser.add_argument('--holdout', type=Path)
   arguments = parser.parse_args()
   if arguments.max_hours <= 0:
     parser.error('--max-hours must be positive')

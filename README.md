@@ -12,7 +12,7 @@
 
 PredictFix AI 將維修知識查找、資格與容量派工、排查驗收及案例累積接成一套可操作的維修管理系統，面向 CNC 工廠的主管與維修工程師。
 
-**[直接開啟展示](https://predictfix-mobile-demo.ruru0109lee.chatgpt.site) · [三分鐘操作指南](docs/interview-demo.md) · [本機體驗](#快速開始) · [操作手冊](docs/repair-flow.md) · [系統架構](docs/system-architecture.md) · [安全測試](docs/security-testing.md)**
+**[直接開啟展示](https://predictfix-mobile-demo.ruru0109lee.chatgpt.site) · [三分鐘操作指南](docs/demo-guide.md) · [本機體驗](#快速開始) · [操作手冊](docs/repair-flow.md) · [系統架構](docs/system-architecture.md) · [安全測試](docs/security-testing.md)**
 
 **已驗證成果：161 項自動化測試通過，零跳過（2026-10-20 乾淨環境實跑）；完整展示流程已跑通。** 2026-10-07 已完成獨立本機部署與備份還原檢查；2026-10-15 本機模型改用 Gemma 4 E2B 後重跑 45 個安全檢查全數通過，包含 8 個本機模型攻擊情境。詳見下方測試與限制。
 
@@ -27,12 +27,12 @@ PredictFix AI 將維修知識查找、資格與容量派工、排查驗收及案
 | 本機運行 | 已恢復並驗證 | SQLAlchemy 改採官方支援的純 Python 安裝，展示及正式資料模式皆通過健康檢查。 |
 | 獨立本機部署 | 曾於 8084 驗證，非即時服務狀態 | 檔案雜湊快照、隔離 SQLite、正式登入、重啟及備份還原的歷史紀錄；不是公開網站。 |
 | LoRA 小規模訓練 | 已完成並部署獨立實驗 API | Qwen3-0.6B，12 步 CPU 訓練；保留測試 9／12 題符合，資料不足 3 題皆失敗，未替換正式模型。 |
-| Gemma QLoRA | 504 步實驗完成，尚不採用 | 最新 504 步（2026-10-20）：新 100 題合成評估完全正確率 42%、recall 50.77%，三段答案 0/20。較早 126 步（2026-10-19）為 128 題全部輸出空選段（全部拒答），兩輪對照見 [Gemma QLoRA 兩輪結果](#gemma-qlora-兩輪結果)。最新結果來自獨立訓練分支，沒有替換現用 Q8_0 模型。見 [面試證據](docs/interview-readiness.md)。 |
+| Gemma QLoRA | 504 步實驗完成，尚不採用 | 最新 504 步（2026-10-20）：新 100 題合成評估完全正確率 42%、recall 50.77%，三段答案 0/20。較早 126 步（2026-10-19）為 128 題全部輸出空選段（全部拒答），兩輪對照見 [Gemma QLoRA 兩輪結果](#gemma-qlora-兩輪結果)。訓練程式為 `scripts/run_gemma_sft_campaign.py`／`scripts/run_gemma_sft.py`，凍結設定為 `training/gemma-sft-protocol-v4-coverage.json`；新 100 題評估程式仍只在 `codex/qlora-collapse-fix` 分支。沒有替換現用 Q8_0 模型。原始報告見 [驗證證據](artifacts/validation-20261021/README.md)。 |
 | 外部工單介接 | API／CSV／outbox 已實作 | 本機模擬器及隔離測試已驗證；正式 Compose 已含 worker，尚未對接真實企業端點。 |
 | 維修知識圖譜 | 可追溯關係、審查與獨立查詢已實作 | 有合成來源覆蓋評估；一般 AI 查詢尚未直接使用圖譜，未經領域專家及現場成效驗收。 |
 | 可重複展示 | 已提供準備工具與展示腳本 | 專用設備、工程師、資格與出勤；驗收阻擋、主管審核、案例發布與檢索已跑通。 |
 | CI | PR #11 合併後 main 三個 job 全數通過（2026-10-21） | 全套 161 項測試、正式／展示容器與 PostgreSQL 驗證成功。[執行紀錄](https://github.com/mina201199/predictfix-ai-factory/actions/runs/39509848713)；早期整合範圍見 [交付驗證](docs/release-validation-20261020.md)。 |
-| Docker／PostgreSQL／HTTPS | Docker 與 PostgreSQL 17 有歷史實測；本機 TLS 曾有交接紀錄 | 並發派工、正式模式、維修流程三個情境在 PostgreSQL 上通過；Compose 正式模式「API＋PostgreSQL」通過健康檢查、重啟後資料保存，`pg_dump` 備份可還原到新資料庫並撤銷工作階段。CI 每次重跑。本 repo 缺完整 TLS 原始輸出，手機與企業 HTTPS 仍待驗收，見 [交接紀錄](docs/interview-handoff-20261021.md)。 |
+| Docker／PostgreSQL／HTTPS | Docker 與 PostgreSQL 17 有歷史實測；本機 TLS 曾有交接紀錄 | 並發派工、正式模式、維修流程三個情境在 PostgreSQL 上通過；Compose 正式模式「API＋PostgreSQL」通過健康檢查、重啟後資料保存，`pg_dump` 備份可還原到新資料庫並撤銷工作階段。CI 每次重跑。本 repo 缺完整 TLS 原始輸出，手機與企業 HTTPS 仍待驗收，部署設定見 [正式環境手冊](docs/production-setup.md)。 |
 | 公開展示 | 已公開（2026-10-21） | 免登入觀看實機影片與三分鐘操作指南，可用手機或電腦體驗虛構維修流程。[交付驗證](docs/showcase-delivery-20261021.md)。 |
 | 正式後端／企業上線 | 尚未完成 | 正式後端尚無外部可用網址，未接真實感測器，未完成工廠現場驗收。 |
 
@@ -82,7 +82,7 @@ flowchart LR
 4. **執行與復測**：切換被指派的工程師，逐項記錄；驗收未通過時，系統阻擋提交。
 5. **審核與累積**：主管核對證據，可退回重修；通過案件整理成案例，人工核對後發布。
 
-展示前執行 `scripts/prepare_interview_demo.py`，即可準備專用工程師、資格、當日出勤與已指派工單。[2–3 分鐘展示腳本](docs/interview-demo.md) 提供操作順序與完整流程驗證方式；完整操作見 [操作手冊](docs/repair-flow.md)。目前補問採結構化欄位檢查；比較的是候選來源，尚未自動產生完整維修方案。
+展示前執行 `scripts/prepare_interview_demo.py`，即可準備專用工程師、資格、當日出勤與已指派工單。[展示操作指南](docs/demo-guide.md) 提供 2–3 分鐘操作順序與完整流程驗證方式；完整操作見 [操作手冊](docs/repair-flow.md)。目前補問採結構化欄位檢查；比較的是候選來源，尚未自動產生完整維修方案。
 
 ## 機台銘牌掃描 Demo
 
@@ -149,7 +149,7 @@ New-NetFirewallRule -DisplayName "PredictFix LAN demo" -Direction Inbound -Proto
 | **本機 AI** | Gemma 4 E2B Q8_0（Google，Apache 2.0）、llama.cpp 純 CPU；另支援 Ollama | 知識中心由模型選段；浮動助手以 RAG 整理白話建議、引用與操作草稿。操作須人工確認並通過後端權限檢查，模型不核准復機。模型不可用時明示未取得有效模型結果。不需 GPU，選型依據見 [本機模型基準](docs/local-llm-benchmark.md) 與 [模型選型與合規](docs/model-selection.md)。 |
 | **工程師推薦** | 規則篩選與排序 | 必要資格、出勤與容量是可核對的條件；目前沒有可用來訓練推薦模型的現場成效資料。 |
 | **一致性與權限** | 工作階段、角色、CSRF、版本檢查、冪等請求 | 限制操作身分，避免重送造成重複工單或扣帳，拒絕過期版本覆寫。 |
-| **部署** | Docker Compose、PostgreSQL、Caddy 設定 | 分開配置 API、資料庫、模型與 HTTPS；API＋PostgreSQL 有實測紀錄；本機 TLS 與正式環境驗收的界線見 [面試交接](docs/interview-handoff-20261021.md)。 |
+| **部署** | Docker Compose、PostgreSQL、Caddy 設定 | 分開配置 API、資料庫、模型與 HTTPS；API＋PostgreSQL 有實測紀錄；本機 TLS 與正式環境驗收的界線見 [正式環境手冊](docs/production-setup.md)。 |
 
 ### 模型選型與合規
 
@@ -227,24 +227,24 @@ flowchart TD
 |---|---|---|
 | **功能與整合測試** | 161 項 pytest 通過、零跳過，2026-10-20 乾淨環境實跑 | 涵蓋權限、派工、驗收、重修、保養、庫存、備份、持久化、展示、LoRA 分組／評分器、引用截斷、檢索快取與工單分頁；不能代表工廠現場驗收。 |
 | **重新安裝驗證** | 2026-10-20 GitHub Actions 從乾淨 Git checkout 安裝固定依賴，通過 161 項測試 | 驗證依賴安裝可在另一台機器重現；CI 為 Ubuntu，本次 Windows 另建乾淨虛擬環境安裝，但未透過 `setup.ps1`。 |
-| **完整回歸** | 161 項 pytest 通過、零失敗／錯誤／跳過，2026-10-21 | 包含 `tests` 與 `tools/demo-video/tests`；增加慢啟動的程序清理測試，沒有重跑 GPU／正式部署。見 [JUnit](artifacts/interview-20261021/tests.xml)。 |
+| **完整回歸** | 161 項 pytest 通過、零失敗／錯誤／跳過，2026-10-21 | 包含 `tests` 與 `tools/demo-video/tests`；增加慢啟動的程序清理測試，沒有重跑 GPU／正式部署。見 [JUnit](artifacts/validation-20261021/tests.xml)。 |
 | **AI／API 安全** | 45／45 個檢查通過（2026-10-15，Gemma 4 E2B），其中含 8 個真實本機模型攻擊情境 | 測提示詞注入、越權、敏感資料暴露與捏造引用；是有限情境驗證，未完成全面滲透測試。 |
 | **檢索方法比較** | 16 題正例 Top-3 命中 15 題（93.75%）；4 題負例均無結果 | TF-IDF、BM25、融合方法同分；開發用合成題，不是獨立保留集，也不是 AI 回答正確率。 |
-| **完整展示流程** | 驗收失敗阻擋、復測提交、主管審核、案例發布及再檢索通過 | [流程報告](artifacts/interview-walkthrough-report.json) 是 API 操作證據；[60 秒操作影片](docs/media/predictfix-demo.mp4)為本機展示模式錄影。 |
+| **完整展示流程** | 驗收失敗阻擋、復測提交、主管審核、案例發布及再檢索通過 | [流程報告](artifacts/validation-walkthrough-report.json) 是 API 操作證據；[60 秒操作影片](docs/media/predictfix-demo.mp4)為本機展示模式錄影。 |
 | **正式資料模式** | 2026-10-07 本機 API、空資料庫、展示功能隔離與模型連線通過 | [本機驗證報告](artifacts/production-live-check.json)；不等於公網或企業上線。 |
 
 [安全測試說明](docs/security-testing.md) · [逐項安全報告](artifacts/security-test-report.json) · [檢索報告](artifacts/retrieval-eval-report.json)
 
-2026-10-21 交付狀態見 [交接清單](docs/interview-handoff-20261021.md)；[舊交付檢查報告](artifacts/interview-readiness-report.json) 保留其原始日期與測試範圍。
+2026-10-21 驗證證據見 [證據索引](artifacts/validation-20261021/README.md)；[舊交付檢查報告](artifacts/validation-readiness-report.json) 保留其原始日期與測試範圍。
 
 ## 本機部署與 LoRA 微調實驗
 
-以下自動產生區塊保存歷史 Qwen 實驗；最新 Gemma QLoRA 與現用模型的差異見 [面試回答](docs/interview-readiness.md)，不以本區塊判斷即時服務狀態。
+以下自動產生區塊保存歷史 Qwen 實驗；最新 Gemma QLoRA 與現用模型的差異見下方 [Gemma QLoRA 兩輪結果](#gemma-qlora-兩輪結果)，不以本區塊判斷即時服務狀態。
 
 <!-- experiment-results:start -->
 **歷史本機部署紀錄：deployed。** 當時在 `http://127.0.0.1:8084` 驗證正式資料模式，採獨立資料庫與具有檔案雜湊的版本快照；不代表該服務現在仍開啟。
 
-已驗證登入與主管權限、匿名阻擋、關閉快速登入、重啟後帳號保存，以及 SQLite 備份／新庫還原與工作階段撤銷。尚未部署公網；Docker 映像已由 CI 以正式模式實際啟動驗證，PostgreSQL 已有重啟保存與 `pg_dump` 還原紀錄。本機 TLS 的後續交接與未驗收範圍見 [面試交接](docs/interview-handoff-20261021.md)；本輪不重跑部署。
+已驗證登入與主管權限、匿名阻擋、關閉快速登入、重啟後帳號保存，以及 SQLite 備份／新庫還原與工作階段撤銷。尚未部署公網；Docker 映像已由 CI 以正式模式實際啟動驗證，PostgreSQL 已有重啟保存與 `pg_dump` 還原紀錄。本機 TLS 尚未驗收，部署設定與未驗收範圍見 [正式環境手冊](docs/production-setup.md)；本輪不重跑部署。
 
 **LoRA 任務：根據報修問題與候選原文，選取相關段落 ID；無依據時輸出空清單。** 資料為 44 題原創虛構案例，按來源主題分組，訓練／驗證／測試為 24／8／12 題。
 
@@ -284,7 +284,7 @@ Exact match 變化：**+75.0 個百分點**。這是小規模流程實驗，不�
 | **126 步（舊，2026-10-19）** | 100 題保留集（另有 28 題開發驗證） | 完全正確率 9%、recall 97.78%、空金標拒答 0/40 | 完全正確率 40%、recall 0%；128 題全部輸出空選段 | 全部拒答，正確率上升只來自空金標題，不可用 |
 | **504 步（最新，2026-10-20）** | 新 100 題合成題 | 完全正確率 18%、precision 42.29%、recall 90.77%、空金標拒答 0/30、三段答案 14/20 | 完全正確率 42%、precision 73.33%、recall 50.77%、空金標拒答 18/30、三段答案 0/20 | 解除全部拒答，但多段答案嚴重漏選，`modelReady: false`，尚不採用 |
 
-原始數字：126 步見 [比較報告](artifacts/gemma-sft-comparison-20261019.json) 與 [實驗紀錄](docs/gemma-sft-results-20261019.md)；504 步見 [100 題比較](artifacts/interview-20261021/selection-independent-v5-comparison-20261020.json) 與 [訓練紀錄](artifacts/interview-20261021/qlora-coverage-train-20261020.json)。題目與標註皆由同一作者合成，沒有外部維修專家盲測。
+原始數字：126 步見 [比較報告](artifacts/gemma-sft-comparison-20261019.json) 與 [實驗紀錄](docs/gemma-sft-results-20261019.md)；504 步見 [100 題比較](artifacts/validation-20261021/selection-independent-v5-comparison-20261020.json) 與 [訓練紀錄](artifacts/validation-20261021/qlora-coverage-train-20261020.json)。題目與標註皆由同一作者合成，沒有外部維修專家盲測。
 
 ### 另外做的 ML 實驗：公開軸承故障分類
 
@@ -339,7 +339,7 @@ Exact match 變化：**+75.0 個百分點**。這是小規模流程實驗，不�
 .\.venv\Scripts\python.exe scripts/prepare_interview_demo.py
 ```
 
-登入畫面會新增「以面試示範工程師體驗」。重跑沿用未完成的示範工單，不清空既有資料。詳見 [面試展示指南](docs/interview-demo.md)。
+登入畫面會新增「以面試示範工程師體驗」。重跑沿用未完成的示範工單，不清空既有資料。詳見 [展示操作指南](docs/demo-guide.md)。
 
 本機 LLM 與軸承回放為額外安裝項目：
 
@@ -374,7 +374,7 @@ docker stop pf-verify-pg
 .\.venv\Scripts\python.exe scripts\verify_postgres.py container
 ```
 
-兩個指令最後一行都是 JSON，所有值為 `true` 即通過。pytest 項數、安全情境與模型題數不能直接相加；148 項是 2026-10-19 歷史結果。CI 另解析 JUnit，拒絕零測試或跳過測試的結果。展示前依 [隔離驗證方式](docs/interview-demo.md) 取得當次結果。
+兩個指令最後一行都是 JSON，所有值為 `true` 即通過。pytest 項數、安全情境與模型題數不能直接相加；148 項是 2026-10-19 歷史結果。CI 另解析 JUnit，拒絕零測試或跳過測試的結果。展示前依 [隔離驗證方式](docs/demo-guide.md) 取得當次結果。
 
 ## 下一步
 
@@ -393,7 +393,7 @@ docker stop pf-verify-pg
 | 文件 | 內容 |
 |---|---|
 | [操作手冊](docs/repair-flow.md) | 報修、清單、派工、驗收、保養與備品。 |
-| [面試展示指南](docs/interview-demo.md) | 一鍵準備、2–3 分鐘腳本、流程驗證與 CI 邊界。 |
+| [展示操作指南](docs/demo-guide.md) | 一鍵準備、2–3 分鐘操作流程、流程驗證與 CI 邊界。 |
 | [本機部署與 LoRA 實驗](docs/lora-training.md) | 部署快照、資料分組、CPU 訓練、基準比較與適用限制。 |
 | [Gemma 固定 SFT 實驗](docs/gemma-sft-protocol.md) · [實測結果](docs/gemma-sft-results-20261019.md) · [重跑與驗證](docs/gemma-sft-running.md) | 官方權重、獨立保留集與 adapter 重載；記錄 2026-10-19 第一輪 126 步 QLoRA（全部拒答，未達可用的選段改善）。504 步最新結果見 [Gemma QLoRA 兩輪結果](#gemma-qlora-兩輪結果)。 |
 | [系統架構](docs/system-architecture.md) | 資料流、API、來源管理與實作邊界。 |

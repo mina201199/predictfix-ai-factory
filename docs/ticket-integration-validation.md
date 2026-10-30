@@ -2,7 +2,7 @@
 
 驗證日期：2026-10-19（Asia/Taipei）。分支 `codex/wave2-ticket-integration`，基底 `ad3fc63`。這份報告記錄本機模擬與隔離 SQLite 的實際結果，未對接企業系統，也未執行 PostgreSQL／GPU／LLM 測試。
 
-後續狀態：2026-10-20 已另有 [PostgreSQL 介接與部署設定稽核](../artifacts/system-audit-20261020/README.md)，2026-10-21 面試演練見 [本輪證據](../artifacts/interview-20261021/README.md)。下方數字與「未驗證／未合併」均描述 2026-10-19 當時狀態，原始結果不改寫。
+後續狀態：2026-10-20 已另有 [PostgreSQL 介接與部署設定稽核](../artifacts/system-audit-20261020/README.md)，2026-10-21 面試演練見 [本輪證據](../artifacts/validation-20261021/README.md)。下方數字與「未驗證／未合併」均描述 2026-10-19 當時狀態，原始結果不改寫。
 
 ## 測試結果
 

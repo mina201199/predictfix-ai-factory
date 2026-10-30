@@ -154,7 +154,7 @@ def main():
     args=parser.parse_args()
     if urlparse(args.url).hostname not in ['127.0.0.1','localhost']:raise SystemExit('Local demonstration only')
     with httpx.Client(base_url=args.url,timeout=30) as client:result=prepare(client,args.walkthrough)
-    filename='interview-walkthrough-report.json' if args.walkthrough else 'interview-demo-report.json'
+    filename='validation-walkthrough-report.json' if args.walkthrough else 'validation-demo-report.json'
     (ROOT/'artifacts'/filename).write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     print(json.dumps(result,ensure_ascii=False))
 
