@@ -4,7 +4,7 @@
 
 - [公開面試展示：影片、逐字稿、三分鐘指南與互動工作台](https://predictfix-mobile-demo.ruru0109lee.chatgpt.site)
 - [實機影片 MP4](https://predictfix-mobile-demo.ruru0109lee.chatgpt.site/media/predictfix-demo.mp4)
-- [操作說明與本機準備](interview-demo.md)
+- [操作說明與本機準備](demo-guide.md)
 
 網站開放任何持有連結者瀏覽，不需登入、安裝或 API Key。所有內容皆為虛構展示資料，未連接正式資料庫、現場設備或即時 AI。
 

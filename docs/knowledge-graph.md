@@ -2,7 +2,7 @@
 
 這版可把警報／零件連到排查步驟，再找到來源明示的備品與資格。每條關係須主管核對；工程師只能讀取當下仍有效的核准路徑。系統不判定診斷正確、不自動派工、結案或核准復機，人工核准也不等於原廠認證。
 
-2026-10-21 面試整理：圖譜是獨立查詢頁及 API，一般 `/api/assist` 尚未使用圖譜。本輪重跑的 SQLite 合成評估見 [新報告](../artifacts/interview-20261021/knowledge-graph-evaluation.json)，操作使用 [共同展示步驟](interview-demo.md)。來源覆蓋數字不代表診斷正確率或節省維修時間。
+2026-10-21 面試整理：圖譜是獨立查詢頁及 API，一般 `/api/assist` 尚未使用圖譜。本輪重跑的 SQLite 合成評估見 [新報告](../artifacts/validation-20261021/knowledge-graph-evaluation.json)，操作使用 [共同展示步驟](demo-guide.md)。來源覆蓋數字不代表診斷正確率或節省維修時間。
 
 ## 資料與 schema
 

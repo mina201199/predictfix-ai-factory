@@ -2,7 +2,7 @@
 
 查證日期：2026-10-16。標示「未查證」的項目是查不到可靠來源或尚未實測，不代表已確認。
 
-2026-10-21 狀態整理：現行預設仍為 Gemma Q8_0。Gemma QLoRA 已另完成 GPU 訓練與新題評估，但尚不採用；見 [最新數據與界線](interview-readiness.md)。以下外部來源、授權及政策的查證日期仍為 2026-10-16，本輪未更新法律查證，不能據此保證個別案場合規。
+2026-10-21 狀態整理：現行預設仍為 Gemma Q8_0。Gemma QLoRA 已另完成 GPU 訓練與新題評估，但尚不採用；見 [最新數據與界線](../README.md#gemma-qlora-兩輪結果)。以下外部來源、授權及政策的查證日期仍為 2026-10-16，本輪未更新法律查證，不能據此保證個別案場合規。
 
 ## 結論
 
@@ -96,7 +96,7 @@ Qwen3 由阿里巴巴的 Qwen 團隊開發，2025-04-29 發布（[Simon Willison
 |---|---|
 | [開發紀錄](development-history.md)、[安全測試](security-testing.md) 的 2026-10-06／07／14 段落 | 當時的實際紀錄，已在文中標明淘汰 |
 | [本機模型基準](local-llm-benchmark.md)、`scripts/benchmark_local_llm.py` | Qwen 是換模型時的對照組，保留才能重現比較 |
-| `artifacts/local-llm-benchmark.json`、`llm-smoke-report.json`、`knowledge-live-smoke.json`、`interview-readiness-report.json` | 當時產生的原始證據，修改內容等於竄改紀錄 |
+| `artifacts/local-llm-benchmark.json`、`llm-smoke-report.json`、`knowledge-live-smoke.json`、`validation-readiness-report.json` | 當時產生的原始證據，修改內容等於竄改紀錄 |
 | `tests/test_local_llm_request.py` | 回歸測試，確保 Qwen 專用的 `/no_think` 不會再送給現用模型 |
 | README 的歷史 LoRA 段落、[LoRA 實驗](lora-training.md)、`training/model-revision.json` | 保留 Qwen3-0.6B 的歷史 CPU 實驗；Gemma QLoRA 結果另存，兩者都不代表現用 Q8_0 服務已微調 |
 

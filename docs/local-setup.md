@@ -34,7 +34,7 @@
 
 登入畫面提供主管／工程師快速體驗。展示資料庫為 `data/predictfix.db`；新排查流程仍需主管建立出勤與資格，才會有可派工程師。
 
-面試展示可另開終端機執行 `.\.venv\Scripts\python.exe scripts/prepare_interview_demo.py`，準備獨立示範工單、專用工程師與當日出勤。詳見 [面試展示指南](interview-demo.md)。
+面試展示可另開終端機執行 `.\.venv\Scripts\python.exe scripts/prepare_interview_demo.py`，準備獨立示範工單、專用工程師與當日出勤。詳見 [展示操作指南](demo-guide.md)。
 
 如需三筆已完成的合成維修案例，在展示服務啟動後執行 `python scripts/seed_knowledge_demo.py`。重跑不重複建立相同事件；請依腳本的 URL 設定連到展示服務。這些資料會保存到展示庫。
 
