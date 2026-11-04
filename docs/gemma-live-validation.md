@@ -13,7 +13,7 @@
 使用兩個專用 PowerShell 終端機。兩者都先設定：
 
 ```powershell
-Set-Location -LiteralPath 'C:\Users\User\Desktop\ai factory\predictfix-wave2-main'
+# 在 repo 根目錄執行
 $python = (Resolve-Path '../predictfix-ai-factory/.venv/Scripts/python.exe').Path
 $demoDir = Join-Path $PWD '.runtime/rehearsal-20261022'
 ```

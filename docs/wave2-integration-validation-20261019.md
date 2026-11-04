@@ -29,7 +29,7 @@
 
 ```powershell
 New-Item -ItemType Directory -Force .runtime | Out-Null
-$python = 'C:/Users/User/Desktop/ai factory/predictfix-ai-factory/.venv/Scripts/python.exe'
+$python = 'python'
 & $python -m pytest --confcutdir=. --rootdir=. tests -q -p no:cacheprovider --basetemp=.runtime/wave2-review-new --junitxml=.runtime/wave2-review-new.xml
 & $python scripts/check_test_report.py .runtime/wave2-review-new.xml
 node tests/scan_race.cjs

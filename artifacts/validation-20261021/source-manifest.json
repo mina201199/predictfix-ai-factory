@@ -21,7 +21,12 @@
       "sha256": "58a4719c892f12a13790822a044663534cfe140de3023d95f43ddf3f5fd24ac6",
       "gitContentSha256": "8ead9eb110634572aa4380876bb76fc01c2111c91c52225d58d7ed4bc99c426a",
       "bytes": 417007,
-      "copiedBytesMatch": true
+      "copiedBytesMatch": true,
+      "redaction": {
+        "date": "2026-10-30",
+        "change": "Removed local absolute path prefixes (checkpoint and adapter paths now repo-relative); no metric values changed.",
+        "gitContentSha256After": "11f1bcc2caad8e9e38be15c933e3fffaae374b5cab53f59bb7322ebfd7abb3d6"
+      }
     }
   ]
 }

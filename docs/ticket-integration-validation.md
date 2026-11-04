@@ -22,7 +22,7 @@
 執行指令（worktree 使用既有主 repo 的 Python，未修改其依賴）：
 
 ```powershell
-& 'C:/Users/User/Desktop/ai factory/predictfix-ai-factory/.venv/Scripts/python.exe' -m pytest --confcutdir=. --rootdir=. tests -q -p no:cacheprovider --basetemp=.runtime/integration-release-check --junitxml=.runtime/integration-release-check.xml
+python -m pytest --confcutdir=. --rootdir=. tests -q -p no:cacheprovider --basetemp=.runtime/integration-release-check --junitxml=.runtime/integration-release-check.xml
 ```
 
 結構化結果：[artifacts/ticket-integration-validation.json](../artifacts/ticket-integration-validation.json)。該檔案包含兩種模式的實際案例名稱、CLI 回應與重啟結果，不含秘密。JUnit 原始檔保存在忽略的 `.runtime/integration-release-check.xml` 與各子目錄 `child-report.xml`。

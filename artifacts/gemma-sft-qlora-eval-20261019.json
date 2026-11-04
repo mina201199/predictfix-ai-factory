@@ -319,7 +319,7 @@
     "check_qlora_feasibility.py": "8b3619c27a0789d1c33b047d60fdea8c2427dd9fe53b98b8b3c16c60e012d336",
     "prepare_lora_data.py": "9f5016e0118043e813029ae71116056049f80ad8a20849502b935bd8f124e8c2"
   },
-  "adapter_source": "C:\\Users\\User\\Desktop\\ai factory\\predictfix-wave2-training\\.runtime\\qlora-campaign-formal-02\\qlora_train",
+  "adapter_source": ".runtime\\qlora-campaign-formal-02\\qlora_train",
   "clock_context": "Uncontrolled concurrent workloads; wall time is budget evidence, not performance comparison.",
   "wall_seconds_uncontrolled": 326.46900000000096,
   "nvidia_smi_before_cuda_init": {

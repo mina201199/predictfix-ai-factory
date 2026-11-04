@@ -6,46 +6,46 @@
   "stages": {
     "base_nf4": {
       "status": "completed",
-      "report": "C:\\Users\\User\\Desktop\\ai factory\\predictfix-wave2-training\\.runtime\\base-nf4-formal-01\\report.json",
+      "report": ".runtime\\base-nf4-formal-01\\report.json",
       "reused": true
     },
     "qlora_train": {
       "status": "trained_pending_reload",
-      "report": "C:\\Users\\User\\Desktop\\ai factory\\predictfix-wave2-training\\.runtime\\qlora-campaign-formal-02\\qlora_train\\report.json",
+      "report": ".runtime\\qlora-campaign-formal-02\\qlora_train\\report.json",
       "command": [
-        "C:\\Users\\User\\Desktop\\ai factory\\predictfix-ai-factory\\.runtime\\qlora-env\\Scripts\\python.exe",
-        "C:\\Users\\User\\Desktop\\ai factory\\predictfix-wave2-training\\scripts\\run_gemma_sft.py",
+        ".runtime\\qlora-env\\Scripts\\python.exe",
+        "scripts\\run_gemma_sft.py",
         "train",
         "--mode",
         "qlora",
         "--runtime-dir",
-        "C:\\Users\\User\\Desktop\\ai factory\\predictfix-ai-factory\\.runtime",
+        ".runtime",
         "--run-dir",
-        "C:\\Users\\User\\Desktop\\ai factory\\predictfix-wave2-training\\.runtime\\qlora-campaign-formal-02\\qlora_train",
+        ".runtime\\qlora-campaign-formal-02\\qlora_train",
         "--max-seconds",
         "9180.0",
         "--baseline-report",
-        "C:\\Users\\User\\Desktop\\ai factory\\predictfix-wave2-training\\.runtime\\base-nf4-formal-01\\report.json"
+        ".runtime\\base-nf4-formal-01\\report.json"
       ],
       "exit_code": 0
     },
     "qlora_reload": {
       "status": "completed",
-      "report": "C:\\Users\\User\\Desktop\\ai factory\\predictfix-wave2-training\\.runtime\\qlora-campaign-formal-02\\qlora_reload\\report.json",
+      "report": ".runtime\\qlora-campaign-formal-02\\qlora_reload\\report.json",
       "command": [
-        "C:\\Users\\User\\Desktop\\ai factory\\predictfix-ai-factory\\.runtime\\qlora-env\\Scripts\\python.exe",
-        "C:\\Users\\User\\Desktop\\ai factory\\predictfix-wave2-training\\scripts\\run_gemma_sft.py",
+        ".runtime\\qlora-env\\Scripts\\python.exe",
+        "scripts\\run_gemma_sft.py",
         "reload",
         "--mode",
         "qlora",
         "--runtime-dir",
-        "C:\\Users\\User\\Desktop\\ai factory\\predictfix-ai-factory\\.runtime",
+        ".runtime",
         "--run-dir",
-        "C:\\Users\\User\\Desktop\\ai factory\\predictfix-wave2-training\\.runtime\\qlora-campaign-formal-02\\qlora_reload",
+        ".runtime\\qlora-campaign-formal-02\\qlora_reload",
         "--max-seconds",
         "2263.311999999998",
         "--adapter-run",
-        "C:\\Users\\User\\Desktop\\ai factory\\predictfix-wave2-training\\.runtime\\qlora-campaign-formal-02\\qlora_train"
+        ".runtime\\qlora-campaign-formal-02\\qlora_train"
       ],
       "exit_code": 0
     }

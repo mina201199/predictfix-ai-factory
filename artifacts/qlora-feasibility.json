@@ -238,7 +238,7 @@
       "trainable_parameters": 12079104,
       "lora_wrapped_linears": 205
     },
-    "dataset": "C:\\Users\\User\\Desktop\\ai factory\\predictfix-qlora-dataset\\training\\selection-dataset.json",
+    "dataset": "training\\selection-dataset.json",
     "steps": [
       {
         "step": 1,
@@ -396,7 +396,7 @@
       "trainable_parameters": 12079104,
       "lora_wrapped_linears": 205
     },
-    "dataset": "C:\\Users\\User\\Desktop\\ai factory\\predictfix-qlora-dataset\\training\\selection-dataset.json",
+    "dataset": "training\\selection-dataset.json",
     "error_type": "RuntimeError",
     "error": "expected mat1 and mat2 to have the same dtype, but got: float != struct c10::Half"
   },
@@ -445,7 +445,7 @@
       "trainable_parameters": 12079104,
       "lora_wrapped_linears": 205
     },
-    "dataset": "C:\\Users\\User\\Desktop\\ai factory\\predictfix-qlora-dataset\\training\\selection-dataset.json",
+    "dataset": "training\\selection-dataset.json",
     "steps": [
       {
         "step": 1,
