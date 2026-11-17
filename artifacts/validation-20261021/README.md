@@ -1,4 +1,4 @@
-# 面試證據索引（2026-10-21）
+# 驗證證據索引（2026-10-21）
 
 本目錄區分歷史模型實驗與本次程式／流程驗證。沒有執行模型訓練或重新量測 CPU/GPU 基準。
 
@@ -15,4 +15,4 @@
 
 CPU/GPU 的 44 題測試仍引用原位置的 [原始基準](../local-llm-benchmark.json)。PostgreSQL 與部署修正引用 [2026-10-20 稽核](../system-audit-20261020/README.md)，不當作今日重測。模型副本逐位元對照來源工作樹；Git blob 與工作樹的換行格式不同，manifest 同時保留兩者 SHA-256，並以解析後 JSON 確認來源 commit 內容一致。
 
-新 100 題報告內有先前規劃階段遺留的「future evaluator」限制文字；其實已保存逐題評分與比較。此處保留原檔，不改寫歷史；解讀以已完成結果、`modelReady: false` 及 [面試回答](../../docs/interview-readiness.md) 為準。
+新 100 題報告內有先前規劃階段遺留的「future evaluator」限制文字；其實已保存逐題評分與比較。此處保留原檔，不改寫歷史；解讀以已完成結果、`modelReady: false` 及 [README 的 Gemma QLoRA 兩輪結果](../../README.md#gemma-qlora-兩輪結果) 為準。

@@ -88,17 +88,17 @@ flowchart TD
 
 **6. 先用攻擊測試重現，再修正。** 安全測試先重現「草稿／撤回資料被工程師讀取」「已發布案例暴露原始快照」「驗證錯誤回傳密碼」等問題再修正；模型攻擊測試同時核對身分與案例狀態，不只看回答文字（`docs/security-testing.md`）。
 
-**7. 微調實驗誠實記錄，未達標就不採用。** Gemma QLoRA（GTX 1050 Ti 4 GB、NF4）跑了兩輪：126 步版本全部輸出空選段；504 步版本在新 100 題合成題上完全正確率由 18% 升到 42%，但 recall 由 90.77% 降到 50.77%、三段答案 0/20，因此 `modelReady: false`，未替換現用模型（`artifacts/interview-20261021/selection-independent-v5-comparison-20261020.json`）。
+**7. 微調實驗誠實記錄，未達標就不採用。** Gemma QLoRA（GTX 1050 Ti 4 GB、NF4）跑了兩輪：126 步版本全部輸出空選段；504 步版本在新 100 題合成題上完全正確率由 18% 升到 42%，但 recall 由 90.77% 降到 50.77%、三段答案 0/20，因此 `modelReady: false`，未替換現用模型（`artifacts/validation-20261021/selection-independent-v5-comparison-20261020.json`）。
 
 ## 成果與數字
 
 | 項目 | 結果 | 來源 |
 |---|---|---|
-| 自動化測試 | **164 passed**（2026-10-30 本機重跑 `pytest tests`，Python 3.13，不需模型服務與 API key）；2026-10-21 完整回歸 161 項、零跳過 | `tests/`、`artifacts/interview-20261021/tests.xml` |
+| 自動化測試 | **164 passed**（2026-10-30 本機重跑 `pytest tests`，Python 3.13，不需模型服務與 API key）；2026-10-21 完整回歸 161 項、零跳過 | `tests/`、`artifacts/validation-20261021/tests.xml` |
 | AI／API 安全檢查 | 45／45 通過，含 8 個真實本機模型攻擊情境（2026-10-15，Gemma 4 E2B） | `artifacts/security-test-report.json` |
 | 檢索方法比較 | 16 題正例 Top-3 命中 15 題（93.75%）；4 題負例皆無結果；TF-IDF／BM25／融合同分 | `artifacts/retrieval-eval-report.json` |
 | 銘牌 OCR | 90 張合成銘牌（18 台 × 5 種變化）top-1 100%、自動開錯台 0 次 | `artifacts/ocr-eval-report.json` |
-| 完整展示流程 | 驗收失敗阻擋、復測提交、主管審核、案例發布與再檢索通過 | `artifacts/interview-walkthrough-report.json` |
+| 完整展示流程 | 驗收失敗阻擋、復測提交、主管審核、案例發布與再檢索通過 | `artifacts/validation-walkthrough-report.json` |
 | CI | GitHub Actions 跑全套測試、正式／展示雙模式容器與 PostgreSQL 情境 | `.github/workflows/`、[執行紀錄](https://github.com/mina201199/predictfix-ai-factory/actions/runs/39509848713) |
 | 公開軸承資料（CWRU）分類實驗 | 跨負載測試 Accuracy 66.7%、Macro-F1 0.556，內圈 Recall 0（泛化不足，獨立實驗） | `artifacts/model-report.json` |
 
@@ -140,7 +140,7 @@ flowchart TD
 - **資料全為虛構或合成**：手冊、設備、工單、評估題集與標註都由同一作者建立，沒有外部維修專家盲測。
 - **尚未上線**：正式後端沒有外部可用網址；公開展示是靜態模擬介面。Docker／PostgreSQL 有驗證紀錄，手機與企業 HTTPS 環境仍待驗收。
 - **AI 範圍有限**：補問是結構化欄位檢查，比較的是候選來源，尚未自動產生完整維修方案；知識圖譜尚未接入一般 AI 查詢。
-- **微調未採用**：Gemma QLoRA 504 步結果與訓練程式位於另外的實驗分支，未合併、未替換現用 Q8_0 模型。
+- **微調未採用**：Gemma QLoRA 504 步訓練程式為 `scripts/run_gemma_sft_campaign.py`／`scripts/run_gemma_sft.py`，凍結設定為 `training/gemma-sft-protocol-v4-coverage.json`；新 100 題評估程式仍在另外的實驗分支，未替換現用 Q8_0 模型。
 - **未實作**：PLC／感測器接入、健康度與剩餘壽命預測、完整 PDF 手冊匯入／OCR、企業 SSO、多租戶、真實 ERP／人事串接。
 - **下一步**：建立獨立手冊題集與相關性標註、由領域人員評估引用適用性；完成公開後端部署（HTTPS、監控、異地備份演練）。
 

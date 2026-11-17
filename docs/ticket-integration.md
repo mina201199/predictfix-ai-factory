@@ -2,7 +2,7 @@
 
 這是外部 API、CSV 與狀態回寫的可操作子系統，目前對接的是本機模擬器，尚未串接真實企業工單系統。SQLite 有實際測試；2026-10-20 已補 PostgreSQL 介接測試與事件／CSV 鎖定修正，見 [稽核證據](../artifacts/system-audit-20261020/README.md)。主線的 `compose.production.yaml` 已包含 `INTEGRATION_SOURCES` 與背景 worker；設定存在不等於企業部署驗收。服務不呼叫 LLM，不使用 GPU。
 
-2026-10-21 面試展示使用 [共同隔離展示步驟](interview-demo.md)，不覆寫專案根目錄既有 `.env` 或正式資料庫。下方歷史驗收的 SQLite 範圍仍按原日期解讀。
+2026-10-21 面試展示使用 [共同隔離展示步驟](demo-guide.md)，不覆寫專案根目錄既有 `.env` 或正式資料庫。下方歷史驗收的 SQLite 範圍仍按原日期解讀。
 
 ## 設定與啟動
 
